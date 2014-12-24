@@ -31,6 +31,7 @@ function mytheme_prebuilt_layouts($layouts){
 	return $layouts;
 	
 }
+add_filter('siteorigin_panels_prebuilt_layouts','mytheme_prebuilt_layouts');
 ```
 
 The layout array is just what we copied from the page builder data dump. We've added an extra `name` key, which Page Builder uses when it displays your prebuilt layout. 
