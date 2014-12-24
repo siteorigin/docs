@@ -6,7 +6,7 @@ Page Builder makes it easy to bundle prebuilt lauyouts into your theme or plugin
 
 While in debug mode, Page Builder will show you some extra details about the page you're editing. To enable this, add the following lines to your `wp-config.php`.
 
-```php
+```
 define('SITEORIGIN_PANELS_NOCACHE', true);
 define('SITEORIGIN_PANELS_DEV', true);
 ```
@@ -19,7 +19,7 @@ After you've enabled debug mode, you'll get a full dump of your page's content a
 
 For this Page Builder uses the `siteorigin_panels_prebuilt_layouts` filter. So we'll create a function that hooks into this filter. The function takes an array of the existing layouts, adds its own layout (using a unique array key), then returns the entire array.
 
-```php
+```
 function mytheme_prebuilt_layouts($layouts){
 	$layouts['home-page'] = array(
 		// We'll add a title field
