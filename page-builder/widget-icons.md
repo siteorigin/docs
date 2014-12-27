@@ -8,7 +8,7 @@ The easiest thing to use for your icons is the official WordPress icon set, [Das
 
 This is the easiest way to add icons to your widgets. You just need to include a `panels_icon` argument to the `$widget_options` argument of the `WP_Widget` constructor.
 
-```
+```php
 class Foo_Widget extends WP_Widget {
 
     /**
@@ -31,7 +31,7 @@ class Foo_Widget extends WP_Widget {
 
 This works in a similar way to how you'd assign [widget groups](./widget-groups.md). You use the `siteorigin_widgets` filter to alter the widgets icons.
 
-```
+```php
 function mytheme_add_widget_icons($widgets){
 	$widgets['My_Widget']['icon'] = 'dashicons dashicons-wordpress';
 	return $widgets;
