@@ -8,7 +8,7 @@ Page Builder filters all widgets in the **Add Widget** dialog though the `siteor
 
 ```php
 function mytheme_recommended_widgets($widgets){
-	if( empty(widgets['My_Custom_Widget']) ){
+	if( empty($widgets['My_Custom_Widget']) ){
 		$widgets['My_Custom_Widget'] = array(
 			'class' => 'My_Custom_Widget',
 			'title' => __('Custom Widget', 'siteorigin-panels'),
@@ -56,7 +56,7 @@ function mytheme_filter_missing_widget_form($form, $widget, $instance){
 add_filter('siteorigin_panels_missing_widget_form', 'mytheme_filter_missing_widget_form');
 ```
 
-You can get create here as to what you do with the widget form. You could go as far as creating the entire form.
+You can get creative here as to what you do with the widget form. You could go as far as creating the entire form.
 
 #### Missing Widget Content
 
@@ -86,7 +86,7 @@ add_filter('siteorigin_panels_missing_widget', 'mytheme_render_missing_widget');
 
 #### Missing Widget Object
 
-You could also simplify the whole process and just create an placeholder widget object. This widget should be of a class that extends the `WP_Widget` class.
+You could also simplify the whole process and just create a placeholder widget object. This widget should be of a class that extends the `WP_Widget` class.
 
 This is how that filter is called.
 
