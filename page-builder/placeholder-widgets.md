@@ -25,7 +25,7 @@ function mytheme_recommended_widgets($widgets){
 	
 	return $widgets;
 }
-add_filter('siteorigin_widgets', 'mytheme_recommended_widgets');
+add_filter('siteorigin_panels_widgets', 'mytheme_recommended_widgets');
 ```
 
 There's an optional `'plugin'` attribute in the widget array. This tells Page Builder where it can download and install the plugin from, if it's hosted on the WordPress.org directory.
