@@ -2,33 +2,8 @@
 
 The widgets bundle is a convenient collection of widgets, bundled as a plugin. It also happens to be an excellent framework for creating new widgets with minimal coding required. Here we explain how to extend the widgets bundle with your own widgets. If you've done so in a fork of our git repository, you can even submit a pull request and your widget might be included in the official bundle.
 
-## Getting started quickly
+## Topics
 
-The quickest and simplest way to get started is by cloning our [so-dev-examples](../../../so-dev-examples) git repository. Look in the `extend-widgets-bundle` plugin (remember to activate it under Plugins) and using the Hello World Widget as a template. All you need to do is create a copy of the `hello-world-widget` folder and rename it as follows:
-
-1. Choose an id for your widget, using hyphens to separate words. E.g. `my-awesome-widget`.
-2. Copy the `hello-world-widget` folder and rename it, and the `hello-world-widget.php` file inside, using your chosen id. E.g. the folder will be `my-awesome-widget` and the file will be `my-awesome-widget.php`.
-3. Open the PHP file and rename the class from `Hello_World_Widget` to a name following the naming convention described below. E.g. `My_Awesome_Widget`
-4. In the class' constructor, the first argument to the parent constructor is the widget id. Replace the current value `hello-world-widget` with your chosen id. E.g. `my-awesome-widget`.
-5. At the bottom of the file, you'll see the widget being registered. Again replace `hello-world-widget` with your chosen id. E.g. `my-awesome-widget`.
-6. In the metadata header above the class, change the `Widget Name` field to your widget name. E.g. `Widget Name: My Awesome Widget`. This field does not follow any convention, but it must be present for your widget to be included in the list of SiteOrigin widgets.
-
-> We use the following naming convention: the name of the folder and the PHP file containing your widget class should be the same as the widget id you specify in your widget class constructor. This should be all lowercase words separated by hyphens. The Widget Bundle plugin code derives the class name from the widget id name by replacing hyphens with underscores and capitalising the first letters of the hyphen-separated words.
-
-You should now have a simple functional widget that you can start changing to create your awesome widget!
-
-## Adding a separate widgets folder
-
-If you'd like to keep your widgets separate from the SiteOrigin widgets, we have included a filter hook which you can use to register a folder containing several of your widgets, as follows:
-
-```php
-<?php
-
-function add_my_awesome_widgets_collection($folders){
-	$folders[] = 'path/to/my/widgets/';
-	return $folders;
-}
-add_filter('siteorigin_widgets_widget_folders', 'add_my_awesome_widgets_collection');
-```
-
-The Widget Bundle plugin code will check subfolders of this folder for PHP files. If it finds any PHP files with a metadata header containing a Widget Name field, it will list them as a widget which can be activated and used anywhere widgets may normally be used.
+- [Extending the widgets bundle](widgets-bundle/extending-widgets-bundle.md)
+  - [Getting started quickly](widgets-bundle/extending-widgets-bundle.md#getting-started-quickly)
+  - [Adding a separate widgets folder](widgets-bundle/extending-widgets-bundle.md#adding-a-separate-widgets-folder)
