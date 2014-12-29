@@ -4,7 +4,7 @@ We're working hard on impoving Page Builder - making it the most powerful and fl
 
 ## Contributing to Core
 
-There are 2 main categories of we'd love to see from developers out there. These are bug fixes and additional hooks/filters. If you ever find a bug, you can either [create a new issue](https://github.com/siteorigin/siteorigin-panels/issues), or submit a pull request that fixes the issue.
+There are 2 main categories of we'd love to see from developers out there. These are bug fixes and additional hooks/filters. If you ever find a bug, you can either [create a new issue](https://github.com/siteorigin/siteorigin-panels/issues), or submit a pull request to the [Page Builder GitHub repo](https://github.com/siteorigin/siteorigin-panels).
 
 The same goes for additional hooks and filters. If you're working on a theme and plugin and you need a way to hook into Page Builder to customize its behaviour, either let us know or submit a pull request with the extra hooks.
 
