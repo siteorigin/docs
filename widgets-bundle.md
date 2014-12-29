@@ -5,5 +5,3 @@ The widgets bundle is a convenient collection of widgets, bundled as a plugin. I
 ## Topics
 
 - [Extending the widgets bundle](widgets-bundle/extending-widgets-bundle.md)
-  - [Getting started quickly](widgets-bundle/extending-widgets-bundle.md#getting-started-quickly)
-  - [Adding a separate widgets folder](widgets-bundle/extending-widgets-bundle.md#adding-a-separate-widgets-folder)
