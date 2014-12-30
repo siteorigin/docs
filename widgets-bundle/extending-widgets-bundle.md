@@ -37,7 +37,7 @@ What follows are the basic requirements for creating your own widget using the S
 
 #### Widget name
 
-Start by creating your wiget folder using a name of your choice, and then a php file with the same name. We encourage the use of the WordPress guidelines for naming files and folders, which you can find [here](http://codex.wordpress.org/Writing_a_Plugin#Names.2C_Files.2C_and_Locations).
+Start by creating your wiget folder using a name of your choice, and then a php file with the same name. We encourage the use of the WordPress guidelines for naming files and folders, which you can find <a href="http://codex.wordpress.org/Writing_a_Plugin#Names.2C_Files.2C_and_Locations" target="_blank">here</a>.
 
 #### Widget metadata
 
@@ -78,4 +78,4 @@ class Hello_World_Widget extends SiteOrigin_Widget {
 siteorigin_widget_register('hello-world-widget', __FILE__, 'Hello_World_Widget');
 ```
 
-Once you've done this, you'll see your widget in the Plugins > SiteOrigin Widgets list, it can be activated and deactivated, and you'll see an 'Untitled Widget' in Page Builder widgets and a blank widget in other widget lists. So you can't really use your widget yet, but it's there!
+Once you've done this, you'll see your widget in the Plugins > SiteOrigin Widgets list, it can be activated and deactivated, and you'll see an 'Untitled Widget' in Page Builder widgets and a blank widget in other widget lists. So you can't really use your widget yet, but it's there! :metal:
