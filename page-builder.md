@@ -4,7 +4,7 @@ We built Page Builder to work with just about any WordPress theme, but there are
 
 ## Widgets
 
-Page Builder supports most standard widgets. There are a few things that you should be aware of though. Especially related to how your widget should handle Javascript. Read our guide on using Javascript in your Page Builder widgets.
+Page Builder supports most standard widgets. There are a few things that you should be aware of though. Especially related to how your widget should handle Javascript. Read our [compatibility guide](./page-builder/widget-compatibility.md) on making your widgets work with Page Builder.
 
 There are a few ways that you can either register widgets that only appear in widgets area or Page Builder.
 
