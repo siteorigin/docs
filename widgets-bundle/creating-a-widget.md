@@ -4,7 +4,7 @@ What follows are the basic requirements for creating your own widget using the S
 
 ## Widget name
 
-Start by creating your wiget folder using a name of your choice, and then a php file with the same name. We encourage the use of the WordPress guidelines for naming files and folders, which you can find <a href="http://codex.wordpress.org/Writing_a_Plugin#Names.2C_Files.2C_and_Locations" target="_blank">here</a>.
+Start by creating your wiget folder using a name of your choice, and then a PHP file with the same name. We encourage the use of the WordPress guidelines for naming files and folders, which you can find <a href="http://codex.wordpress.org/Writing_a_Plugin#Names.2C_Files.2C_and_Locations" target="_blank">here</a>.
 
 ## Widget metadata
 
@@ -29,7 +29,6 @@ Video URI: http://example.com/hello-world-widget-video
 Now you'll need to create a class which extends the `SiteOrigin_Widget` abstract base class and, as a minimum, overrides the `get_template_name` and `get_style_name` abstract methods. You'll also need to register your widget class with the SiteOrigin Widgets Bundle using the `siteorigin_widget_register` function, passing in the widget id, widget file path, and widget class name as arguments.
 
 ```php
-<?php
 
 class Hello_World_Widget extends SiteOrigin_Widget {
 
@@ -90,3 +89,31 @@ function __construct() {
 ```
 
 Once you have your constructor implemented like the above example, you should see your widget's name and description being displayed in the various widget configuration lists. The Hello World widget will now also display a text field in the Edit Widget form containing the text 'Hello world!', which can be edited and saved.
+
+## Widget template
+
+You need to provide a template to tell the widget how it should be displayed. You supply a template name by overriding the `get_template_name` function and returning the name of the template file, without a `.php` file extension. By default, the base `SiteOrigin_Widget` class looks for a PHP file, with the name returned by `get_template_name`, in a `tpl` directory, in the widget directory. You can change this behaviour by overriding the `get_template_dir` function and returning the path of a directory (without leading or trailing slashes), relative to the widget class file.
+
+```php
+function get_template_name($instance) {
+	return 'hello-world-template';
+}
+
+function get_template_dir($instance) {
+	return 'hw-templates';
+}
+```
+
+Below is the directory structure of the Hello World Widget.
+
+![Hello World Directory Structure](./images/hello-world-widget-directory-structure.png)
+
+Now that the widget knows where to find it's template you can add in some HTML. The Hello World widget template simply contains the following:
+
+```php
+<div>
+	<?php echo wp_kses_post($instance['text']) ?>
+</div>
+```
+
+And now you can see your widget being displayed!
