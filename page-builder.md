@@ -23,3 +23,6 @@ Prebuilt Layouts are a great way to give your users some designs that they can u
 ## Hooks and Filters
 
 Page Builder has lots of hooks and filters for you to use. We've already covered these briefly in the Widgets and Prebuilt Layouts sections, but there are other filters you can use to inject custom content, filter output, etc.
+
+* [Filtering HTML Structure](./page-builder/hooks/html.md).
+* [Filtering CSS](./page-builder/hooks/css.md).
