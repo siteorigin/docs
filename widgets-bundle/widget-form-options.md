@@ -22,7 +22,7 @@ Renders a text input field.
 
 #### Example
 Form options input:
-```
+```php
 $form_options = array(
 	'some_text' => array(
 		'type' => 'text',
@@ -42,7 +42,7 @@ Renders a color input field and color picker.
 
 #### Example
 Form options input:
-```
+```php
 $form_options = array(
 	'some_color' => array(
 		'type' => 'color',
@@ -62,7 +62,7 @@ Renders a text input field for entering a number. This is the same as the text t
 
 #### Example
 Form options input:
-```
+```php
 $form_options = array(
 	'some_number' => array(
 		'type' => 'number',
@@ -86,7 +86,7 @@ Renders a textarea field.
 
 #### Example
 Form options input:
-```
+```php
 $form_options = array(
 	'some_long_message' => array(
 		'type' => 'textarea',
@@ -113,7 +113,7 @@ Renders a number slider field to allow the choice of a number in a range.
 
 #### Example
 Form options input:
-```
+```php
 $form_options = array(
 	'some_number_in_a_range' => array(
 		'type' => 'slider',
@@ -140,7 +140,7 @@ Renders a dropdown select field. This field is better for a long list of predefi
 
 #### Example 1 - default value without prompt
 Form options input:
-```
+```php
 $form_options = array(
 	'some_selection' => array(
 		'type' => 'select',
@@ -160,7 +160,7 @@ Result:
 
 #### Example 2 - prompt without default value
 Form options input:
-```
+```php
 $form_options = array(
 	'another_selection' => array(
 		'type' => 'select',
@@ -184,7 +184,7 @@ Renders a checkbox field.
 
 #### Example
 Form options input:
-```
+```php
 $form_options = array(
 	'some_boolean' => array(
 		'type' => 'checkbox',
@@ -207,7 +207,7 @@ Renders a radio input field. This field is better for a short list of predefined
 
 #### Example
 Form options input:
-```
+```php
 $form_options = array(
 	'radio_selection' => array(
 		'type' => 'radio',
@@ -237,7 +237,7 @@ Renders a media selector field. This fields requires at least WordPress 3.5.
 
 #### Example
 Form options input:
-```
+```php
 $form_options = array(
 	'some_media' => array(
 		'type' => 'media',
@@ -259,7 +259,7 @@ Renders a post selector field. This can be used to build custom queries with whi
 
 #### Example
 Form options input:
-```
+```php
 $form_options = array(
 	'some_posts' => array(
 		'type' => 'posts',
