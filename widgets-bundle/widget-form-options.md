@@ -32,6 +32,7 @@ $form_options = array(
 );
 ```
 Result:
+
 ![Widget Form Text Input](./images/form-field-type-text.png)
 
 ---
@@ -51,6 +52,7 @@ $form_options = array(
 );
 ```
 Result:
+
 ![Widget Form Color Picker](./images/form-field-type-color.png)
 
 ---
@@ -70,6 +72,7 @@ $form_options = array(
 );
 ```
 Result:
+
 ![Widget Form Number Input](./images/form-field-type-number.png)
 
 ---
@@ -95,6 +98,7 @@ $form_options = array(
 );
 ```
 Result:
+
 ![Widget Form Text Area](./images/form-field-type-textarea.png)
 
 ---
@@ -122,6 +126,7 @@ $form_options = array(
 );
 ```
 Result:
+
 ![Widget Form Slider](./images/form-field-type-slider.png)
 
 ---
@@ -150,6 +155,7 @@ $form_options = array(
 );
 ```
 Result:
+
 ![Widget Form Select 1](./images/form-field-type-select-1.png)
 
 #### Example 2 - prompt without default value
@@ -168,6 +174,7 @@ $form_options = array(
 );
 ```
 Result:
+
 ![Widget Form Select](./images/form-field-type-select-2.png)
 
 ---
@@ -187,6 +194,7 @@ $form_options = array(
 );
 ```
 Result:
+
 ![Widget Form Checkbox](./images/form-field-type-checkbox.png)
 
 ---
@@ -214,6 +222,7 @@ $form_options = array(
 );
 ```
 Result:
+
 ![Widget Form Radio Input](./images/form-field-type-radio.png)
 
 ---
@@ -240,6 +249,7 @@ $form_options = array(
 );
 ```
 Result:
+
 ![Widget Form Media Selector](./images/form-field-type-media.png)
 
 ---
@@ -258,6 +268,7 @@ $form_options = array(
 );
 ```
 Result:
+
 ![Widget Form Posts Selector](./images/form-field-type-posts.png)
 
 ---
