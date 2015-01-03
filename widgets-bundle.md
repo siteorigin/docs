@@ -6,3 +6,4 @@ The widgets bundle is a convenient collection of widgets, bundled as a plugin. I
 
 - [Getting started quickly](widgets-bundle/getting-started-quickly.md)
 - [Creating a widget](widgets-bundle/creating-a-widget.md)
+- [Widget form options](widgets-bundle/widget-form-options.md)
