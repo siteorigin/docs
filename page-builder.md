@@ -14,7 +14,7 @@ Page Builder has a few unique widget related concepts.
 * [Widget groups](./page-builder/widget-groups.md) let you organize your widgets within the Add Widget dialog.
 * [Widget icons](./page-builder/widget-icons.md) let you make your widgets stand out in the Add Widget dialog.
 
-For widget developers, you could consider using the SiteOrigin Widgets Bundle as a boilerplate for your widgets. It gives you a base to create some fairly advanced widgets and widget interfaces with minimal coding.
+For widget developers, you could consider using the [SiteOrigin Widgets Bundle](./widgets-bundle.md) as a boilerplate for your widgets. It gives you a base to create some fairly advanced widgets and widget interfaces with minimal coding.
 
 ## Prebuilt Layouts
 
@@ -23,3 +23,6 @@ Prebuilt Layouts are a great way to give your users some designs that they can u
 ## Hooks and Filters
 
 Page Builder has lots of hooks and filters for you to use. We've already covered these briefly in the Widgets and Prebuilt Layouts sections, but there are other filters you can use to inject custom content, filter output, etc.
+
+* [Filtering HTML Structure](./page-builder/hooks/html.md).
+* [Filtering CSS](./page-builder/hooks/css.md).
