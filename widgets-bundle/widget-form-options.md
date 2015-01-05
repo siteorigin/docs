@@ -263,7 +263,7 @@ Form options input:
 $form_options = array(
 	'some_posts' => array(
 		'type' => 'posts',
-		'label' => __('Some posts query', 'siteorigin-widgets'),
+		'label' => __('Some posts query', 'widget-form-fields-text-domain'),
 	)
 );
 ```
@@ -274,17 +274,127 @@ Result:
 ---
 
 ### icon
+Renders an icon selector field. This allows you to select an icon from a default set of icon families, namely <a href="http://fortawesome.github.io/Font-Awesome/" target="_blank">Font Awesome</a>, <a href="https://icomoon.io/" target="_blank">IcoMoon</a>, <a href="http://genericons.com/" target="_blank">Genericons</a>, <a href="http://typicons.com/" target="_blank">Typicons</a>, and <a href="http://www.elegantthemes.com/blog/freebie-of-the-week/free-line-style-icons" target="_blank">Elegant Themes' Line Icons</a>. You can include your own icon families with the `siteorigin_widgets_icon_families` filter.
+
+#### Example
+Form options input:
+```php
+$form_options = array(
+	'some_icon' => array(
+		'type' => 'icon',
+		'label' => __('Select an icon', 'widget-form-fields-text-domain'),
+	)
+);
+```
+Result:
+
+![Widget Form Icon Selector](./images/form-field-type-icon.png)
 
 ---
 
 ### section
+The section field type provides a convenient way to group and hide related form fields. This is useful when you have a large form which can appear overwhelming.
+
+#### Additional options
+- hide: `bool` Whether or not this section should start out collapsed or expanded.
+- fields: `array` The set of fields to be grouped together. This should contain any combination of other field types, even sections and repeaters.
+
+#### Example
+Form options input:
+```php
+$form_options = array(
+	'a_section' => array(
+		'type' => 'section',
+		'label' => __( 'A section containing related fields.' , 'widget-form-fields-text-domain' ),
+		'hide' => true,
+		'fields' => array(
+			'grouped_text' => array(
+				'type' => 'text',
+				'label' => __( 'A grouped text field', 'widget-form-fields-text-domain' )
+			),
+			'grouped_checkbox' => array(
+				'type' => 'checkbox',
+				'label' => __( 'A grouped checkbox', 'widget-form-fields-text-domain' )
+			)
+		)
+	)
+);
+```
+Result:
+
+![Widget Form Section](./images/form-field-type-section.png)
 
 ---
 
 ### repeater
+The repeater field type allows repeating of the specified set of fields. 
+
+#### Additional options
+- item_name: `string` A default label for each repeated item.
+- item_label: `array` This array descibes how the repeater may retrieve the item labels from HTML elements as they are updated. The options are:
+  - selector: `string` A JQuery selector which is used to find an element from which to retrieve the item label.
+  - update_event: `string` The event on which to bind and update the item label.
+  - value_method: `string` The function which should be used to retrieve the item label from an element.
+- fields: `array` THe set of fields to be repeated together as one item. This should contain any combination of other field types, even sections and repeaters.
+
+#### Example
+Form options input:
+```php
+$form_options = array(
+	'a_repeater' => array(
+		'type' => 'repeater',
+		'label' => __( 'A repeating repeater.' , 'widget-form-fields-text-domain' ),
+		'item_name'  => __( 'Repeater item', 'siteorigin-widgets' ),
+		'item_label' => array(
+			'selector'     => "[id*='repeat_text']",
+			'update_event' => 'change',
+			'value_method' => 'val'
+		),
+		'fields' => array(
+			'repeat_text' => array(
+				'type' => 'text',
+				'label' => __( 'A text field in a repeater item.', 'widget-form-fields-text-domain' )
+			),
+			'repeat_checkbox' => array(
+				'type' => 'checkbox',
+				'label' => __( 'A checkbox in a repeater item.', 'widget-form-fields-text-domain' )
+			)
+		)
+	)
+);
+```
+Result:
+
+Empty repeater:
+
+![Widget Form Repeater 1](./images/form-field-type-repeater-1.png)
+
+Repeater containing two items (the first item is collapsed and the second item is expanded):
+![Widget Form Repeater 2](./images/form-field-type-repeater-2.png)
 
 ---
 
 ### widget
+Includes the entire form of an existing widget class.
+
+#### Additional options
+- class: `string` The class name of the widget to be included.
+- hide: `bool` Whether or not this section should start out collapsed or expanded.
+
+#### Example
+Form options input:
+```php
+$form_options = array(
+	'some_widget' => array(
+		'type' => 'widget',
+		'label' => __( 'Button Widget', 'widget-form-fields-text-domain' ),
+		'class' => 'SiteOrigin_Widget_Button_Widget',
+		'hide' => true
+	)
+);
+```
+Result:
+
+![Widget Form Widget Field](./images/form-field-type-widget.png)
 
 ---
