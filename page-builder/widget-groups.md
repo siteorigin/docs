@@ -14,6 +14,8 @@ function mytheme_add_widget_tabs($tabs) {
 			'groups' => array('mytheme')
 		)
 	);
+	
+	return $tabs;
 }
 add_filter('siteorigin_panels_widget_dialog_tabs', 'mytheme_add_widget_tabs', 20);
 ```
