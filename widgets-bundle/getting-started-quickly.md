@@ -1,6 +1,6 @@
 # Getting started quickly
 
-The quickest and simplest way to get started is by cloning our [so-dev-examples](../../../so-dev-examples) git repository. Look in the `extend-widgets-bundle` plugin (remember to activate it under Plugins) and using the Hello World Widget as a template. All you need to do is create a copy of the `hello-world-widget` folder and rename it as follows:
+The quickest and simplest way to get started is by cloning our [so-dev-examples](https://github.com/siteorigin/so-dev-examples) git repository. Look in the `extend-widgets-bundle` plugin (remember to activate it under Plugins) and using the Hello World Widget as a template. All you need to do is create a copy of the `hello-world-widget` folder and rename it as follows:
 
 1. Choose an id for your widget. E.g. `my-awesome-widget`.
 2. Copy the `hello-world-widget` folder and rename it, and the `hello-world-widget.php` file inside, using your chosen id. E.g. the folder will be `my-awesome-widget` and the file will be `my-awesome-widget.php`. It is important that these are the same.
