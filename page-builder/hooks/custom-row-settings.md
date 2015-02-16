@@ -1,7 +1,7 @@
 ### Adding a custom option under the Row Styles
 
 ```php
-function custom_row_style_fields() {
+function custom_row_style_fields($fields) {
   $fields['parallax'] = array(
   	'name'        => __('Parallax', 'siteorigin-panels'),
   	'type'        => 'checkbox',
