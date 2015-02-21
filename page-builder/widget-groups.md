@@ -11,7 +11,7 @@ function mytheme_add_widget_tabs($tabs) {
 	$tabs[] = array(
 		'title' => __('My Tab', 'mytheme'),
 		'filter' => array(
-			'groups' => array('mytheme')
+			'groups' => 'mytheme'
 		)
 	);
 	
