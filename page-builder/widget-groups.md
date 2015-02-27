@@ -34,7 +34,7 @@ class Foo_Widget extends WP_Widget {
 			__( 'Widget Title', 'text_domain' ), // Name
 			array(
 				'description' => __( 'A Foo Widget', 'text_domain' ),
-				'panels_groups' => 'mytheme'
+				'panels_groups' => array('mytheme')
 			)
 		);
 	}
