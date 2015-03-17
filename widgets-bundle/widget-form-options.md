@@ -15,6 +15,8 @@ Each value in the form options array is a form field descriptor, which is an ass
 
 In addition to these, some fields have their own specific configuration values, which are listed in the respective sections below.
 
+>You can see all of these in action by installing and activating the SiteOrigin Widget Form Fields Demo plugin which can be found in the [so-dev-examples](https://github.com/siteorigin/so-dev-examples) repository.
+
 ## Form field types
 
 ### text
@@ -44,7 +46,6 @@ Renders a color input field and color picker.
 Form options input:
 ```php
 $form_options = array(
-	'some_color' => array(
 		'type' => 'color',
 		'label' => __( 'Choose a color', 'widget-form-fields-text-domain' ),
 		'default' => '#bada55'
@@ -81,7 +82,6 @@ Result:
 Renders a textarea field.
 
 #### Additional options
-- allow_html_formatting: `bool` Allows a few specific html tags to be passed through sanitization to the widget instance to influence display of the text. These are `<a>`, `<br>`, `<strong>`, and `<em>`.
 - rows: `int` The number of visible rows in the textarea.
 
 #### Example
@@ -92,7 +92,6 @@ $form_options = array(
 		'type' => 'textarea',
 		'label' => __( 'Type a message', 'widget-form-fields-text-domain' ),
 		'default' => 'An example of a long message.</br>It is even possible to add a few html tags.</br><a href="siteorigin.com" target="_blank"">Links!</a></br><strong>Strong</strong> and <em>emphasized</em> text.',
-		'allow_html_formatting' => true,
 		'rows' => 10
 	)
 );
@@ -335,7 +334,7 @@ The repeater field type allows repeating of the specified set of fields.
   - selector: `string` A JQuery selector which is used to find an element from which to retrieve the item label.
   - update_event: `string` The event on which to bind and update the item label.
   - value_method: `string` The function which should be used to retrieve the item label from an element.
-- fields: `array` THe set of fields to be repeated together as one item. This should contain any combination of other field types, even sections and repeaters.
+- fields: `array` The set of fields to be repeated together as one item. This should contain any combination of other field types, even sections and repeaters.
 
 #### Example
 Form options input:
