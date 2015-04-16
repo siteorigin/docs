@@ -2,9 +2,27 @@
 
 What follows are the basic requirements for creating your own widget using the SiteOrigin Widgets Bundle as a framework.
 
+## Registering a custom widgets folder
+
+To allow you to organize your widgets and keep them separate from the SiteOrigin widgets, we have included a filter hook which you can use to register a folder containing several of your widgets, as follows:
+
+```php
+<?php
+
+function add_my_awesome_widgets_collection($folders){
+	$folders[] = 'path/to/my/widgets/';
+	return $folders;
+}
+add_filter('siteorigin_widgets_widget_folders', 'add_my_awesome_widgets_collection');
+```
+
+The Widgets Bundle plugin code will check subfolders of this folder for PHP files. If it finds any PHP files with a metadata header containing a Widget Name field, it will list them as a widget which can be activated and used anywhere widgets may normally be used.
+
+In our example `extend-widgets-bundle` plugin we use the standard WordPress method of creating a plugin, which then uses the above filter hook to add it's `extra-widgets` folder to the search path for widgets.
+
 ## Widget name
 
-Start by creating your wiget folder using a name of your choice, and then a PHP file with the same name. We encourage the use of the WordPress guidelines for naming files and folders, which you can find <a href="http://codex.wordpress.org/Writing_a_Plugin#Names.2C_Files.2C_and_Locations" target="_blank">here</a>.
+Start by creating your widget folder using a name of your choice, and then a PHP file with the same name. We encourage the use of the WordPress guidelines for naming files and folders, which you can find <a href="http://codex.wordpress.org/Writing_a_Plugin#Names.2C_Files.2C_and_Locations" target="_blank">here</a>.
 
 ## Widget metadata
 
@@ -106,7 +124,7 @@ function get_template_dir($instance) {
 
 Below is the directory structure of the Hello World Widget.
 
-![Hello World Directory Structure](./images/hello-world-widget-directory-structure.png)
+![Hello World Directory Structure](../images/hello-world-widget-directory-structure.png)
 
 Now that the widget knows where to find it's template you can add in some HTML. The Hello World widget template simply contains the following:
 
@@ -117,3 +135,15 @@ Now that the widget knows where to find it's template you can add in some HTML. 
 ```
 
 And now you can see your widget being displayed!
+
+## Widget styles
+
+You can supply a LESS stylesheet for your widget by overriding the `get_style_name` function and returning the name of the LESS stylesheet, without a `.less` file extension. The base `SiteOrigin_Widget` class looks for a LESS file in a `styles` directory, in the widget directory.
+
+We go into more detail about the use of LESS in the Widgets Bundle [here](../templating/less-stylesheets.md)
+
+```php
+function get_style_name($instance) {
+	return 'my-widget-styles';
+}
+```
