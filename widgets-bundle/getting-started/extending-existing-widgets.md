@@ -1,10 +1,10 @@
-# Adding custom widget styles
+# Extending existing widgets
 
 When you're creating a theme or plugin, you might want to offer your users a custom version of one of the widgets that already comes with the SiteOrigin Widgets Bundle. Rather than create a new widget from scratch, you can just extend one of our widgets with your own custom style.
 
 In this tutorial, we'll deal with adding a new style to the button widget.
 
-### Modifying The Form
+## Modifying the form
 
 The first thing you'll want to do is modify the default form to add in your own style. Open up the `so-widgets-bundle` folder and open up `widgets/so-button-widget/so-button-widget.php`. In the `__construct` function, you'll see that the 4th argument is an array that specifies the form. The button widget has a section called `design` and in that, a field called `theme`. This is the field we're going to modify to add a custom option.
 
@@ -26,7 +26,7 @@ We're making sure that the option field we're looking for is there, and if it is
 
 ![Custom Button Theme](images/custom-theme-field.png)
 
-### Changing The Template File
+## Changing the template file
 
 Now that we've added our own button theme, the next thing we're going to want to do is create our own template file. In the Widgets Bundle, a template is simply a PHP file. It gets passed the widget values in an `$instance` array, plus it has access to the values returned by `get_template_variables()`.
 
@@ -48,7 +48,7 @@ To get an idea of what's available to a button widget, you can take a look at th
 
 Also, keep in mind that you can just skip specifying a custom template file, in which case the button widget will just use the default template file `base.php`.
 
-### Changing The LESS File
+## Changing the LESS file
 
 We'll use a similar method to change the LESS file we use to generate the style for our custom button. Most of the time, this is going to be the only file you actually change.
 
@@ -66,8 +66,3 @@ add_filter( 'siteorigin_widget_less_file_sow-button', 'mytheme_button_less_file'
 ```
 
 The LESS syntax is fairly simple, especially if you're just using it for variables and nexting. To learn more about using LESS in the Widgets Bundle, read over the [LESS Stylesheets](../templating/less-stylesheets.md) section of the docs.
-
-### Conclusion
-
-And if everything went according to play, you should have your own custom buton style integrating with the Widgets Bundle.
-
