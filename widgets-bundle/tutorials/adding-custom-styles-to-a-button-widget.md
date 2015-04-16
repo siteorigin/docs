@@ -56,6 +56,9 @@ We'll use a similar method to change the LESS file we use to generate the style 
 function mytheme_button_less_file( $filename, $instance, $widget ){
 	if( !empty($instance['design']['theme']) && $instance['design']['theme'] == 'test' ) {
 		$filename = plugin_dir_path( __FILE__ ) . 'less/test.less';
+		
+		// And this one for themes
+		$filename = get_stylesheet_dir() . '/less/test.less'; 
 	}
 	return $filename;
 }
