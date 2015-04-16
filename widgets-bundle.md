@@ -7,7 +7,7 @@ The widgets bundle is a convenient collection of widgets, bundled as a plugin. I
 - Getting started
     - [Creating a widget](widgets-bundle/getting-started/creating-a-widget.md)
     - [Extending existing widgets](widgets-bundle/getting-started/extending-existing-widgets.md)
-    - [Initialising a widget](widgets-bundle/getting-started/initialising-a-widget.md)
+    - [Initializing a widget](widgets-bundle/getting-started/initializing-a-widget.md)
 - Form building
     - [Form fields](widgets-bundle/form-building/form-fields.md)
     - [Repeaters and sections](widgets-bundle/form-building/repeaters-and-sections.md)
