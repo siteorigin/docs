@@ -1,4 +1,4 @@
-# Widget form options
+# Form fields
 
 This is where you'll find a lot of the convenience of using the SiteOrigin Widgets Bundle as a framework for creating your own widgets. The widget form options are a way for you to define the configuration options you'd like to allow for your widget users. The more form options you provide, the more customizable your widget becomes.
 
