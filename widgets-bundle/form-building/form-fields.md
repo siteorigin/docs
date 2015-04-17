@@ -143,7 +143,6 @@ Renders a number slider field to allow the choice of a number in a range.
 #### Additional options
 - min: `int` The minimum value of the allowed range.
 - max: `int` The maximum value of the allowed range.
-- integer: `bool`
 
 #### Example
 Form options input:
@@ -262,12 +261,15 @@ Result:
 ---
 
 ### media
-Renders a media selector field. This fields requires at least WordPress 3.5.
+Renders a media selector button. When clicked the button opens the WordPress Media Library dialog for the media types specified by the `library` option.
+
+>_This field requires at least WordPress 3.5._
 
 #### Additional options
 - choose: `string` A label for the title of the media selector dialog.
 - update: `string` A label for the confirmation button of the media selector dialog.
 - library: `string` Sets the media library which to browse and from which media can be selected. Allowed values are `'image'`, `'audio'`, `'video'`, and `'file'`. The default is `'file'`.
+- fallback: `bool` Whether or not to display a URL input field which allows for specification of a fallback URL to be used in case the selected media resource isn't available.
 
 #### Example
 Form options input:
@@ -278,7 +280,8 @@ $form_options = array(
 		'label' => __( 'Choose a media thing', 'widget-form-fields-text-domain' ),
 		'choose' => __( 'Choose image', 'widget-form-fields-text-domain' ),
 		'update' => __( 'Set image', 'widget-form-fields-text-domain' ),
-		'library' => 'image'
+		'library' => 'image',
+		'fallback' => true
 	)
 );
 ```
@@ -290,6 +293,8 @@ Result:
 
 ### posts
 Renders a post selector field. This can be used to build custom queries with which to select posts from your database. The field displays a small red indicator which shows the number of posts currently being selected. By default, all posts are selected.
+
+You can find more detail about the use of the post selector field [here](./post-selector.md).
 
 #### Example
 Form options input:
@@ -307,31 +312,12 @@ Result:
 
 ---
 
-### icon
-Renders an icon selector field. This allows you to select an icon from a default set of icon families, namely <a href="http://fortawesome.github.io/Font-Awesome/" target="_blank">Font Awesome</a>, <a href="https://icomoon.io/" target="_blank">IcoMoon</a>, <a href="http://genericons.com/" target="_blank">Genericons</a>, <a href="http://typicons.com/" target="_blank">Typicons</a>, and <a href="http://www.elegantthemes.com/blog/freebie-of-the-week/free-line-style-icons" target="_blank">Elegant Themes' Line Icons</a>. You can include your own icon families with the `siteorigin_widgets_icon_families` filter.
-
-#### Example
-Form options input:
-```php
-$form_options = array(
-	'some_icon' => array(
-		'type' => 'icon',
-		'label' => __('Select an icon', 'widget-form-fields-text-domain'),
-	)
-);
-```
-Result:
-
-![Widget Form Icon Selector](../images/form-field-type-icon.png)
-
----
-
 ### section
 The section field type provides a convenient way to group and hide related form fields. This is useful when you have a large form which can appear overwhelming.
 
 #### Additional options
 - hide: `bool` Whether or not this section should start out collapsed or expanded.
-- fields: `array` The set of fields to be grouped together. This should contain any combination of other field types, even sections and repeaters.
+- fields: `array` The set of fields to be grouped together. This should contain any combination of other field types, even repeaters and sections.
 
 #### Example
 Form options input:
@@ -361,15 +347,17 @@ Result:
 ---
 
 ### repeater
-The repeater field type allows repeating of the specified set of fields. 
+The repeater field type provides a convenient way to repeat a specified set of form fields. 
 
 #### Additional options
 - item_name: `string` A default label for each repeated item.
-- item_label: `array` This array descibes how the repeater may retrieve the item labels from HTML elements as they are updated. The options are:
+- item_label: `array` This associative array describes how the repeater may retrieve the item labels from HTML elements as they are updated. The options are:
   - selector: `string` A JQuery selector which is used to find an element from which to retrieve the item label.
-  - update_event: `string` The event on which to bind and update the item label.
-  - value_method: `string` The function which should be used to retrieve the item label from an element.
-- fields: `array` The set of fields to be repeated together as one item. This should contain any combination of other field types, even sections and repeaters.
+  - update_event: `string` The javascript event on which to bind and update the item label.
+  - value_method: `string` The javascript function which should be used to retrieve the item label from an element.
+- fields: `array` The set of fields to be repeated together as one item. This should contain any combination of other field types, even repeaters and sections.
+- scroll_count: `int` The maximum number of repeated items to display before adding a scrollbar to the repeater.
+- readonly: `bool` Whether or not items may be added to or removed from this repeater by user interaction.
 
 #### Example
 Form options input:
@@ -400,7 +388,6 @@ $form_options = array(
 Result:
 
 Empty repeater:
-
 ![Widget Form Repeater 1](../images/form-field-type-repeater-1.png)
 
 Repeater containing two items (the first item is collapsed and the second item is expanded):
@@ -413,7 +400,7 @@ Includes the entire form of an existing widget class.
 
 #### Additional options
 - class: `string` The class name of the widget to be included.
-- hide: `bool` Whether or not this section should start out collapsed or expanded.
+- hide: `bool` Whether or not this widget's form section should start out collapsed or expanded.
 
 #### Example
 Form options input:
@@ -430,5 +417,51 @@ $form_options = array(
 Result:
 
 ![Widget Form Widget Field](../images/form-field-type-widget.png)
+
+---
+
+### icon
+Renders an icon selector field. This allows you to select an icon from a default set of icon families, namely <a href="http://fortawesome.github.io/Font-Awesome/" target="_blank">Font Awesome</a>, <a href="https://icomoon.io/" target="_blank">IcoMoon</a>, <a href="http://genericons.com/" target="_blank">Genericons</a>, <a href="http://typicons.com/" target="_blank">Typicons</a>, and <a href="http://www.elegantthemes.com/blog/freebie-of-the-week/free-line-style-icons" target="_blank">Elegant Themes' Line Icons</a>. You can include your own icon families with the `siteorigin_widgets_icon_families` filter.
+
+You can find more detail about extending available icons [here](./extending-existing-fields.md).
+
+#### Example
+Form options input:
+```php
+$form_options = array(
+	'some_icon' => array(
+		'type' => 'icon',
+		'label' => __('Select an icon', 'widget-form-fields-text-domain'),
+	)
+);
+```
+Result:
+
+![Widget Form Icon Selector](../images/form-field-type-icon.png)
+
+---
+
+### font
+Renders a font selector field. This allows you to select a font from a default set of font families, namely the web safe fonts (Helvetica Neue, Lucida Grande, Georgia, and Courier New ) and a selection of font families from the Google Fonts library. By default this field will use the font specified by the active theme.
+
+You can include your own font families with the `siteorigin_widgets_font_families` filter. You can find more detail about extending available fonts [here](./extending-existing-fields.md).
+
+#### Example
+Form options input:
+```php
+$form_options = array(
+	'some_font' => array(
+		'type' => 'font',
+		'label' => __('Select a font', 'widget-form-fields-text-domain'),
+	)
+);
+```
+Result:
+
+Default selection:
+![Widget Form Font Selector](../images/form-field-type-font-1.png)
+
+Selecting a font:
+![Widget Form Font Selector](../images/form-field-type-font-2.png)
 
 ---

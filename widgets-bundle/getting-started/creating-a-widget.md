@@ -140,7 +140,7 @@ And now you can see your widget being displayed!
 
 You can supply a LESS stylesheet for your widget by overriding the `get_style_name` function and returning the name of the LESS stylesheet, without a `.less` file extension. The base `SiteOrigin_Widget` class looks for a LESS file in a `styles` directory, in the widget directory.
 
-We go into more detail about the use of LESS in the Widgets Bundle [here](../templating/less-stylesheets.md)
+You can find more detail about the use of LESS in the Widgets Bundle [here](../templating/less-stylesheets.md).
 
 ```php
 function get_style_name($instance) {
