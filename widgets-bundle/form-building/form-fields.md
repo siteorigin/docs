@@ -1,17 +1,15 @@
 # Form fields
 
-This is where you'll find a lot of the convenience of using the SiteOrigin Widgets Bundle as a framework for creating your own widgets. The widget form options are a way for you to define the configuration options you'd like to allow for your widget users. The more form options you provide, the more customizable your widget becomes.
+This is where you'll find a lot of the convenience of using the SiteOrigin Widgets Bundle as a framework for creating your own widgets. The widget form fields are a way for you to define the configuration fields you'd like to allow for your widget users. The more form fields you provide, the more customizable your widget becomes.
 
-## Form option field descriptors
+## Form field descriptors
 
-Each value in the form options array is a form field descriptor, which is an associative array describing the form field to be rendered by the `SiteOrigin_Widget` base class, in order to capture configuration values for a widget instance. Each form field descriptor must at least have a type, however a few of the types won't be useful without additional configuration values. Optional base form field descriptor values are listed below:
+The form fields options are passed into the `SiteOrigin_Widget` class constructor as an array and stored in the `$form_options` instance variable. Each value in the array is a form field descriptor, which is an associative array describing the form field to be rendered by the `SiteOrigin_Widget` base class, in order to capture configuration values for a widget instance. Each form field descriptor must at least have a type, however a few of the types won't be useful without additional configuration values. Optional base form field descriptor values are listed below:
 
 - label: `string` Render a label for the field with the given value.
 - default: `mixed` The field will be prepopulated with this default value.
-- description: `string` Render small italic text below the field to desribe the field's purpose.
-- optional: `bool` Append '(Optional)' to this field's label as a small green supertext.
-- state_name: `string` Transforms into a class name, which, together with some JQuery, allows groups of elements to easily be set as visible or invisible simultaneously.
-- hidden: `bool` Whether this field starts out visible or invisible.
+- description: `string` Render small italic text below the field to describe the field's purpose.
+- optional: `bool` Append '(Optional)' to this field's label as a small green superscript.
 
 In addition to these, some fields have their own specific configuration values, which are listed in the respective sections below.
 
@@ -21,6 +19,10 @@ In addition to these, some fields have their own specific configuration values, 
 
 ### text
 Renders a text input field.
+
+#### Additional options
+- placeholder: `string` A string to display before any text has been input.
+- readonly: `bool` If true, this field will not be editable.
 
 #### Example
 Form options input:
@@ -35,12 +37,39 @@ $form_options = array(
 ```
 Result:
 
-![Widget Form Text Input](./images/form-field-type-text.png)
+![Widget Form Text Input](../images/form-field-type-text.png)
+
+---
+
+### link
+Renders an input field for entering any URL and a button for convenient selection of content from public posts (except attachments).
+
+#### Additional options
+- placeholder: `string` A string to display before any text has been input.
+- readonly: `bool` If true, this field will not be editable.
+
+#### Example
+Form options input:
+```php
+$form_options = array(
+	'some_url' => array(
+		'type' => 'link',
+		'label' => __('Some URL goes here', 'widget-form-fields-text-domain'),
+		'default' => 'http://www.example.com'
+	)
+);
+```
+Result:
+
+![Widget Form Link Input](../images/form-field-type-link.png)
 
 ---
 
 ### color
 Renders a color input field and color picker.
+
+#### Additional options
+- placeholder: `string` A string to display before any text has been input.
 
 #### Example
 Form options input:
@@ -54,12 +83,16 @@ $form_options = array(
 ```
 Result:
 
-![Widget Form Color Picker](./images/form-field-type-color.png)
+![Widget Form Color Picker](../images/form-field-type-color.png)
 
 ---
 
 ### number
-Renders a text input field for entering a number. This is the same as the text type field, except that the input is cast as a `float`.
+Renders a text input field for entering a number. This is the same as the _text_ field, except that the input is cast as a `float`.
+
+#### Additional options
+- placeholder: `string` A string to display before any text has been input.
+- readonly: `bool` If true, this field will not be editable.
 
 #### Example
 Form options input:
@@ -74,7 +107,7 @@ $form_options = array(
 ```
 Result:
 
-![Widget Form Number Input](./images/form-field-type-number.png)
+![Widget Form Number Input](../images/form-field-type-number.png)
 
 ---
 
@@ -83,6 +116,8 @@ Renders a textarea field.
 
 #### Additional options
 - rows: `int` The number of visible rows in the textarea.
+- placeholder: `string` A string to display before any text has been input.
+- readonly: `bool` If true, this field will not be editable.
 
 #### Example
 Form options input:
@@ -98,7 +133,7 @@ $form_options = array(
 ```
 Result:
 
-![Widget Form Text Area](./images/form-field-type-textarea.png)
+![Widget Form Text Area](../images/form-field-type-textarea.png)
 
 ---
 
@@ -126,7 +161,7 @@ $form_options = array(
 ```
 Result:
 
-![Widget Form Slider](./images/form-field-type-slider.png)
+![Widget Form Slider](../images/form-field-type-slider.png)
 
 ---
 
@@ -155,7 +190,7 @@ $form_options = array(
 ```
 Result:
 
-![Widget Form Select 1](./images/form-field-type-select-1.png)
+![Widget Form Select 1](../images/form-field-type-select-1.png)
 
 #### Example 2 - prompt without default value
 Form options input:
@@ -174,7 +209,7 @@ $form_options = array(
 ```
 Result:
 
-![Widget Form Select](./images/form-field-type-select-2.png)
+![Widget Form Select](../images/form-field-type-select-2.png)
 
 ---
 
@@ -194,7 +229,7 @@ $form_options = array(
 ```
 Result:
 
-![Widget Form Checkbox](./images/form-field-type-checkbox.png)
+![Widget Form Checkbox](../images/form-field-type-checkbox.png)
 
 ---
 
@@ -222,7 +257,7 @@ $form_options = array(
 ```
 Result:
 
-![Widget Form Radio Input](./images/form-field-type-radio.png)
+![Widget Form Radio Input](../images/form-field-type-radio.png)
 
 ---
 
@@ -249,7 +284,7 @@ $form_options = array(
 ```
 Result:
 
-![Widget Form Media Selector](./images/form-field-type-media.png)
+![Widget Form Media Selector](../images/form-field-type-media.png)
 
 ---
 
@@ -268,7 +303,7 @@ $form_options = array(
 ```
 Result:
 
-![Widget Form Posts Selector](./images/form-field-type-posts.png)
+![Widget Form Posts Selector](../images/form-field-type-posts.png)
 
 ---
 
@@ -287,7 +322,7 @@ $form_options = array(
 ```
 Result:
 
-![Widget Form Icon Selector](./images/form-field-type-icon.png)
+![Widget Form Icon Selector](../images/form-field-type-icon.png)
 
 ---
 
@@ -321,7 +356,7 @@ $form_options = array(
 ```
 Result:
 
-![Widget Form Section](./images/form-field-type-section.png)
+![Widget Form Section](../images/form-field-type-section.png)
 
 ---
 
@@ -366,10 +401,10 @@ Result:
 
 Empty repeater:
 
-![Widget Form Repeater 1](./images/form-field-type-repeater-1.png)
+![Widget Form Repeater 1](../images/form-field-type-repeater-1.png)
 
 Repeater containing two items (the first item is collapsed and the second item is expanded):
-![Widget Form Repeater 2](./images/form-field-type-repeater-2.png)
+![Widget Form Repeater 2](../images/form-field-type-repeater-2.png)
 
 ---
 
@@ -394,6 +429,6 @@ $form_options = array(
 ```
 Result:
 
-![Widget Form Widget Field](./images/form-field-type-widget.png)
+![Widget Form Widget Field](../images/form-field-type-widget.png)
 
 ---
