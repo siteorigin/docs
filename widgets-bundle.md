@@ -1,6 +1,10 @@
 # Widgets bundle developer docs
 
-The widgets bundle is a convenient collection of widgets, bundled as a plugin. It also happens to be an excellent framework for creating new widgets with minimal coding required. Here we explain how to extend the widgets bundle with your own widgets. If you've done so in a fork of our git repository, you can even submit a pull request and your widget might be included in the official bundle.
+The SiteOrigin Widgets Bundle is far more than just a collection of widgets. It's a framework that you can build on to create widgets in minimal time. It features powerful form building, data handling and templating. The core of the Widgets Bundle handles everything for you, so you can focus your efforts on building beautiful widgets.
+
+Even if you wont want to create your own widgets from scratch, the Widgets Bundle is easy to extend in other ways. You can create custom templates, styles and form fields for all our existing widgets. One example use case is creating a custom style for the button widget that fits in with the look and feel of your theme.
+
+These developer docs will teach you everything you need to know to build on top of the SiteOrigin Widgets Bundle.
 
 ## Topics
 
