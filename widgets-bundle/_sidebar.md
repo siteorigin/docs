@@ -10,6 +10,7 @@
 * [Extending existing fields](form-building/extending-existing-fields.md)
 * [Adding custom fields](form-building/adding-custom-fields.md)
 * [Modifying forms](form-building/modifying-forms.md)
+* [State emitters](form-building/state-emitters.md)
 ### Templating
 * [HTML templates](templating/html-templates.md)
 * [LESS stylesheets](templating/less-stylesheets.md)
