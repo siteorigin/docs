@@ -20,6 +20,7 @@ These developer docs will teach you everything you need to know to build on top 
     - [Extending existing fields](widgets-bundle/form-building/extending-existing-fields.md)
     - [Adding custom fields](widgets-bundle/form-building/adding-custom-fields.md)
     - [Modifying forms](widgets-bundle/form-building/modifying-forms.md)
+    - [State emitters](widgets-bundle/form-building/state-emitters.md)
 - Templating
     - [HTML templates](widgets-bundle/templating/html-templates.md)
     - [LESS stylesheets](widgets-bundle/templating/less-stylesheets.md)
