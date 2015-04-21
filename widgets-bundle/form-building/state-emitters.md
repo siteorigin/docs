@@ -10,7 +10,7 @@ A form state is scoped to a given widget form. Each form can only occupy one sta
 
 ## State Emitters
 
-The first thing you need to understand is state emitters. These are tiedto specific fields. They broadcast form states based on a given set of arguments. Here's how you define them in the form array.
+The first thing you need to understand is state emitters. These are tied to specific fields. They broadcast form states based on a given set of arguments. Here's how you define them in the form array.
 
 ```php
 'map_type'    => array(
