@@ -6,7 +6,7 @@
 * [Form fields](form-building/form-fields.md)
 * [Repeaters and sections](form-building/repeaters-and-sections.md)
 * [Post selector](form-building/post-selector.md)
-* [Validation and sanitization](form-building/validation-and-sanitization.md)
+* [Input sanitization](form-building/input-sanitization.md)
 * [Extending existing fields](form-building/extending-existing-fields.md)
 * [Adding custom fields](form-building/adding-custom-fields.md)
 * [Modifying forms](form-building/modifying-forms.md)

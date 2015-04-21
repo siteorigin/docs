@@ -16,7 +16,7 @@ These developer docs will teach you everything you need to know to build on top 
     - [Form fields](widgets-bundle/form-building/form-fields.md)
     - [Repeaters and sections](widgets-bundle/form-building/repeaters-and-sections.md)
     - [Post selector](widgets-bundle/form-building/post-selector.md)
-    - [Validation and sanitization](widgets-bundle/form-building/validation-and-sanitization.md)
+    - [Input sanitization](widgets-bundle/form-building/input-sanitization.md)
     - [Extending existing fields](widgets-bundle/form-building/extending-existing-fields.md)
     - [Adding custom fields](widgets-bundle/form-building/adding-custom-fields.md)
     - [Modifying forms](widgets-bundle/form-building/modifying-forms.md)
