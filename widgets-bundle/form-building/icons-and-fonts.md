@@ -98,7 +98,7 @@ add_filter( 'siteorigin_widgets_font_families', 'my_font_families_filter' );
 ### Using fonts
 To use the selected font family in your template, requires a few steps:
 
-Include a LESS stylesheet as described [here](../templating/less-stylesheets.md). It will need at least a variable for the font family, but possibly one for font weight too.
+1) Include a LESS stylesheet as described [here](../templating/less-stylesheets.md). It will need at least a variable for the font family, but possibly one for font weight too.
 ```less
 // Variable with default value where selected font family will be injected.
 @font_family: "Lucida Grande", sans-serif;
@@ -111,7 +111,7 @@ Include a LESS stylesheet as described [here](../templating/less-stylesheets.md)
 }
 ```
 
-Return the selected font family and weight in the widget's overridden `get_less_variables()` function, by using the `siteorigin_widget_get_font()`.
+2) Return the selected font family and weight in the widget's overridden `get_less_variables()` function, by using the `siteorigin_widget_get_font()`.
 ```php
 function get_less_variables( $instance ) {
     $selected_font = siteorigin_widget_get_font( $instance['some_font'] );
@@ -125,7 +125,7 @@ function get_less_variables( $instance ) {
 }
 ```
 
-If the selected font is a Google font, you should use the `.widget-function` callback at the top of LESS stylesheet to call back into widget and get the required import statement. You'll need to do this for each different font family you're using in the stylesheet.
+3) If the selected font is a Google font, you should use the `.widget-function` callback at the top of LESS stylesheet to call back into widget and get the required import statement. You'll need to do this for each different font family you're using in the stylesheet.
 In the LESS stylesheet, call the `less_import_google_font()` function in the widget:
 ```less
 .widget-function('import_google_font');
