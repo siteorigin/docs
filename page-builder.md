@@ -26,4 +26,4 @@ Page Builder has lots of hooks and filters for you to use. We've already covered
 
 * [Filtering HTML Structure](./page-builder/hooks/html.md).
 * [Filtering CSS](./page-builder/hooks/css.md).
-* [Filtering Custom Row Options] (.page-builder/hooks/custom-row-settings.md).
+* [Filtering Custom Row Options](./page-builder/hooks/custom-row-settings.md).
