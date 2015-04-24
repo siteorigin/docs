@@ -1,6 +1,6 @@
 # Template variables filter
 
-To understand this filter, it's best to look at the context in which it runs. The widgets bundle passes the widget instance to the `get_template_variables` function, which is the function your plugin should be overriding to return an array of vairables that'll be passed through `extract` and made available to the template files.
+For you to understand this filter, it's best to look at the context in which it runs. The widgets bundle passes the widget instance to the `get_template_variables` function. This function is the one your plugin should override to return an array of variables that the Widgets Bundle will pass through `extract` to make them available for your widget template.
 
 ```php
 $template_vars = $this->get_template_variables($instance, $args);
@@ -20,8 +20,8 @@ The filter takes the form `'siteorigin_widgets_template_variables_' . $this->id_
  * @param SiteOrigin_Widget $widget The main widget instance.
  */
 function wbe_filter_template_variables( $template_vars, $instance, $args, $widget ){
-	// Strictly this isn't correct, but we'll use it as an example
-	$template_vars['text'] = __( $instance['text'], 'test-domain' );
+    // Strictly this isn't correct, but we'll use it as an example
+    $template_vars['text'] = __( $instance['text'], 'test-domain' );
 }
 add_filter( 'siteorigin_widgets_template_variables_sow-button', 'wbe_filter_template_variables', 10, 4 );
 ```

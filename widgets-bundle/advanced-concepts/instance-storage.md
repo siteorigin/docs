@@ -4,13 +4,13 @@ As the name implies, instance storage stores the current widget instance and mak
 
 ### When will you use it?
 
-For example, lets say you create a newsletter widget and you're adding direct integration with a few newsletter providers. So you add a field that lets your users enter their MailChimp API key for example. You'll need to access this API key only after someone submits a form.
+For example, let's say you create a newsletter widget, and you're adding direct integration with a few newsletter providers. So you add a field that lets your users enter their MailChimp API key for example. You'll need to access this API key only after someone submits a form.
 
-So, instead you'll just include the instance storage hash in your newsletter signup HTML form, and use that hash to retrieve the full instance, including the API key, after they've submitted that form back to your server.
+So, instead you'll just include the instance storage hash in your newsletter signup HTML form. You'd then use that hash to retrieve the full instance (including the API key) after a user has submitted the signup form back to your server.
 
 ### Enabling instance storage
 
-Instance storage is not enabled by default, but you can enable it by setting the `instance_storage` key to true in the `$widget_options` array.
+Your widget won't have instance storage enabled by default. You can enable it by setting the `instance_storage` key to true in the `$widget_options` array.
 
 ```php
 class My_Newsletter_Widget extends SiteOrigin_Widget {

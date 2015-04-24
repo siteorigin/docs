@@ -5,10 +5,10 @@ The post selector field allows the user to build a query to find posts in the da
 Form options input:
 ```php
 $form_options = array(
-	'some_posts' => array(
-		'type' => 'posts',
-		'label' => __('Some posts query', 'widget-form-fields-text-domain'),
-	)
+    'some_posts' => array(
+        'type' => 'posts',
+        'label' => __('Some posts query', 'widget-form-fields-text-domain'),
+    )
 );
 ```
 
