@@ -423,7 +423,7 @@ Result:
 ### icon
 Renders an icon selector field. This allows you to select an icon from a default set of icon families, namely <a href="http://fortawesome.github.io/Font-Awesome/" target="_blank">Font Awesome</a>, <a href="https://icomoon.io/" target="_blank">IcoMoon</a>, <a href="http://genericons.com/" target="_blank">Genericons</a>, <a href="http://typicons.com/" target="_blank">Typicons</a>, and <a href="http://www.elegantthemes.com/blog/freebie-of-the-week/free-line-style-icons" target="_blank">Elegant Themes' Line Icons</a>. You can include your own icon families with the `siteorigin_widgets_icon_families` filter.
 
-You can find more detail about extending available icons [here](./extending-existing-fields.md).
+You can find more detail about using icons [here](./icons-and-fonts.md).
 
 #### Example
 Form options input:
@@ -444,7 +444,7 @@ Result:
 ### font
 Renders a font selector field. This allows you to select a font from a default set of font families, namely the web safe fonts (Helvetica Neue, Lucida Grande, Georgia, and Courier New ) and a selection of font families from the Google Fonts library. By default this field will use the font specified by the active theme.
 
-You can include your own font families with the `siteorigin_widgets_font_families` filter. You can find more detail about extending available fonts [here](./extending-existing-fields.md).
+You can include your own font families with the `siteorigin_widgets_font_families` filter. You can find more detail about extending available fonts [here](./icons-and-fonts.md).
 
 #### Example
 Form options input:
