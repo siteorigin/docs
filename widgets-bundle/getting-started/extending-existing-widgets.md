@@ -37,11 +37,11 @@ function mytheme_button_template_file( $filename, $instance, $widget ){
 		$filename = plugin_dir_path( __FILE__ ) . 'tpl/button.php';
 		
 		// And this one for themes
-		$filename = get_stylesheet_dir() . '/tpl/button.php'; 
+		$filename = get_stylesheet_directory() . '/tpl/button.php'; 
 	}
 	return $filename;
 }
-add_filter( 'siteorigin_widget_template_file_sow-button', 'mytheme_button_template_file', 10, 3 );
+add_filter( 'siteorigin_widgets_template_file_sow-button', 'mytheme_button_template_file', 10, 3 );
 ```
 
 To get an idea of what's available to a button widget, you can take a look at the one that comes with the which is `widgets/so-button-widget/tpl/base.php`. Modify this to your liking and put it in your theme or plugin. Read over the [HTML Templates](../templating/html-templates.md) section to find out more about creating templates.
@@ -58,11 +58,11 @@ function mytheme_button_less_file( $filename, $instance, $widget ){
 		$filename = plugin_dir_path( __FILE__ ) . 'less/test.less';
 		
 		// And this one for themes
-		$filename = get_stylesheet_dir() . '/less/test.less'; 
+		$filename = get_stylesheet_directory() . '/less/test.less'; 
 	}
 	return $filename;
 }
-add_filter( 'siteorigin_widget_less_file_sow-button', 'mytheme_button_less_file', 10, 3 );
+add_filter( 'siteorigin_widgets_less_file_sow-button', 'mytheme_button_less_file', 10, 3 );
 ```
 
 The LESS syntax is fairly simple, especially if you're just using it for variables and nexting. To learn more about using LESS in the Widgets Bundle, read over the [LESS Stylesheets](../templating/less-stylesheets.md) section of the docs.
