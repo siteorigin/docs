@@ -58,11 +58,11 @@ function mytheme_button_less_file( $filename, $instance, $widget ){
 		$filename = plugin_dir_path( __FILE__ ) . 'less/test.less';
 		
 		// And this one for themes
-		$filename = get_stylesheet_dir() . '/less/test.less'; 
+		$filename = get_stylesheet_directory() . '/less/test.less'; 
 	}
 	return $filename;
 }
-add_filter( 'siteorigin_widget_less_file_sow-button', 'mytheme_button_less_file', 10, 3 );
+add_filter( 'siteorigin_widgets_less_file_sow-button', 'mytheme_button_less_file', 10, 3 );
 ```
 
 The LESS syntax is fairly simple, especially if you're just using it for variables and nexting. To learn more about using LESS in the Widgets Bundle, read over the [LESS Stylesheets](../templating/less-stylesheets.md) section of the docs.
