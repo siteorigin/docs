@@ -37,11 +37,11 @@ function mytheme_button_template_file( $filename, $instance, $widget ){
 		$filename = plugin_dir_path( __FILE__ ) . 'tpl/button.php';
 		
 		// And this one for themes
-		$filename = get_stylesheet_dir() . '/tpl/button.php'; 
+		$filename = get_stylesheet_directory() . '/tpl/button.php'; 
 	}
 	return $filename;
 }
-add_filter( 'siteorigin_widget_template_file_sow-button', 'mytheme_button_template_file', 10, 3 );
+add_filter( 'siteorigin_widgets_template_file_sow-button', 'mytheme_button_template_file', 10, 3 );
 ```
 
 To get an idea of what's available to a button widget, you can take a look at the one that comes with the which is `widgets/so-button-widget/tpl/base.php`. Modify this to your liking and put it in your theme or plugin. Read over the [HTML Templates](../templating/html-templates.md) section to find out more about creating templates.
