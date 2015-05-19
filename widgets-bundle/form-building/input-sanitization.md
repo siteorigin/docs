@@ -49,7 +49,7 @@ $form_options = array(
 	'some_url' => array(
 		'type' => 'link',
 		'label' => __('Some URL goes here', 'widget-form-fields-text-domain'),
-		'sanitize' => 'url,
+		'sanitize' => 'url',
 	),
 	'some_email_address' => array(
 	    'type' => 'text',
