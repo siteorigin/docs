@@ -88,7 +88,7 @@ array(
 ```
 
 #### Rendering the label
-It is fairly common for fields to have a label, so the `SiteOrigin_Widget_Field_Base` class includes a default label rendering function `render_field_label`. There are two ways to customise the label rendering. You can override `render_field_label` and do your own rendering, or you can simply add CSS classes to affect the styling of the existing label. The second method makes it easier for subclasses to customize the labels. You will need to ensure that your stylesheet containing the custom label CSS class is enqueued elsewhere.
+It is fairly common for fields to have a label, so the `SiteOrigin_Widget_Field_Base` class includes a default label rendering function `render_field_label`. There are two ways to customise the label rendering. You can override `render_field_label` and do your own rendering, or you can override the `get_label_classes` function to return CSS classes to affect the styling of the existing label. The second method makes it easier for subclasses to customize the labels. You will need to ensure that your stylesheet containing the custom label CSS class is enqueued elsewhere.
 
 ##### Example - overriding `render_field_label`
 ```php
@@ -101,8 +101,9 @@ protected function render_field_label() {
 
 ##### Example - adding label CSS classes
 ```php
-protected function add_label_classes( $label_classes ) {
-	$label_classes[] = 'my-custom-field-label-css-class';
+protected function get_label_classes() {
+	$label_classes = parent::get_label_classes();
+	$label_classes[] = 'additional-CSS-class';
 	return $label_classes;
 }
 ```
