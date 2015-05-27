@@ -10,6 +10,7 @@ The form fields options are passed into the `SiteOrigin_Widget` class constructo
 - default: `mixed` The field will be prepopulated with this default value.
 - description: `string` Render small italic text below the field to describe the field's purpose.
 - optional: `bool` Append '(Optional)' to this field's label as a small green superscript.
+- sanitize: `string` Specifies sanitization type to be performed on input from this field. Available sanitizations are'email' and 'url'. If the specified sanitization isn't recognized it is assumed to be a custom sanitization and a filter is applied using the pattern `'siteorigin_widgets_sanitize_field_' . $sanitize`, in case the sanitization is defined elsewhere.
 
 In addition to these, some fields have their own specific configuration values, which are listed in the respective sections below.
 
@@ -170,6 +171,7 @@ Renders a dropdown select field. This field is better for a long list of predefi
 #### Additional options
 - prompt: `string` If present, it is included as a disabled (not selectable) value at the top of the list of options. If there is no default value, it is selected by default. You might even want to leave the label value blank when you use this.
 - options `array` The list of options which may be selected.
+- multiple `bool` Determines whether this is a single or multiple select field.
 
 #### Example 1 - default value without prompt
 Form options input:
@@ -209,6 +211,27 @@ $form_options = array(
 Result:
 
 ![Widget Form Select](../images/form-field-type-select-2.png)
+
+#### Example 3 - multiple select
+Form options input:
+```php
+$form_options = array(
+	'another_selection' => array(
+		'type' => 'select',
+		'label' => __( 'Choose a thing from a long list of things', 'widget-form-fields-text-domain' ),
+		'multiple' => true,
+		'default' => 'the_other_thing',
+		'options' => array(
+			'this_thing' => __( 'This thing', 'widget-form-fields-text-domain' ),
+			'that_thing' => __( 'That thing', 'widget-form-fields-text-domain' ),
+			'the_other_thing' => __( 'The other thing', 'widget-form-fields-text-domain' ),
+		)
+	)
+);
+```
+Result:
+
+![Widget Form Multiple Select](../images/form-field-type-select-3.png)
 
 ---
 
