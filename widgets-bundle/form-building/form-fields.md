@@ -138,6 +138,46 @@ Result:
 
 ---
 
+### tinymce
+Renders a TinyMCE editor field.
+
+#### Additional options
+- rows: `int` The number of visible rows in the textarea.
+- default_editor: `string` Whether to display the TinyMCE visual editor or the Quicktags HTML editor initially. Allowed values are `'tinymce'` ( can be abbreviated to `'tmce'`), and `'html'`. The default is `'tinymce'`.
+- editor_height: `int` The initial height of the editor. Setting this will cause the rows option to be ignored.
+- button_filters: `array` An array of filter callbacks to filter the buttons available on the TinyMCE visual editor and the Quicktags HTML editor. The TinyMCE editor can display up to four rows of buttons and the Quicktags editor displays a single row of buttons. Each row can be filtered by specifying a corresponding callback, as follows:
+  * First row: `'mce_buttons'`
+  * Second row: `'mce_buttons_2'`
+  * Third row: `'mce_buttons_3'`
+  * Fourth row: `'mce_buttons_4'`
+  * Quicktags settings: `'quicktags_settings'`
+
+#### Example
+Form options input:
+```php
+$form_options = array(
+	'some_tinymce_editor' => array(
+        'type' => 'tinymce',
+        'label' => __( 'Visually edit, richly.', 'widget-form-fields-text-domain' ),
+        'default' => 'An example of a long message.</br>It is even possible to add a few html tags.</br><a href="siteorigin.com" target="_blank"">Links!</a>',
+        'rows' => 10,
+        'default_editor' => 'html',
+        'button_filters' => array(
+            'mce_buttons' => array( $this, 'filter_mce_buttons' ),
+            'mce_buttons_2' => array( $this, 'filter_mce_buttons_2' ),
+            'mce_buttons_3' => array( $this, 'filter_mce_buttons_3' ),
+            'mce_buttons_4' => array( $this, 'filter_mce_buttons_5' ),
+            'quicktags_settings' => array( $this, 'filter_quicktags_settings' ),
+        ),
+	)
+);
+```
+Result:
+
+![Widget Form Text Area](../images/form-field-type-tinymce.png)
+
+---
+
 ### slider
 Renders a number slider field to allow the choice of a number in a range.
 
