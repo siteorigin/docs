@@ -13,7 +13,7 @@ define('SITEORIGIN_PANELS_DEV', true);
 
 ### Page Builder Data Dump
 
-After you've enabled debug mode, you'll get a full dump of your page's content as a PHP array. To do this, view the HTML source of a page builder page you've already created. Then search for the following string `Page Builder Data`. You'll see a standard HTML comment with the PHP for your page. Copy this array, we'll be using it shortly.
+After you've enabled debug mode, you'll get a full dump of your page's content as a PHP array. To do this, view the HTML source of a page builder page you've already created. The dump will only show up when you are editing the page you created with Page Builder, but not when you simply view it. Then search for the following string `Page Builder Data`. You'll see a standard HTML comment with the PHP for your page. Copy this array, we'll be using it shortly.
 
 ### Registering Your Prebuilt Layout
 
@@ -23,7 +23,8 @@ For this Page Builder uses the `siteorigin_panels_prebuilt_layouts` filter. So w
 function mytheme_prebuilt_layouts($layouts){
 	$layouts['home-page'] = array(
 		// We'll add a title field
-		'name' => __('Default Home', 'vantage'),
+		'name' => __('Default Home', 'vantage'),	// Required
+		'description' => __('Default Home Description', 'vantage'),	// Optional
 		'widgets' => array( ... ),
 		'grids' => array( ... ),
 		'grid_cells' => array( ... )

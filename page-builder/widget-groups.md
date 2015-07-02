@@ -22,6 +22,18 @@ add_filter('siteorigin_panels_widget_dialog_tabs', 'mytheme_add_widget_tabs', 20
 
 Next you just need to make sure that you assign your widgets a group. You can either do this by filtering the widgets array using `siteorigin_panels_widgets` and add a `groups` attribute to each of your widgets, or you can add a `panels_group` argument to the `$widget_options` argument of the `WP_Widget` constructor.
 
+### Filtering Page Builder Widgets
+
+```php
+function mytheme_add_widget_icons($widgets){
+	$widgets['My_Widget']['groups'] = array('mytheme');
+	return $widgets;
+}
+add_filter('siteorigin_panels_widgets', 'mytheme_add_widget_icons');
+```
+
+### Widgets Argument
+
 ```php
 class Foo_Widget extends WP_Widget {
 

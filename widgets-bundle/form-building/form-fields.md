@@ -10,6 +10,7 @@ The form fields options are passed into the `SiteOrigin_Widget` class constructo
 - default: `mixed` The field will be prepopulated with this default value.
 - description: `string` Render small italic text below the field to describe the field's purpose.
 - optional: `bool` Append '(Optional)' to this field's label as a small green superscript.
+- sanitize: `string` Specifies sanitization type to be performed on input from this field. Available sanitizations are'email' and 'url'. If the specified sanitization isn't recognized it is assumed to be a custom sanitization and a filter is applied using the pattern `'siteorigin_widgets_sanitize_field_' . $sanitize`, in case the sanitization is defined elsewhere.
 
 In addition to these, some fields have their own specific configuration values, which are listed in the respective sections below.
 
@@ -137,6 +138,46 @@ Result:
 
 ---
 
+### tinymce
+Renders a TinyMCE editor field.
+
+#### Additional options
+- rows: `int` The number of visible rows in the textarea.
+- default_editor: `string` Whether to display the TinyMCE visual editor or the Quicktags HTML editor initially. Allowed values are `'tinymce'` ( can be abbreviated to `'tmce'`), and `'html'`. The default is `'tinymce'`.
+- editor_height: `int` The initial height of the editor. Setting this will cause the rows option to be ignored.
+- button_filters: `array` An array of filter callbacks to filter the buttons available on the TinyMCE visual editor and the Quicktags HTML editor. The TinyMCE editor can display up to four rows of buttons and the Quicktags editor displays a single row of buttons. Each row can be filtered by specifying a corresponding callback, as follows:
+  * First row: `'mce_buttons'`
+  * Second row: `'mce_buttons_2'`
+  * Third row: `'mce_buttons_3'`
+  * Fourth row: `'mce_buttons_4'`
+  * Quicktags settings: `'quicktags_settings'`
+
+#### Example
+Form options input:
+```php
+$form_options = array(
+	'some_tinymce_editor' => array(
+        'type' => 'tinymce',
+        'label' => __( 'Visually edit, richly.', 'widget-form-fields-text-domain' ),
+        'default' => 'An example of a long message.</br>It is even possible to add a few html tags.</br><a href="siteorigin.com" target="_blank"">Links!</a>',
+        'rows' => 10,
+        'default_editor' => 'html',
+        'button_filters' => array(
+            'mce_buttons' => array( $this, 'filter_mce_buttons' ),
+            'mce_buttons_2' => array( $this, 'filter_mce_buttons_2' ),
+            'mce_buttons_3' => array( $this, 'filter_mce_buttons_3' ),
+            'mce_buttons_4' => array( $this, 'filter_mce_buttons_5' ),
+            'quicktags_settings' => array( $this, 'filter_quicktags_settings' ),
+        ),
+	)
+);
+```
+Result:
+
+![Widget Form Text Area](../images/form-field-type-tinymce.png)
+
+---
+
 ### slider
 Renders a number slider field to allow the choice of a number in a range.
 
@@ -170,6 +211,7 @@ Renders a dropdown select field. This field is better for a long list of predefi
 #### Additional options
 - prompt: `string` If present, it is included as a disabled (not selectable) value at the top of the list of options. If there is no default value, it is selected by default. You might even want to leave the label value blank when you use this.
 - options `array` The list of options which may be selected.
+- multiple `bool` Determines whether this is a single or multiple select field.
 
 #### Example 1 - default value without prompt
 Form options input:
@@ -209,6 +251,27 @@ $form_options = array(
 Result:
 
 ![Widget Form Select](../images/form-field-type-select-2.png)
+
+#### Example 3 - multiple select
+Form options input:
+```php
+$form_options = array(
+	'another_selection' => array(
+		'type' => 'select',
+		'label' => __( 'Choose a thing from a long list of things', 'widget-form-fields-text-domain' ),
+		'multiple' => true,
+		'default' => 'the_other_thing',
+		'options' => array(
+			'this_thing' => __( 'This thing', 'widget-form-fields-text-domain' ),
+			'that_thing' => __( 'That thing', 'widget-form-fields-text-domain' ),
+			'the_other_thing' => __( 'The other thing', 'widget-form-fields-text-domain' ),
+		)
+	)
+);
+```
+Result:
+
+![Widget Form Multiple Select](../images/form-field-type-select-3.png)
 
 ---
 

@@ -10,13 +10,13 @@ The `SiteOrigin_Widget` base class provides two convenience methods, `register_f
 function initialize() {
     $this->register_frontend_scripts(
         array(
-            array( 'hello-world-script', 'absolute/path/to/my/script.js, array( 'jquery' ), '1.0' )
+            array( 'hello-world-script', 'absolute/path/to/my/script.js', array( 'jquery' ), '1.0' )
         )
     );
     
     $this->register_frontend_styles(
         array(
-            array( 'hello-world-style', 'absolute/path/to/my/style.css, array(), '1.0' )
+            array( 'hello-world-style', 'absolute/path/to/my/style.css', array(), '1.0' )
         )
     );
 }

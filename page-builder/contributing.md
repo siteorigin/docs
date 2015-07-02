@@ -14,7 +14,7 @@ We're trying to keep the core of Page Builder as light as possible. This makes i
 
 Some examples are implementing support for other grid systems like Bootstrap, or adding extra row/widget styles. Both are possible with some creative use of the existing hooks in Page Builder. You can see [default-styles.php](https://github.com/siteorigin/siteorigin-panels/blob/master/inc/default-styles.php) for an idea of how we've implemented styles in Page Builder.
 
-If your plugin proves very popular and you give us permission, we'll integrate the new feautures into the core of Page Builder.
+If your plugin proves very popular and you give us premission, we'll integrate the new features into the core of Page Builder.
 
 ## Developer Documentation
 
