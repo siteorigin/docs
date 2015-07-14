@@ -5,7 +5,7 @@ There are few steps necessary to prepare a plugin for release on the WordPress.o
 ## Environment setup
 
 1) [Download](https://nodejs.org/download/) and install Node.js and npm.
-2) In a terminal or command line, navigate to the root of the plugin directory and run `npm install`
+2) In a terminal, navigate to the root of the plugin directory and run `npm install`
 3) Get some coffee while npm installs the required packages.
 
 ## Running builds
@@ -22,9 +22,9 @@ The release task performs the following subtasks:
 
 Release task usage:
 
-`gulp build:release -v {version}`
+`gulp build:release -v version`
 
-Where `{version}` should be replaced with the required version number.
+Where `version` should be replaced with the required version number.
 For example, say the next version of the plugin is 1.2.3:
 
 `gulp build:release -v 1.2.3`
