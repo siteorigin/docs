@@ -20,6 +20,7 @@
 ### Advanced concepts
 * [Instance storage](advanced-concepts/instance-storage.md)
 * [Hooks and filters](advanced-concepts/hooks-and-filters.md)
+* [Post meta boxes](advanced-concepts/post-meta-box-forms.md)
 
 ### Tutorials
 * [Hello world!](tutorials/hello-world.md)

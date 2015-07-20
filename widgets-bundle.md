@@ -30,6 +30,7 @@ These developer docs will teach you everything you need to know to build on top 
 ### Advanced concepts
 * [Instance storage](widgets-bundle/advanced-concepts/instance-storage.md)
 * [Hooks and filters](widgets-bundle/advanced-concepts/hooks-and-filters.md)
+* [Post meta boxes for widget data](widgets-bundle/advanced-concepts/post-meta-box-forms.md)
 
 ### Tutorials
 * [Hello world!](widgets-bundle/tutorials/hello-world.md)
