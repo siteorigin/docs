@@ -4,9 +4,9 @@ There are few steps necessary to prepare a plugin for release on the WordPress.o
 
 ## Environment setup
 
-1) [Download](https://nodejs.org/download/) and install Node.js and npm.
-2) In a terminal, navigate to the root of the plugin directory and run `npm install`
-3) Get some coffee while npm installs the required packages.
+1. [Download](https://nodejs.org/download/) and install Node.js and npm.
+2. In a terminal, navigate to the root of the plugin directory and run `npm install`
+3. Get some coffee while npm installs the required packages.
 
 ## Running builds
 
@@ -14,11 +14,11 @@ There are two build tasks, `build:release` and `build:dev`.
 
 The release task performs the following subtasks:
 
-1) Updates the version number in the siteorigin-panels.php and readme.txt files.
-2) Compiles LESS files to CSS.
-3) Minifies JavaScript files and adds a `.min` suffix.
-4) Copies all files to a `dist/siteorigin-panels` folder.
-5) Creates a `.zip` archive with the appropriate filename ready for uploading to wordpress.org.
+1. Updates the version number in the siteorigin-panels.php and readme.txt files.
+2. Compiles LESS files to CSS.
+3. Minifies JavaScript files and adds a `.min` suffix.
+4. Copies all files to a `dist/siteorigin-panels` folder.
+5. Creates a `.zip` archive with the appropriate filename ready for uploading to wordpress.org.
 
 Release task usage:
 
