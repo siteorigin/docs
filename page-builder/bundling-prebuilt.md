@@ -1,6 +1,6 @@
 # Page Builder Prebuilt Layouts
 
-Page Builder makes it easy to bundle prebuilt lauyouts into your theme or plugin. We've made a point of not including any of these into the Page Builder core, relying mainly on other themes and plugins to add the layouts that work with their unique designs.
+Page Builder makes it easy to bundle prebuilt layouts into your theme or plugin. We've made a point of not including any of these into the Page Builder core, relying mainly on other themes and plugins to add the layouts that work with their unique designs.
 
 ### Enable Debug Mode
 
