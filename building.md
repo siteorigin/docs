@@ -14,10 +14,10 @@ There are two build tasks, `build:release` and `build:dev`.
 
 The release task performs the following subtasks:
 
-1. Updates the version number in the siteorigin-panels.php and readme.txt files.
+1. Updates the version number in the `{plugin-name}.php` and `readme.txt` files.
 2. Compiles LESS files to CSS.
 3. Minifies JavaScript files and adds a `.min` suffix.
-4. Copies all files to a `dist/siteorigin-panels` folder.
+4. Copies all files to a `dist/{plugin-name}` folder.
 5. Creates a `.zip` archive with the appropriate filename ready for uploading to wordpress.org.
 
 Release task usage:
