@@ -52,7 +52,7 @@ Once an icon has been selected for use in your widget form, it needs a bit of pr
 Let's say your widget form includes the following:
 ```php
 $form_options = array(
-    'my_icon' = array(
+    'my_icon' => array(
         'type' => 'icon'
         'label' => __( 'My Icon', 'example-text-domain' )
     ),
