@@ -53,15 +53,15 @@ Let's say your widget form includes the following:
 ```php
 $form_options = array(
     'my_icon' = array(
-        'type' => 'icon'
+        'type' => 'icon',
         'label' => __( 'My Icon', 'example-text-domain' )
     ),
     'my_icon_size' => array(
-        'type' => 'number'
+        'type' => 'number',
         'label' => __( 'My Icon Size', 'example-text-domain' )
     ),
     'my_icon_color' => array(
-        'type' => 'color'
+        'type' => 'color',
         'label' => __( 'My Icon Color', 'example-text-domain' )
     )
 );
