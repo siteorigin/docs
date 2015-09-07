@@ -64,6 +64,19 @@ siteorigin_widget_register('hello-world-widget', __FILE__, 'Hello_World_Widget')
 
 Once you've done this, you'll see your widget in the Plugins > SiteOrigin Widgets list, it can be activated and deactivated, and you'll see an 'Untitled Widget' in Page Builder widgets and a blank widget in other widget lists. So you can't really use your widget yet, but it's there!
 
+## Widget banner image
+To use a custom image for the banner in the Plugins > SiteOrigin Widgets list you can either place it in a folder named `assets` and name the file `banner.svg` or you can use the `siteorigin_widgets_widget_banner` filter hook. The following code can be found in the example main widget file `my-awesome-widget.php` outside of the class declaration. If you put the code somewhere else, make sure to adjust the file path accordingly.
+
+```php
+function my_awesome_widget_banner_img_src( $banner_url, $widget_meta ) {
+	if( $widget_meta['ID'] == 'my-awesome-widget') {
+		$banner_url = plugin_dir_url(__FILE__) . 'images/awesome_widget_banner.svg';
+	}
+	return $banner_url;
+}
+add_filter( 'siteorigin_widgets_widget_banner', 'my_awesome_widget_banner_img_src', 10, 2);
+```
+
 ## Widget class constructor
 
 Here you'll see how to implement the constructor for your widget. The `SiteOrigin_Widget` class extends the `WP_Widget` class so the parent constructor call might look familiar, with a few additions.
