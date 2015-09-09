@@ -1,10 +1,10 @@
 # Modifying Forms With State Emitters
 
-State emitters give you a way to easily hide, show or modify certain parts of a widget's form. Using entries in the form array, you can define state emitters fields, that will emit a specific state to the rest of the form, and then state handlers that will perform a specific action based on any changes in the state.
+State emitters give you a way to easily hide, show or manipulate certain parts of a widget's form. Using entries in the form array, you can define state emitters fields, that will emit a specific state to the rest of the form, and then state handlers that will perform a specific action based on any changes in the state.
 
-State emitters are a fairly advanced concept, and won't be necessary for all fields. Make sure you're fairly comfortable with creating forms before you try adding state emitters.
+State emitters are an advanced concept, and they aren't necessary for all fields. Make sure you're comfortable with creating forms before you try adding state emitters.
 
-## Form States
+## Form states
 
 A form state is scoped to a given widget form. Each form can only occupy one state per state group. A state is represented by the string `group[state]`. Group and state names can consist of alphabetical characters and underscores.
 
@@ -32,11 +32,11 @@ What the `state_emitter` argument is essentially saying is that every time this 
 
 The Widgets Bundle has a few built in state emitter callbacks that should cover most of your needs.
 
-### The select Callback
+### The select callback
 
 The `select` state emitter simply sets the state for all the given groups in the args array to the value of the field. This is especially useful when you want to set the state of the field based on a dropdown or radio field.
 
-### The in Callback
+### The in callback
 
 The `in` state emitter checks if the current field value is in the set of arguments.
 
@@ -52,7 +52,7 @@ The `in` state emitter checks if the current field value is in the set of argume
 
 This is useful when you want to group different options into a set of states.
 
-### The conditional Callback
+### The conditional callback
 
 The conditional callback evaluates arbitrary conditions. The variable `var` is available to use in any way you please. Your expression should be valid Javascript and evaluate to a boolean.
 
@@ -67,7 +67,7 @@ The conditional callback evaluates arbitrary conditions. The variable `var` is a
 ),
 ```
 
-### Custom Callbacks
+### Custom callbacks
 
 If you need a custom state emitter for some specialized functionality, you can add it in Javascript by simply attaching a new function to the global `sowEmitters` object.
 
@@ -143,4 +143,51 @@ Else arguments give you a catch all of actions to run for a given group. Let's s
 ),
 ```
 
-The Widgets bundle goes from top to bottom of the state handlers. If it reaches an else handler, it'll run it only if no actions have run for the same group for the given state handler. 
+The Widgets bundle goes from top to bottom of the state handlers. If it reaches an else handler, it'll run it only if no actions have run for the same group for the given state handler.
+
+## States in Repeaters
+
+State Emitter groups are global within a given form. That means if you have a state emitter for a field inside a repeater, each instance of that field will emit states for the same group. To change this behavoir, use the `{$repeater}` string in your repeater group names.
+
+For example, the Contact Form widget has a repeater that allows a user to create a list of form fields. Each item has a field type dropdown to select what type of field it is and another repeater to add value options for the field. This value options field only applies to dropdown and and checkboxes fields.
+
+So in the state emitter argument, we have a select state emitter where the group is `field_type_{$repeater}` and a state handler that shows or hides the value options repeater based on this same group.
+
+```php
+'type' => array(
+	'type' => 'select',
+	'label' => __( 'Field Type', 'siteorigin-widgets' ),
+	'options' => array(
+		// Some options left out
+		'text' => __( 'Text', 'siteorigin-widgets' ),
+		'select' => __( 'Dropdown Select', 'siteorigin-widgets' ),
+		'checkboxes' => __( 'Checkboxes', 'siteorigin-widgets' ),
+	),
+	'state_emitter' => array(
+		'callback' => 'select',
+		'args' => array( 'field_type_{$repeater}' ),
+	)
+),
+```
+
+And then for the value options repeater:
+
+```php
+'options' => array(
+	'type' => 'repeater',
+	'label' => __( 'Options', 'siteorigin-widgets' ),
+	'item_name' => __( 'Option', 'siteorigin-widgets' ),
+	'fields' => array(
+		'value' => array(
+			'type' => 'text',
+			'label' => __( 'Value', 'siteorigin-widgets' ),
+		),
+	),
+
+	// These are only required for a few states
+	'state_handler' => array(
+		'field_type_{$repeater}[select,checkboxes]' => array('show'),
+		'_else[field_type_{$i}]' => array( 'hide' ),
+	),
+),
+```
