@@ -26,6 +26,7 @@ function my_icon_families_filter( $icon_families ) {
 		    // Etc.
 		),
     );
+    return $icon_families;
 }
 add_filter( 'siteorigin_widgets_icon_families', 'my_icon_families_filter' );
 ```
