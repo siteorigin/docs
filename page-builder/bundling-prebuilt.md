@@ -25,6 +25,7 @@ function mytheme_prebuilt_layouts($layouts){
 		// We'll add a title field
 		'name' => __('Default Home', 'vantage'),	// Required
 		'description' => __('Default Home Description', 'vantage'),	// Optional
+		'screenshot' => plugin_dir_url( __FILE__ ) . 'images/layout-screenshot.png',	// Optional
 		'widgets' => array( ... ),
 		'grids' => array( ... ),
 		'grid_cells' => array( ... )
