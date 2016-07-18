@@ -187,7 +187,7 @@ And then for the value options repeater:
 	// These are only required for a few states
 	'state_handler' => array(
 		'field_type_{$repeater}[select,checkboxes]' => array('show'),
-		'_else[field_type_{$i}]' => array( 'hide' ),
+		'_else[field_type_{$repeater}]' => array( 'hide' ),
 	),
 ),
 ```
