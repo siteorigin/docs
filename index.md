@@ -6,3 +6,4 @@ This is the home of SiteOrigin developer documentation for our themes and plugin
 * [Widgets Bundle](widgets-bundle.md)
 * [Testing](testing.md)
 * [Building](building.md)
+* [SiteOrigin Premium](siteorigin-premium.md)
