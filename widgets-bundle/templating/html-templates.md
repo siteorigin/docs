@@ -1,5 +1,5 @@
 # HTML Templates
-HTML templates are used to render widgets for display in the front end. A template is included for output when the `widget()` function is called, so it has access to the widget `$instance` variable and the `$args` variable. The template's name must be specified by overriding the `get_template_name()` function. By default, it must be placed in a folder named _tpl_ in the root of the widget folder.
+HTML templates are used to render widgets for display in the front end. A template is included for output when the `widget()` function is called, so it has access to the widget `$instance` variable and the `$args` variable. Variables in sections can be accessed by multidimensional array as shown below. The template's name must be specified by overriding the `get_template_name()` function. By default, it must be placed in a folder named _tpl_ in the root of the widget folder.
 
 ### Example - simple template
 Overriding the `get_template_name()` function:
@@ -16,7 +16,7 @@ In the file found at tpl/my-awesome-template.php:
     <h1><?php echo $instance['title'] ?></h1>
     <?php echo $args['after_title'] ?>
     <div>
-        <a href="<?php $instance['link_url'] ?>"><?php $instance['link_text'] ?></a>
+        <a href="<?php $instance['section_link']['link_url'] ?>"><?php $instance['section_link']['link_text'] ?></a>
     </div>
 </div>
 ```
@@ -46,8 +46,8 @@ Return the variables for extraction in an array:
 function get_template_variables( $instance ) {
     return array(
         'title' => ! empty( $instance['title'] ) ? $instance['title'] : 'Default title',
-        'link_url' => ! empty( $instance['link_url'] ) ? $instance['link_url'] : '',
-        'link_text' => ! empty( $instance['link_text'] ) ? $instance['link_text'] : 'Default link text.',
+        'link_url' => ! empty( $instance['section_link']['link_url'] ) ? $instance['section_link']['link_url'] : '',
+        'link_text' => ! empty( $instance['section_link']['link_text'] ) ? $instance['section_link']['link_text'] : 'Default link text.',
     );
 }
 ```
