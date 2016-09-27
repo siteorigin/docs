@@ -17,7 +17,7 @@ To filter the icon families, you use the `'siteorigin_widgets_icon_families'` fi
 
 ```php
 function my_icon_families_filter( $icon_families ) {
-    $icon_families['my-rad-icon-family'] = array(
+    $icon_families['radicons'] = array(
 		'name' => __( 'My Rad Icons', 'example-text-domain' ),
 		'style_uri' => plugin_dir_url( __FILE__ ) . '/icons/style.css',
 		'icons' => array(
