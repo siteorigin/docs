@@ -15,5 +15,5 @@ function mytheme_button_template_file( $filename, $instance, $widget ){
     }
     return $filename;
 }
-add_filter( 'siteorigin_widget_template_file_sow-button', 'mytheme_button_template_file', 10, 3 );
+add_filter( 'siteorigin_widgets_template_file_sow-button', 'mytheme_button_template_file', 10, 3 );
 ```
