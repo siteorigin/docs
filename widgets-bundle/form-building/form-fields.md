@@ -76,6 +76,7 @@ Renders a color input field and color picker.
 Form options input:
 ```php
 $form_options = array(
+	'some_color' => array(
 		'type' => 'color',
 		'label' => __( 'Choose a color', 'widget-form-fields-text-domain' ),
 		'default' => '#bada55'
@@ -331,7 +332,7 @@ Renders a media selector button. When clicked the button opens the WordPress Med
 #### Additional options
 - choose: `string` A label for the title of the media selector dialog.
 - update: `string` A label for the confirmation button of the media selector dialog.
-- library: `string` Sets the media library which to browse and from which media can be selected. Allowed values are `'image'`, `'audio'`, `'video'`, and `'file'`. The default is `'file'`.
+- library: `string` Sets the media library which to browse and from which media can be selected. Allowed values are `'image'`, `'audio'`, `'video'`, and `'file'`. The default is `'image'`.
 - fallback: `bool` Whether or not to display a URL input field which allows for specification of a fallback URL to be used in case the selected media resource isn't available.
 
 #### Example
