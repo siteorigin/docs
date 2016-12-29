@@ -76,6 +76,7 @@ Renders a color input field and color picker.
 Form options input:
 ```php
 $form_options = array(
+	'some_color' => array(
 		'type' => 'color',
 		'label' => __( 'Choose a color', 'widget-form-fields-text-domain' ),
 		'default' => '#bada55'
