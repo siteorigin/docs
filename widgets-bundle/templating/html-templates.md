@@ -43,7 +43,7 @@ For convenience, before including the template file specified by `get_template_n
 ### Example - using template variables
 Return the variables for extraction in an array:
 ```php
-function get_template_variables( $instance ) {
+function get_template_variables( $instance, $args ) {
     return array(
         'title' => ! empty( $instance['title'] ) ? $instance['title'] : 'Default title',
         'link_url' => ! empty( $instance['link_url'] ) ? $instance['link_url'] : '',
