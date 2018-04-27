@@ -1,6 +1,6 @@
 # Page Builder Developer Docs
 
-We built Page Builder to work with just about any WordPress theme, but there are lots of things you can do to to customize the experience for your users. Please read our [Contributing to Page Builder](./page-builder/contributing.md) guide if you'd like to help improve Page Builder.
+We built Page Builder to work with just about any WordPress theme, but there are lots of things you can do to customize the experience for your users. Please read our [Contributing to Page Builder](./page-builder/contributing.md) guide if you'd like to help improve Page Builder.
 
 ## Widgets
 
