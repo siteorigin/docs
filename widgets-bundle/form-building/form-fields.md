@@ -114,7 +114,7 @@ Result:
 ---
 
 ### measurement
-Renders a field for entering a [unit of measurement](https://developer.mozilla.org/en-US/docs/Learn/CSS/Introduction_to_CSS/Values_and_units#Numeric_values). This is the same as the text field, except that the input includes unit of measurements. This field type is typically used for things like margins, borders, and paddings.
+Renders a field for entering a [unit of measurement](https://developer.mozilla.org/en-US/docs/Learn/CSS/Introduction_to_CSS/Values_and_units#Numeric_values). This is the same as the text field, except that the input includes unit of measurements.
 
 #### Additional options
 - placeholder: `string` A string to display before any text has been input.
@@ -137,6 +137,47 @@ $form_options = array(
 Result:
 
 ![Widget Form Measurement](../images/form-field-type-measurement.png)
+
+### multi measurement
+Renders multiple fields for entering [unit of measurement](https://developer.mozilla.org/en-US/docs/Learn/CSS/Introduction_to_CSS/Values_and_units#Numeric_values). This field type is typically used for things like margins, borders, and paddings.
+
+#### Additional options
+- measurements: `array` The list of measurement options
+-- units: `array` The selector units of measurement. If no units are set, default units are used - 'px', '%', 'in', 'cm', 'mm', 'em', 'rem', 'pt', 'pc', 'ex', 'ch', 'vw', 'vh', 'vmin', 'vmax'.
+- separator: `string` separator for the measurements. Default is an empty space.
+- autofill: `bool` Whether to automatically fill the rest of the inputs when the first value is entered. Default is false.
+
+#### Example
+Form options input:
+
+
+```php
+$useable_units = array( 'px', '%' );
+$form_options = array(
+	'padding' => array(
+		'type' => 'multi-measurement',
+		'autofill' => true,
+		'measurements' => array(
+			'padding_top' => array(
+				'units' => $useable_units,
+			),
+			'right' => array(
+				'units' => $useable_units,
+			),
+			'bottom' => array(
+				'units' => $useable_units,
+			),
+			'left' => array(
+				'units' => $useable_units,
+			),
+		),
+	),
+);
+```
+
+Result:
+
+![Widget Form Measurement](../images/form-field-type-multi-measurement.png)
 
 ### textarea
 Renders a textarea field.
@@ -231,6 +272,30 @@ Result:
 
 ---
 
+### order
+Renders a list of options that the user can reorder. For usage, please refer to [this tutorial](./order-field.md)
+
+#### Additional options
+- options: `array` The list of options which can be reordered
+- max: `int` The maximum value of the allowed range.
+
+#### Example
+Form options input:
+```php
+$form_options = array(
+	'ordering' => array(
+		'type' => 'order',
+		'options' => array(
+		),
+		'default' => array( 'section', 'divider', 'other section' ),
+	),
+);
+```
+Result:
+
+![Widget Form Ordering](../images/form-field-type-order.png)
+
+---
 ### select
 Renders a dropdown select field. This field is better for a long list of predefined values. For a short list the radio input field is a better choice.
 
@@ -409,7 +474,7 @@ Result:
 ---
 
 ### image size
-Renders a dropdown with all of [the avaliable image sizes](https://developer.wordpress.org/reference/functions/add_image_size/) on the widget users website. This field is commonly used in conjuction with the Media field to allow the user more control over the image output. Please refer to the Image Sizes tutorial for usage instructions.
+Renders a dropdown with all of [the available image sizes](https://developer.wordpress.org/reference/functions/add_image_size/) on the widget users website. This field is commonly used in conjunction with the Media field to allow the user more control over the image output. Please refer to the [Image Sizes tutorial](./image-sizes-field.md) for usage instructions.
 
 > This field requires at least WordPress 2.9.
 
@@ -559,7 +624,7 @@ Result:
 ---
 
 ### builder
-An entire [SiteOrigin Page Builder](https://wordpress.org/plugins/siteorigin-panels/) instance.
+An entire [SiteOrigin Page Builder](https://wordpress.org/plugins/siteorigin-panels/) instance. For usage, please refer to [this tutorial](./builder-field.md)
 
 > This field requires [SiteOrigin Page Builder](https://wordpress.org/plugins/siteorigin-panels/) to be installed and active
 
