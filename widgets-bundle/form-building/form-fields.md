@@ -113,6 +113,77 @@ Result:
 
 ---
 
+### measurement
+Renders a field for entering a [unit of measurement](https://developer.mozilla.org/en-US/docs/Learn/CSS/Introduction_to_CSS/Values_and_units#Numeric_values). This is the same as the text field, except that the input includes unit of measurements.
+
+#### Additional options
+- placeholder: `string` A string to display before any text has been input.
+- readonly: `bool` If true, this field will not be editable.
+
+#### Example
+Form options input:
+
+
+```php
+$form_options = array(
+	'example_size' => array(
+		'type' => 'measurement',
+		'label' => __('Size', 'widget-form-fields-text-domain'),
+		'default' => '10px',
+	)
+);
+```
+
+Result:
+
+![Widget Form Measurement](../images/form-field-type-measurement.png)
+
+### multi measurement
+Renders multiple fields for entering [unit of measurement](https://developer.mozilla.org/en-US/docs/Learn/CSS/Introduction_to_CSS/Values_and_units#Numeric_values). This field type is typically used for things like margins, borders, and paddings.
+
+#### Additional options
+- measurements: `array` The list of measurement options
+-- units: `array` The selector units of measurement. If no units are set, default units are used - 'px', '%', 'in', 'cm', 'mm', 'em', 'rem', 'pt', 'pc', 'ex', 'ch', 'vw', 'vh', 'vmin', 'vmax'.
+- separator: `string` separator for the measurements. Default is an empty space.
+- autofill: `bool` Whether to automatically fill the rest of the inputs when the first value is entered. Default is false.
+
+#### Example
+Form options input:
+
+
+```php
+$useable_units = array( 'px', '%' );
+$form_options = array(
+	'padding' => array(
+		'type' => 'multi-measurement',
+		'autofill' => true,
+		'default' => '5% 0px 25px 0px',
+		'measurements' => array(
+			'padding_top' => array(
+				'label' => __( 'Padding Top', 'widget-form-fields-text-domain' ),
+				'units' => $useable_units,
+			),
+			'right' => array(
+				'label' => __( 'Padding Right', 'widget-form-fields-text-domain' ),
+				'units' => $useable_units,
+			),
+			'bottom' => array(
+				'label' => __( 'Padding Bottom', 'widget-form-fields-text-domain' ),
+				'units' => $useable_units,
+			),
+			'left' => array(
+				'label' => __( 'Padding Left', 'widget-form-fields-text-domain' ),
+				'units' => $useable_units,
+			),
+		),
+	),
+);
+```
+
+Result:
+
+![Widget Form Multi Measurement](../images/form-field-type-multi-measurement.png)
+
 ### textarea
 Renders a textarea field.
 
@@ -206,6 +277,34 @@ Result:
 
 ---
 
+### order
+Renders a list of options that the user can reorder. For usage, please refer to [this tutorial](./order-field.md)
+
+#### Additional options
+- options: `array` The list of options which can be reordered
+- max: `int` The maximum value of the allowed range.
+
+#### Example
+Form options input:
+```php
+$form_options = array(
+	'ordering' => array(
+		'type' => 'order',
+		'label' => __( 'Element Order', 'widget-form-fields-text-domain' ),
+		'options' => array(
+			'section' => __( 'Section', 'widget-form-fields-text-domain' ),
+			'divider' => __( 'Content', 'widget-form-fields-text-domain' ),
+			'other section' => __( 'Other Section', 'widget-form-fields-text-domain' ),
+		),
+		'default' => array( 'section', 'divider', 'other section' ),
+	),
+);
+```
+Result:
+
+![Widget Form Ordering](../images/form-field-type-order.png)
+
+---
 ### select
 Renders a dropdown select field. This field is better for a long list of predefined values. For a short list the radio input field is a better choice.
 
@@ -296,6 +395,34 @@ Result:
 
 ---
 
+### checkboxes
+Renders a series of checkboxes.
+
+#### Additional options
+- options `array` The list of options which may be selected.
+
+#### Example
+Form options input:
+
+```php
+$form_options = array(
+	'potential_options' => array(
+		'type' => 'checkboxes',
+		'label' => __( 'Allow this thing?', 'widget-form-fields-text-domain' ),
+		'default' => true
+		'options' => array(
+			'option' =>  __( 'value', 'another additional option' )
+			'other option =>  __( 'other value', 'another additional option' )
+			'another additional option' => __( 'Another possible value', 'widget-form-fields-text-domain' )
+		),
+	)
+);
+```
+
+Result:
+
+![Widget Form series of Checkboxes](../images/form-field-type-checkboxes.jpg)
+
 ### radio
 Renders a radio input field. This field is better for a short list of predefined values. For a long list the dropdown select field is a better choice.
 
@@ -354,6 +481,27 @@ Result:
 ![Widget Form Media Selector](../images/form-field-type-media.png)
 
 ---
+
+### image size
+Renders a dropdown with all of [the available image sizes](https://developer.wordpress.org/reference/functions/add_image_size/) on the widget users website. This field is commonly used in conjunction with the Media field to allow the user more control over the image output. Please refer to the [Image Sizes tutorial](./image-sizes-field.md) for usage instructions.
+
+> This field requires at least WordPress 2.9.
+
+#### Example
+```php
+$form_options = array(
+	'size' => array(
+		'type' => 'image-size',
+		'label' => __( 'Image size', 'widget-form-fields-text-domain' ),
+	)
+);
+```
+Result:
+
+![Widget from Image Sizes](../images/form-field-type-image-sizes.png)
+
+Possible Image Size values:
+![Possible Image Size values](../images/form-field-type-image-sizes-example.png)
 
 ### posts
 Renders a post selector field. This can be used to build custom queries with which to select posts from your database. The field displays a small red indicator which shows the number of posts currently being selected. By default, all posts are selected.
@@ -484,6 +632,58 @@ Result:
 
 ---
 
+### builder
+An entire [SiteOrigin Page Builder](https://wordpress.org/plugins/siteorigin-panels/) instance. For usage, please refer to [this tutorial](./builder-field.md)
+
+> This field requires [SiteOrigin Page Builder](https://wordpress.org/plugins/siteorigin-panels/) to be installed and active
+
+#### Additional options
+-  builder: `string` The type of page builder instance - currently unused. Defaults to `sow-builder-field`
+
+#### Example
+Form options input:
+
+```php
+$form_options = array(
+	'page_builder' => array(
+		'type' => 'builder',
+		'label' => __( 'Page Builder', 'widget-form-fields-text-domain'),
+	)
+);
+```
+
+Result:
+
+![Widget Form Builder field](../images/form-field-type-builder.png)
+
+### code 
+A textarea field with the [Behave.js library](https://github.com/jakiestfu/Behave.js) set up for it.
+
+#### Additional options
+- element_id `string` the id of the code textarea
+- element_name `string` the name of the code textarea
+- rows: `int` The number of visible rows in the textarea.
+- placeholder: `string` A string to display before any text has been input.
+- readonly `bool` If true, this field will not be editable.
+
+#### Example
+Form options input:
+
+```php
+$form_options = array(
+	'code_editor' => array(
+		'type' => 'code',
+		'label' => __( 'Code Editor', 'widget-form-fields-text-domain' ),
+	)
+);
+```
+
+Result:
+
+![Widget Form Code Field](../images/form-field-type-code.png)
+
+---
+
 ### icon
 Renders an icon selector field. This allows you to select an icon from a default set of icon families, namely <a href="http://fortawesome.github.io/Font-Awesome/" target="_blank">Font Awesome</a>, <a href="https://icomoon.io/" target="_blank">IcoMoon</a>, <a href="http://genericons.com/" target="_blank">Genericons</a>, <a href="http://typicons.com/" target="_blank">Typicons</a>, and <a href="http://www.elegantthemes.com/blog/freebie-of-the-week/free-line-style-icons" target="_blank">Elegant Themes' Line Icons</a>. You can include your own icon families with the `siteorigin_widgets_icon_families` filter.
 
@@ -527,5 +727,3 @@ Default selection:
 
 Selecting a font:
 ![Widget Form Font Selector](../images/form-field-type-font-2.png)
-
----
