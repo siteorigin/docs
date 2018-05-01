@@ -157,6 +157,7 @@ $form_options = array(
 	'padding' => array(
 		'type' => 'multi-measurement',
 		'autofill' => true,
+		'default' => '5% 0px 25px 0px',
 		'measurements' => array(
 			'padding_top' => array(
 				'label' => __( 'Padding Top', 'widget-form-fields-text-domain' ),
@@ -181,7 +182,7 @@ $form_options = array(
 
 Result:
 
-![Widget Form Measurement](../images/form-field-type-multi-measurement.png)
+![Widget Form Multi Measurement](../images/form-field-type-multi-measurement.png)
 
 ### textarea
 Renders a textarea field.
