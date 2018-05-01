@@ -143,7 +143,7 @@ Renders multiple fields for entering [unit of measurement](https://developer.moz
 
 #### Additional options
 - measurements: `array` The list of measurement options
--- units: `array` The selector units of measurement. If no units are set, default units are used - 'px', '%', 'in', 'cm', 'mm', 'em', 'rem', 'pt', 'pc', 'ex', 'ch', 'vw', 'vh', 'vmin', 'vmax'.
+-- units: `array` The selector units of measurement. If no units are set, default units are used -  `px`, `%`, `in`, `cm`, `mm`, `em`, `rem`, `pt`, `pc`, `ex`, `ch`, `vw`, `vh`, `vmin`, `vmax`.
 - separator: `string` separator for the measurements. Default is an empty space.
 - autofill: `bool` Whether to automatically fill the rest of the inputs when the first value is entered. Default is false.
 
