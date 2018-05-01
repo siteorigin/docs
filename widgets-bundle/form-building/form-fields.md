@@ -159,15 +159,19 @@ $form_options = array(
 		'autofill' => true,
 		'measurements' => array(
 			'padding_top' => array(
+				'label' => __( 'Padding Top', 'widget-form-fields-text-domain' ),
 				'units' => $useable_units,
 			),
 			'right' => array(
+				'label' => __( 'Padding Right', 'widget-form-fields-text-domain' ),
 				'units' => $useable_units,
 			),
 			'bottom' => array(
+				'label' => __( 'Padding Bottom', 'widget-form-fields-text-domain' ),
 				'units' => $useable_units,
 			),
 			'left' => array(
+				'label' => __( 'Padding Left', 'widget-form-fields-text-domain' ),
 				'units' => $useable_units,
 			),
 		),
@@ -285,7 +289,11 @@ Form options input:
 $form_options = array(
 	'ordering' => array(
 		'type' => 'order',
+		'label' => __( 'Element Order', 'widget-form-fields-text-domain' ),
 		'options' => array(
+			'section' => __( 'Section', 'widget-form-fields-text-domain' ),
+			'divider' => __( 'Content', 'widget-form-fields-text-domain' ),
+			'other section' => __( 'Other Section', 'widget-form-fields-text-domain' ),
 		),
 		'default' => array( 'section', 'divider', 'other section' ),
 	),
