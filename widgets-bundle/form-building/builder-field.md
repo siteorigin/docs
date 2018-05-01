@@ -30,4 +30,4 @@ else {
 	echo __( 'This widget requires Page Builder.', 'so-widgets-bundle' );
 }
 ```
-`$content_builder_id` doesn't need to be so complex, but we recommend using a complex idea to prevent any potential mismatches.
+`$content_builder_id` doesn't need to be complex, but we recommend using a complex od to prevent any potential mismatches.
