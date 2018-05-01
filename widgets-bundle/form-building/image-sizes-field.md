@@ -32,10 +32,10 @@ if( ! empty( $instance['image'] ) ) {
 ```
 
 The above PHP will:
-1. check to ensure an image is set. 
-2. check if an image size is set
-  - If no size is set, default to full
-  - If size is set, use image_size
-3. Fetch the image
-4. Ensure image exists
-5. Render Image as a full width div with 250px height with the image set as the background
+1. Check to ensure an image is set. 
+2. Check if an image size is set.
+  - If no size is set, default to full.
+  - If size is set, use `image_size`.
+3. Fetch the image.
+4. Ensure image exists.
+5. Render Image as a full width div with 250px height with the image set as the background.
