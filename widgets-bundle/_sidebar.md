@@ -10,7 +10,7 @@
 * [Input sanitization](form-building/input-sanitization.md)
 * [Icons and fonts](form-building/icons-and-fonts.md)
 * [Page Builder Field](form-building/builder-field.md)
-* [Image Sizes Field](form-building/builder-field.md)
+* [Image Sizes Field](form-building/image-sizes-field.md)
 * [Order Field](form-building/order-field.md)
 * [Adding custom fields](form-building/adding-custom-fields.md)
 * [Modifying forms](form-building/modifying-forms.md)
