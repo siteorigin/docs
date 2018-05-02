@@ -6,9 +6,12 @@
 ### Form building
 * [Form fields](form-building/form-fields.md)
 * [Repeaters and sections](form-building/repeaters-and-sections.md)
-* [Post selector](form-building/post-selector.md)
 * [Input sanitization](form-building/input-sanitization.md)
 * [Icons and fonts](form-building/icons-and-fonts.md)
+* [Order field](form-building/order-field.md)
+* [Page Builder](form-building/builder-field.md)
+* [Post selector](form-building/post-selector.md)
+* [Image sizes](form-building/image-sizes-field.md)
 * [Adding custom fields](form-building/adding-custom-fields.md)
 * [Modifying forms](form-building/modifying-forms.md)
 * [State emitters](form-building/state-emitters.md)
