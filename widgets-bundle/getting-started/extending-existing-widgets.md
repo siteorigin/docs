@@ -6,7 +6,9 @@ In this tutorial, we'll deal with adding a new style to the button widget.
 
 ## Modifying the form
 
-The first thing you'll want to do is modify the default form to add in your own style. Open up the `so-widgets-bundle` folder and open up `widgets/so-button-widget/so-button-widget.php`. In the `__construct` function, you'll see that the 4th argument is an array that specifies the form. The button widget has a section called `design` and in that, a field called `theme`. This is the field we're going to modify to add a custom option.
+The first thing you'll want to do is modify the default form to add in your own style. To get an idea of what the default form looks like, open the `so-widgets-bundle` direcotry and open up `widgets/so-button-widget/so-button-widget.php`. In the `__construct` function, you'll see that the 4th argument is an array that specifies the form. The button widget has a section called `design` and in that, a field called `theme`. 
+
+The `theme` field is a method of allowing the user to select differnet button themes. We need to modify this field and add our own custom theme option, which will allow users to select our theme. Here's the PHP we would use to do that:
 
 ```php
 function mytheme_extend_button_form( $form_options, $widget ){
@@ -28,10 +30,11 @@ We're making sure that the option field we're looking for is there, and if it is
 
 ## Changing the template file
 
-Now that we've added our own button theme, the next thing we're going to want to do is create our own template file. In the Widgets Bundle, a template is simply a PHP file. It gets passed the widget values in an `$instance` array, plus it has access to the values returned by `get_template_variables()`.
+Now that we've added our own button theme to the `theme` drop down, we need to tell the SiteOrigin Button widget what template file to display when the user selects our theme from `theme` drop down what template file to use. In the SiteOrigin Widgets Bundle, a template is simply a PHP file. It gets passed the widget values in an `$instance` array, plus it has access to the values returned by `get_template_variables()`.
 
 ```php
 function mytheme_button_template_file( $filename, $instance, $widget ){
+	// Check if the user has selected your custom theme
 	if( !empty($instance['design']['theme']) && $instance['design']['theme'] == 'test' ) {
 		// This option works for plugins
 		$filename = plugin_dir_path( __FILE__ ) . 'tpl/button.php';
@@ -43,6 +46,7 @@ function mytheme_button_template_file( $filename, $instance, $widget ){
 }
 add_filter( 'siteorigin_widgets_template_file_sow-button', 'mytheme_button_template_file', 10, 3 );
 ```
+The above code checks if the user has selected our button theme (that's what the if clause checks), and if it does, it loads the specified template. You'll want to change the `test` to the theme name you decided on and `button.php` to your template file.
 
 To get an idea of what's available to a button widget, you can take a look at the one that comes with the which is `widgets/so-button-widget/tpl/base.php`. Modify this to your liking and put it in your theme or plugin. Read over the [HTML Templates](../templating/html-templates.md) section to find out more about creating templates.
 
@@ -54,6 +58,7 @@ We'll use a similar method to change the LESS file we use to generate the style 
 
 ```php
 function mytheme_button_less_file( $filename, $instance, $widget ){
+	// Check if the user has selected your custom theme
 	if( !empty($instance['design']['theme']) && $instance['design']['theme'] == 'test' ) {
 		$filename = plugin_dir_path( __FILE__ ) . 'less/test.less';
 		
