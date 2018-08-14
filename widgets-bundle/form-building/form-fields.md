@@ -409,7 +409,6 @@ $form_options = array(
 	'potential_options' => array(
 		'type' => 'checkboxes',
 		'label' => __( 'Allow this thing?', 'widget-form-fields-text-domain' ),
-		'default' => true
 		'options' => array(
 			'option' =>  __( 'value', 'widget-form-fields-text-domain' ),
 			'other option' =>  __( 'other value', 'widget-form-fields-text-domain' ),
