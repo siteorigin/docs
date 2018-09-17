@@ -26,7 +26,7 @@ Lets go over what's all happening here. First, we're creating a custom filter fu
 
 We're making sure that the option field we're looking for is there, and if it is, we're adding our own option called **Test Style**.
 
-![Custom Button Theme](images/custom-theme-field.png)
+![Custom Button Theme](../images/custom-theme-field.png)
 
 ## Changing the template file
 
