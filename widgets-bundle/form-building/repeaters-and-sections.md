@@ -132,7 +132,7 @@ get_template_variables( $instance, $args ) {
     }
     
     return array(
-    	'a_text_thing' => ! empty( $text_from_grouped_text ) ? $text_from_grouped_text : 'A default string';
+    	'a_text_thing' => ! empty( $text_from_grouped_text ) ? $text_from_grouped_text : 'A default string'
     );
 }
 ```
