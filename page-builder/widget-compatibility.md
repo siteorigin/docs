@@ -15,7 +15,7 @@ The first thing your widget needs to do is enqueue its CSS and Javascript for th
 function mywidget_enqueue_scripts(){
 	wp_enqueue_script( ... );
 }
-add_action( 'admin_print_scripts-widgets.php', 'mywidget_enqueue_scripts' );
+add_action('admin_print_scripts-widgets.php', 'mywidget_enqueue_scripts');
 // Add this to enqueue your scripts on Page Builder too
 add_action('siteorigin_panel_enqueue_admin_scripts', 'mywidget_enqueue_scripts');
 
