@@ -48,6 +48,7 @@ Renders an input field for entering any URL and a button for convenient selectio
 #### Additional options
 - placeholder: `string` A string to display before any text has been input.
 - readonly: `bool` If true, this field will not be editable.
+- post_types: `array` Array of strings post types by which to search.
 
 #### Example
 Form options input:
