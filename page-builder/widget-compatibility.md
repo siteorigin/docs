@@ -12,12 +12,12 @@ The first thing your widget needs to do is enqueue its CSS and Javascript for th
 /**
  * Enqueue all my widget's admin scripts
  */
-function mywidget_enqueue_scripts(){
+function mywidget_enqueue_scripts() {
 	wp_enqueue_script( ... );
 }
 add_action( 'admin_print_scripts-widgets.php', 'mywidget_enqueue_scripts' );
 // Add this to enqueue your scripts on Page Builder too
-add_action('siteorigin_panel_enqueue_admin_scripts', 'mywidget_enqueue_scripts');
+add_action( 'siteorigin_panel_enqueue_admin_scripts', 'mywidget_enqueue_scripts' );
 
 ```
 
@@ -28,11 +28,11 @@ The next thing you need to do is ensure your widget form setup function is being
 The other option is to use the `panelsopen` jQuery event. This event is triggered right after the form HTML is loaded, so is a good opportuinity to set up your form.
 
 ```javascript
-$(document).on('panelsopen', function(e) {
-	var dialog = $(e.target);
+$( document ).on( 'panelsopen', function( e ) {
+	var dialog = $( e.target );
 	// Check that this is for our widget class
-	if( !dialog.has('.some-unique-widget-form-class') ) return;
+	if( !dialog.has( '.some-unique-widget-form-class' ) ) return;
 
 	// Here we can setup our widget form.
-});
+} );
 ```
