@@ -24,7 +24,7 @@ Renders a text input field.
 #### Additional options
 - placeholder: `string` A string to display before any text has been input.
 - readonly: `bool` If true, this field will not be editable.
-- input_type: `bool` The input type  to use for this field. Supports all standard HTML input types. For a list avaliable types, [click here](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input#Form_%3Cinput%3E_types).
+- input_type: `string` The input type  to use for this field. Supports all standard HTML input types. For a list avaliable types, [click here](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input#Form_%3Cinput%3E_types).
 
 #### Example
 Form options input:
