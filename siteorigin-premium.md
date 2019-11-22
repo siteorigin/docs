@@ -2,7 +2,7 @@
 
 SiteOrigin Premium is our way of adding features to all of our WordPress themes and plugins, while giving access to our premium email support.
 
-## Removing The Teaser
+## Removing the Teaser
 
 We promote SiteOrigin Premium through small teasers in our plugins. If you're a theme developer building on top of Page Builder, Widgets Bundle or SiteOrigin CSS, we give you the option to hide all references to SiteOrigin Premium.
 
