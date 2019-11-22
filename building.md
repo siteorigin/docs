@@ -2,13 +2,13 @@
 
 There are few steps necessary to prepare a plugin for release on the WordPress.org plugin directory. We use [Gulp](http://gulpjs.com/) to automate this.
 
-## Environment setup
+## Environment Setup
 
 1. [Download](https://nodejs.org/download/) and install Node.js and npm.
 2. In a terminal, navigate to the root of the plugin directory and run `npm install`
 3. Get some coffee while npm installs the required packages.
 
-## Running builds
+## Running Builds
 
 There are two build tasks, `build:release` and `build:dev`.
 
@@ -31,6 +31,6 @@ For example, say the next version of the plugin is 1.2.3:
 
 The dev build task only has one subtask:
 
-1) Watch LESS files for changes and compile to CSS.
+1. Watch LESS files for changes and compile to CSS.
 
 This is simply to avoid having to manually recompile LESS files while working on them.
