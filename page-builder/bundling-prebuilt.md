@@ -2,38 +2,24 @@
 
 Page Builder makes it easy to bundle prebuilt layouts into your theme or plugin. We've made a point of not including any of these into the Page Builder core, relying mainly on other themes and plugins to add the layouts that work with their unique designs.
 
-### Enable Debug Mode
+## Register a Custom Layouts Folder Location
 
-While in debug mode, Page Builder will show you some extra details about the page you're editing. To enable this, add the following lines to your `wp-config.php`.
+Use the below function to register a location for your prebuilt layout files. Replace `siteorigin` with your theme or plugin namespace. Change folder path as required, in this example we're storing our layouts in the `/inc/layouts` folder
 
-```php
-define('SITEORIGIN_PANELS_NOCACHE', true);
-define('SITEORIGIN_PANELS_DEV', true);
 ```
-
-### Page Builder Data Dump
-
-After you've enabled debug mode, you'll get a full dump of your page's content as a PHP array. To do this, view the HTML source of a page builder page you've already created. The dump will only show up when you are editing the page you created with Page Builder, but not when you simply view it. Then search for the following string `Page Builder Data`. You'll see a standard HTML comment with the PHP for your page. Copy this array, we'll be using it shortly.
-
-### Registering Your Prebuilt Layout
-
-For this Page Builder uses the `siteorigin_panels_prebuilt_layouts` filter. So we'll create a function that hooks into this filter. The function takes an array of the existing layouts, adds its own layout (using a unique array key), then returns the entire array.
-
-```php
-function mytheme_prebuilt_layouts($layouts){
-	$layouts['home-page'] = array(
-		// We'll add a title field
-		'name' => __('Default Home', 'vantage'),	// Required
-		'description' => __('Default Home Description', 'vantage'),	// Optional
-		'screenshot' => plugin_dir_url( __FILE__ ) . 'images/layout-screenshot.png',	// Optional
-		'widgets' => array( ... ),
-		'grids' => array( ... ),
-		'grid_cells' => array( ... )
-	);
-	return $layouts;
-	
+/**
+ * Register a custom layouts folder location.
+ */
+function siteorigin_layouts_folder( $layout_folders ) {
+	$layout_folders[] = get_template_directory() . '/inc/layouts';
+	return $layout_folders;
 }
-add_filter('siteorigin_panels_prebuilt_layouts','mytheme_prebuilt_layouts');
+add_filter( 'siteorigin_panels_local_layouts_directories', 'siteorigin_layouts_folder' );
 ```
 
-The layout array is just what we copied from the page builder data dump. We've added an extra `name` key, which Page Builder uses when it displays your prebuilt layout. 
+### Export Your Layout JSON File
+
+Edit the page containing your layout. In Page Builder, click Layouts > Import/Export > Download Layout. To change your layout name as seen in Page Builder, edit the JSON file and locate the name/value pair at the end of the file `"name":"Home"`. Change the `name` value as required. In this example, our layout is named `Home`. To add a thumbnail for each layout, include a JPG or PNG file with the same filename as the JSON file you'd like to use it for. For example, if your JSON file was named `home.json`, your thumbnail image would be named `home.jpg`. Finally, copy both the JSON layout file and thumbnail to your layouts directory location. Navigate to Layouts > Prebuilt layouts in any Page Builder page to view and test your layout.
+
+### External Images
+If you'd like your layout images to populate on other domains, make use of the External URL field wherever possible. For example, when adding a row background you can either use the Select Image button or insert a URL into the External URL field. Using the External URL field will ensure the image loads on domains other than your own.
