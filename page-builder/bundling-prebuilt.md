@@ -25,6 +25,8 @@ Edit the page containing your layout. In Page Builder, click Layouts > Import/Ex
 
 If you'd like your layout images to populate on other domains, make use of the External URL field wherever possible. For example, when adding a row background you can either use the Select Image button or insert a URL into the External URL field. Using the External URL field will ensure the image loads on domains other than your own.
 
+---
+
 ### Example Theme
 
 You can find an example theme [here](https://siteorigin.com/wp-content/uploads/2019/11/starter-theme.zip). `starter-theme` was created from underscores and isn't intended for production usage. Within the example theme you'll find the following:
@@ -61,11 +63,37 @@ add_filter( 'siteorigin_panels_local_layouts_directories', 'starter_theme_layout
 
 In our layouts folder we've included a demo layout and matching thumbnail.
 
+---
+
+### Example Child Theme
+
+You can find an example child theme [here](https://siteorigin.com/wp-content/uploads/2019/11/siteorigin-corp-child-prebuilt-layouts.zip). Our child theme uses SiteOrigin Corp theme as its parent theme. Within the example child theme you'll find the following:
+
+#### functions.php
+
+In the child theme `functions.php` file we register the location of our prebuilt layouts folder.
+
+```
+/**
+ * Register a custom layouts folder location.
+ */
+function siteorigin_corp_child_layouts_folder( $layout_folders ) {
+	$layout_folders[] = get_stylesheet_directory() . '/layouts';
+	return $layout_folders;
+}
+add_filter( 'siteorigin_panels_local_layouts_directories', 'siteorigin_corp_child_layouts_folder' );
+```
+#### layouts
+
+In our layouts folder we've included a demo layout and matching thumbnail.
+
+---
+
 ### Example Plugin
 
 You can find an example theme [here](https://siteorigin.com/wp-content/uploads/2019/11/so-prebuilt-layouts.zip). Within the example plugin you'll find the following:
 
-#### so-custom-post-loop.php ####
+#### so-custom-post-loop.php
 
 In the main plugin file we register the location of our prebuilt layouts folder.
 
