@@ -23,3 +23,36 @@ Edit the page containing your layout. In Page Builder, click Layouts > Import/Ex
 
 ### External Images
 If you'd like your layout images to populate on other domains, make use of the External URL field wherever possible. For example, when adding a row background you can either use the Select Image button or insert a URL into the External URL field. Using the External URL field will ensure the image loads on domains other than your own.
+
+### Example Theme
+You can find an example theme [here](https://siteorigin.com/wp-content/uploads/2019/11/starter-theme.zip). `starter-theme` was created from underscores and isn't intended for production usage. Within the example theme you'll find the following:
+
+#### functions.php ####
+At the end of the theme's `functions.php` file we conditionally require a Page Builder compatibility file.
+
+```
+/**
+ * Page Builder by SiteOrigin compatibility file.
+ */
+if ( defined( 'SITEORIGIN_PANELS_VERSION' ) ) {
+	require get_template_directory() . '/inc/siteorigin-page-builder.php';
+}
+```
+
+#### /inc/siteorigin-page-builder.php #### 
+In our compatibility file we have the following:
+
+```
+/**
+ * Register a custom layouts folder location.
+ */
+function starter_theme_layouts_folder( $layout_folders ) {
+	$layout_folders[] = get_template_directory() . '/inc/layouts';
+	return $layout_folders;
+}
+add_filter( 'siteorigin_panels_local_layouts_directories', 'starter_theme_layouts_folder' );
+```
+
+#### /inc/layouts/ ####
+
+In our layouts folder we've included a demo layout and matching thumbnail.
