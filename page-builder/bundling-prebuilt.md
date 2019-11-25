@@ -67,7 +67,7 @@ In our layouts folder we've included a demo layout and matching thumbnail.
 
 ### Example Child Theme
 
-You can find an example child theme [here](https://siteorigin.com/wp-content/uploads/2019/11/siteorigin-corp-child-prebuilt-layouts.zip). Our child theme uses SiteOrigin Corp theme as its parent theme. Within the example child theme you'll find the following:
+You can find an example child theme [here](https://siteorigin.com/wp-content/uploads/2019/11/siteorigin-corp-child-prebuilt-layouts.zip). Our child theme uses [SiteOrigin Corp](https://siteorigin.com/theme/corp/) as its parent theme. Within the example child theme you'll find the following:
 
 #### functions.php
 
