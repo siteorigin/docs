@@ -91,7 +91,7 @@ In our layouts folder we've included a demo layout and matching thumbnail.
 
 ### Example Plugin
 
-You can find an example theme [here](https://siteorigin.com/wp-content/uploads/2019/11/so-prebuilt-layouts.zip). Within the example plugin you'll find the following:
+You can find an example plugin [here](https://siteorigin.com/wp-content/uploads/2019/11/so-prebuilt-layouts.zip). Within the example plugin you'll find the following:
 
 #### so-custom-post-loop.php
 
