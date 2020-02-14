@@ -422,7 +422,7 @@ $form_options = array(
 
 Result:
 
-![Widget Form series of Checkboxes](../images/form-field-type-checkboxes.jpg)
+![Widget Form series of Checkboxes](../images/form-field-type-checkboxes.png)
 
 ### radio
 Renders a radio input field. This field is better for a short list of predefined values. For a long list the dropdown select field is a better choice.
