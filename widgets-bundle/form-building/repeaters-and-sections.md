@@ -41,7 +41,7 @@ get_template_variables( $instance, $args ) {
 	$joined_text = '';
     // Ensure that the repeater is available and not empty.
     if ( ! empty( $instance['a_repeater'] ) ) {
-    	$repeater_items = $instance['a_repeater']
+    	$repeater_items = $instance['a_repeater'];
     	foreach( $repeater_items as $index => $repeater_item ) {
     		$text_from_repeater_item_text_field = $repeater_item['repeat_text'];
     		$joined_text .= $text_from_repeater_item_text_field;
