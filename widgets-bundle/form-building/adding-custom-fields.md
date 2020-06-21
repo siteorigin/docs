@@ -2,7 +2,7 @@
 We have made the form fields, used by SiteOrigin widgets, extendible so that you can easily create your own custom fields. There are a few steps involved, but each of them is fairly simple. You can see the example code in the so-dev-examples repository <a href="https://github.com/siteorigin/so-dev-examples/tree/develop/extend-widgets-bundle/custom-fields/" target="_blank">here</a>.
 
 ## Field class names
-The SiteOrigin Widgets Bundle supports PHP 5.2.0 and above, so we avoid the use of the namespaces feature which is only available from PHP 5.3.0 onwards. We "namespace" our classes by prefixing their names with some (hopefully unique) prefix. The full class name then follows the convention `$class_prefix . $field_type`. For example, the basic text field in the Widgets Bundle has the type `text` and it is prefixed by `SiteOrigin_Widget_Field_`, so the resulting class name is `SiteOrigin_Widget_Field_Text`.
+The SiteOrigin Widgets Bundle supports PHP 5.2.0 and above, so we avoid the use of the namespaces feature which is only available from PHP 5.3.0 onwards. We "namespace" our classes by prefixing their names with some (hopefully unique) prefix. The full class name then follows the convention `$class_prefix . ucfirst($field_type)`. For example, the basic text field in the Widgets Bundle has the type `text` and it is prefixed by `SiteOrigin_Widget_Field_`, so the resulting class name is `SiteOrigin_Widget_Field_Text`. Note that the field type has a capitalised first letter.
 
 ## Adding custom field class prefixes
 We encourage you to prefix your custom field class names to avoid conflicts with other class names. If you do this, the Widgets Bundle needs to know what your chosen prefix is, in order to autoload and instantiate your custom field classes. If you need to, you can add more than one prefix, but one is sufficient for the Widgets Bundle.
@@ -27,9 +27,11 @@ function my_custom_fields_class_paths( $class_paths ) {
 }
 add_filter( 'siteorigin_widgets_field_class_paths', 'my_custom_fields_class_paths' );
 ```
-
 ## Implementing a custom field
 Implementing a custom field is as simple as extending one of the existing field classes and implementing or overriding at least the `render_field` and `sanitize_input` methods. There is much more that can be done, but this is all that is required to successfully render a custom field and save it's input.
+
+### Filenames and class naming
+For your field class to be loaded, you need to name your class according to the convention mentioned above. However the file itself must be named according to the convention `$field_type.class.php` and it must be placed in one of the class paths you added in the step above. For example, if you have a field type of `taxonomylist` with a custom class path of `my_custom_fields/` and a class prefix of `My_Custom_Field_`, you'd first create the file `my_custom_fields/taxonomylist.class.php` and then define the class `My_Custom_Field_Taxonomylist` inside it. 
 
 ### Inheriting from SiteOrigin_Widget_Field_Base
 The `SiteOrigin_Widget_Field_Base` abstract class handles most of the work required for the widget form fields. It contains various properties and methods which are used to render the field for display in the front end and preparing input from the field for database persistence. When extending this class there are two abstract methods which must be implemented, namely, `render_field` and `sanitize_input`.

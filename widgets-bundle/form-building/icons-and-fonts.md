@@ -76,7 +76,7 @@ Then, to render the icon in your template, you simply include a call to the icon
     if(!empty($instance['my_icon_color'])) $icon_styles[] = 'color: '.$instance['my_icon_color'];
 ?>
 <div>
-    echo siteorigin_widget_get_icon( $instance['my_icon'], $icon_styles );
+   <?php echo siteorigin_widget_get_icon( $instance['my_icon'], $icon_styles ); ?>
 </div>
 ```
  

@@ -66,7 +66,7 @@ Page Builder also lets you create the frontend content for a widget using the `s
 echo apply_filters('siteorigin_panels_missing_widget', '', $widget, $args , $instance);
 ```
 
-Where the first argument is the empy string for you to populate, `$widget` is the widget class, `$args` are the widget arguments and `$instance` is the widget instance.
+Where the first argument is the empty string for you to populate, `$widget` is the widget class, `$args` are the widget arguments and `$instance` is the widget instance.
 
 Here's an example of using a custom function to render a missing widget.
 

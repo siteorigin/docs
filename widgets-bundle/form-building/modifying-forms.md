@@ -55,8 +55,9 @@ function mytheme_filter_widget_form($form_options, $widget){
     if( !empty($form_options['design']['fields']['theme']['options']) ) {
         $form_options['design']['fields']['theme']['options']['test'] = __('Test Style', 'mytheme');
     }
+    return $form_options;
 }
-add_filter('siteorigin_widgets_form_options_sow-button', 'mytheme_filter_widget_form', 10, 2)
+add_filter('siteorigin_widgets_form_options_sow-button', 'mytheme_filter_widget_form', 10, 2);
 ```
 
 ## Modifying a child widget form
