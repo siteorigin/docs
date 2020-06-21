@@ -22,6 +22,7 @@ The filter takes the form `'siteorigin_widgets_template_variables_' . $this->id_
 function wbe_filter_template_variables( $template_vars, $instance, $args, $widget ){
     // Strictly this isn't correct, but we'll use it as an example
     $template_vars['text'] = __( $instance['text'], 'test-domain' );
+    return $template_vars;
 }
 add_filter( 'siteorigin_widgets_template_variables_sow-button', 'wbe_filter_template_variables', 10, 4 );
 ```
