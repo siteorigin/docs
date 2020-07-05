@@ -11,7 +11,7 @@ add_filter( 'siteorigin_panels_layout_builder_supports', 'so_disallow_new_widget
 
 #### Adjustable Actions
 
-All Adjustable Actions are enabled by default.
+All adjustable actions are enabled by default.
 
 **editRow**
 
@@ -43,29 +43,27 @@ Controls whether widgets are able to be moved.
 
 #### Adjustable Features
 
-All Adjustable Features are enabled by default.
+All adjustable features are enabled by default.
 
 **prebuilt**
 
-If Prebuilt is enabled, the user will be able to access the Layouts Directory. The Layout Directory can accessed by clicking the Layouts button in the page builder toolbar.
+If `prebuilt` is enabled, the user will be able to access the Layouts Directory. The Layout Directory can accessed by clicking the Layouts button in the Page Builder toolbar.
 
 **history**
 
-If Prebuilt is enabled, the History buttton will appear in the page builder toolbar and the user will be able to undo previous edits.
+If `prebuilt` is enabled, the History buttton will appear in the Page Builder toolbar and the user will be able to undo previous edits.
 
-This action isn't supported by every builder instance may not always have a noticeable effect.
+This action isn't supported by every Page Builder instance may not always have a noticeable effect.
 
 **liveEditor**
 
-If Prebuilt is enabled, the Live Editor button will appear in the page builder toolbar, and the user will be able to make changes using the Live Editor.
+If `prebuilt` is enabled, the Live Editor button will appear in the Page Builder toolbar, and the user will be able to make changes using the Live Editor.
 
-This action isn't supported by every builder instance may not always have a noticeable effect.
+This action isn't supported by every Page Builder instance may not always have a noticeable effect.
 
 **revertToEditor**
 
-This action isn't supported by every builder instance may not always have a noticeable effect.
-
-All adjustable features are enabled by default.
+This action isn't supported by every Page Builder instance may not always have a noticeable effect.
 
 #### siteorigin_panels_layout_builder_supports
 
