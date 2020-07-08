@@ -6,7 +6,7 @@ function so_disallow_new_widgets( $supports ) {
 
 	return $supports;
 }
-add_filter( 'siteorigin_panels_layout_builder_supports', 'so_disallow_new_widgets' );
+add_filter( 'siteorigin_panels_builder_supports', 'so_disallow_new_widgets' );
 ```
 
 #### Adjustable Actions
