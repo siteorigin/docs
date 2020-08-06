@@ -32,6 +32,24 @@ function mytheme_add_widget_icons($widgets){
 add_filter('siteorigin_panels_widgets', 'mytheme_add_widget_icons');
 ```
 
+#### Add widgets to recommended group
+If you would like to add widgets to other groups, like recommended, and still keep the initial groups that the widget was added to.
+The main difference here is that SiteOrigin widgets bundle add groups on `11`, so you could add your function after `11`.
+```php
+function set_so_widget_into_recommended_group($widgets){
+    $widgets_classes_to_recommened = array('widget_1_class', 'widget_2_class');
+    
+    foreach($widgets_classes_to_recommened as $index => $widget_class){
+        $init_groups = $widgets[$widget_class]['groups'];
+        $new_groups = array_push($init_groups, 'recommended');
+
+        $widgets[$widget_class]['groups'] = $new_groups;
+    }
+    return $widgets;
+}
+add_filter('siteorigin_panels_widgets', 'set_so_widget_into_recommended_group', 12);
+```
+
 ### Widgets Argument
 
 ```php
