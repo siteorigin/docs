@@ -32,23 +32,42 @@ function mytheme_add_widget_icons($widgets){
 add_filter('siteorigin_panels_widgets', 'mytheme_add_widget_icons');
 ```
 
-#### Add widgets to recommended group
-If you would like to add widgets to other groups, like recommended, and still keep the initial groups that the widget was added to.
-The main difference here is that SiteOrigin widgets bundle add groups on `11`, so you could add your function after `11`.
+#### Add a widget to the recommended Group
+If you would like to add widgets to other groups, like recommended, and still keep the initial groups where the widget belonged to.
+```php
+function add_my_widget_into_recommended_group($widgets){
+    
+    $widgets['My_Widget']['groups'][] = 'recommended';
+    return $widgets;
+}
+
+add_filter('siteorigin_panels_widgets', 'add_my_widget_into_recommended_group', 12);
+```
+
+#### Adding Multiple Widgets at once
+It is easier to maintain all the recommended widgets for your project with a loop the same group(s).
+
 ```php
 function set_so_widget_into_recommended_group($widgets){
-    $widgets_classes_to_recommened = array('widget_1_class', 'widget_2_class');
+    
+    $widgets_classes_to_recommened = array(
+        'My_Widget_1',
+        'My_Widget_2'
+    );
     
     foreach($widgets_classes_to_recommened as $index => $widget_class){
-        $init_groups = $widgets[$widget_class]['groups'];
-        $new_groups = array_push($init_groups, 'recommended');
-
-        $widgets[$widget_class]['groups'] = $new_groups;
+        $widgets[$widget_class]['groups'][] = 'recommended';
     }
     return $widgets;
 }
 add_filter('siteorigin_panels_widgets', 'set_so_widget_into_recommended_group', 12);
 ```
+
+#### Maintain Standard Widget Ordering
+SiteOrigin widgets bundle plugin add widgets' groups on the priority `11`. If you set a value lesser or equal `<=` to `11`, your groups will be overwritten by the SiteOrigin Widgets bundle filter. When you would like to organize the widgets in your project, you must add your function after `11`.
+`add_filter('siteorigin_panels_widgets', 'your_function', 12);`
+
+
 
 ### Widgets Argument
 
