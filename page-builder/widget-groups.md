@@ -32,6 +32,43 @@ function mytheme_add_widget_icons($widgets){
 add_filter('siteorigin_panels_widgets', 'mytheme_add_widget_icons');
 ```
 
+#### Add a widget to the recommended Group
+You can set widgets to the recommended group by setting the group to `recommended`.
+
+```php
+function add_my_widget_into_recommended_group( $widgets ) {
+    
+    $widgets['My_Widget']['groups'][] = 'recommended';
+    return $widgets;
+}
+
+add_filter( 'siteorigin_panels_widgets', 'add_my_widget_into_recommended_group', 12 );
+```
+
+#### Maintain Standard Widget Ordering
+By design, SiteOrigin Widget Bundle the standard widget groups using a priority of `11`. IF a priority lower or equal to 11 is used your groups may be overwritten. To prevent this, it's recommended you use a priority higher than 11. For example:
+
+`add_filter( 'siteorigin_panels_widgets', 'your_function', 12 );`
+
+#### Adding Multiple Widgets at once
+It's possible to add multiple widgets at a time using a standard `foreach` loop. No restrictions are imposed on how many widgets you can add at a time.
+
+```php
+function set_so_widget_into_recommended_group( $widgets ) {
+    
+    $widgets_classes_to_recommened = array(
+        'My_Widget_1',
+        'My_Widget_2'
+    );
+    
+    foreach($widgets_classes_to_recommened as $index => $widget_class){
+        $widgets[$widget_class]['groups'][] = 'recommended';
+    }
+    return $widgets;
+}
+add_filter( 'siteorigin_panels_widgets', 'set_so_widget_into_recommended_group', 12 );
+```
+
 ### Widgets Argument
 
 ```php
