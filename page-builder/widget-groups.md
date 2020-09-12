@@ -32,7 +32,7 @@ function mytheme_add_widget_icons($widgets){
 add_filter('siteorigin_panels_widgets', 'mytheme_add_widget_icons');
 ```
 
-#### Add a widget to the recommended Group
+#### Add a Widget to the Recommended Group
 You can set widgets to the recommended group by setting the group to `recommended`.
 
 ```php
@@ -46,7 +46,7 @@ add_filter( 'siteorigin_panels_widgets', 'add_my_widget_into_recommended_group',
 ```
 
 #### Maintain Standard Widget Ordering
-By design, SiteOrigin Widget Bundle the standard widget groups using a priority of `11`. IF a priority lower or equal to 11 is used your groups may be overwritten. To prevent this, it's recommended you use a priority higher than 11. For example:
+By design, SiteOrigin Widget Bundle the standard widget groups using a priority of `11`. If a priority lower or equal to 11 is used your groups may be overwritten. To prevent this, it's recommended you use a priority higher than 11. For example:
 
 `add_filter( 'siteorigin_panels_widgets', 'your_function', 12 );`
 
