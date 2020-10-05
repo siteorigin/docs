@@ -21,7 +21,7 @@ $form_options = array(
 You can use `foreach` and `switch` to run through the through the `$instance['ordering']` `array`. An example of this is:
 
 ```php
-foreach( $instance['ordering' as $item ) {
+foreach( $instance['ordering'] as $item ) {
 	switch( $item ) {
 		case 'section' :
 			// output here
