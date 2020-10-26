@@ -126,16 +126,3 @@ function get_less_variables( $instance ) {
 }
 ```
 
-3) If the selected font is a Google font, you should use the `.widget-function` callback at the top of LESS stylesheet to call back into widget and get the required import statement. You'll need to do this for each different font family you're using in the stylesheet.
-In the LESS stylesheet, call the `less_import_google_font()` function in the widget:
-```less
-.widget-function('import_google_font');
-```
-
-In the widget you should have a function named `less_import_google_font()` which should return the CSS import statement need to use the Google font:
-```php
-function less_import_google_font( $instance, $args ) {
-    $selected_font = siteorigin_widget_get_font( $instance['some_font'] );
-    return $selected_font['css_import'];
-}
-```
