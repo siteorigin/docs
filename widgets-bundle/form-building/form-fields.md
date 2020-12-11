@@ -600,11 +600,11 @@ $form_options = array(
 ```
 Result:
 
-Empty repeater:
 ![Widget Form Repeater 1](../images/form-field-type-repeater-1.png)
 
 Repeater containing two items (the first item is collapsed and the second item is expanded):
-![Widget Form Repeater 2](../images/form-field-type-repeater-2.png)
+
+![Widget Form Repeater 3](../images/form-field-type-repeater-3.png)
 
 ---
 
