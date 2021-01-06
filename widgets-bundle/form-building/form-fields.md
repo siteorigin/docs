@@ -121,6 +121,8 @@ Renders a field for entering a [unit of measurement](https://developer.mozilla.o
 #### Additional options
 - placeholder: `string` A string to display before any text has been input.
 - readonly: `bool` If true, this field will not be editable.
+- units: `array` An optional array of measurement units that will populate the drop down. Defaults to the list returned by `siteorigin_widgets_get_measurements_list()`.
+- default_unit: `string` The default unit of measurement if the unit of measurement isn't able to be detected or is no longer present in the `units` array. Default to px.
 
 #### Example
 Form options input:
