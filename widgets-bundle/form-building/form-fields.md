@@ -220,6 +220,7 @@ Renders a TinyMCE editor field.
 #### Additional options
 - rows: `int` The number of visible rows in the textarea.
 - default_editor: `string` Whether to display the TinyMCE visual editor or the Quicktags HTML editor initially. Allowed values are `'tinymce'` ( can be abbreviated to `'tmce'`), and `'html'`. The default is `'tinymce'`.
+- media_button: `bool` Whether to add the Add Media button. The default is `true`.
 - editor_height: `int` The initial height of the editor. Setting this will cause the rows option to be ignored.
 - button_filters: `array` An array of filter callbacks to filter the buttons available on the TinyMCE visual editor and the Quicktags HTML editor. The TinyMCE editor can display up to four rows of buttons and the Quicktags editor displays a single row of buttons. Each row can be filtered by specifying a corresponding callback, as follows:
   * First row: `'mce_buttons'`
