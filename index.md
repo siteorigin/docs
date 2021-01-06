@@ -4,6 +4,5 @@ This is the home of SiteOrigin developer documentation for our themes and plugin
 
 * [Page Builder](page-builder.md)
 * [Widgets Bundle](widgets-bundle.md)
-* [Testing](testing.md)
 * [Building](building.md)
 * [SiteOrigin Premium](siteorigin-premium.md)
