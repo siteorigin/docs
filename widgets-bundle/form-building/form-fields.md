@@ -261,6 +261,7 @@ Renders a number slider field to allow the choice of a number in a range.
 #### Additional options
 - min: `int` The minimum value of the allowed range.
 - max: `int` The maximum value of the allowed range.
+- step: `float` The step size when moving in the range.
 
 #### Example
 Form options input:
@@ -272,6 +273,7 @@ $form_options = array(
 		'default' => 24,
 		'min' => 2,
 		'max' => 37,
+		'step' => 0.5,
 		'integer' => true
 	)
 );
