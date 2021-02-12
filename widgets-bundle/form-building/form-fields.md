@@ -493,6 +493,10 @@ Renders a dropdown with all of [the available image sizes](https://developer.wor
 
 > This field requires at least WordPress 2.9.
 
+
+#### Additional options
+- custom_size: `bool` Whether to allow custom image sizes. By default, Custom Sizes are disabled.
+
 #### Example
 ```php
 $form_options = array(
@@ -507,8 +511,33 @@ Result:
 ![Widget from Image Sizes](../images/form-field-type-image-sizes.png)
 
 Possible Image Size values:
+
 ![Possible Image Size values](../images/form-field-type-image-sizes-example.png)
 
+#### Custom Image Size
+The custom_size option allows the user to manually input an image size. The custom image size values are prefixed with the option name and then \_width or \_height. For example: `option_name_width` and `option_name_height**`.
+
+For this image size to be used you'll need to detect the size form field value equals to `custom_size` and then pass an array with the field values. For example:
+
+```
+<?php
+// Detect custom image size and override size.
+if (
+	$instance['size'] == 'custom_size' &&
+	! empty( $instance['size_width'] ) &&
+	! empty( $instance['size_height'] )
+) {
+	$instance['size'] = array(
+		(int) $instance['size_width'],
+		(int) $instance['size_width'],
+	);
+}
+
+$src = siteorigin_widgets_get_attachment_image_src(
+	$instance['image'], // Set elsewhere
+	$instance['size']
+);
+```
 ### posts
 Renders a post selector field. This can be used to build custom queries with which to select posts from your database. The field displays a small red indicator which shows the number of posts currently being selected. By default, all posts are selected.
 
