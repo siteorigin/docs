@@ -1,6 +1,6 @@
 # Hooks and filters
 
-The SiteOrigin Widgets Bundle gives you ample opportuinity to extend and enhance the functionality of the bundle. We've already covered a lot of these filters in other sections of this documentation. This page just serves as a general reference.
+The SiteOrigin Widgets Bundle gives you ample opportunity to extend and enhance the functionality of the bundle. We've already covered a lot of these filters in other sections of this documentation. This page just serves as a general reference.
 
 ## Actions
 
