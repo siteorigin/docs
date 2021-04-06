@@ -1,7 +1,7 @@
 ### Getting started
 * [Creating a widget](getting-started/creating-a-widget.md)
 * [Extending existing widgets](getting-started/extending-existing-widgets.md)
-* [Initialising a widget](getting-started/initialising-a-widget.md)
+* [Initializing a widget](getting-started/initializing-a-widget.md)
 
 ### Form building
 * [Form fields](form-building/form-fields.md)
