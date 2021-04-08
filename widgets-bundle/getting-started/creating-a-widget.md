@@ -44,7 +44,7 @@ Video URI: http://example.com/hello-world-widget-video
 
 ## Widget class
 
-Now you'll need to create a class that extends the `SiteOrigin_Widget` abstract base class. TheS `iteOrigin_Widget` class is based on the WordPress Widgets API, so a constructor containing information about the widget is required.
+Now you'll need to create a class that extends the `SiteOrigin_Widget` abstract base class. The `SiteOrigin_Widget` class is based on the WordPress Widgets API, so a constructor containing information about the widget is required.
 
 You'll also need to register your widget class with the SiteOrigin Widgets Bundle using the `siteorigin_widget_register` function, passing in the widget id, widget file path, and widget class name as arguments.
 
