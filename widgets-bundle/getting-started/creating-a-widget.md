@@ -44,7 +44,7 @@ Video URI: http://example.com/hello-world-widget-video
 
 ## Widget class
 
-Now you'll need to create a class which extends the `SiteOrigin_Widget` abstract base class. The `SiteOrigin_Widget` class is based on the WordPress Widgets API so a constructor containing information about the widget is required.
+Now you'll need to create a class that extends the `SiteOrigin_Widget` abstract base class. TheS `iteOrigin_Widget` class is based on the WordPress Widgets API, so a constructor containing information about the widget is required.
 
 You'll also need to register your widget class with the SiteOrigin Widgets Bundle using the `siteorigin_widget_register` function, passing in the widget id, widget file path, and widget class name as arguments.
 
@@ -90,7 +90,7 @@ siteorigin_widget_register( 'hello-world-widget', __FILE__, 'Hello_World_Widget'
 
 ```
 
-Once you have implemented your widget like the above example, your widget will be listed in the SiteOrigin Widgets List. This list can be accessed by navigating to **Plugins > SiteOrigin Widgets**. In the above example, the Hello World widget will be listed. This widget will contain a text field in the Edit Widget form containing the text 'Hello world!', which can be edited and saved. It won't however output the text on the frontend without a Widget Template.
+Once you have implemented your widget like the above example, your widget will be listed in the SiteOrigin Widgets list. This list can be accessed by navigating to **Plugins > SiteOrigin Widgets**. In the above example, the Hello World widget will be listed. This widget will contain a text field in the Edit Widget form containing the text 'Hello world!', which can be edited and saved. It won't, however, output the text on the frontend without a Widget Template.
 
 ## Widget template
 
@@ -133,15 +133,15 @@ function get_style_name($instance) {
 ```
 
 ## Widget banner image
-To use a custom image for the banner in the Plugins > SiteOrigin Widgets list you can either place it in a folder named `assets` and name the file `banner.svg` or you can use the `siteorigin_widgets_widget_banner` filter hook. The following code can be found in the example main widget file `my-awesome-widget.php` outside of the class declaration. If you put the code somewhere else, make sure to adjust the file path accordingly.
+To use a custom image for the banner in the Plugins > SiteOrigin Widgets list, you can either place it in a folder named `assets` and name the file `banner.svg`, or you can use the `siteorigin_widgets_widget_banner` filter hook. The following code can be found in the example main widget file `my-awesome-widget.php` outside of the class declaration. If you put the code somewhere else, make sure to adjust the file path accordingly.
 
 ```php
 function my_awesome_widget_banner_img_src( $banner_url, $widget_meta ) {
-	if( $widget_meta['ID'] == 'my-awesome-widget') {
-		$banner_url = plugin_dir_url(__FILE__) . 'images/awesome_widget_banner.svg';
+	if ( $widget_meta['ID'] == 'my-awesome-widget' ) {
+		$banner_url = plugin_dir_url( __FILE__ ) . 'images/awesome_widget_banner.svg';
 	}
 	return $banner_url;
 }
-add_filter( 'siteorigin_widgets_widget_banner', 'my_awesome_widget_banner_img_src', 10, 2);
+add_filter( 'siteorigin_widgets_widget_banner', 'my_awesome_widget_banner_img_src', 10, 2 );
 ```
 
