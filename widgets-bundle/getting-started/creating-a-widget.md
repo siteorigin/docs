@@ -44,45 +44,14 @@ Video URI: http://example.com/hello-world-widget-video
 
 ## Widget class
 
-Now you'll need to create a class which extends the `SiteOrigin_Widget` abstract base class and, as a minimum, overrides the `get_template_name` and `get_style_name` abstract methods. You'll also need to register your widget class with the SiteOrigin Widgets Bundle using the `siteorigin_widget_register` function, passing in the widget id, widget file path, and widget class name as arguments.
+Now you'll need to create a class which extends the `SiteOrigin_Widget` abstract base class. The `SiteOrigin_Widget` class is based on the WordPress Widgets API so a constructor containing information about the widget is required.
+
+You'll also need to register your widget class with the SiteOrigin Widgets Bundle using the `siteorigin_widget_register` function, passing in the widget id, widget file path, and widget class name as arguments.
 
 ```php
-
 class Hello_World_Widget extends SiteOrigin_Widget {
 
-	function get_template_name($instance) {
-		return '';
-	}
-
-	function get_style_name($instance) {
-		return '';
-	}
-}
-
-siteorigin_widget_register('hello-world-widget', __FILE__, 'Hello_World_Widget');
-```
-
-Once you've done this, you'll see your widget in the Plugins > SiteOrigin Widgets list, it can be activated and deactivated, and you'll see an 'Untitled Widget' in Page Builder widgets and a blank widget in other widget lists. So you can't really use your widget yet, but it's there!
-
-## Widget banner image
-To use a custom image for the banner in the Plugins > SiteOrigin Widgets list you can either place it in a folder named `assets` and name the file `banner.svg` or you can use the `siteorigin_widgets_widget_banner` filter hook. The following code can be found in the example main widget file `my-awesome-widget.php` outside of the class declaration. If you put the code somewhere else, make sure to adjust the file path accordingly.
-
-```php
-function my_awesome_widget_banner_img_src( $banner_url, $widget_meta ) {
-	if( $widget_meta['ID'] == 'my-awesome-widget') {
-		$banner_url = plugin_dir_url(__FILE__) . 'images/awesome_widget_banner.svg';
-	}
-	return $banner_url;
-}
-add_filter( 'siteorigin_widgets_widget_banner', 'my_awesome_widget_banner_img_src', 10, 2);
-```
-
-## Widget class constructor
-
-Here you'll see how to implement the constructor for your widget. The `SiteOrigin_Widget` class extends the `WP_Widget` class so the parent constructor call might look familiar, with a few additions.
-
-```php
-function __construct() {
+	function __construct() {
 	//Here you can do any preparation required before calling the parent constructor, such as including additional files or initializing variables.
 
 	//Call the parent constructor with the required arguments.
@@ -91,12 +60,12 @@ function __construct() {
 		'hello-world-widget',
 
 		// The name of the widget for display purposes.
-		__('Hello World Widget', 'hello-world-widget-text-domain'),
+		__( 'Hello World Widget', 'hello-world-widget-text-domain' ),
 
 		// The $widget_options array, which is passed through to WP_Widget.
 		// It has a couple of extras like the optional help URL, which should link to your sites help or support page.
 		array(
-			'description' => __('A hello world widget.', 'hello-world-widget-text-domain'),
+			'description' => __( 'A hello world widget.', 'hello-world-widget-text-domain' ),
 			'help'        => 'http://example.com/hello-world-widget-docs',
 		),
 
@@ -108,18 +77,20 @@ function __construct() {
 		array(
 			'text' => array(
 				'type' => 'text',
-				'label' => __('Hello world! goes here.', 'siteorigin-widgets'),
-				'default' => 'Hello world!'
+				'label' => __( 'Hello world! goes here.', 'hello-world-widget-text-domain' ),
+				'default' => 'Hello world!',
 			),
 		),
 
 		//The $base_folder path string.
-		plugin_dir_path(__FILE__)
+		plugin_dir_path( __FILE__ )
 	);
 }
+siteorigin_widget_register( 'hello-world-widget', __FILE__, 'Hello_World_Widget' );
+
 ```
 
-Once you have your constructor implemented like the above example, you should see your widget's name and description being displayed in the various widget configuration lists. The Hello World widget will now also display a text field in the Edit Widget form containing the text 'Hello world!', which can be edited and saved.
+Once you have implemented your widget like the above example, your widget will be listed in the SiteOrigin Widgets List. This list can be accessed by navigating to **Plugins > SiteOrigin Widgets**. In the above example, the Hello World widget will be listed. This widget will contain a text field in the Edit Widget form containing the text 'Hello world!', which can be edited and saved. It won't however output the text on the frontend without a Widget Template.
 
 ## Widget template
 
@@ -160,3 +131,17 @@ function get_style_name($instance) {
 	return 'my-widget-styles';
 }
 ```
+
+## Widget banner image
+To use a custom image for the banner in the Plugins > SiteOrigin Widgets list you can either place it in a folder named `assets` and name the file `banner.svg` or you can use the `siteorigin_widgets_widget_banner` filter hook. The following code can be found in the example main widget file `my-awesome-widget.php` outside of the class declaration. If you put the code somewhere else, make sure to adjust the file path accordingly.
+
+```php
+function my_awesome_widget_banner_img_src( $banner_url, $widget_meta ) {
+	if( $widget_meta['ID'] == 'my-awesome-widget') {
+		$banner_url = plugin_dir_url(__FILE__) . 'images/awesome_widget_banner.svg';
+	}
+	return $banner_url;
+}
+add_filter( 'siteorigin_widgets_widget_banner', 'my_awesome_widget_banner_img_src', 10, 2);
+```
+
