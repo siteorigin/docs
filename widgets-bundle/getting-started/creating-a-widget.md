@@ -85,6 +85,7 @@ class Hello_World_Widget extends SiteOrigin_Widget {
 		//The $base_folder path string.
 		plugin_dir_path( __FILE__ )
 	);
+	}
 }
 siteorigin_widget_register( 'hello-world-widget', __FILE__, 'Hello_World_Widget' );
 
