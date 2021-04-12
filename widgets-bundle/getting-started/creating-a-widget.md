@@ -52,9 +52,9 @@ You'll also need to register your widget class with the SiteOrigin Widgets Bundl
 class Hello_World_Widget extends SiteOrigin_Widget {
 
 	function __construct() {
-		//Here you can do any preparation required before calling the parent constructor, such as including additional files or initializing variables.
+		// Here you can do any preparation required before calling the parent constructor, such as including additional files or initializing variables.
 
-		//Call the parent constructor with the required arguments.
+		// Call the parent constructor with the required arguments.
 		parent::__construct(
 			// The unique id for your widget.
 			'hello-world-widget',
@@ -69,11 +69,11 @@ class Hello_World_Widget extends SiteOrigin_Widget {
 				'help'        => 'http://example.com/hello-world-widget-docs',
 			),
 
-			//The $control_options array, which is passed through to WP_Widget
+			// The $control_options array, which is passed through to WP_Widget
 			array(
 			),
 
-			//The $form_options array, which describes the form fields used to configure SiteOrigin widgets. We'll explain these in more detail later.
+			// The $form_options array, which describes the form fields used to configure SiteOrigin widgets. We'll explain these in more detail later.
 			array(
 				'text' => array(
 					'type' => 'text',
@@ -82,7 +82,7 @@ class Hello_World_Widget extends SiteOrigin_Widget {
 				),
 			),
 
-			//The $base_folder path string.
+			// The $base_folder path string.
 			plugin_dir_path( __FILE__ )
 		);
 	}
