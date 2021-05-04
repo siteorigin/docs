@@ -45,7 +45,7 @@ The page builder widget instance.
 
 #### Example Code
 
-The following example code will override the
+The following example code will replace the Calendar widgets form with a message.
 
 ```
 function so_override_calendar_form( $form, $widget_class, $instance ) {
