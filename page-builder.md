@@ -10,9 +10,9 @@ There are a few ways that you can either register widgets that only appear in wi
 
 Page Builder has a few unique widget related concepts.
 
-* [Placeholder widgets](./page-builder/placeholder-widgets.md) let you add widgets that don't yet exist to the Add Widget dialog. This feature is useful for recommending widgets that you might want your user to install. You can also remove the widgets that Page Builder itself recommends.
-* [Widget groups](./page-builder/widget-groups.md) let you organize your widgets within the Add Widget dialog.
-* [Widget icons](./page-builder/widget-icons.md) let you make your widgets stand out in the Add Widget dialog.
+- [Placeholder widgets](./page-builder/placeholder-widgets.md) let you add widgets that don't yet exist to the Add Widget dialog. This feature is useful for recommending widgets that you might want your user to install. You can also remove the widgets that Page Builder itself recommends.
+- [Widget groups](./page-builder/widget-groups.md) let you organize your widgets within the Add Widget dialog.
+- [Widget icons](./page-builder/widget-icons.md) let you make your widgets stand out in the Add Widget dialog.
 
 For widget developers, you could consider using the [SiteOrigin Widgets Bundle](./widgets-bundle.md) as a boilerplate for your widgets. It gives you a base to create some fairly advanced widgets and widget interfaces with minimal coding.
 
@@ -24,7 +24,8 @@ Prebuilt Layouts are a great way to give your users some designs that they can u
 
 Page Builder has lots of hooks and filters for you to use. We've already covered these briefly in the Widgets and Prebuilt Layouts sections, but there are other filters you can use to inject custom content, filter output, etc.
 
-* [Filtering HTML Structure](./page-builder/hooks/html.md).
-* [Filtering CSS](./page-builder/hooks/css.md).
-* [Filtering Custom Row Options](./page-builder/hooks/custom-row-settings.md).
-* [Filtering Page Builder Features and Actions](./page-builder/hooks/builder-features-actions.md).
+- [Filtering HTML Structure](./page-builder/hooks/html.md).
+- [Filtering CSS](./page-builder/hooks/css.md).
+- [Filtering Custom Row Options](./page-builder/hooks/custom-row-settings.md).
+- [Filtering Widget Form](./page-builder/hooks/widget-form.md).
+- [Filtering Page Builder Features and Actions](./page-builder/hooks/builder-features-actions.md).
