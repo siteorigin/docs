@@ -26,6 +26,32 @@ echo apply_filters( 'siteorigin_panels_before_row', '', $panels_data['grids'][$g
 echo apply_filters( 'siteorigin_panels_after_row', '', $panels_data['grids'][$gi], $grid_attributes );
 ```
 
+### Inside Rows Before and After
+
+You can output additional content inside the rows and before/after the cells have been added.
+
+```php
+// Row Container
+echo apply_filters( 'siteorigin_panels_inside_row_before', '', $row );
+// Cells
+echo apply_filters( 'siteorigin_panels_inside_row_after', '', $row );
+// Row Container End
+```
+
+### Inside Cells Before and After
+
+Like with the Inside Before After Rows, you can output additional markup inside the cells. This will allow you to wrap the widgets added to the cell with additional markup before/after the widget has rendered.
+
+```php
+// Row Container
+// Cell Container
+echo apply_filters( 'siteorigin_panels_inside_cell_before', '', $cell );
+// Widgets Added To Cell
+echo apply_filters( 'siteorigin_panels_inside_cell_after', '', $cell )
+// Cell Container End
+// Row Container End
+```
+
 ### Row and Cell Styles
 
 Page Builder has a few ways for you to add classes and CSS attributes to style wrappers. These wrappers are designed to give you a way to add visual styling to your Page Builder elements.
