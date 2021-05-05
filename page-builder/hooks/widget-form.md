@@ -1,6 +1,6 @@
 ### Action: siteorigin_panels_before_widget_form
 
-The `siteorigin_panels_before_widget_form` action will allow you to add markup before to the widget form is output.
+The `siteorigin_panels_before_widget_form` action will allow you to add markup before the widget form is output.
 
 #### Parameters
 
@@ -27,7 +27,7 @@ add_action( 'siteorigin_panels_before_widget_form', 'so_add_text_prior_to_archiv
 
 #### Filter: siteorigin_panels_widget_form
 
-The `siteorigin_panels_widget_form` filter allows you to filter the form HTML prior to output. This will allow you to override form markup and implement an custom renderer.
+The `siteorigin_panels_widget_form` filter allows you to filter the form HTML prior to output. This will allow you to override form markup and implement a custom renderer.
 
 #### Parameters
 
