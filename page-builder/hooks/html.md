@@ -28,7 +28,7 @@ echo apply_filters( 'siteorigin_panels_after_row', '', $panels_data['grids'][$gi
 
 ### Inside Rows Before and After
 
-You can output additional content inside the rows and before/after the cells have been added
+You can output additional content inside the rows and before/after the cells have been added.
 
 ```php
 // Row Container
