@@ -1,3 +1,4 @@
+### Filter: siteorigin_panels_builder_supports
 The `siteorigin_panels_builder_supports` filter allows you to enable and disable Page Builder features. For example, the following snippet will prevent users from being able to add new widgets:
 
 ```php
