@@ -11,6 +11,7 @@
 - [HTML Structure](hooks/html.md)
 - [Page Builder Features and Actions](hooks/builder-features-actions.md)
 - [Widget Form](hooks/widget-form.md)
+- [Widget Instance](hooks/widget-instance.md)
 
 ### Tutorials
 
