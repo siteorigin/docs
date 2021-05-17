@@ -26,5 +26,4 @@ function so_editor_override_setting_if_test( $instance, $the_widget, $widget_cla
 	return $instance;
 }
 add_filter( 'siteorigin_panels_widget_instance', 'so_editor_override_setting_if_test', 10, 3 );
-
 ```
