@@ -2,13 +2,13 @@
 
 As the name implies, instance storage stores the current widget instance and makes it accessible through a hash string. This feature is useful when you want to access a variable without having it visible in your widgets HTML.
 
-### When will you use it?
+### When Will You Use It?
 
 For example, let's say you create a newsletter widget, and you're adding direct integration with a few newsletter providers. So you add a field that lets your users enter their MailChimp API key for example. You'll need to access this API key only after someone submits a form.
 
 So, instead you'll just include the instance storage hash in your newsletter signup HTML form. You'd then use that hash to retrieve the full instance (including the API key) after a user has submitted the signup form back to your server.
 
-### Enabling instance storage
+### Enabling Instance Storage
 
 Your widget won't have instance storage enabled by default. You can enable it by setting the `instance_storage` key to true in the `$widget_options` array.
 
@@ -42,7 +42,7 @@ class My_Newsletter_Widget extends SiteOrigin_Widget {
 
 The Widgets Bundle will enable instance storage for this specific widget. The Widgets Bundle will automatically cache the instance every time the widget is displayed.
 
-### Using the $storage_hash variable
+### Using the $storage_hash Variable
 
 If your widget has `instance_storage` enabled, then your widget template files will have access to a variable called `$storage_hash`. You'll normally just add this as a hidden field in your form or as a `data-storage-hash` HTML attribute if you want to send requests using AJAX.
 
