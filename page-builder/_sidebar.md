@@ -15,5 +15,5 @@
 
 ### Tutorials
 
-- [Bundling Page Builder Prebuilt Layouts](hooks/builder-features-actions.md)
+- [Bundling Page Builder Prebuilt Layouts](bundling-prebuilt.md)
 - [Making Your Widgets Page Builder Compatible](widget-compatibility.md)
