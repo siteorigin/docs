@@ -48,9 +48,9 @@ add_filter( 'siteorigin_widgets_template_file_sow-button', 'mytheme_button_templ
 ```
 The above code checks if the user has selected our button theme (that's what the if clause checks), and if it does, it loads the specified template. You'll want to change the `test` to the theme name you decided on and `button.php` to your template file.
 
-To get an idea of what's available to a button widget, you can take a look at the one that comes with the which is `widgets/so-button-widget/tpl/base.php`. Modify this to your liking and put it in your theme or plugin. Read over the [HTML Templates](../templating/html-templates.md) section to find out more about creating templates.
+To get an idea of what's available to a button widget, you can take a look at the one that comes with the which is `widgets/so-button-widget/tpl/default.php`. Modify this to your liking and put it in your theme or plugin. Read over the [HTML Templates](../templating/html-templates.md) section to find out more about creating templates.
 
-Also, keep in mind that you can just skip specifying a custom template file, in which case the button widget will just use the default template file `base.php`.
+Also, keep in mind that you can just skip specifying a custom template file, in which case the button widget will just use the default template file `default.php`.
 
 ## Changing the LESS file
 
