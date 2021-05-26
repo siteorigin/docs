@@ -163,7 +163,7 @@ $form_options = array(
 		'autofill' => true,
 		'default' => '5% 0px 25px 0px',
 		'measurements' => array(
-			'padding_top' => array(
+			'top' => array(
 				'label' => __( 'Padding Top', 'widget-form-fields-text-domain' ),
 				'units' => $useable_units,
 			),
