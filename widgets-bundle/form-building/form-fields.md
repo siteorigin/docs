@@ -188,6 +188,36 @@ Result:
 
 ![Widget Form Multi Measurement](../images/form-field-type-multi-measurement.png)
 
+### multiple media
+
+Renders a media selector button that allows for mutiple items to be selected. When clicked the button opens the WordPress Media Library dialog for the media types specified by the `library` option.
+
+> _This field requires at least WordPress 3.5._
+
+#### Additional options
+
+- choose: `string` A label for the title of the media selector dialog.
+- update: `string` A label for the confirmation button of the media selector dialog.
+- library: `string` Sets the media library which to browse and from which media can be selected. Allowed MIME type values are `'image'`, `'audio'`, `'video'`, `'file'` and `'application'`. The default is `'image'`.
+
+#### Example
+
+Form options input:
+
+```php
+$form_options = array(
+	'images' => array(
+		'type' => 'multiple_media',
+		'label' => __( 'Multiple Media', 'widget-form-fields-text-domain' ),
+		'library' => 'image'
+	),
+);
+```
+
+Result:
+
+![Widget Form Multi Media](../images/form-field-type-multiple-media.jpg)
+
 ### textarea
 Renders a textarea field.
 
