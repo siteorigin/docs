@@ -1,4 +1,4 @@
-### Adding a custom option under the Row Styles
+### Adding a Custom Option Under the Row Styles
 
 ```php
 function custom_row_style_fields($fields) {
@@ -38,7 +38,6 @@ Can be set to ``design``, ``layout`` and ``attributes``.
 
 The position in the group the option should appear. Priority set on default options:
 
-
 Attribute Fields
 
 * 5 - Row Class
@@ -59,8 +58,7 @@ Design Fields
 * 7 - Background Image Display
 * 10 - Border Color
 
-
-### Adding the new option to the row element
+### Adding the New Option to the Row Element
 
 ```php
 function custom_row_style_attributes( $attributes, $args ) {
@@ -88,9 +86,11 @@ To add a new attribute, add both a new key and value to ``$attributes``. Example
 Note that the filter for ``siteorigin_panels_row_style_attributes`` needs to be called after Page Builder loads. In my project I added the filter inside a function which is triggered on ``plugins_loaded``.
 
 ### Processing Styles
-Before rendering the context's styles, it's possible to access and alter the styles of the current context using filters. This allows you to migrate and alter data as needed. Changes aren't, however, stored until the user saves the page/widget. There are two filters that allow for this. siteorigin_panels_general_current_styles, which is a general catch-all filter, and siteorigin_panels_general_current_styles_{type}, {type} being the currently viewed type.
+
+Before rendering the context's styles, it's possible to access and alter the styles of the current context using filters. This allows you to migrate and alter data as needed. Changes aren't, however, stored until the user saves the page/widget. There are two filters that allow for this. `siteorigin_panels_general_current_styles`, which is a general catch-all filter, and `siteorigin_panels_general_current_styles_{type}`, `{type}` being the currently viewed type.
 
 #### Parameters:
+
 **current**
 
 An array containing the current settings for the type.
