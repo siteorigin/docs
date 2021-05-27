@@ -6,9 +6,9 @@ In this tutorial, we'll deal with adding a new style to the button widget.
 
 ## Modifying the form
 
-The first thing you'll want to do is modify the default form to add in your own style. To get an idea of what the default form looks like, open the `so-widgets-bundle` directory and open up `widgets/so-button-widget/so-button-widget.php`. In the `__construct` function, you'll see that the 4th argument is an array that specifies the form. The button widget has a section called `design` and in that, a field called `theme`. 
+The first thing you'll want to do is modify the default form to add in your own style. To get an idea of what the default form looks like, navigate to the `so-widgets-bundle` directory and open up `widgets/button/button.php`. The `SiteOrigin_Widget_Button_Widget` class has inherited the `$form_options` array, an argument from its parent class's `__construct` function that specifies the form. Further down in `button.php` is `get_widget_form()`, where you'll find a section called `design` and in that, a field called `theme`. 
 
-The `theme` field is a method of allowing the user to select differnet button themes. We need to modify this field and add our own custom theme option, which will allow users to select our theme. Here's the PHP we would use to do that:
+The `theme` field is a method of allowing the user to select different button themes. We need to modify this field and add our own custom theme option, which will allow users to select our theme. Here's the PHP we would use to do that:
 
 ```php
 function mytheme_extend_button_form( $form_options, $widget ){
