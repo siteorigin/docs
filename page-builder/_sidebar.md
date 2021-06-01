@@ -8,6 +8,7 @@
 
 - [CSS](hooks/css.md)
 - [Custom Row Options](hooks/custom-row-settings.md)
+- [Filtering Widget Options](hooks/custom-row-settings.md)
 - [HTML Structure](hooks/html.md)
 - [Page Builder Features and Actions](hooks/builder-features-actions.md)
 - [Widget Form](hooks/widget-form.md)
