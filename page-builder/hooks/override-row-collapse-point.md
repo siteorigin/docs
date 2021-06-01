@@ -52,7 +52,7 @@ add_filter( 'siteorigin_panels_row_style_fields', function( $fields ) {
 	return $fields;
 }, 20 );
 
-// Override the rows collapse point as needed.
+// Override the row collapse point as needed.
 add_filter( 'siteorigin_panels_css_row_collapse_point', function( $collapse_point, $row ) {
 	if ( ! empty( $row['style']['collapse_point'] ) ) {
 		$collapse_point = $row['style']['collapse_point'];
