@@ -30,3 +30,4 @@ Page Builder has lots of hooks and filters for you to use. We've already covered
 - [Filtering Widget Form](./page-builder/hooks/widget-form.md).
 - [Filtering Widget Instance](./page-builder/hooks/widget-instance.md).
 - [Filtering Page Builder Features and Actions](./page-builder/hooks/builder-features-actions.md).
+- [Overriding Row Collapse Point](./page-builder/hooks/override-row-collapse-point.md)
