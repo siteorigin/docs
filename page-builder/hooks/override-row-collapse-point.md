@@ -1,3 +1,5 @@
+### Override Row Collapse Point
+
 The `siteorigin_panels_css_row_collapse_point` filter will allow you to override the global Page Builder Mobile Width on a row by row basis.
 
 #### Parameters
