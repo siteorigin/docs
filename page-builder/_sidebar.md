@@ -8,8 +8,10 @@
 
 - [CSS](hooks/css.md)
 - [Custom Row Options](hooks/custom-row-settings.md)
+- [Filtering Widget Options](hooks/custom-row-settings.md)
 - [HTML Structure](hooks/html.md)
 - [Page Builder Features and Actions](hooks/builder-features-actions.md)
+- [Override Row Collapse Point](hooks/override-row-collapse-point.md)
 - [Widget Form](hooks/widget-form.md)
 - [Widget Instance](hooks/widget-instance.md)
 
