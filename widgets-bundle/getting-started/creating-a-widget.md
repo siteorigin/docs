@@ -146,4 +146,3 @@ function my_awesome_widget_banner_img_src( $banner_url, $widget_meta ) {
 }
 add_filter( 'siteorigin_widgets_widget_banner', 'my_awesome_widget_banner_img_src', 10, 2 );
 ```
-
