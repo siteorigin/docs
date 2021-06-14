@@ -200,7 +200,7 @@ Renders a media selector button that allows for mutiple items to be selected. Wh
 - update: `string` A label for the confirmation button of the media selector dialog.
 - library: `string` Sets the media library which to browse and from which media can be selected. Allowed MIME type values are `'image'`, `'audio'`, `'video'`, `'file'` and `'application'`. The default is `'image'`.
 - title: `boolean` Whether to display the item title or not. Titles are by default.
-- thumbnail_dimensions: `array` The dimensions of each thumbnail item. Only used when editing widgets. The default is 64x64.
+- thumbnail_dimensions: `array` The dimensions of each thumbnail item. Only used when editing widgets. The default dimensions are`array( 64, 64 )`.
 
 #### Example
 
