@@ -136,7 +136,7 @@ function get_less_variables( $instance ) {
 
 The selected font family.
 
-Example Value:
+Example value:
 
 `Alegreya`
 
@@ -144,7 +144,7 @@ Example Value:
 
 The selected font weight and styling. `weight` will only be set up the user selects a font with a weight, or the font is set to italic.
 
-This item is manitained for backwards compatability. We recommend using `widgets_raw` and `style` instead.
+This item is maintained for backwards compatibility. We recommend using `widgets_raw` and `style` instead.
 
 Example value:
 
