@@ -104,15 +104,18 @@ To use the selected font family in your template, requires a few steps:
 // Variable with default value where selected font family will be injected.
 @font_family: "Lucida Grande", sans-serif;
 @font_weight: 400;
+@font_style: default;
 
 .my-styled-text {
-    // Use the font variables in a class.
-    font-family: @font_family;
-    font-weight: @font_weight;
+	// Use the font variables in a class.
+	font-family: @font_family;
+	font-weight: @font_weight;
+	font-style: @font_style;
 }
 ```
 
-2) Return the selected font family and weight in the widget's overridden `get_less_variables()` function, by using the `siteorigin_widget_get_font()`.
+2. Return the selected font family and weight in the widget's overridden `get_less_variables()` function, by using the `siteorigin_widget_get_font()`.
+
 ```php
 function get_less_variables( $instance ) {
     $selected_font = siteorigin_widget_get_font( $instance['some_font'] );
@@ -120,9 +123,44 @@ function get_less_variables( $instance ) {
         'font_family' => $selected_font['family'],
     );
     if( ! empty( $selected_font['weight'] ) ) {
-        $less_variables['font_weight'] = $selected_font['weight'];
+        $less_variables['font_weight'] = $selected_font['weight_raw'];
+        $less_variables['font_style'] = $selected_font['style'];
     }
     return $less_variables;
 }
 ```
 
+`siteorigin_widget_get_font` returns an array with following items:
+
+**family**
+
+The selected font family.
+
+Example Value:
+
+`Alegreya`
+
+**weight**
+
+The selected font weight and styling. `weight` will only be set up the user selects a font with a weight, or the font is set to italic.
+
+This item is manitained for backwards compatability. We recommend using `widgets_raw` and `style` instead.
+
+Example value:
+
+`600italic`
+
+**widgets_raw**
+
+The selected font. `weight` will only be set up the user selects a font with a weight.
+
+Example value:
+`600`
+
+**style**
+
+The selected style. `style` will be empty if the user doesn't select an italic font option.
+
+Example value:
+
+`italic`
