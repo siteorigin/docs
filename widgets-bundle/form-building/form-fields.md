@@ -199,6 +199,8 @@ Renders a media selector button that allows for mutiple items to be selected. Wh
 - choose: `string` A label for the title of the media selector dialog.
 - update: `string` A label for the confirmation button of the media selector dialog.
 - library: `string` Sets the media library which to browse and from which media can be selected. Allowed MIME type values are `'image'`, `'audio'`, `'video'`, `'file'` and `'application'`. The default is `'image'`.
+- title: `boolean` Whether to display the item title or not. Titles are by default.
+- thumbnail_dimensions: `array` The dimensions of each thumbnail item. Only used when editing widgets. The default is 64x64.
 
 #### Example
 
@@ -209,7 +211,9 @@ $form_options = array(
 	'images' => array(
 		'type' => 'multiple_media',
 		'label' => __( 'Multiple Media', 'widget-form-fields-text-domain' ),
-		'library' => 'image'
+		'library' => 'image',
+		'thumbnail_dimensions' => array( 64, 64 ),
+		'title' => true,
 	),
 );
 ```
