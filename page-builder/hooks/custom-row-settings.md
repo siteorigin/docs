@@ -106,3 +106,25 @@ The current type. This parammater is not present if `siteorigin_panels_general_c
 **args**
 
 An array containing builder arguments.
+
+### Altering the Default Number of Columns for Rows
+
+It's possible to override the default number of row columns, and their weight (width), by using the `siteorigin_panels_default_row_columns` filter. This filter accepts a multidimensional array with each item being treated as a column. Each item must contain a weight item which is used to size the column. Weight is decimal based so 0.30 is equivalent to 30% of the row.
+
+The following snippet will allow you to set the default
+
+```php
+add_filter( 'siteorigin_panels_default_row_columns', function( $default_columns ) {
+	return array(
+		array(
+			'weight' => 0.333,
+		),
+		array(
+			'weight' => 0.333,
+		),
+		array(
+			'weight' => 0.333,
+		),
+	);
+} );
+```
