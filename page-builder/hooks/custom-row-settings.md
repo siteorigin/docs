@@ -128,3 +128,15 @@ add_filter( 'siteorigin_panels_default_row_columns', function( $default_columns 
 	);
 } );
 ```
+
+### Override the Row Column Input
+
+It's possible to adjust the Row Column input markup by using the `siteorigin_panels_row_column_count_input` filter. This will allow alter the column number present in the input field. It doesn't however allow you to alter the default row columns, that's done using `siteorigin_panels_default_row_columns` filter.
+
+The following snippet will column the column field to 4.
+
+```php
+add_filter( 'siteorigin_panels_row_column_count_input', function( $input ) {
+	return '<input type="number" min="1" max="12" name="cells" class="so-row-field" value="4" />';
+} );
+```
