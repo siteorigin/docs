@@ -1,8 +1,8 @@
-# Form fields
+# Form Fields
 
 This is where you'll find a lot of the convenience of using the SiteOrigin Widgets Bundle as a framework for creating your own widgets. The widget form fields are a way for you to define the configuration fields you'd like to allow for your widget users. The more form fields you provide, the more customizable your widget becomes.
 
-## Form field descriptors
+## Form Field Descriptors
 
 The form fields options are passed into the `SiteOrigin_Widget` class constructor as an array and stored in the `$form_options` instance variable. Each value in the array is a form field descriptor, which is an associative array describing the form field to be rendered by the `SiteOrigin_Widget` base class, in order to capture configuration values for a widget instance. Each form field descriptor must at least have a type, however a few of the types won't be useful without additional configuration values. Optional base form field descriptor values are listed below:
 
@@ -14,14 +14,14 @@ The form fields options are passed into the `SiteOrigin_Widget` class constructo
 
 In addition to these, some fields have their own specific configuration values, which are listed in the respective sections below.
 
->You can see all of these in action by installing and activating the SiteOrigin Widget Form Fields Demo plugin which can be found in the [so-dev-examples](https://github.com/siteorigin/so-dev-examples) repository.
+You can see all of these in action by installing and activating the SiteOrigin Widget Form Fields Demo plugin which can be found in the [so-dev-examples](https://github.com/siteorigin/so-dev-examples) repository.
 
-## Form field types
+## Form Field Types
 
 ### text
 Renders a text input field.
 
-#### Additional options
+#### Additional Options
 - placeholder: `string` A string to display before any text has been input.
 - readonly: `bool` If true, this field will not be editable.
 - input_type: `string` The input type  to use for this field. Supports all standard HTML input types. For a list avaliable types, [click here](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input).
@@ -46,7 +46,7 @@ Result:
 ### link
 Renders an input field for entering any URL and a button for convenient selection of content from public posts (except attachments).
 
-#### Additional options
+#### Additional Options
 - placeholder: `string` A string to display before any text has been input.
 - readonly: `bool` If true, this field will not be editable.
 - post_types: `array` Array of strings post types by which to search.
@@ -94,7 +94,7 @@ Result:
 ### number
 Renders a text input field for entering a number. This is the same as the _text_ field, except that the input is cast as a `float`.
 
-#### Additional options
+#### Additional Options
 - placeholder: `string` A string to display before any text has been input.
 - readonly: `bool` If true, this field will not be editable.
 
@@ -118,7 +118,7 @@ Result:
 ### measurement
 Renders a field for entering a [unit of measurement](https://developer.mozilla.org/en-US/docs/Learn/CSS/Introduction_to_CSS/Values_and_units#Numeric_values). This is the same as the text field, except that the input includes unit of measurements.
 
-#### Additional options
+#### Additional Options
 - placeholder: `string` A string to display before any text has been input.
 - readonly: `bool` If true, this field will not be editable.
 - units: `array` An optional array of measurement units that will populate the drop down. Defaults to the list returned by `siteorigin_widgets_get_measurements_list()`.
@@ -145,7 +145,7 @@ Result:
 ### multi measurement
 Renders multiple fields for entering [unit of measurement](https://developer.mozilla.org/en-US/docs/Learn/CSS/Introduction_to_CSS/Values_and_units#Numeric_values). This field type is typically used for things like margins, borders, and paddings.
 
-#### Additional options
+#### Additional Options
 - measurements: `array` The list of measurement options
 -- units: `array` The selector units of measurement. If no units are set, default units are used -  `px`, `%`, `in`, `cm`, `mm`, `em`, `rem`, `pt`, `pc`, `ex`, `ch`, `vw`, `vh`, `vmin`, `vmax`.
 - separator: `string` separator for the measurements. Default is an empty space.
@@ -192,9 +192,9 @@ Result:
 
 Renders a media selector button that allows for mutiple items to be selected. When clicked the button opens the WordPress Media Library dialog for the media types specified by the `library` option.
 
-> _This field requires at least WordPress 3.5._
+_This field requires at least WordPress 3.5._
 
-#### Additional options
+#### Additional Options
 
 - choose: `string` A label for the title of the media selector dialog.
 - update: `string` A label for the confirmation button of the media selector dialog.
@@ -225,7 +225,7 @@ Result:
 ### textarea
 Renders a textarea field.
 
-#### Additional options
+#### Additional Options
 - rows: `int` The number of visible rows in the textarea.
 - placeholder: `string` A string to display before any text has been input.
 - readonly: `bool` If true, this field will not be editable.
@@ -251,7 +251,7 @@ Result:
 ### tinymce
 Renders a TinyMCE editor field.
 
-#### Additional options
+#### Additional Options
 - rows: `int` The number of visible rows in the textarea.
 - default_editor: `string` Whether to display the TinyMCE visual editor or the Quicktags HTML editor initially. Allowed values are `'tinymce'` ( can be abbreviated to `'tmce'`), and `'html'`. The default is `'tinymce'`.
 - media_buttons: `bool` Whether to add the Add Media button. The default is `true`.
@@ -321,7 +321,7 @@ Result:
 ### order
 Renders a list of options that the user can reorder. For usage, please refer to [this tutorial](./order-field.md)
 
-#### Additional options
+#### Additional Options
 - options: `array` The list of options which can be reordered
 - max: `int` The maximum value of the allowed range.
 
@@ -349,12 +349,12 @@ Result:
 ### select
 Renders a dropdown select field. This field is better for a long list of predefined values. For a short list the radio input field is a better choice.
 
-#### Additional options
+#### Additional Options
 - prompt: `string` If present, it is included as a disabled (not selectable) value at the top of the list of options. If there is no default value, it is selected by default. You might even want to leave the label value blank when you use this.
 - options `array` The list of options which may be selected.
 - multiple `bool` Determines whether this is a single or multiple select field.
 
-#### Example 1 - default value without prompt
+#### Example 1 - Default Value Without Prompt
 Form options input:
 ```php
 $form_options = array(
@@ -374,7 +374,7 @@ Result:
 
 ![Widget Form Select 1](../images/form-field-type-select-1.png)
 
-#### Example 2 - prompt without default value
+#### Example 2 - Prompt Without Default Value
 Form options input:
 ```php
 $form_options = array(
@@ -393,7 +393,7 @@ Result:
 
 ![Widget Form Select](../images/form-field-type-select-2.png)
 
-#### Example 3 - multiple select
+#### Example 3 - Multiple Select
 Form options input:
 ```php
 $form_options = array(
@@ -439,7 +439,7 @@ Result:
 ### checkboxes
 Renders a series of checkboxes.
 
-#### Additional options
+#### Additional Options
 - options `array` The list of options which may be selected.
 
 #### Example
@@ -494,9 +494,9 @@ Result:
 ### media
 Renders a media selector button. When clicked the button opens the WordPress Media Library dialog for the media types specified by the `library` option.
 
->_This field requires at least WordPress 3.5._
+_This field requires at least WordPress 3.5._
 
-#### Additional options
+#### Additional Options
 - choose: `string` A label for the title of the media selector dialog.
 - update: `string` A label for the confirmation button of the media selector dialog.
 - library: `string` Sets the media library which to browse and from which media can be selected. Allowed MIME type values are `'image'`, `'audio'`, `'video'`, `'file'` and `'application'`. The default is `'image'`.
@@ -525,10 +525,10 @@ Result:
 ### image size
 Renders a dropdown with all of [the available image sizes](https://developer.wordpress.org/reference/functions/add_image_size/) on the widget users website. This field is commonly used in conjunction with the Media field to allow the user more control over the image output. Please refer to the [Image Sizes tutorial](./image-sizes-field.md) for usage instructions.
 
-> This field requires at least WordPress 2.9.
+_This field requires at least WordPress 2.9._
 
 
-#### Additional options
+#### Additional Options
 - custom_size: `bool` Whether to allow custom image sizes. By default, Custom Sizes are disabled.
 
 #### Example
@@ -596,7 +596,7 @@ Result:
 ### section
 The section field type provides a convenient way to group and hide related form fields. This is useful when you have a large form which can appear overwhelming.
 
-#### Additional options
+#### Additional Options
 - hide: `bool` Whether or not this section should start out collapsed or expanded.
 - fields: `array` The set of fields to be grouped together. This should contain any combination of other field types, even repeaters and sections.
 
@@ -630,7 +630,7 @@ Result:
 ### repeater
 The repeater field type provides a convenient way to repeat a specified set of form fields. 
 
-#### Additional options
+#### Additional Options
 - item_name: `string` A default label for each repeated item.
 - item_label: `array` This associative array describes how the repeater may retrieve the item labels from HTML elements as they are updated. The options are:
   - selector: `string` A JQuery selector which is used to find an element from which to retrieve the item label.
@@ -679,7 +679,7 @@ Repeater containing two items (the first item is collapsed and the second item i
 ### widget
 Includes the entire form of an existing widget class.
 
-#### Additional options
+#### Additional Options
 - class: `string` The class name of the widget to be included.
 - hide: `bool` Whether or not this widget's form section should start out collapsed or expanded.
 
@@ -704,9 +704,9 @@ Result:
 ### builder
 An entire [SiteOrigin Page Builder](https://wordpress.org/plugins/siteorigin-panels/) instance. For usage, please refer to [this tutorial](./builder-field.md)
 
-> This field requires [SiteOrigin Page Builder](https://wordpress.org/plugins/siteorigin-panels/) to be installed and active
+_This field requires [SiteOrigin Page Builder](https://wordpress.org/plugins/siteorigin-panels/) to be installed and active._
 
-#### Additional options
+#### Additional Options
 -  builder: `string` The type of page builder instance - currently unused. Defaults to `sow-builder-field`
 
 #### Example
