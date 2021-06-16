@@ -2,15 +2,15 @@
 
 ```php
 function custom_row_style_fields($fields) {
-  $fields['parallax'] = array(
-  	'name'        => __('Parallax', 'siteorigin-panels'),
-  	'type'        => 'checkbox',
-  	'group'       => 'design',
-  	'description' => __('If enabled, the background image will have a parallax effect.', 'siteorigin-panels'),
-  	'priority'    => 8,
-  );
-  
-  return $fields;
+	$fields['parallax'] = array(
+		'name'        => __('Parallax', 'siteorigin-panels'),
+		'type'        => 'checkbox',
+		'group'       => 'design',
+		'description' => __('If enabled, the background image will have a parallax effect.', 'siteorigin-panels'),
+		'priority'    => 8,
+	);
+
+	return $fields;
 }
 
 add_filter( 'siteorigin_panels_row_style_fields', 'custom_row_style_fields' );
@@ -62,10 +62,10 @@ Design Fields
 
 ```php
 function custom_row_style_attributes( $attributes, $args ) {
-	if( !empty( $args['parallax'] ) ) {
+	if ( !empty( $args['parallax'] ) ) {
 		array_push($attributes['class'], 'parallax');
 	}
-	
+
 	return $attributes;
 }
 
@@ -89,7 +89,7 @@ Note that the filter for ``siteorigin_panels_row_style_attributes`` needs to be 
 
 Before rendering the context's styles, it's possible to access and alter the styles of the current context using filters. This allows you to migrate and alter data as needed. Changes aren't, however, stored until the user saves the page/widget. There are two filters that allow for this. `siteorigin_panels_general_current_styles`, which is a general catch-all filter, and `siteorigin_panels_general_current_styles_{type}`, `{type}` being the currently viewed type.
 
-#### Parameters:
+#### Parameters
 
 **current**
 
@@ -101,7 +101,7 @@ The id of post being edited. This value will be empty if edited outside of Page 
 
 **type**
 
-The current type. This parammater is not present if `siteorigin_panels_general_current_styles_{type}` is the used filter.
+The current type. This parameter is not present if `siteorigin_panels_general_current_styles_{type}` is the used filter.
 
 **args**
 
