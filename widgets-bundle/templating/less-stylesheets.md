@@ -2,7 +2,7 @@
 
 For easier development of styles and runtime stylesheet generation the Widgets Bundle uses LESS. A LESS stylesheet may be specified by overriding the `get_style_name()` function and returning the name of the file, without the `.less` extension, found in the `styles` folder.
 
-Once the widgets LESS stylesheets are generated, they'll be cached at `wp-content/uploads/siteorigin-widgets/`. You can prevent this to make testing LESS simpler by adding the following to your `wp-config.php` file:
+Once the widget's LESS stylesheets are generated, they'll be cached at `wp-content/uploads/siteorigin-widgets/`. You can prevent this to make testing LESS simpler by adding the following to your `wp-config.php` file:
 
 `define( 'SITEORIGIN_WIDGETS_DEBUG', true );`
 

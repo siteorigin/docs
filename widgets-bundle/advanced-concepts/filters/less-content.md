@@ -1,6 +1,6 @@
 # LESS content filter
 
-You're able to access a widgets LESS prior to it being converted to CSS by using the `'siteorigin_widgets_less_' . $this->id_base` filter. This filter runs _after_ the LESS variables from the widget instance have been injected.
+You're able to access a widget's LESS prior to it being converted to CSS by using the `'siteorigin_widgets_less_' . $this->id_base` filter. This filter runs _after_ the LESS variables from the widget instance have been injected.
 
 ```php
 /**
@@ -9,8 +9,8 @@ You're able to access a widgets LESS prior to it being converted to CSS by using
  * @param SiteOrigin_Widget $widget The widget object.
  */
 function wbe_filter_widget_less( $less, $instance, $widget ) {
-    // Filter the LESS content here.
-    return $less;
+	// Filter the LESS content here.
+	return $less;
 }
 add_filter('siteorigin_widgets_less_sow-button', 'wbe_filter_widget_less', 10, 3);
 ```
@@ -25,8 +25,8 @@ If you want to make changes to the LESS prior to the variables being replaced, y
  * @param SiteOrigin_Widget $widget The widget object.
  */
 function wbe_filter_widget_less_vars( $less, $vars, $instance, $widget ) {
-    // Filter the LESS content here.
-    return $less;
+	// Filter the LESS content here.
+	return $less;
 }
 add_filter( 'siteorigin_widgets_less_vars_sow-button', 'wbe_filter_widget_less_vars', 10, 4 );
 ```
