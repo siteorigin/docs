@@ -91,7 +91,7 @@ $presets = json_decode( file_get_contents( plugin_dir_path( __FILE__ ) . 'data/p
 
 ### Dynamic State Handler
 
-The preset field is able to work in combination with the [State Emitters](state-emitters.md). Due to complicated nature of manging state_handlers when there's a number of presets present, we've created a utility method for widgets called `dynamic_preset_state_handler`. This method allows you to automatically add `state_handlers` based on the data in your presets. This method has three required parameters:
+The preset field is able to work in combination with the [State Emitters](state-emitters.md). Due to complicated nature of manging state_handlers when there's a number of presets present, we've created a utility method for `SiteOrigin_Widget` called `dynamic_preset_state_handler`. This method allows you to automatically add `state_handlers` based on the data in your presets. This method has three required parameters:
 
 - state_name: `string` The name of the state. This is set when creating the `state_emitter`.
 - preset_data: `array` An array containing your preset data.
@@ -126,7 +126,7 @@ $this->dynamic_preset_state_handler(
             'options' => $presets,
             'state_emitter' => array(
                 'callback' => 'select',
-                'args' => array( 'selected_theme' ),
+                'args' => array( 'selected_theme' ), // state_name
             ),
         ),
         'test' => array(
@@ -143,6 +143,6 @@ $this->dynamic_preset_state_handler(
 
 ### Test Plugin
 
-Due to the complicated nature of this, we've prepared you a test plugin for you to try this field. You can [download it by clicking here](https://siteorigin.com/wp-content/uploads/2021/06/siteorigin-preset-field-demo.zip). Once downloaded, please navigate to **Plugins > Add New** and upload **siteorigin-preset-field-demo.zip**. When prompted, activate the **SiteOrigin - Preset Field** plugin.
+Due to the complicated nature of this field, we've prepared a test plugin for you to try it. You can [download it by clicking here](https://siteorigin.com/wp-content/uploads/2021/06/siteorigin-preset-field-demo.zip). Once downloaded, please navigate to **Plugins > Add New** and upload **siteorigin-preset-field-demo.zip**. When prompted, activate the **SiteOrigin - Preset Field** plugin.
 
 Once installed, navigate to **Plugins > SiteOrigin Widgets** and activate the **SiteOrigin Preset Field** widget. Open any Page Builder powered page and add the **SiteOrigin Preset Field** widget to your page.
