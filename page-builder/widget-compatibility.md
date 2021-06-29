@@ -36,3 +36,44 @@ $( document ).on( 'panelsopen', function( e ) {
 	// Here we can setup our widget form.
 } );
 ```
+
+### Overriding Automatic Widget Description
+
+By default, Page Builder will override a widgets description to allow users to more easily identify widgets without needing to open them. Page Builder will look for the first valid non-empty input (with a preference for fields called "title" and "text") and use that for its description. This can, however, be problematic for certain fields so you may wish to tell Page Builder to look for a specific field, or completely disable the automatic widget description altogether. This is done by adjusting the `panels_title` option in the widget's `$widget_options` parameter when constructing the widget.
+
+You can disable the widget descriptions by setting `panels_title` to `false`.
+
+```php
+function __construct() {
+		parent::__construct(
+			'sow-demo-widget',
+			__( 'SiteOrigin Demo Widget', 'siteorigin-docs' ),
+			array(
+				'panels_title' => 'false', // Disable Widget description override.
+			),
+			array(),
+			false,
+			plugin_dir_path( __FILE__ )
+		);
+	}
+```
+
+You can tell Page Builder to find a field with a specific name by setting `panels_title` to the field you would like for it to use. For example, if you have a field called "username" you would use:
+
+```php
+function __construct() {
+		parent::__construct(
+			'sow-demo-widget',
+			__( 'SiteOrigin Demo Widget', 'siteorigin-docs' ),
+			array(
+				'description' => __( "This will only be used if a username isn't set.", 'siteorigin-docs' ),
+				'panels_title' => 'username', // Tell Page Builder to look for the "username" field"
+			),
+			array(),
+			false,
+			plugin_dir_path( __FILE__ )
+		);
+	}
+```
+
+If Page Builder isn't able to find a valid field with that title, it'll fallback to the standard widget description.
