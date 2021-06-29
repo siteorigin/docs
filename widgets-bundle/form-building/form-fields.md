@@ -796,3 +796,45 @@ Default selection:
 
 Selecting a font:
 ![Widget Form Font Selector](../images/form-field-type-font-2.png)
+
+### presets
+
+The presets field allows you to create presets for your widget. You can [find more information about using presets here](./presets.md).
+
+#### Options
+
+- options `array` A multidimensional array containing your presets data.
+- default_preset `string` Which preset to load automatically. This is optional, and if its not set an empty default option will be added to the presets select.
+
+#### Example
+
+Form options input:
+
+```php
+$form_options = array(
+	'presets' => array(
+		'type' => 'presets',
+		'label' => __( 'Theme', 'siteorigin-premium'),
+		'default_preset' => 'test-2',
+		'options' => array(
+			'test' => array( // Preset 1
+				'label' => 'Test 1',
+				'values' => array(
+					'test' => 'Test 1 example text',
+				),
+			),
+			'test-2' => array(  // Preset 2
+				'label' => 'Test 2',
+				'values' => array(
+					'test' => 'Test 1 example text',
+					'color' => '#0f0',
+				),
+			),
+		),
+	),
+);
+```
+
+Result:
+
+![Widget Form Icon Selector](../images/form-field-type-preset.png)
