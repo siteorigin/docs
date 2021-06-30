@@ -1,5 +1,10 @@
 # LESS stylesheets
+
 For easier development of styles and runtime stylesheet generation the Widgets Bundle uses LESS. A LESS stylesheet may be specified by overriding the `get_style_name()` function and returning the name of the file, without the `.less` extension, found in the `styles` folder.
+
+Once the widget's LESS stylesheets are generated, they'll be cached at `wp-content/uploads/siteorigin-widgets/`. You can prevent this to make testing LESS simpler by adding the following to your `wp-config.php` file:
+
+`define( 'SITEORIGIN_WIDGETS_DEBUG', true );`
 
 ## Mixin libraries
 For convenience, we have included the mixin libraries, <a href="http://lesselements.com/" target="_blank">LESS Elements</a> and <a href="http://lesshat.madebysource.com/" target="_blank">LESSHat</a>, in the `base/less/` folder. They help reduce the amount of CSS required to ensure compatibility with multiple versions of multiple browsers, or where CSS is simply too verbose. See their respective documentation pages for more information on what's available and usage examples. These may be included in a LESS stylesheet by using the `@import` directive, as follows:

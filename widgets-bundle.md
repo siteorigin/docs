@@ -16,6 +16,7 @@ These developer docs will teach you everything you need to know to build on top 
 ### Form building
 * [Form fields](widgets-bundle/form-building/form-fields.md)
 * [Repeaters and sections](widgets-bundle/form-building/repeaters-and-sections.md)
+* [Presets](widgets-bundle/form-building/presets.md)
 * [Post selector](widgets-bundle/form-building/post-selector.md)
 * [Input sanitization](widgets-bundle/form-building/input-sanitization.md)
 * [Icons and fonts](widgets-bundle/form-building/icons-and-fonts.md)
