@@ -10,6 +10,7 @@
 * [Icons and fonts](form-building/icons-and-fonts.md)
 * [Order field](form-building/order-field.md)
 * [Page Builder](form-building/builder-field.md)
+* [Presets](form-building/presets.md)
 * [Post selector](form-building/post-selector.md)
 * [Image sizes](form-building/image-sizes-field.md)
 * [Adding custom fields](form-building/adding-custom-fields.md)
