@@ -804,7 +804,7 @@ The presets field allows you to create presets for your widget. You can [find mo
 #### Options
 
 - options `array` A multidimensional array containing your presets data.
-- default_preset `string` Which preset to load automatically. This is optional, and if its not set an empty default option will be added to the presets select.
+- default_preset `string` Which preset to load automatically. This is optional, and if it is not set, an empty default option will be added to the presets select.
 
 #### Example
 
