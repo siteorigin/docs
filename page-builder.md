@@ -27,7 +27,7 @@ Page Builder has lots of hooks and filters for you to use. We've already covered
 - [Filtering HTML Structure](./page-builder/hooks/html.md).
 - [Filtering CSS](./page-builder/hooks/css.md).
 - [Filtering Custom Row Options](./page-builder/hooks/custom-row-settings.md).
-- [Filtering Widget Options](./page-builder/hooks/custom-row-settings.md)
+- [Filtering Widget Options](./page-builder/hooks/filtering-widget-settings.md)
 - [Filtering Widget Form](./page-builder/hooks/widget-form.md).
 - [Filtering Widget Instance](./page-builder/hooks/widget-instance.md).
 - [Filtering Page Builder Features and Actions](./page-builder/hooks/builder-features-actions.md).
