@@ -1,8 +1,8 @@
 # Filters
 
-- [Widget folders](filters/widget-folders.md).
-- [Active widgets](filters/active-widgets.md).
-- [Menu capability](filters/admin-capability.md).
+- [Widget Folders](filters/widget-folders.md).
+- [Active Widgets](filters/active-widgets.md).
+- [Menu Capability](filters/admin-capability.md).
 - [Form Options](filters/form-options.md).
 - [Frontend Widget Instance](filters/widget-instance.md).
 - [Form Widget Instance](filters/form-widget-instance.md).

@@ -1,5 +1,5 @@
 # Getting Started
 
-- [Creating a widget](getting-started/creating-a-widget.md).
-- [Extending existing widgets](getting-started/extending-existing-widgets.md).
-- [Initializing a widget](getting-started/initializing-a-widget.md).
+- [Creating a Widget](getting-started/creating-a-widget.md).
+- [Extending Existing Widgets](getting-started/extending-existing-widgets.md).
+- [Initializing a Widget](getting-started/initializing-a-widget.md).

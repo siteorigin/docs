@@ -1,5 +1,5 @@
 # Tutorials
 
-- [Hello world!](tutorials/hello-world.md).
-- [Adding custom styles to a button widget](tutorials/adding-custom-styles-to-a-button-widget.md).
-- [Changing form structure](tutorials/changing-form-structure.md).
+- [Hello World!](tutorials/hello-world.md).
+- [Adding Custom Styles to a Button Widget](tutorials/adding-custom-styles-to-a-button-widget.md).
+- [Changing Form Structure](tutorials/changing-form-structure.md).
