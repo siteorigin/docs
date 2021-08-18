@@ -16,6 +16,7 @@
 * [Adding custom fields](form-building/adding-custom-fields.md)
 * [Modifying forms](form-building/modifying-forms.md)
 * [State emitters](form-building/state-emitters.md)
+* [Overriding form fields](form-building/overriding-form-fields.md)
 
 ### Templating
 * [HTML templates](templating/html-templates.md)
