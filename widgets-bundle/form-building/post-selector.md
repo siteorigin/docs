@@ -47,3 +47,25 @@ if($query_result->have_posts()) : ?>
 
 <?php endif; ?>
 ```
+
+### Filtering siteorigin_widget_post_selector_process_query
+
+The `siteorigin_widgets_posts_selector_query` filter can be used to filter the array returned by `siteorigin_widget_post_selector_process_query`. This allows you to alter the query of SiteOrigin widgets (ie. Post Loop) and widgets that function, and make changes that otherwise wouldn't be possible with just the Additional field.
+
+The following example will require results to have `age` meta with a value of `3` or `4`.
+
+```php
+<?php
+add_filter( 'siteorigin_widgets_posts_selector_query', function( $query ) {
+    $query['meta_query'] => array(
+        array(
+            'key'     => 'age',
+            'value'   => array( 3, 4 ),
+            'compare' => 'IN',
+        ),
+    );
+
+    return $query;
+} );
+?>
+```
