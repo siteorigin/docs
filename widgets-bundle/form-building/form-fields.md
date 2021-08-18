@@ -44,7 +44,8 @@ Result:
 ---
 
 ### link
-Renders an input field for entering any URL and a button for convenient selection of content from public posts (except attachments).
+
+Renders an input field for entering any URL and a button for convenient selection of content from public posts (except attachments). It's recommended that you output the URL using `sow_esc_url`. That will convert post id selections by the user to the full URL.
 
 #### Additional Options
 - placeholder: `string` A string to display before any text has been input.
