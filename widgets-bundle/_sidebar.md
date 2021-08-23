@@ -13,6 +13,7 @@
 * [Presets](form-building/presets.md)
 * [Post selector](form-building/post-selector.md)
 * [Image sizes](form-building/image-sizes-field.md)
+* [Multiple media &amp; repeaters](form-building/multiple-media-repeater.md)
 * [Adding custom fields](form-building/adding-custom-fields.md)
 * [Modifying forms](form-building/modifying-forms.md)
 * [State emitters](form-building/state-emitters.md)
