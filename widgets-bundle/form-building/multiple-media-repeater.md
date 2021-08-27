@@ -1,6 +1,6 @@
 # Connecting Multiple Media Form Field to a Repeater
 
-A multiple media form field can be connected to a repeater to allow users to bulk add images. Any images added using this field won't be stored in the field directly; instead, they'll be stored in the repeater directly. This functionality currently only supports adding images to media fields inside repeaters at this time.
+A multiple media form field can be connected to a repeater to allow users to bulk add images. Any images added using this field won't be stored in the field directly; instead, they'll be stored in the repeater directly. This functionality currently only supports adding images to media fields inside repeaters.
 
 ## Example
 
