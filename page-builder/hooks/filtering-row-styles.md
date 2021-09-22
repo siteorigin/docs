@@ -106,3 +106,21 @@ The current type. This parameter is not present if `siteorigin_panels_general_cu
 **args**
 
 An array containing builder arguments.
+
+### JavaScript event: setup_style_fields
+
+The `setup_style_fields` event will allow you interact with styles, and make adjustments based on the overall Page Builder view. This can be used to help trigger JavaScript assoicated with custom fields (such as date picker) and conditionally show fields.
+
+For example, the following JavaScript will conditionally show a field with the id of `example` based on whether the `toggle_example` field is ticked or not.
+
+```javascript
+( function( $ ) {
+	$( document ).on( 'setup_style_fields', function( e, view ) {
+		var example = view.$el.find( '.so-field-example' );
+
+		view.$el.find( '.so-field-toggle_example input[type="checkbox"]' ).on( 'change', function() {
+			// If the toggle example field is checked, show the field.
+			$( this ).is( ':checked' ) ? exampleField.show() : exampleField.hide();
+		} ).trigger( 'change' );
+} )( jQuery );
+```
