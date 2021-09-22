@@ -12,6 +12,7 @@
 - [HTML Structure](hooks/html.md)
 - [Page Builder Features and Actions](hooks/builder-features-actions.md)
 - [Override Row Collapse Point](hooks/override-row-collapse-point.md)
+- [Row Form](hooks/row-form.md)
 - [Widget Form](hooks/widget-form.md)
 - [Widget Instance](hooks/widget-instance.md)
 
