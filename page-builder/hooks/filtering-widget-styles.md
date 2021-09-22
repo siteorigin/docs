@@ -1,4 +1,4 @@
-### Filtering Widget Settings Based on Widget Being Edited
+### Filtering Widget Styles Based on Widget Being Edited
 
 As of SiteOrigin Page Builder `2.12.2`, it's possible to filter the Widget Styles available on a widget by widget basis. This is done using the `siteorigin_panels_widget_style_fields` filter, which has an optional parameter called `$args`, which contains additional information about the current styles. When editing a widget, `$args['widget']` will be set to the currently active Widget Class.
 

@@ -24,11 +24,11 @@ The name of the custom option.
 
 **type**
 
-Can be set to ``checkbox``, ``text``, ``code``, ``measurement``, ``color``, ``image`` and ``select``.
+Can be set to `checkbox`, `text`, `code`, `measurement`, `color`, `image` and `select`.
 
 **group**
 
-Can be set to ``design``, ``layout`` and ``attributes``.
+Can be set to `design`, `layout` and `attributes`.
 
 **description**
 
@@ -40,23 +40,23 @@ The position in the group the option should appear. Priority set on default opti
 
 Attribute Fields
 
-* 5 - Row Class
-* 6 - Cell Class
-* 10 - CSS Styles
+- 5 - Row Class
+- 6 - Cell Class
+- 10 - CSS Styles
 
 Layout Fields
 
-* 5 - Bottom Margin
-* 6 - Gutter
-* 7 - Padding
-* 10 - Row Layout
+- 5 - Bottom Margin
+- 6 - Gutter
+- 7 - Padding
+- 10 - Row Layout
 
 Design Fields
 
-* 5 - Background Color
-* 6 - Background Image
-* 7 - Background Image Display
-* 10 - Border Color
+- 5 - Background Color
+- 6 - Background Image
+- 7 - Background Image Display
+- 10 - Border Color
 
 ### Adding the New Option to the Row Element
 
@@ -72,18 +72,18 @@ function custom_row_style_attributes( $attributes, $args ) {
 add_filter('siteorigin_panels_row_style_attributes', 'custom_row_style_attributes', 10, 2);
 ```
 
-The code checks if parallax is set inside the ``$args`` array and adds a value of 'parallax' to ``$attributes['class']``.
+The code checks if parallax is set inside the `$args` array and adds a value of 'parallax' to `$attributes['class']`.
 
-``$args`` array is used to check which values have been set.
-``$attributes`` array contains all the values that will display on the front-end.
+`$args` array is used to check which values have been set.
+`$attributes` array contains all the values that will display on the front-end.
 
-To add a custom class, append the class name to ``$attributes['class']``.
+To add a custom class, append the class name to `$attributes['class']`.
 
-To add a custom style (like text-align: center;), append the style to ``$attributes['style']``.
+To add a custom style (like text-align: center;), append the style to `$attributes['style']`.
 
-To add a new attribute, add both a new key and value to ``$attributes``. Example: ``$attributes['data-video-id'] = $args['video-id'];`` will add ``data-video-id="9"`` to the row element.
+To add a new attribute, add both a new key and value to `$attributes`. Example: `$attributes['data-video-id'] = $args['video-id'];` will add `data-video-id="9"` to the row element.
 
-Note that the filter for ``siteorigin_panels_row_style_attributes`` needs to be called after Page Builder loads. In my project I added the filter inside a function which is triggered on ``plugins_loaded``.
+Note that the filter for `siteorigin_panels_row_style_attributes` needs to be called after Page Builder loads. In my project I added the filter inside a function which is triggered on `plugins_loaded`.
 
 ### Processing Styles
 
