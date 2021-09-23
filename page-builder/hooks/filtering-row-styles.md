@@ -1,13 +1,13 @@
 ### Adding a Custom Option Under the Row Styles
 
 ```php
-function custom_row_style_fields($fields) {
+function custom_row_style_fields( $fields ) {
 	$fields['parallax'] = array(
-		'name'        => __('Parallax', 'siteorigin-panels'),
-		'type'        => 'checkbox',
-		'group'       => 'design',
-		'description' => __('If enabled, the background image will have a parallax effect.', 'siteorigin-panels'),
-		'priority'    => 8,
+		'name' => __( 'Parallax', 'so-widgets-test' ),
+		'type' => 'checkbox',
+		'group' => 'design',
+		'description' => __( 'If enabled, the background image will have a parallax effect.', 'so-widgets-test' ),
+		'priority' => 8,
 	);
 
 	return $fields;
@@ -62,14 +62,14 @@ Design Fields
 
 ```php
 function custom_row_style_attributes( $attributes, $args ) {
-	if ( !empty( $args['parallax'] ) ) {
-		array_push($attributes['class'], 'parallax');
+	if ( ! empty( $args['parallax'] ) ) {
+		array_push( $attributes['class'], 'parallax' );
 	}
 
 	return $attributes;
 }
 
-add_filter('siteorigin_panels_row_style_attributes', 'custom_row_style_attributes', 10, 2);
+add_filter( 'siteorigin_panels_row_style_attributes', 'custom_row_style_attributes', 10, 2 );
 ```
 
 The code checks if parallax is set inside the `$args` array and adds a value of 'parallax' to `$attributes['class']`.
@@ -107,7 +107,7 @@ The current type. This parameter is not present if `siteorigin_panels_general_cu
 
 An array containing builder arguments.
 
-### JavaScript event: setup_style_fields
+### JavaScript Event: setup_style_fields
 
 The `setup_style_fields` event will allow you interact with styles, and make adjustments based on the overall Page Builder view. This can be used to help trigger JavaScript assoicated with custom fields (such as date picker) and conditionally show fields.
 
