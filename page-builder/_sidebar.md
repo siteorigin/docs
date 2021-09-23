@@ -7,11 +7,12 @@
 ### Hooks
 
 - [CSS](hooks/css.md)
-- [Custom Row Options](hooks/custom-row-settings.md)
-- [Filtering Widget Options](hooks/filtering-widget-settings.md)
+- [Custom Row Options](hooks/filtering-row-styles.md)
+- [Filtering Widget Options](hooks/filtering-widget-styles.md)
 - [HTML Structure](hooks/html.md)
 - [Page Builder Features and Actions](hooks/builder-features-actions.md)
 - [Override Row Collapse Point](hooks/override-row-collapse-point.md)
+- [Row Form](hooks/row-form.md)
 - [Widget Form](hooks/widget-form.md)
 - [Widget Instance](hooks/widget-instance.md)
 
