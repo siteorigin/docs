@@ -191,7 +191,7 @@ Result:
 
 ### multiple media
 
-Renders a media selector button that allows for mutiple items to be selected. When clicked the button opens the WordPress Media Library dialog for the media types specified by the `library` option.
+Renders a media selector button that allows for multiple items to be selected. When clicked the button opens the WordPress Media Library dialog for the media types specified by the `library` option.
 
 _This field requires at least WordPress 3.5._
 
@@ -202,6 +202,7 @@ _This field requires at least WordPress 3.5._
 - library: `string` Sets the media library which to browse and from which media can be selected. Allowed MIME type values are `'image'`, `'audio'`, `'video'`, `'file'` and `'application'`. The default is `'image'`.
 - title: `boolean` Whether to display the item title or not. Titles are displayed by default.
 - thumbnail_dimensions: `array` The dimensions of each thumbnail item. Only used when editing widgets. The default dimensions are `array( 64, 64 )`.
+- repeater: `array` An optional array containing information about a repeater field. This will allow for the multiple media field to add items to the repeater. For usage instructions, please refer to [this tutorial](./multiple-media-repeater.md)
 
 #### Example
 
