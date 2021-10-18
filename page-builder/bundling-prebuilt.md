@@ -111,3 +111,20 @@ add_filter( 'siteorigin_panels_local_layouts_directories', 'so_prebuilt_layouts_
 #### layouts
 
 In our layouts folder we've included a demo layout and matching thumbnail.
+
+### Sorting
+
+By default, Page Builder doesn't apply any sorting and layouts are ordered as they're identified. You can sort layouts once Page Builder has identified them by using the `siteorigin_panels_prebuilt_layouts` filter. The `siteorigin_panels_prebuilt_layouts` filter has a single filter containing the `$layouts` array.
+
+For example, the following PHP will allow you to automatically
+
+```
+add_filter( 'siteorigin_panels_prebuilt_layouts', function( $layouts ) {
+	// Sort layouts alphabetically.
+	usort( $layouts, function( $a, $b ) {
+		return strcmp( $a['id'], $b['id'] );
+	} );
+
+	return $layouts;
+} );
+```
