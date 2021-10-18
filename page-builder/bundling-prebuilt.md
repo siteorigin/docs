@@ -116,7 +116,7 @@ In our layouts folder we've included a demo layout and matching thumbnail.
 
 By default, Page Builder doesn't apply any sorting and layouts are ordered as they're identified. You can sort layouts once Page Builder has identified them by using the `siteorigin_panels_prebuilt_layouts` filter. The `siteorigin_panels_prebuilt_layouts` filter has a single filter containing the `$layouts` array.
 
-For example, the following PHP will allow you to automatically
+For example, the following PHP will alphabetically sort layouts by their layout id.
 
 ```
 add_filter( 'siteorigin_panels_prebuilt_layouts', function( $layouts ) {
