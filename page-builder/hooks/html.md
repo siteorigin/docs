@@ -87,3 +87,27 @@ $cell_attributes = apply_filters( 'siteorigin_panels_row_cell_attributes', array
 	'id' => 'pgc-' . $post_id . '-' . $gi  . '-' . $ci
 ), $panels_data );
 ```
+
+### Prevent output of Row or Widget
+
+You can completely prevent a row or widget from outputting by using the `siteorigin_panels_output_row/widget` filter.
+
+```php
+// Prevent the first row from outputting.
+add_filter( 'siteorigin_panels_output_row', function( $output, $row, $ri, $panels_data, $post_id ) {
+	if ( $ri === 1 ) {
+		$output = false;
+	}
+	return $output;
+}, 10, 5 );
+
+// Prevent the archive widget from outputting.
+add_filter( 'siteorigin_panels_output_widget', function( $output, $widget, $ri, $ci, $wi, $panels_data, $post_id ) {
+	if ( $widget['panels_info']['class'] == 'WP_Widget_Archives' ) {
+		$output = false;
+	}
+
+	return $output;;
+}, 10, 7 );
+
+```
