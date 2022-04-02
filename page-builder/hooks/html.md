@@ -1,4 +1,4 @@
-# Filtering Page Builder HTML structure
+# Filtering Page Builder HTML Structure
 
 By default, Page Builder gives you all the HTML you'll likely need to customize the look and feel of your layout. There are times, however, that you'll need to add your own HTML, classes or styles. You'll find most of these filters in the [siteorigin\_panels\_render](https://github.com/siteorigin/siteorigin-panels/blob/master/siteorigin-panels.php#L738).
 
@@ -12,7 +12,7 @@ They're called as follows.
 
 ```php
 echo apply_filters( 'siteorigin_panels_before_content', '', $panels_data, $post_id );
-// Page Builder content is rendered here
+// Page Builder content is rendered here.
 echo apply_filters( 'siteorigin_panels_after_content', '', $panels_data, $post_id );
 ```
 
@@ -22,7 +22,7 @@ Just like before and after content, these filters give you a chance to add raw H
 
 ```php
 echo apply_filters( 'siteorigin_panels_before_row', '', $panels_data['grids'][$gi], $grid_attributes );
-// Row is generated here
+// Row is generated here.
 echo apply_filters( 'siteorigin_panels_after_row', '', $panels_data['grids'][$gi], $grid_attributes );
 ```
 
@@ -31,11 +31,11 @@ echo apply_filters( 'siteorigin_panels_after_row', '', $panels_data['grids'][$gi
 You can output additional content inside the rows and before/after the cells have been added.
 
 ```php
-// Row Container
+// Row Container.
 echo apply_filters( 'siteorigin_panels_inside_row_before', '', $row );
-// Cells
+// Cells.
 echo apply_filters( 'siteorigin_panels_inside_row_after', '', $row );
-// Row Container End
+// Row Container End.
 ```
 
 ### Inside Cells Before and After
@@ -80,10 +80,34 @@ add_filter('siteorigin_panels_row_attributes','myplugin_filter_row_attributes', 
 Dealing with cell styles is similar.
 
 ```php
-// Themes can add their own styles to cells
+// Themes can add their own styles to cells.
 $cell_classes = apply_filters( 'siteorigin_panels_row_cell_classes', array('panel-grid-cell'), $panels_data );
 $cell_attributes = apply_filters( 'siteorigin_panels_row_cell_attributes', array(
 	'class' => implode( ' ', $cell_classes ),
 	'id' => 'pgc-' . $post_id . '-' . $gi  . '-' . $ci
 ), $panels_data );
+```
+
+### Prevent Output of Row or Widget
+
+You can completely prevent a row or widget from outputting by using the `siteorigin_panels_output_row/widget` filter.
+
+```php
+// Prevent the first row from outputting.
+add_filter( 'siteorigin_panels_output_row', function( $output, $row, $ri, $panels_data, $post_id ) {
+	if ( $ri === 1 ) {
+		$output = false;
+	}
+	return $output;
+}, 10, 5 );
+
+// Prevent the Archive Widget from outputting.
+add_filter( 'siteorigin_panels_output_widget', function( $output, $widget, $ri, $ci, $wi, $panels_data, $post_id ) {
+	if ( $widget['panels_info']['class'] == 'WP_Widget_Archives' ) {
+		$output = false;
+	}
+
+	return $output;;
+}, 10, 7 );
+
 ```
