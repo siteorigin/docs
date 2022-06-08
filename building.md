@@ -1,4 +1,4 @@
-# Building SiteOrigin plugins
+# Building SiteOrigin Plugins
 
 There are few steps necessary to prepare a plugin for release on the WordPress.org plugin directory. We use [Gulp](http://gulpjs.com/) to automate this.
 
