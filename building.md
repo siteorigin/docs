@@ -1,4 +1,4 @@
-# Building SiteOrigin plugins
+# Building SiteOrigin Plugins
 
 There are few steps necessary to prepare a plugin for release on the WordPress.org plugin directory. We use [Gulp](http://gulpjs.com/) to automate this.
 
@@ -34,3 +34,5 @@ The dev build task only has one subtask:
 1. Watch LESS files for changes and compile to CSS.
 
 This is simply to avoid having to manually recompile LESS files while working on them.
+
+Test update.
