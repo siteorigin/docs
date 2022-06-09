@@ -98,9 +98,9 @@ Once you have implemented your widget like the above example, your widget will b
 
 You need to provide a template to tell the widget how it should be displayed. By default, Widgets Bundle will attempt to use `tpl/default.php` in your widget directory.
 
-You optionally supply a custom template name by overriding the `get_template_name` function and returning the name of the template file, without a `.php` file extension. By default, the base `SiteOrigin_Widget` class looks for a PHP file, with the name returned by `get_template_name`, in a `tpl` directory, in the widget directory.
+You optionally supply a custom template name by overriding the `get_template_name` function and returning the name of the template file without a `.php` file extension. By default, the base `SiteOrigin_Widget` class looks for a PHP file, with the name returned by `get_template_name`, in a `tpl` directory, in the widget directory.
 
-You can change what directory Widgets Bundle looks in by overriding the `get_template_dir` function and returning the path of a directory (without leading or trailing slashes), relative to the widget class file.
+You can change what the directory Widgets Bundle looks in by overriding the `get_template_dir` function and returning the path of a directory (without leading or trailing slashes) relative to the widget class file.
 
 ```php
 function get_template_name( $instance ) {
