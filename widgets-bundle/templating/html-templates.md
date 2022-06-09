@@ -1,5 +1,7 @@
 # HTML Templates
-HTML templates are used to render widgets for display in the front end. A template is included for output when the `widget()` function is called, so it has access to the widget `$instance` variable and the `$args` variable. The template's name must be specified by overriding the `get_template_name()` function. By default, it must be placed in a folder named _tpl_ in the root of the widget folder.
+HTML templates are used to render widgets for display in the front end. A template is included for output when the `widget()` function is called, so it has access to the widget `$instance` variable and the `$args` variable. By default, Widgets Bundle will attempt to use `tpl/default.php` in your widget directory.
+
+The template's name can be optionally overriden by using the `get_template_name()` function. By default, it must be placed in a folder named _tpl_ in the root of the widget folder.
 
 ### Example - simple template
 Overriding the `get_template_name()` function:
