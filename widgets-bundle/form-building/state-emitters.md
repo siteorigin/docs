@@ -82,6 +82,8 @@ sowEmitters.custom = function( val, args, field ){
 };
 ```
 
+The `field` parameter allows you to determine which field triggered the emitter. This can be useful for checking other fields in comparison to the current one.
+
 ## State Handlers
 
 Once a state has been emitted by any field in the form, the rest of the form can handle state changes by defining a state handler. The most common use case of this will be to show or hide fields, depending on the state of the form.
