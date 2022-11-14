@@ -72,15 +72,17 @@ The conditional callback evaluates arbitrary conditions. The variable `var` is a
 If you need a custom state emitter for some specialized functionality, you can add it in Javascript by simply attaching a new function to the global `sowEmitters` object.
 
 ```javascript
-sowEmitters.custom : function(val, args){
+sowEmitters.custom = function( val, args, field ){
     var returnStates = {};
     
     // Use the field value in val and the args to set the group states
     returnStates['group'] = 'state';
     
     return returnStates;
-},
+};
 ```
+
+The `field` parameter allows you to determine which field triggered the emitter. This can be useful for checking other fields in comparison to the current one.
 
 ## State Handlers
 

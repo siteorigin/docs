@@ -18,6 +18,7 @@
 * [Modifying forms](form-building/modifying-forms.md)
 * [State emitters](form-building/state-emitters.md)
 * [Overriding form fields](form-building/overriding-form-fields.md)
+* [Global Widget Settings](widgets-bundle/form-building/global-widget-settings.md)
 
 ### Templating
 * [HTML templates](templating/html-templates.md)

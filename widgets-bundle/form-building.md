@@ -14,3 +14,4 @@
 - [Multiple Media &amp; Repeaters](form-building/multiple-media-repeater.md).
 - [State Emitters](form-building/state-emitters.md).
 - [Overriding Form fields](form-building/overriding-form-fields.md).
+- [Global Widget Settings](form-building/global-widget-settings.md).
