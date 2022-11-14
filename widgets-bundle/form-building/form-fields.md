@@ -47,6 +47,8 @@ Result:
 
 Renders an input field for entering any URL and a button for convenient selection of content from public posts (except attachments). It's recommended that you output the URL using `sow_esc_url`. That will convert post id selections by the user to the full URL.
 
+You can filter search results using the `siteorigin_widgets_search_posts_results` filter, and you can change the SQL Order By using the `siteorigin_widgets_search_posts_order_by` filter. For more information, [click here](./link-form-field-filters.md).
+
 #### Additional Options
 - placeholder: `string` A string to display before any text has been input.
 - readonly: `bool` If true, this field will not be editable.
