@@ -1,6 +1,6 @@
 # Global Widget Settings
 
-You can add global settings for your widget by adding the `get_settings_form` method to your widget and returning a standard [forms](./form-fields.md) array. These settings are accessed by the user navigating to via **Plugins > SiteOrigin Widgets** and then clicking your widgets respective Settings button.
+You can add global settings for your widget by adding the `get_settings_form` method to your widget and returning a standard [forms](./form-fields.md) array. These settings are accessed by the user navigating to **Plugins > SiteOrigin Widgets** and then clicking your widgets respective Settings button.
 
 ### Example
 The following example adds an example checkbox global setting to this widget's global settings.
@@ -21,7 +21,7 @@ class MyCustomWidget extends SiteOrigin_Widget {
 ```
 
 ### Retrieving a Widget’s Global Settings
-The `SiteOrigin_Widget` class includes a utility method called `get_global_settings` you can use to retrieve your global settings. It features an optional string parameter that allows you to retrieve a specific setting. If this parameter isn't set, all settings are returned. The following example snippets
+The `SiteOrigin_Widget` class includes a utility method called `get_global_settings` you can use to retrieve your global settings. It features an optional string parameter that allows you to retrieve a specific setting. If this parameter isn't set, all settings are returned. The following example snippet fetches the widget's global settings and then checks for our example checkbox.
 
 ```php
 class MyCustomWidget extends SiteOrigin_Widget {
@@ -42,7 +42,7 @@ class MyCustomWidget extends SiteOrigin_Widget {
 ```
 
 ### Retrieving a Specific Widget Global Setting
-The `get_global_settings` method features an optional string parameter that allows you to retrieve a specific setting. If this parameter isn't set, all settings are returned. Below is the above snippet modified to use this paramater.
+The `get_global_settings` method features an optional string parameter that allows you to retrieve a specific setting. If this parameter isn't set, all settings are returned. Below is the above snippet modified to use this parameter.
 
 ```php
 class MyCustomWidget extends SiteOrigin_Widget {
