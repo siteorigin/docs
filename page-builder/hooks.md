@@ -7,5 +7,6 @@
 - [Filtering HTML Structure](hooks/html.md).
 - [Overriding Row Collapse Point](hooks/override-row-collapse-point.md)
 - [Filtering Row Form](hooks/row-form.md).
+- [Row & Widget Output Filters](hooks/stopping-output-of-row-widget.md)
 - [Filtering Widget Form](hooks/widget-form.md).
 - [Filtering Widget Instance](hooks/widget-instance.md).
