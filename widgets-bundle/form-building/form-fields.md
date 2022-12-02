@@ -100,6 +100,9 @@ Renders a text input field for entering a number. This is the same as the _text_
 #### Additional Options
 - placeholder: `string` A string to display before any text has been input.
 - readonly: `bool` If true, this field will not be editable.
+- abs: `bool` Whether to optionally apply the PHP function `abs` when saving to ensure only positive numbers are possible.
+- min: `float` An optional minimum value allowed.
+- max: `float` An optional maximum value allowed.
 
 #### Example
 Form options input:
