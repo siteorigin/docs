@@ -639,7 +639,7 @@ The tabs field integrates with the section field by replacing the sections with 
 
 This field requires Widgets Bundle version 1.xx.x or higher. If the user is using a version prior to that release, the sections will output as normal.
 
-#### Additional Options
+#### Options
 - tabs: `array` This associative array contains the section id and label of the section to display as a tab. The section label doesn't have to be the same as the section.
 
 ```php
@@ -666,7 +666,7 @@ add_filter( 'siteorigin_widgets_form_options_sow-editor', function( $form_option
 		'fields' => array(
 			'test' => array(
 				'type' => 'html',
-				'label' => __( 'First tab', 'so-example' ),
+				'markup' => __( 'First tab', 'so-example' ),
 			),
 		),
 	);
@@ -680,7 +680,7 @@ add_filter( 'siteorigin_widgets_form_options_sow-editor', function( $form_option
 		'fields' => array(
 			'test' => array(
 				'type' => 'html',
-				'label' => __( 'Second tab', 'so-example' ),
+				'markup' => __( 'Second tab', 'so-example' ),
 			),
 		),
 	);
