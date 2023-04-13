@@ -635,7 +635,7 @@ Result:
 ---
 
 ### tabs
-The tabs field integrates with the section form. By itself, this field doesn't function and must be paired with a section field as each tab corresponds to an assigned section. On mobile devices, this field will collapse to sections.
+The tabs field integrates with the section form. By itself, this field doesn't function and must be paired with a section field as each tab corresponds to an assigned section. On mobile devices, the tabs will disappear in favor of the original sections.
 
 This field requires Widgets Bundle version 1.xx.x or higher. If the user is using a version prior to that release, the sections will output as normal.
 
