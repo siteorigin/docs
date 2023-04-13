@@ -24,7 +24,7 @@ Renders a text input field.
 #### Additional Options
 - placeholder: `string` A string to display before any text has been input.
 - readonly: `bool` If true, this field will not be editable.
-- input_type: `string` The input type  to use for this field. Supports all standard HTML input types. For a list avaliable types, [click here](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input).
+- input_type: `string` The input type to use for this field. Supports all standard HTML input types. For a list avaliable types, [click here](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input).
 
 #### Example
 Form options input:
@@ -153,7 +153,7 @@ Renders multiple fields for entering [unit of measurement](https://developer.moz
 
 #### Additional Options
 - measurements: `array` The list of measurement options
--- units: `array` The selector units of measurement. If no units are set, default units are used -  `px`, `%`, `in`, `cm`, `mm`, `em`, `rem`, `pt`, `pc`, `ex`, `ch`, `vw`, `vh`, `vmin`, `vmax`.
+-- units: `array` The selector units of measurement. If no units are set, default units are used - `px`, `%`, `in`, `cm`, `mm`, `em`, `rem`, `pt`, `pc`, `ex`, `ch`, `vw`, `vh`, `vmin`, `vmax`.
 - separator: `string` separator for the measurements. Default is an empty space.
 - autofill: `bool` Whether to automatically fill the rest of the inputs when the first value is entered. Default is false.
 
@@ -846,13 +846,11 @@ Result:
 
 ![Widget Form Icon Selector](../images/form-field-type-preset.png)
 
-
 ### html
 
 The HTML field allows you to directly output HTML. This is useful for conveying information that is better served being separate rather than in a field description, giving a brief for a section, etc.
 
 This field requires Widgets Bundle version Widgets Bundle 1.44.0 or higher. If the user is using a version prior to that release, nothing will output.
-
 
 #### Options
 
@@ -860,7 +858,7 @@ This field requires Widgets Bundle version Widgets Bundle 1.44.0 or higher. If t
 
 #### Example
 
-This example will add two HTML fields to the end of the  SiteOrgin Editor widget. The first will display a box with some inline styling and the second will add the SiteOrigin logo.
+This example will add two HTML fields to the end of the SiteOrgin Editor widget. The first will display a box with some inline styling and the second will add the SiteOrigin logo.
 
 ```php
 add_filter( 'siteorigin_widgets_form_options_sow-editor', function( $form_options ) {
@@ -879,7 +877,6 @@ add_filter( 'siteorigin_widgets_form_options_sow-editor', function( $form_option
 		'label' => __( 'SiteOrigin Logo HTML Example' , 'so-example' ),
 		'markup' => '<img src="https://siteorigin.com/wp-content/themes/siteorigin-theme/images/logo/logo.svg" width="175" height="33">',
 	);
-
 
 	return $form_options;
 } );
