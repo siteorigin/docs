@@ -634,6 +634,67 @@ Result:
 
 ---
 
+### tabs
+The tabs field integrates with the section field by replacing the sections with tabs. On mobile devices, this field will collapse to sections.
+
+This field requires Widgets Bundle version 1.xx.x or higher. If the user is using a version prior to that release, the sections will output as normal.
+
+#### Additional Options
+- tabs: `array` This associative array contains the section id and label of the section to display as a tab. The section label doesn't have to be the same as the section.
+
+```php
+
+add_filter( 'siteorigin_widgets_form_options_sow-editor', function( $form_options ) {
+	if ( empty( $form_options ) ) {
+		return $form_options;
+	}
+
+	// This go anywhere in the `$form_options` array.
+	$form_options['tabs'] = array(
+		'type' => 'tabs',
+		'tabs' => array(
+			'example_section' => __( 'Example Section', 'so-example' ),
+			'another_example' => __( 'Second Example', 'so-example' ),
+		),
+	);
+
+	$form_options['example_section'] = array(
+		'type' => 'section',
+		'label' => __( 'Example Section' , 'so-example' ),
+		'tab' => true,
+		'hide' => true,
+		'fields' => array(
+			'test' => array(
+				'type' => 'html',
+				'label' => __( 'First tab', 'so-example' ),
+			),
+		),
+	);
+
+
+	$form_options['another_example'] = array(
+		'type' => 'section',
+		'label' => __( 'The Tab label defined above will be output instead of this' , 'so-example' ),
+		'tab' => true,
+		'hide' => true,
+		'fields' => array(
+			'test' => array(
+				'type' => 'html',
+				'label' => __( 'Second tab', 'so-example' ),
+			),
+		),
+	);
+
+
+	return $form_options;
+} );
+```
+
+Result:
+![Tabs Form Field](../images/form-field-tabs.png)
+
+---
+
 ### repeater
 The repeater field type provides a convenient way to repeat a specified set of form fields. 
 
