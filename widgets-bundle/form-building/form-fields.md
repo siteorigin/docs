@@ -887,17 +887,18 @@ Result:
 
 ![HTML Form field](../images/form-field-html.png)
 
-
 ### Autocomplete
 
 The Autocomplete field provides a list of posts or terms  users that the user can select from. When an item is selected, the post/term id will be inserted. If multiple are selected each selection will be separated by a comma.
 
 #### Options
+
 - post_types `array` An array of post types to use in the autocomplete query. Only used for posts. Default is posts.
 - source `string` Indicates which database table will be used to retrieve autocomplete suggestions. Options are `posts` and `terms`. Default is posts
 - multiple `string` Whether to allow multiple items to be selected. Default is true.
 
 #### Example
+
 ```php
 $form_options = array(
 	'example' => array(
