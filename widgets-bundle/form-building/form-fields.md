@@ -103,6 +103,7 @@ Renders a text input field for entering a number. This is the same as the _text_
 - abs: `bool` Whether to optionally apply the PHP function `abs` when saving to ensure only positive numbers are possible.
 - min: `float` An optional minimum value allowed.
 - max: `float` An optional maximum value allowed.
+- unit: `string` An optional unit of measurement shown to the user. This option will not be saved.
 
 #### Example
 Form options input:
@@ -111,7 +112,8 @@ $form_options = array(
 	'some_number' => array(
 		'type' => 'number',
 		'label' => __( 'Enter a number', 'widget-form-fields-text-domain' ),
-		'default' => '12654'
+		'default' => '12654',
+		'unit' => 'px',
 	)
 );
 ```
