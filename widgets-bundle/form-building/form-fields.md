@@ -635,9 +635,9 @@ Result:
 ---
 
 ### tabs
-The tabs field integrates with the section form. By itself, this field doesn't function and must be paired with a section field as each tab corresponds to an assigned section. On mobile devices, the tabs will disappear in favor of the original sections.
+The tabs field integrates with the section field. By itself, this field doesn't function and must be paired with a section field as each tab corresponds to an assigned section. On mobile devices, the tabs will disappear in favor of the original sections.
 
-This field requires Widgets Bundle version 1.xx.x or higher. If the user is using a version prior to that release, the sections will output as normal.
+This field requires Widgets Bundle version 1.50.1 or higher. If the user is using a version prior to that release, the sections will output as normal.
 
 #### Options
 - tabs: `array` This associative array contains the section id and label of the section to display as a tab. The section label doesn't have to be the same as the section.
@@ -649,7 +649,6 @@ add_filter( 'siteorigin_widgets_form_options_sow-editor', function( $form_option
 		return $form_options;
 	}
 
-	// This go anywhere in the `$form_options` array.
 	$form_options['tabs'] = array(
 		'type' => 'tabs',
 		'tabs' => array(
