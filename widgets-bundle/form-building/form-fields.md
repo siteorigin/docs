@@ -889,7 +889,7 @@ Result:
 
 ### Autocomplete
 
-The Autocomplete field provides a list of posts or terms  users that the user can select from. When an item is selected, the post/term id will be inserted. If multiple are selected each selection will be separated by a comma.
+The Autocomplete field provides a list of posts or terms users that the user can select from. When an item is selected, the post/term id will be inserted. If multiple are selected each selection will be separated by a comma.
 
 #### Options
 
