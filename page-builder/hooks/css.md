@@ -6,12 +6,12 @@ Page Builder has several hooks for filtering CSS output. This can be useful if y
 
 Page Builder has several filters along the way to change various aspects of the Page Builder layout. You can find most of these in the [siteorigin\_panels\_generate\_css](https://github.com/siteorigin/siteorigin-panels/blob/master/siteorigin-panels.php#L579) function.
 
-* `siteorigin_panels_css_cell_width` - This filter lets you change the percentage width of an individual cell. Values are given as a string, like `33.333%`. You can filter this to change the percent or the units. This filter gives you the following arguments.
-	* `$width` - The width string.
-	* `$grid` - The grid array. You can var_dump or use a debugger to see what's available to you here.
-	* `$gi` The row index.
+* `siteorigin_panels_css_cell_weight` - This filter lets you change the share of the row that an individual cell takes. The value is a number from 0 to 1, like `0.3333`. Page Builder turns it into the cell's percentage width and subtracts its share of the row gutter. This filter gives you the following arguments.
+	* `$weight` - The cell weight.
+	* `$row` - The row array. You can var_dump or use a debugger to see what's available to you here.
+	* `$ri` The row index.
 	* `$cell` The cell array.
-	* `$ci` The cell index.
+	* `$ci` The cell index, minus one. The first cell in a row gets `-1`.
 	* `$panels_data` The full $panels_data array. This will also have all the style values.
 	* `$post_id`
 * `siteorigin_panels_css_row_margin_bottom` - This filter lets you change the bottom margin of a row. This is given as a CSS string (with px units), so you can change both the value and the units. The filter is called using the following code - `apply_filters('siteorigin_panels_css_row_margin_bottom', $panels_margin_bottom.'px', $grid, $gi, $panels_data, $post_id)`
