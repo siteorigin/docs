@@ -20,4 +20,5 @@
 ### Tutorials
 
 - [Bundling Page Builder Prebuilt Layouts](bundling-prebuilt.md)
+- [Theme Integration](theme-integration.md)
 - [Making Your Widgets Page Builder Compatible](widget-compatibility.md)
