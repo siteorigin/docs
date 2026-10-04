@@ -1,37 +1,43 @@
 # Building SiteOrigin Plugins
 
-There are few steps necessary to prepare a plugin for release on the WordPress.org plugin directory. We use [Gulp](http://gulpjs.com/) to automate this.
+There are few steps necessary to prepare a plugin for release on the WordPress.org plugin directory. We use [Gulp](http://gulpjs.com/) to automate this. The build tasks live in the [plugin-build](https://github.com/siteorigin/plugin-build) repository, which each plugin includes as a git submodule in a folder called `build`.
 
 ## Environment Setup
 
 1. [Download](https://nodejs.org/download/) and install Node.js and npm.
-2. In a terminal, navigate to the root of the plugin directory and run `npm install`
-3. Get some coffee while npm installs the required packages.
+2. In a terminal, navigate to the root of the plugin directory and run `git submodule update --init build` to add the `build` folder.
+3. Navigate to the `build` folder and run `npm install`.
+4. Get some coffee while npm installs the required packages.
+
+Each plugin has a `build-config.js` file in its root directory. The build reads the plugin slug and the files to version, compile and copy from this file.
 
 ## Running Builds
 
-There are two build tasks, `build:release` and `build:dev`.
+There are two build tasks, `build:release` and `build:dev`. Run them from the `build` folder.
 
 The release task performs the following subtasks:
 
-1. Updates the version number in the `{plugin-name}.php` and `readme.txt` files.
-2. Compiles LESS files to CSS.
-3. Minifies JavaScript files and adds a `.min` suffix.
-4. Copies all files to a `dist/{plugin-name}` folder.
-5. Creates a `.zip` archive with the appropriate filename ready for uploading to wordpress.org.
+1. Updates the version number in the files listed under `version.src` in `build-config.js`.
+2. Compiles LESS and SASS files to CSS.
+3. Processes JavaScript files with Babel and Browserify, if `build-config.js` sets them up.
+4. Minifies CSS and JavaScript files and adds the `jsMinSuffix` set in `build-config.js`, usually `.min`.
+5. Generates the translation (POT) file.
+6. Copies all files to a `dist/{slug}` folder.
+7. Creates a `{slug}.{version}.zip` archive ready for uploading to wordpress.org.
 
-Release task usage:
+Run the release task with `npx`, which uses the Gulp version installed in the `build` folder:
 
-`gulp build:release -v version`
+`npx gulp build:release -v version`
 
 Where `version` should be replaced with the required version number.
 For example, say the next version of the plugin is 1.2.3:
 
-`gulp build:release -v 1.2.3`
+`npx gulp build:release -v 1.2.3`
 
-The dev build task only has one subtask:
+The Widgets Bundle uses a newer version of the build, which needs Node.js 18 or later. Its Gulp command line reads `-v` as a request for the Gulp version, so run the release task through npm instead:
 
-1. Watch LESS files for changes and compile to CSS.
+`npm run build:release --release=1.2.3`
+
+The dev build task compiles the CSS and JavaScript once, then watches the LESS, SASS and JavaScript source files and recompiles them when they change. Run it with `npx gulp build:dev`, or `npm run build:dev` in the Widgets Bundle.
 
 This is simply to avoid having to manually recompile LESS files while working on them.
-
