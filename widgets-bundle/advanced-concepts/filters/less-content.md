@@ -37,7 +37,7 @@ To change the value of a LESS variable, use the `'siteorigin_widgets_less_variab
 
 ```php
 function wbe_filter_widget_less_variables( $vars, $instance, $widget ) {
-	$vars['some_variable'] = '#ff0000';
+	$vars['button_color'] = '#ff0000';
 	return $vars;
 }
 add_filter( 'siteorigin_widgets_less_variables_sow-button', 'wbe_filter_widget_less_variables', 10, 3 );
