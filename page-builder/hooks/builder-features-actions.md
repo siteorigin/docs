@@ -35,7 +35,7 @@ Page Builder applies `history`, `liveEditor` and `revertToEditor` only in a buil
 
 ## Layout Builder Widget
 
-The `siteorigin_panels_layout_builder_supports` filter does the same job for the Layout Builder widget and leaves the main Page Builder untouched. Its second argument is the Layout Builder's `$panels_data` as a JSON string. This example stops users from adding new widgets inside Layout Builder widgets:
+The `siteorigin_panels_layout_builder_supports` filter does the same job for the Layout Builder Widget and leaves the main Page Builder untouched. Its second argument is the Layout Builder's `$panels_data` as a JSON string. This example stops users from adding new widgets inside Layout Builder Widgets:
 
 ```php
 function so_disallow_new_widgets_layout_builder( $supports ) {

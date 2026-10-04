@@ -28,7 +28,7 @@ add_filter( 'siteorigin_panels_local_layouts_directories', 'siteorigin_layouts_f
 
 ## Using External Images
 
-Wherever a layout uses an image, such as a row background, enter the image's address in the **External URL** field. Page Builder then loads the image from that address on every site that uses the layout, where an image chosen with **Select Image** would be missing from your users' Media Libraries.
+Wherever a layout uses an image, such as a row background, enter the image's address in the **External URL** field. Page Builder then loads the image from that address on every site that uses the layout. An image chosen with **Select Image** comes from your own Media Library, so it would be missing on your users' sites.
 
 ## Sorting Layouts
 

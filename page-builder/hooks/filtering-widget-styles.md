@@ -1,6 +1,6 @@
 # Filtering Widget Options
 
-The `siteorigin_panels_widget_style_fields` filter changes the widget style fields for one widget at a time, from Page Builder 2.12.3. Its third argument, `$args`, holds the builder arguments. When a user edits a widget, `$args['widget']` holds the widget's class. When Page Builder builds its field cache, `$args` is `false`, so check that `$args['widget']` is set before you use it, or PHP shows a notice.
+From Page Builder 2.12.3, the `siteorigin_panels_widget_style_fields` filter changes the widget style fields for one widget at a time. Its third argument, `$args`, holds the builder arguments. When a user edits a widget, `$args['widget']` holds the widget's class. When Page Builder builds its field cache, `$args` is `false`, so check that `$args['widget']` is set before you use it, or PHP shows a notice.
 
 ## Example
 

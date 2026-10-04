@@ -77,7 +77,7 @@ function add_my_widget_into_recommended_group( $widgets ) {
 add_filter( 'siteorigin_panels_widgets', 'add_my_widget_into_recommended_group', 12 );
 ```
 
-To recommend several widgets, loop through their class names:
+A loop through their class names recommends several widgets at once:
 
 ```php
 function set_so_widget_into_recommended_group( $widgets ) {

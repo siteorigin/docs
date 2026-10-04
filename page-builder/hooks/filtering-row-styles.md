@@ -34,9 +34,9 @@ These are the priorities of Page Builder's own row fields, so you can place your
 
 | Group | Priority and field |
 |---|---|
-| Attributes | 4 Row ID, 5 Row Class, 6 Column Class, 10 CSS Declarations, 11 Mobile CSS Declarations |
-| Layout | 5 Bottom Margin, 6 Gutter, 7 Padding, 10 Row Layout, 15 Collapse Behaviour, 16 Collapse Order, 17 Column Vertical Alignment |
-| Design | 5 Background Color, 6 Background Image, 7 Background Image Alt Text, 7 Background Image Display, 8 Background Image Size, 9 Background Image Opacity, 10 Border Color, 11 Border Thickness, 12 Border Radius, 20 Box Shadow, 25 Box Shadow Hover, 30 Full Height |
+| Attributes | 4 **Row ID**, 5 **Row Class**, 6 **Column Class**, 10 **CSS Declarations**, 11 **Mobile CSS Declarations** |
+| Layout | 5 **Bottom Margin**, 6 **Gutter**, 7 **Padding**, 10 **Row Layout**, 15 **Collapse Behaviour**, 16 **Collapse Order**, 17 **Column Vertical Alignment** |
+| Design | 5 **Background Color**, 6 **Background Image**, 7 **Background Image Alt Text**, 7 **Background Image Display**, 8 **Background Image Size**, 9 **Background Image Opacity**, 10 **Border Color**, 11 **Border Thickness**, 12 **Border Radius**, 20 **Box Shadow**, 25 **Box Shadow Hover**, 30 **Full Height** |
 
 ## Adding the Field's Value to the Row
 

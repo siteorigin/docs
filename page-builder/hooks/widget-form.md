@@ -12,7 +12,7 @@ This example adds a note to the Archives widget form that recommends **Show post
 ```
 function so_add_text_prior_to_archives_widget_form( $the_widget, $instance ) {
 	if ( get_class( $the_widget ) == 'WP_Widget_Archives' ) {
-		esc_html_e( 'We recommend ticking "Show posts count"', 'example-text-domain' );
+		esc_html_e( 'We recommend enabling "Show post counts"', 'example-text-domain' );
 	}
 }
 add_action( 'siteorigin_panels_before_widget_form', 'so_add_text_prior_to_archives_widget_form', 10, 2 );

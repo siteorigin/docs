@@ -20,10 +20,7 @@ add_action( 'siteorigin_panel_enqueue_admin_scripts', 'mywidget_enqueue_scripts'
 
 ## Setting Up the Form
 
-Your widget's form setup code needs to run when Page Builder opens the form. There are two ways to do this:
-
-- Add a `<script>` to your widget form that sets up the form. It runs on the Widgets screen and in Page Builder.
-- Listen for the `panelsopen` jQuery event, which Page Builder triggers right after it loads the form HTML:
+Your widget's form setup code needs to run when Page Builder opens the form. Either add a `<script>` to your widget form that sets up the form, which runs on the Widgets screen and in Page Builder, or listen for the `panelsopen` jQuery event, which Page Builder triggers right after it loads the form HTML:
 
 ```javascript
 ( function( $ ) {
@@ -43,7 +40,7 @@ Your widget's form setup code needs to run when Page Builder opens the form. The
 
 In the builder, Page Builder shows a summary under each widget's title, so users can tell widgets apart without opening them. The summary comes from the widget's first non-empty field, with fields named "title" and "text" first. To use a different field, or to show the widget's description instead, set the `panels_title` option in the widget's `$widget_options`. The examples below extend `SiteOrigin_Widget`. A `WP_Widget` takes the same option in its third argument, `$widget_options`.
 
-To show the widget's description, set `panels_title` to `false`:
+Setting `panels_title` to `false` shows the widget's description:
 
 ```php
 function __construct() {
@@ -60,7 +57,7 @@ function __construct() {
 }
 ```
 
-To use a specific field, set `panels_title` to the field's name. This example uses a field named "username":
+Setting `panels_title` to a field's name uses that field. This example uses a field named "username":
 
 ```php
 function __construct() {

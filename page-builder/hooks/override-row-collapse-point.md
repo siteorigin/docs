@@ -23,7 +23,7 @@ add_filter( 'siteorigin_panels_css_row_collapse_point', function( $collapse_poin
 
 ## Adding a Collapse Point Setting to Rows
 
-This example adds a **Row Collapse Point** field to each row's **Layout** settings, so users set the collapse point of each row in Page Builder. It uses the `siteorigin_panels_row_style_fields` filter from [Filtering Custom Row Options](filtering-row-styles.md).
+This example adds a **Row Collapse Point** field to each row's **Layout** settings, so users can set the collapse point of each row in Page Builder. It uses the `siteorigin_panels_row_style_fields` filter from [Filtering Custom Row Options](filtering-row-styles.md).
 
 ```php
 // Add in collapse point input field.

@@ -10,7 +10,7 @@ If you find a bug, [open an issue](https://github.com/siteorigin/siteorigin-pane
 
 We keep the core of Page Builder small, so it stays light to update and maintain for every site that uses it. If you'd like to add a feature to Page Builder, build it as a plugin. Support for another grid system, such as Bootstrap, or extra row and widget styles both work as plugins that use Page Builder's existing hooks. [styles.php](https://github.com/siteorigin/siteorigin-panels/blob/develop/inc/styles.php) shows how Page Builder adds its own styles.
 
-If your plugin becomes popular and you give us permission, we'll add its features to Page Builder itself.
+If you'd like your plugin's features in Page Builder itself, let us know.
 
 ## Improving the Developer Docs
 

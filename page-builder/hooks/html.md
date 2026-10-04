@@ -1,6 +1,6 @@
 # Filtering Page Builder HTML Structure
 
-Page Builder's HTML has classes and wrappers for most designs. When you need your own HTML, classes or attributes, use the filters in the [`SiteOrigin_Panels_Renderer`](https://github.com/siteorigin/siteorigin-panels/blob/develop/inc/renderer.php) class, which `siteorigin_panels_render()` calls.
+Page Builder outputs classes and wrapper elements for every layout, row, column and widget. To add your own HTML, classes or attributes, use the filters in the [`SiteOrigin_Panels_Renderer`](https://github.com/siteorigin/siteorigin-panels/blob/develop/inc/renderer.php) class, which `siteorigin_panels_render()` calls.
 
 ## Before and After the Layout
 

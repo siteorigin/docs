@@ -1,6 +1,6 @@
 # Theme Integration
 
-Page Builder works with most WordPress themes without any changes. Theme developers can fit Page Builder more closely to a theme's design, from the defaults of its settings to full-width rows and the theme's own row styles. The examples come from SiteOrigin themes such as [Corp](https://siteorigin.com/theme/corp/), [North](https://siteorigin.com/theme/north/) and [Vantage](https://siteorigin.com/theme/vantage/).
+Page Builder works with most WordPress themes without any changes. Theme developers can fit Page Builder more closely to a theme's design, from default settings to full-width rows and your theme's own row styles. The examples come from SiteOrigin themes such as [Corp](https://siteorigin.com/theme/corp/), [North](https://siteorigin.com/theme/north/) and [Vantage](https://siteorigin.com/theme/vantage/).
 
 Put your Page Builder code in a separate file and load it only when Page Builder is active, as Corp does at the end of its `functions.php`:
 
@@ -38,7 +38,7 @@ Page Builder merges its settings in this order, and each step overrides the one 
 
 When a user saves the **Settings > Page Builder** page, Page Builder saves every setting on that page, and the saved values then replace your theme values for those fields. Your theme values still apply to keys that aren't on the settings page, such as `home-page`, `home-page-default` and `home-template`.
 
-To set a value that users can't change, use the `siteorigin_panels_settings` filter with care. The settings page still shows the field, and your filter overrides whatever a user saves there:
+The `siteorigin_panels_settings` filter sets a value that users can't change, so use it with care. The settings page still shows the field, and your filter overrides whatever a user saves there:
 
 ```php
 function mytheme_panels_settings( $settings ) {
@@ -94,7 +94,7 @@ Page Builder adds its layouts through the `the_content` filter, so your template
 
 These functions, and the body classes below, detect layouts built in the Classic Editor. A SiteOrigin Layout Block in the Block Editor renders as part of the post content, and the functions don't detect it.
 
-To stop Page Builder from replacing the content for one call to `the_content`, use the `siteorigin_panels_filter_content_enabled` filter. Unwind does this on video posts: it renders the layout without the first Video Player Widget, then runs that HTML through `the_content` with the filter off so Page Builder doesn't replace it with the full layout.
+The `siteorigin_panels_filter_content_enabled` filter stops Page Builder from replacing the content for one call to `the_content`. Unwind does this on video posts: it renders the layout without the first Video Player Widget, then runs that HTML through `the_content` with the filter off so Page Builder doesn't replace it with the full layout.
 
 ```php
 $content = get_the_content();
@@ -212,14 +212,14 @@ Full width rows can only stretch as wide as the full width container. If your th
 
 SiteOrigin themes add a **Page Settings** meta box, where users remove the sidebar, the title and the spacing around a page. The meta box is part of each theme, and it suits Page Builder pages, where a layout needs the full content area. Corp adds these settings to pages and posts:
 
-- **Page Layout**: Default, No Sidebar, or Full Width, No Sidebar.
+- **Page Layout**: **Default**, **No Sidebar** or **Full Width, No Sidebar**.
 - **Header Overlap**: places the header over the content.
 - **Header** and **Footer**: show or hide the header and the footer.
 - **Header Bottom Margin** and **Footer Top Margin**: remove the space between the header, the content and the footer.
 - **Page Title**: shows or hides the title.
 - **Footer Widgets**: shows or hides the footer widgets.
 
-North has similar settings. Its **Page Layout** options are Default, No Sidebar, Full Width, Full Width, With Sidebar, and Stripped. It also has **Page Title**, **Masthead Bottom Margin**, **Footer Top Margin**, **Hide Masthead** and **Hide Footer Widgets**.
+North has similar settings. Its **Page Layout** options are **Default**, **No Sidebar**, **Full Width**, **Full Width, With Sidebar** and **Stripped**. It also has **Page Title**, **Masthead Bottom Margin**, **Footer Top Margin**, **Hide Masthead** and **Hide Footer Widgets**.
 
 The themes use these values in two ways. Templates check a value before they output an element, as in Corp's `template-parts/content-page.php`:
 
@@ -322,7 +322,7 @@ Inside the layout, Page Builder uses classes such as `panel-layout`, `panel-grid
 
 ## Widget Areas and the Customizer
 
-Page Builder adds a **Layout Builder** widget, which users add to any widget area at **Appearance > Widgets** or in the Customizer to build a layout there. Your theme needs no code for the widget. Make sure your widget areas can hold columns, or tell users which areas suit the widget.
+Page Builder adds a **Layout Builder Widget**, which users add to any widget area at **Appearance > Widgets** or in the Customizer to build a layout there. Your theme needs no code for the widget. Make sure your widget areas can hold columns, or tell users which areas suit the widget.
 
 Page Builder doesn't add Customizer settings of its own. To connect a theme option to Page Builder, pass it through theme support, as North does with its responsive setting.
 
@@ -330,7 +330,7 @@ Page Builder's **Sidebars Emulator** setting, which is enabled by default, regis
 
 ## Post Loop Widget Templates
 
-Page Builder's Post Loop widget lists the templates in your theme that match `loop*.php` and `content*.php`, in the theme root and one folder down, in the parent and child theme. The `siteorigin_panels_postloop_templates` filter removes files that aren't complete loops, as Corp does for its template parts:
+Page Builder's Post Loop Widget lists the templates in your theme that match `loop*.php` and `content*.php`, in the theme root and one folder down, in the parent and child theme. The `siteorigin_panels_postloop_templates` filter removes files that aren't complete loops, as Corp does for its template parts:
 
 ```php
 function mytheme_filter_post_loop_templates( $templates ) {
@@ -345,7 +345,7 @@ function mytheme_filter_post_loop_templates( $templates ) {
 add_filter( 'siteorigin_panels_postloop_templates', 'mytheme_filter_post_loop_templates' );
 ```
 
-To add a template from a deeper folder, add its path relative to the theme folder with the same filter, for example `'partials/loops/loop-grid.php'`.
+The same filter adds a template from a deeper folder: add the template's path relative to the theme folder, for example `'partials/loops/loop-grid.php'`.
 
 ## Other Filters for Themes
 
