@@ -90,26 +90,20 @@ Then set the 'sanitize' option to `date` in your widget's form.
 ```
 
 ### Example - callable sanitization
-In a widget class, the 'sanitize' option can point to one of the widget's own methods.
+The 'sanitize' option can also name a function directly. No filter is needed.
 
 ```php
-class My_Date_Widget extends SiteOrigin_Widget {
-	// The constructor is left out here.
-
-	function get_widget_form() {
-		return array(
-			'some_date' => array(
-				'type' => 'text',
-				'label' => __( 'Some date goes here', 'siteorigin-docs' ),
-				'sanitize' => array( $this, 'sanitize_date' ),
-			),
-		);
-	}
-
-	function sanitize_date( $date_to_sanitize ) {
-		return sanitize_text_field( $date_to_sanitize );
-	}
+function my_widgets_sanitize_date_field( $date_to_sanitize, $old_value = null ) {
+	return sanitize_text_field( $date_to_sanitize );
 }
+
+$form_options = array(
+	'some_date' => array(
+		'type' => 'text',
+		'label' => __( 'Some date goes here', 'siteorigin-docs' ),
+		'sanitize' => 'my_widgets_sanitize_date_field',
+	),
+);
 ```
 
 
