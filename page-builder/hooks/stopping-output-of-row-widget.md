@@ -7,7 +7,7 @@ This filter has the following arguments:
 
 * `$output` controls whether to output the row. Default is true.
 * `$row` is the current row instance.
-* `$ri` is the Page Builder ID of the current row. Please note that this is a zero-based index. This means that instead of starting at 1, the first item ID is 0.
+* `$ri` is the index of the current row. Please note that this is a zero-based index. This means that instead of starting at 1, the first item index is 0.
 * `$panels_data` the data of the currently rendering layout.
 * `$post_id` the post ID of the current post.
 
@@ -28,13 +28,13 @@ This filter has the following arguments:
 
 * `$output` controls whether to output the widget. Default is true.
 * `$widget` is the current widget instance.
-* `$ri` is the Page Builder ID of the current row. 
-* `$ci` is the Page Builder ID of the current cell.
-* `$wi` is the Page Builder ID of the current widget.
+* `$ri` is the index of the current row.
+* `$ci` is the index of the current cell within the row.
+* `$wi` is the index of the current widget within the cell.
 * `$panels_data` the data of the currently rendering layout.
 * `$post_id` the post ID of the current post.
 
-Please note that Page Builder IDs have a zero-based index. This means that instead of starting at 1, the first item is already 0.
+Please note that these indexes are zero-based. This means that instead of starting at 1, the first item is already 0.
 
 The following snippet will prevent the output of the Archive widget.
 
