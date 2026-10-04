@@ -1,17 +1,14 @@
-# Filtering Widget Instance
+# Filtering the Widget Instance
 
-The `siteorigin_panels_widget_instance` hook will allow you to override the widget instance, and output content based on its values. It has three parameters:
+The `siteorigin_panels_widget_instance` filter changes a widget's instance just before Page Builder renders the widget on the front end, so you can change one setting based on the values of others. The filter passes three arguments:
 
-- `instance`
-  The current widget instance array
-- `the_widget`
-  The WP_Widget object of the current widget.
-- `widget_class`
-  A string containing the current widget_class name.
+- `$instance`: the widget's instance array.
+- `$the_widget`: the widget's `WP_Widget` object.
+- `$widget_class`: the widget's class name.
 
-### Examples
+## Example
 
-The example code will enable the SiteOrigin Editor widget setting `Automatically add paragraphs` if the `Title` setting is set to `Test`.
+This example enables **Automatically add paragraphs** in the SiteOrigin Editor Widget when the widget's **Title** is "Test":
 
 ```
 function so_editor_override_setting_if_test( $instance, $the_widget, $widget_class ) {

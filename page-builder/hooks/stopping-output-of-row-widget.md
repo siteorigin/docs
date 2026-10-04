@@ -1,17 +1,18 @@
-# Stopping Output of Row or Widget
+# Stopping Row and Widget Output
 
-There are situations where you may wish to stop the output of a row or widget, and you can do this using the `siteorigin_panels_output_row` and `siteorigin_panels_output_widget` filters. While it's possible to remove them using other methods (such as filtering the panels_data array), those methods will require additional adjustments to account for Page Builder CSS to prevent ID mismatches.
+The `siteorigin_panels_output_row` and `siteorigin_panels_output_widget` filters stop Page Builder from outputting a row or a widget. Use them in place of removing the row or widget from the `panels_data` array: Page Builder then still generates the layout's CSS for the full layout, so the IDs in the CSS match the rows and widgets on the page.
 
-### Filter: siteorigin_panels_output_row
-This filter has the following arguments:
+## Stopping a Row
 
-* `$output` controls whether to output the row. Default is true.
-* `$row` is the current row instance.
-* `$ri` is the index of the current row. Please note that this is a zero-based index. This means that instead of starting at 1, the first item index is 0.
-* `$panels_data` the data of the currently rendering layout.
-* `$post_id` the post ID of the current post.
+The `siteorigin_panels_output_row` filter passes five arguments:
 
-The following snippet will prevent the output of a row when the Row Label is set to `test`.
+- `$output`: whether Page Builder outputs the row. The default is `true`.
+- `$row`: the row's data.
+- `$ri`: the row's index in the layout. The first row is 0.
+- `$panels_data`: the data of the layout Page Builder is rendering.
+- `$post_id`: the ID of the current post.
+
+This example stops the output of any row labeled "test":
 
 ```php
 add_filter( 'siteorigin_panels_output_row', function( $output, $row, $ri, $panels_data, $post_id ) {
@@ -23,20 +24,19 @@ add_filter( 'siteorigin_panels_output_row', function( $output, $row, $ri, $panel
 }, 10, 5 );
 ```
 
-### Filter: siteorigin_panels_output_widget
-This filter has the following arguments:
+## Stopping a Widget
 
-* `$output` controls whether to output the widget. Default is true.
-* `$widget` is the current widget instance.
-* `$ri` is the index of the current row.
-* `$ci` is the index of the current cell within the row.
-* `$wi` is the index of the current widget within the cell.
-* `$panels_data` the data of the currently rendering layout.
-* `$post_id` the post ID of the current post.
+The `siteorigin_panels_output_widget` filter passes seven arguments:
 
-Please note that these indexes are zero-based. This means that instead of starting at 1, the first item is already 0.
+- `$output`: whether Page Builder outputs the widget. The default is `true`.
+- `$widget`: the widget's instance.
+- `$ri`: the index of the widget's row in the layout.
+- `$ci`: the index of the widget's column in the row.
+- `$wi`: the index of the widget in the column.
+- `$panels_data`: the data of the layout Page Builder is rendering.
+- `$post_id`: the ID of the current post.
 
-The following snippet will prevent the output of the Archive widget.
+Each index starts at 0. This example stops the output of every Archives widget:
 
 ```php
 add_filter( 'siteorigin_panels_output_widget', function( $output, $widget, $ri, $ci, $wi, $panels_data, $post_id ) {
