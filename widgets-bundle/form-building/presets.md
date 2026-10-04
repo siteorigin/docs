@@ -61,7 +61,7 @@ $presets = array(
 
 ### Adding the Field
 
-Pass your presets array to a `presets` field with the `options` argument. The optional `default_preset` argument takes the slug of the preset that a new widget starts with; without it, the dropdown starts with an empty option.
+Pass your presets array to a `presets` field with the `options` argument. The optional `default_preset` argument takes a preset slug; when it's set, the dropdown has no empty option.
 
 ```php
 'preset' => array(

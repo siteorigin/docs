@@ -17,7 +17,7 @@ $form_options = array(
 Use of the post selector will result in a pseudo query looking something like this:
 `post_type=post&orderby=date&order=DESC&posts_per_page=3`.
 
-This pseudo query may be transformed into a format understood by WordPress by using the `siteorigin_widget_post_selector_process_query()` function, which takes the pseudo query and an optional `$exclude_current` argument, and returns a query object which may be passed directly to the `WP_Query` constructor to find posts. `$exclude_current` defaults to `true`, which adds the current post to `post__not_in`.
+This pseudo query may be transformed into a format understood by WordPress by using the `siteorigin_widget_post_selector_process_query()` function, which takes the pseudo query and an optional `$exclude_current` argument, and returns a query array which may be passed directly to the `WP_Query` constructor to find posts. `$exclude_current` defaults to `true`, which adds the current post to `post__not_in`.
 
 ### An Example Template Using the Post Selector Query
 

@@ -41,4 +41,16 @@ The above PHP will:
 4. Ensure image exists.
 5. Render Image as a full width div with 250px height with the image set as the background.
 
-If your media field sets `'fallback' => true`, use `siteorigin_widgets_get_attachment_image_src( $instance['image'], $size, $instance['image_fallback'] ?? false )` in place of `wp_get_attachment_image_src()`. It returns the fallback URL when no attachment is selected.
+If your media field sets `'fallback' => true`, use `siteorigin_widgets_get_attachment_image_src()` in place of `wp_get_attachment_image_src()`. It returns the fallback URL when no attachment is selected, so it replaces the `! empty( $instance['image'] )` check:
+
+```php
+$size = empty( $instance['image_size'] ) ? 'full' : $instance['image_size'];
+$attachment = siteorigin_widgets_get_attachment_image_src(
+	$instance['image'],
+	$size,
+	! empty( $instance['image_fallback'] ) ? $instance['image_fallback'] : false
+);
+if ( ! empty( $attachment ) ) {
+	echo '<div style="width: 100%; height: 250px; background-image: url(' . sow_esc_url( $attachment[0] ) . ')"></div>';
+}
+```
