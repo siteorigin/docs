@@ -16,11 +16,14 @@ Declare support for Page Builder with `add_theme_support()` in your `after_setup
 
 ```php
 function mytheme_setup() {
-	add_theme_support( 'siteorigin-panels', array(
-		'home-page'     => true,
-		'margin-bottom' => 35,
-		'title-html'    => '<h3 class="widget-title">{{title}}</h3>',
-	) );
+	add_theme_support(
+		'siteorigin-panels',
+		array(
+			'home-page'     => true,
+			'margin-bottom' => 35,
+			'title-html'    => '<h3 class="widget-title">{{title}}</h3>',
+		)
+	);
 }
 add_action( 'after_setup_theme', 'mytheme_setup' );
 ```
@@ -78,10 +81,13 @@ Theme support accepts any Page Builder setting. These keys matter most to themes
 North passes one of its own settings to Page Builder. When a user disables North's responsive layout, Page Builder's responsive layout is disabled too, until the user saves the Page Builder settings page:
 
 ```php
-add_theme_support( 'siteorigin-panels', array(
-	'home-page'  => true,
-	'responsive' => ! siteorigin_setting( 'responsive_disabled' ),
-) );
+add_theme_support(
+	'siteorigin-panels',
+	array(
+		'home-page'  => true,
+		'responsive' => ! siteorigin_setting( 'responsive_disabled' ),
+	)
+);
 ```
 
 ## Page Templates
@@ -145,7 +151,7 @@ Set `title-html` through theme support to match the titles in your widget areas.
 ```php
 function mytheme_panels_widget_args( $args ) {
 	$args['before_title'] = '<h2 class="widget-title">';
-	$args['after_title'] = '</h2>';
+	$args['after_title']  = '</h2>';
 
 	return $args;
 }

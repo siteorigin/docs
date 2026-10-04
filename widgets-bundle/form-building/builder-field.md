@@ -7,9 +7,9 @@ The builder field puts a full [Page Builder](https://wordpress.org/plugins/siteo
 ```php
 $form_options = array(
 	'page_builder' => array(
-		'type' => 'builder',
-		'label' => __( 'Page Builder', 'widget-form-fields-text-domain'),
-	)
+		'type'  => 'builder',
+		'label' => __( 'Page Builder', 'widget-form-fields-text-domain' ),
+	),
 );
 ```
 
@@ -24,11 +24,10 @@ $form_options = array(
 The function is in Page Builder's [`inc/functions.php`](https://github.com/siteorigin/siteorigin-panels/blob/develop/inc/functions.php). This example builds the ID from a hash of the layout, so builder fields with different layouts get different IDs:
 
 ```php
-if( function_exists( 'siteorigin_panels_render' ) ) {
+if ( function_exists( 'siteorigin_panels_render' ) ) {
 	$content_builder_id = substr( md5( json_encode( $instance['page_builder'] ) ), 0, 8 );
-	echo siteorigin_panels_render( 'w'.$content_builder_id, true, $instance['page_builder'] );
-}
-else {
+	echo siteorigin_panels_render( 'w' . $content_builder_id, true, $instance['page_builder'] );
+} else {
 	esc_html_e( 'This widget requires Page Builder.', 'widget-form-fields-text-domain' );
 }
 ```

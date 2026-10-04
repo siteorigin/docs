@@ -13,7 +13,7 @@ class MyCustomWidget extends SiteOrigin_Widget {
 	function modify_form( $form ) {
 		// We can modify this $form array however we want
 		$form['test_field'] = array(
-			'type' => 'text',
+			'type'  => 'text',
 			'label' => __( 'Test Field', 'siteorigin-docs' ),
 		);
 		return $form;

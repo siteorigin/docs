@@ -21,12 +21,10 @@ class My_Newsletter_Widget extends SiteOrigin_Widget {
 				// Enable instance storage
 				'instance_storage' => true,
 			),
-			array(
-
-			),
+			array(),
 			array(
 				'api_key' => array(
-					'type' => 'text',
+					'type'  => 'text',
 					'label' => __( 'API Key', 'siteorigin-docs' ),
 				),
 			),
@@ -55,23 +53,23 @@ Call `$this->get_stored_instance( $storage_hash )` to retrieve the instance. An 
 
 ```php
 function my_newsletter_signup() {
-    check_ajax_referer( 'my_newsletter_signup', 'nonce' );
+	check_ajax_referer( 'my_newsletter_signup', 'nonce' );
 
-    $hash = isset( $_POST['storage_hash'] ) ? sanitize_key( wp_unslash( $_POST['storage_hash'] ) ) : '';
-    $email = isset( $_POST['email'] ) && is_string( $_POST['email'] ) ? sanitize_email( wp_unslash( $_POST['email'] ) ) : '';
+	$hash  = isset( $_POST['storage_hash'] ) ? sanitize_key( wp_unslash( $_POST['storage_hash'] ) ) : '';
+	$email = isset( $_POST['email'] ) && is_string( $_POST['email'] ) ? sanitize_email( wp_unslash( $_POST['email'] ) ) : '';
 
-    $widget = new My_Newsletter_Widget();
-    $instance = $widget->get_stored_instance( $hash );
+	$widget   = new My_Newsletter_Widget();
+	$instance = $widget->get_stored_instance( $hash );
 
-    // get_stored_instance() returns false for an unknown or expired hash.
-    if ( empty( $instance['api_key'] ) || ! is_email( $email ) ) {
-        wp_send_json_error();
-    }
+	// get_stored_instance() returns false for an unknown or expired hash.
+	if ( empty( $instance['api_key'] ) || ! is_email( $email ) ) {
+		wp_send_json_error();
+	}
 
-    // Now we can handle the rest of the input from $_POST.
-    SomeNewsletterAPI::signup( $instance['api_key'], $email );
+	// Now we can handle the rest of the input from $_POST.
+	SomeNewsletterAPI::signup( $instance['api_key'], $email );
 
-    wp_send_json_success();
+	wp_send_json_success();
 }
 add_action( 'wp_ajax_my_newsletter_signup', 'my_newsletter_signup' );
 add_action( 'wp_ajax_nopriv_my_newsletter_signup', 'my_newsletter_signup' );

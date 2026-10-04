@@ -24,7 +24,7 @@ Page Builder generates its responsive CSS with the [`SiteOrigin_Panels_Css_Build
 
 ```php
 // Let other plugins and components filter the CSS object.
-$css = apply_filters('siteorigin_panels_css_object', $css, $panels_data, $post_id, $layout_data);
+$css = apply_filters( 'siteorigin_panels_css_object', $css, $panels_data, $post_id, $layout_data );
 return $css->get_css();
 ```
 
@@ -42,9 +42,14 @@ The [`add_row_css()`](https://github.com/siteorigin/siteorigin-panels/blob/devel
 Page Builder uses `add_row_css()` to give a row, `$ri`, its bottom margin:
 
 ```php
-$css->add_row_css( $post_id, $ri, '', array(
-	'margin-bottom' => $panels_margin_bottom,
-) );
+$css->add_row_css(
+	$post_id,
+	$ri,
+	'',
+	array(
+		'margin-bottom' => $panels_margin_bottom,
+	)
+);
 ```
 
 ### Adding Column CSS
@@ -57,9 +62,15 @@ This example uses the `siteorigin_panels_css_object` filter to give the first ro
 
 ```php
 function mytheme_filter_css_object( $css, $panels_data, $post_id, $layout_data ) {
-	$css->add_row_css( $post_id, 0, '', array(
-		'background-color' => '#f5f5f5',
-	), 780 );
+	$css->add_row_css(
+		$post_id,
+		0,
+		'',
+		array(
+			'background-color' => '#f5f5f5',
+		),
+		780
+	);
 
 	return $css;
 }

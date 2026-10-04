@@ -9,7 +9,7 @@ Each preset is an item in an array. The item's key is the preset's slug, which i
 ```php
 $presets = array(
 	'preset-slug' => array( // Slug.
-		'label' => 'Visible preset name', // Preset name.
+		'label'  => 'Visible preset name', // Preset name.
 		'values' => array(),
 	),
 );
@@ -19,11 +19,11 @@ Each key in `values` must match a field in your form. A section takes a nested a
 
 ```php
 'values' => array(
-	'setting' => 'example',
+	'setting'   => 'example',
 	'setting-2' => 'value',
-	'design' => array( // Section name.
+	'design'    => array( // Section name.
 		'header-background' => '#0f0', // Setting inside of a section.
-		'setting' => "Setting names don't have to be unique",
+		'setting'           => "Setting names don't have to be unique",
 	),
 ),
 ```
@@ -32,25 +32,25 @@ A preset only needs values for the fields it changes, and every other field keep
 
 ```php
 $presets = array(
-	'preset-slug' => array( // Slug
-		'label' => 'Visible preset name', // Preset name
+	'preset-slug'     => array( // Slug
+		'label'  => 'Visible preset name', // Preset name
 		'values' => array(
-			'setting' => 'example',
+			'setting'   => 'example',
 			'setting-2' => 'value',
-			'design' => array( // Section name.
+			'design'    => array( // Section name.
 				'header-background' => '#0f0', // Setting inside of a section.
-				'setting' => "Setting names don't have to be unique",
+				'setting'           => "Setting names don't have to be unique",
 			),
 		),
 	),
 	'another-example' => array( // Slug.
-		'label' => 'Example 2', // Preset name.
+		'label'  => 'Example 2', // Preset name.
 		'values' => array(
-			'setting' => 'This is',
+			'setting'   => 'This is',
 			'setting-2' => 'Another Example',
-			'design' => array( // Section name.
+			'design'    => array( // Section name.
 				'header-background' => '#000', // Setting inside of a section.
-				'setting' => "Test",
+				'setting'           => 'Test',
 			),
 		),
 	),
@@ -63,9 +63,9 @@ Pass your presets array to a `presets` field in its `options` argument. The opti
 
 ```php
 'preset' => array(
-	'type' => 'presets',
-	'label' => __( 'Preset', 'siteorigin-docs' ),
-	'options' => $presets,
+	'type'           => 'presets',
+	'label'          => __( 'Preset', 'siteorigin-docs' ),
+	'options'        => $presets,
 	'default_preset' => 'preset-slug',
 ),
 ```
@@ -115,8 +115,8 @@ The method adds a handler only to fields inside a `section`, including nested se
 ```php
 public function get_widget_form() {
 	$presets = array(
-		'test' => array( // Preset 1.
-			'label' => 'Test 1',
+		'test'   => array( // Preset 1.
+			'label'  => 'Test 1',
 			'values' => array(
 				'settings' => array(
 					'test' => 'Test 1 example text',
@@ -124,10 +124,10 @@ public function get_widget_form() {
 			),
 		),
 		'test-2' => array( // Preset 2.
-			'label' => 'Test 2',
+			'label'  => 'Test 2',
 			'values' => array(
 				'settings' => array(
-					'test' => 'Test 2 example text',
+					'test'  => 'Test 2 example text',
 					'color' => '#0f0',
 				),
 			),
@@ -138,25 +138,25 @@ public function get_widget_form() {
 		'selected_theme', // state_name
 		$presets, // preset_data
 		array( // fields
-			'preset' => array(
-				'type' => 'presets',
-				'label' => __( 'Theme', 'siteorigin-docs' ),
-				'options' => $presets,
+			'preset'   => array(
+				'type'          => 'presets',
+				'label'         => __( 'Theme', 'siteorigin-docs' ),
+				'options'       => $presets,
 				'state_emitter' => array(
 					'callback' => 'select',
-					'args' => array( 'selected_theme' ), // state_name
+					'args'     => array( 'selected_theme' ), // state_name
 				),
 			),
 			'settings' => array(
-				'type' => 'section',
-				'label' => __( 'Settings', 'siteorigin-docs' ),
+				'type'   => 'section',
+				'label'  => __( 'Settings', 'siteorigin-docs' ),
 				'fields' => array(
-					'test' => array(
-						'type' => 'text',
+					'test'  => array(
+						'type'  => 'text',
 						'label' => __( 'Text', 'siteorigin-docs' ),
 					),
 					'color' => array(
-						'type' => 'color',
+						'type'  => 'color',
 						'label' => __( 'Color', 'siteorigin-docs' ),
 					),
 				),

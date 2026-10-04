@@ -5,9 +5,9 @@ The `siteorigin_widgets_active_widgets` filter changes which widgets are active.
 The keys of the `$active` array are widget folder names, such as `button`. A base ID, such as `sow-button`, doesn't work. Set each key to `true` or `false`.
 
 ```php
-function wbexample_filter_active_widgets($active){
-    $active['wbe-staff'] = true;
-    return $active;
+function wbexample_filter_active_widgets( $active ) {
+	$active['wbe-staff'] = true;
+	return $active;
 }
-add_filter('siteorigin_widgets_active_widgets', 'wbexample_filter_active_widgets');
+add_filter( 'siteorigin_widgets_active_widgets', 'wbexample_filter_active_widgets' );
 ```

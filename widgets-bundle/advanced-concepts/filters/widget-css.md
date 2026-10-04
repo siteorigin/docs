@@ -8,11 +8,11 @@ The filter runs only when the Widgets Bundle compiles the CSS. The Widgets Bundl
 /**
  * @param string $css The CSS.
  * @param array $instance The widget instance array.
- * @param SiteOrigin_Widget $widget The widget 
+ * @param SiteOrigin_Widget $widget The widget
  */
-function wbe_filter_widget_css( $css, $instance, $widget ){
-    // Filter the CSS here.
-    return $css;
+function wbe_filter_widget_css( $css, $instance, $widget ) {
+	// Filter the CSS here.
+	return $css;
 }
-add_filter('siteorigin_widgets_instance_css', 'wbe_filter_widget_css', 10, 3);
+add_filter( 'siteorigin_widgets_instance_css', 'wbe_filter_widget_css', 10, 3 );
 ```

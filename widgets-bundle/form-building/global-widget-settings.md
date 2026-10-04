@@ -13,7 +13,7 @@ class MyCustomWidget extends SiteOrigin_Widget {
 	public function get_settings_form() {
 		return array(
 			'example' => array(
-				'type' => 'checkbox',
+				'type'  => 'checkbox',
 				'label' => __( 'Example', 'siteorigin-docs' ),
 			),
 		);
@@ -65,14 +65,17 @@ class MyCustomWidget extends SiteOrigin_Widget {
 The `siteorigin_widgets_settings_form` filter changes the global settings of every widget. To change one widget's settings, add its `id_base` to the filter name, such as `siteorigin_widgets_settings_form_sow-button` for the Button Widget. Both filters also pass the widget object as a second argument. This example adds a checkbox to the Button Widget's global settings:
 
 ```php
-add_filter( 'siteorigin_widgets_settings_form_sow-button', function( $form_options ) {
-	$form_options['example'] = array(
-		'type' => 'checkbox',
-		'label' => __( 'Example', 'siteorigin-docs' ),
-	);
+add_filter(
+	'siteorigin_widgets_settings_form_sow-button',
+	function ( $form_options ) {
+		$form_options['example'] = array(
+			'type'  => 'checkbox',
+			'label' => __( 'Example', 'siteorigin-docs' ),
+		);
 
-	return $form_options;
-} );
+		return $form_options;
+	}
+);
 ```
 
 ![Widget Form Text Input](../images/form-building-global-widget-settings-button.png)

@@ -11,20 +11,20 @@ A new repeater is empty and shows its label and an **Add** button. Each click on
 ```php
 $form_options = array(
 	'a_repeater' => array(
-		'type' => 'repeater',
-		'label' => __( 'A repeating repeater.' , 'siteorigin-docs' ),
-		'item_name'  => __( 'Repeater item', 'siteorigin-docs' ),
-		'fields' => array(
-			'repeat_text' => array(
-				'type' => 'text',
-				'label' => __( 'A text field in a repeater item.', 'siteorigin-docs' )
+		'type'      => 'repeater',
+		'label'     => __( 'A repeating repeater.', 'siteorigin-docs' ),
+		'item_name' => __( 'Repeater item', 'siteorigin-docs' ),
+		'fields'    => array(
+			'repeat_text'     => array(
+				'type'  => 'text',
+				'label' => __( 'A text field in a repeater item.', 'siteorigin-docs' ),
 			),
 			'repeat_checkbox' => array(
-				'type' => 'checkbox',
-				'label' => __( 'A checkbox in a repeater item.', 'siteorigin-docs' )
-			)
-		)
-	)
+				'type'  => 'checkbox',
+				'label' => __( 'A checkbox in a repeater item.', 'siteorigin-docs' ),
+			),
+		),
+	),
 );
 ```
 
@@ -75,25 +75,25 @@ This example labels each item with its `repeat_text` field:
 ```php
 $form_options = array(
 	'a_repeater' => array(
-		'type' => 'repeater',
-		'label' => __( 'A repeating repeater.' , 'siteorigin-docs' ),
+		'type'       => 'repeater',
+		'label'      => __( 'A repeating repeater.', 'siteorigin-docs' ),
 		'item_name'  => __( 'Repeater item', 'siteorigin-docs' ),
 		'item_label' => array(
 			'selector'     => "[id*='repeat_text']",
 			'update_event' => 'change',
-			'value_method' => 'val'
+			'value_method' => 'val',
 		),
-		'fields' => array(
-			'repeat_text' => array(
-				'type' => 'text',
-				'label' => __( 'A text field in a repeater item.', 'siteorigin-docs' )
+		'fields'     => array(
+			'repeat_text'     => array(
+				'type'  => 'text',
+				'label' => __( 'A text field in a repeater item.', 'siteorigin-docs' ),
 			),
 			'repeat_checkbox' => array(
-				'type' => 'checkbox',
-				'label' => __( 'A checkbox in a repeater item.', 'siteorigin-docs' )
-			)
-		)
-	)
+				'type'  => 'checkbox',
+				'label' => __( 'A checkbox in a repeater item.', 'siteorigin-docs' ),
+			),
+		),
+	),
 );
 ```
 
@@ -107,18 +107,18 @@ The `max_items` option sets the most items a repeater can hold. When the repeate
 
 ```php
 $form_options = array(
-    'feature_list' => array(
-        'type'       => 'repeater',
-        'label'      => __( 'Feature list', 'siteorigin-docs' ),
-        'item_name'  => __( 'Feature', 'siteorigin-docs' ),
-        'max_items'  => 3,  // Allow up to three features.
-        'fields'     => array(
-            'feature_text' => array(
-                'type'  => 'text',
-                'label' => __( 'Feature text', 'siteorigin-docs' ),
-            ),
-        ),
-    ),
+	'feature_list' => array(
+		'type'      => 'repeater',
+		'label'     => __( 'Feature list', 'siteorigin-docs' ),
+		'item_name' => __( 'Feature', 'siteorigin-docs' ),
+		'max_items' => 3,  // Allow up to three features.
+		'fields'    => array(
+			'feature_text' => array(
+				'type'  => 'text',
+				'label' => __( 'Feature text', 'siteorigin-docs' ),
+			),
+		),
+	),
 );
 ```
 
@@ -131,20 +131,20 @@ A section groups related fields under one heading, and users can collapse the se
 ```php
 $form_options = array(
 	'a_section' => array(
-		'type' => 'section',
-		'label' => __( 'A section containing related fields.' , 'siteorigin-docs' ),
-		'hide' => true,
+		'type'   => 'section',
+		'label'  => __( 'A section containing related fields.', 'siteorigin-docs' ),
+		'hide'   => true,
 		'fields' => array(
-			'grouped_text' => array(
-				'type' => 'text',
-				'label' => __( 'A grouped text field', 'siteorigin-docs' )
+			'grouped_text'     => array(
+				'type'  => 'text',
+				'label' => __( 'A grouped text field', 'siteorigin-docs' ),
 			),
 			'grouped_checkbox' => array(
-				'type' => 'checkbox',
-				'label' => __( 'A grouped checkbox', 'siteorigin-docs' )
-			)
-		)
-	)
+				'type'  => 'checkbox',
+				'label' => __( 'A grouped checkbox', 'siteorigin-docs' ),
+			),
+		),
+	),
 );
 ```
 

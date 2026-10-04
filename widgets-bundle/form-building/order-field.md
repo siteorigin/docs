@@ -7,11 +7,11 @@ The order field lets users drag a list of options into order, for example to set
 ```php
 $form_options = array(
 	'ordering' => array(
-		'type' => 'order',
-		'label' => __( 'Element Order', 'widget-form-fields-text-domain' ),
+		'type'    => 'order',
+		'label'   => __( 'Element Order', 'widget-form-fields-text-domain' ),
 		'options' => array(
-			'section' => __( 'Section', 'widget-form-fields-text-domain' ),
-			'divider' => __( 'Content', 'widget-form-fields-text-domain' ),
+			'section'       => __( 'Section', 'widget-form-fields-text-domain' ),
+			'divider'       => __( 'Content', 'widget-form-fields-text-domain' ),
 			'other section' => __( 'Other Section', 'widget-form-fields-text-domain' ),
 		),
 		'default' => array( 'section', 'divider', 'other section' ),
@@ -24,18 +24,18 @@ $form_options = array(
 The field saves the option keys in their new order, so loop through `$instance['ordering']` and output each part in turn:
 
 ```php
-foreach( $instance['ordering'] as $item ) {
-	switch( $item ) {
-		case 'section' :
+foreach ( $instance['ordering'] as $item ) {
+	switch ( $item ) {
+		case 'section':
 			// output here
 			break;
 
-		case 'divider' :
+		case 'divider':
 			// divider here
 			echo '<hr>';
 			break;
 
-		case 'other section' :
+		case 'other section':
 			// output other section
 			break;
 	}

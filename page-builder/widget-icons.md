@@ -9,19 +9,19 @@ Add a `panels_icon` argument to the `$widget_options` argument of the `WP_Widget
 ```php
 class Foo_Widget extends WP_Widget {
 
-    /**
-     * Register widget with WordPress.
-     */
-    function __construct() {
-        parent::__construct(
-            'foo_widget', // Base ID
-            __( 'Widget Title', 'text_domain' ), // Name
-            array(
-                'description' => __( 'A Foo Widget', 'text_domain' ),
-                'panels_icon' => 'dashicons dashicons-wordpress'
-            )
-        );
-    }
+	/**
+	 * Register widget with WordPress.
+	 */
+	function __construct() {
+		parent::__construct(
+			'foo_widget', // Base ID
+			__( 'Widget Title', 'text_domain' ), // Name
+			array(
+				'description' => __( 'A Foo Widget', 'text_domain' ),
+				'panels_icon' => 'dashicons dashicons-wordpress',
+			)
+		);
+	}
 }
 ```
 
@@ -30,13 +30,13 @@ class Foo_Widget extends WP_Widget {
 The `siteorigin_panels_widgets` filter changes the icon of any widget, including widgets you didn't write. It works like [Page Builder Widget Groups](./widget-groups.md): the array key is the widget's PHP class name.
 
 ```php
-function mytheme_add_widget_icons($widgets){
+function mytheme_add_widget_icons( $widgets ) {
 	if ( isset( $widgets['My_Widget'] ) ) {
 		$widgets['My_Widget']['icon'] = 'dashicons dashicons-wordpress';
 	}
 	return $widgets;
 }
-add_filter('siteorigin_panels_widgets', 'mytheme_add_widget_icons');
+add_filter( 'siteorigin_panels_widgets', 'mytheme_add_widget_icons' );
 ```
 
 The Widgets Bundle sets the icons of its own widgets at priority 11. To change the icon of a Widgets Bundle widget, add your filter at priority 12 or higher.

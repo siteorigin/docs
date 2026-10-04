@@ -65,7 +65,7 @@ function __construct() {
 		'sow-demo-widget',
 		__( 'SiteOrigin Demo Widget', 'siteorigin-docs' ),
 		array(
-			'description' => __( "This will only be used if a username isn't set.", 'siteorigin-docs' ),
+			'description'  => __( "This will only be used if a username isn't set.", 'siteorigin-docs' ),
 			'panels_title' => 'username', // Tell Page Builder to look for the "username" field"
 		),
 		array(),

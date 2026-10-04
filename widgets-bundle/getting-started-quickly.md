@@ -25,11 +25,11 @@ The `siteorigin_widgets_widget_folders` filter registers a folder of your own wi
 ```php
 <?php
 
-function add_my_awesome_widgets_collection($folders){
-    $folders[] = plugin_dir_path( __FILE__ ) . 'extra-widgets/';
-    return $folders;
+function add_my_awesome_widgets_collection( $folders ) {
+	$folders[] = plugin_dir_path( __FILE__ ) . 'extra-widgets/';
+	return $folders;
 }
-add_filter('siteorigin_widgets_widget_folders', 'add_my_awesome_widgets_collection');
+add_filter( 'siteorigin_widgets_widget_folders', 'add_my_awesome_widgets_collection' );
 ```
 
 The Widgets Bundle looks for PHP files in each subfolder of a registered folder. It lists every file whose metadata header has a `Widget Name` field as a widget that users can activate and use in widget areas, Page Builder and the Block Editor.

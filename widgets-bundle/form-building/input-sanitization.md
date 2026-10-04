@@ -69,14 +69,14 @@ The `sanitize` option also accepts any PHP callable, which receives the value an
 
 ```php
 $form_options = array(
-	'some_url' => array(
-		'type' => 'link',
-		'label' => __( 'Some URL goes here', 'siteorigin-docs' ),
+	'some_url'           => array(
+		'type'     => 'link',
+		'label'    => __( 'Some URL goes here', 'siteorigin-docs' ),
 		'sanitize' => 'url',
 	),
 	'some_email_address' => array(
-		'type' => 'text',
-		'label' => __( 'Some email address goes here', 'siteorigin-docs' ),
+		'type'     => 'text',
+		'label'    => __( 'Some email address goes here', 'siteorigin-docs' ),
 		'sanitize' => 'email',
 	),
 );
@@ -99,8 +99,8 @@ Then set the field's `sanitize` option to `date`:
 
 ```php
 'some_date' => array(
-	'type' => 'text',
-	'label' => __( 'Some date goes here', 'siteorigin-docs' ),
+	'type'     => 'text',
+	'label'    => __( 'Some date goes here', 'siteorigin-docs' ),
 	'sanitize' => 'date',
 ),
 ```
@@ -116,8 +116,8 @@ function my_widgets_sanitize_date_field( $date_to_sanitize, $old_value = null ) 
 
 $form_options = array(
 	'some_date' => array(
-		'type' => 'text',
-		'label' => __( 'Some date goes here', 'siteorigin-docs' ),
+		'type'     => 'text',
+		'label'    => __( 'Some date goes here', 'siteorigin-docs' ),
 		'sanitize' => 'my_widgets_sanitize_date_field',
 	),
 );

@@ -41,10 +41,10 @@ Return the values from your widget class:
 
 ```php
 function get_less_variables( $instance ) {
-    return array(
-        'background_color' => $instance['background_color'],
-        'border_radius' => $instance['border_radius'],
-    );
+	return array(
+		'background_color' => $instance['background_color'],
+		'border_radius'    => $instance['border_radius'],
+	);
 }
 ```
 
@@ -70,7 +70,7 @@ Then add the method, with the `less_` prefix, to your widget class. The returned
 
 ```php
 function less_my_widget_function( $instance, $args ) {
-    $color = ( isset( $args[0] ) && $args[0] === 'use_blue' ) ? '#0000ff' : '#ff0000';
-    return 'color: ' . $color . ';';
+	$color = ( isset( $args[0] ) && $args[0] === 'use_blue' ) ? '#0000ff' : '#ff0000';
+	return 'color: ' . $color . ';';
 }
 ```

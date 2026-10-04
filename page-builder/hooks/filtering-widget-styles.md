@@ -7,10 +7,15 @@ From Page Builder 2.12.3, the `siteorigin_panels_widget_style_fields` filter cha
 This example removes the **Widget ID** field from the **Attributes** group when a user edits the Archives widget:
 
 ```php
-add_filter( 'siteorigin_panels_widget_style_fields', function( $fields, $post_id, $args ) {
-	if ( isset( $args['widget'] ) && $args['widget'] == 'WP_Widget_Archives' ) {
-		unset( $fields['id'] );
-	}
-	return $fields;
-}, 10, 3 );
+add_filter(
+	'siteorigin_panels_widget_style_fields',
+	function ( $fields, $post_id, $args ) {
+		if ( isset( $args['widget'] ) && $args['widget'] == 'WP_Widget_Archives' ) {
+			unset( $fields['id'] );
+		}
+		return $fields;
+	},
+	10,
+	3
+);
 ```

@@ -56,7 +56,7 @@ The `SiteOrigin_Widget_Field_Base` abstract class does most of the work of a for
 protected function render_field( $value, $instance ) {
 	?>
 	<input type="text" class="siteorigin-widget-input" id="<?php echo esc_attr( $this->element_id ); ?>" name="<?php echo esc_attr( $this->element_name ); ?>"
-		   value="<?php echo esc_attr( $value ); ?>"/>
+			value="<?php echo esc_attr( $value ); ?>"/>
 	<?php
 }
 ```
@@ -125,7 +125,7 @@ protected function render_field_label( $value, $instance ) {
 
 ```php
 protected function get_label_classes( $value, $instance ) {
-	$label_classes = parent::get_label_classes( $value, $instance );
+	$label_classes   = parent::get_label_classes( $value, $instance );
 	$label_classes[] = 'additional-CSS-class';
 	return $label_classes;
 }
@@ -217,11 +217,11 @@ Use your custom field in a widget like any other field:
 ```php
 $form_options = array(
 	'text' => array(
-		'type' => 'better-text',
+		'type'        => 'better-text',
 		'my_property' => 'This is my custom property value',
-		'label' => __( 'A better text field.', 'siteorigin-docs' ),
+		'label'       => __( 'A better text field.', 'siteorigin-docs' ),
 		'description' => __( 'A description for my custom text field.', 'siteorigin-docs' ),
-		'default' => 'Some better text.'
+		'default'     => 'Some better text.',
 	),
 );
 ```

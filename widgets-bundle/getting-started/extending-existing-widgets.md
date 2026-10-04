@@ -8,8 +8,8 @@ The Button Widget's form comes from `get_widget_form()` in `widgets/button/butto
 
 ```php
 function mytheme_extend_button_form( $form_options, $widget ) {
-	// Lets add a new theme option.
-	if ( ! empty($form_options['design']['fields']['theme']['options']) ) {
+	// Add a new theme option.
+	if ( ! empty( $form_options['design']['fields']['theme']['options'] ) ) {
 		$form_options['design']['fields']['theme']['options']['test'] = __( 'Test Style', 'your-text-domain' );
 	}
 
@@ -29,7 +29,7 @@ When a user chooses your button theme, the Button Widget needs your template fil
 ```php
 function mytheme_button_template_file( $filename, $instance, $widget ) {
 	// Check if the user has selected your custom theme.
-	if ( ! empty($instance['design']['theme']) && $instance['design']['theme'] == 'test' ) {
+	if ( ! empty( $instance['design']['theme'] ) && $instance['design']['theme'] == 'test' ) {
 		// This option works for plugins.
 		$filename = plugin_dir_path( __FILE__ ) . 'tpl/button.php';
 
@@ -53,7 +53,7 @@ The Button Widget looks for a LESS file named after the selected button theme, s
 ```php
 function mytheme_button_less_file( $filename, $instance, $widget ) {
 	// Check if the user has selected your custom theme.
-	if ( !empty($instance['design']['theme']) && $instance['design']['theme'] == 'test' ) {
+	if ( ! empty( $instance['design']['theme'] ) && $instance['design']['theme'] == 'test' ) {
 		// This option works for plugins.
 		$filename = plugin_dir_path( __FILE__ ) . 'less/test.less';
 

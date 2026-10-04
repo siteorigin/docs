@@ -26,16 +26,16 @@ The Widgets Bundle outputs each icon as `<span class="sow-icon-{family}" data-so
 
 ```php
 function my_icon_families_filter( $icon_families ) {
-    $icon_families['radicons'] = array(
-		'name' => __( 'My Rad Icons', 'example-text-domain' ),
+	$icon_families['radicons'] = array(
+		'name'      => __( 'My Rad Icons', 'example-text-domain' ),
 		'style_uri' => plugin_dir_url( __FILE__ ) . 'icons/style.css',
-		'icons' => array(
-		    'my-rad-search-icon' => '&#xf101;',
-		    'my-rad-close-icon' => '&#xf101;'
-		    // Etc.
+		'icons'     => array(
+			'my-rad-search-icon' => '&#xf101;',
+			'my-rad-close-icon'  => '&#xf101;',
+			// Etc.
 		),
-    );
-    return $icon_families;
+	);
+	return $icon_families;
 }
 add_filter( 'siteorigin_widgets_icon_families', 'my_icon_families_filter' );
 ```
@@ -56,8 +56,8 @@ This example removes the Font Awesome `address-book` icon from the `$icons` arra
 
 ```php
 function my_fontawesome_icons_filter( $icons ) {
-    unset( $icons['address-book'] );
-    return $icons;
+	unset( $icons['address-book'] );
+	return $icons;
 }
 add_filter( 'siteorigin_widgets_icons_fontawesome', 'my_fontawesome_icons_filter' );
 ```
@@ -68,18 +68,18 @@ add_filter( 'siteorigin_widgets_icons_fontawesome', 'my_fontawesome_icons_filter
 
 ```php
 $form_options = array(
-    'my_icon' => array(
-        'type' => 'icon',
-        'label' => __( 'My Icon', 'example-text-domain' )
-    ),
-    'my_icon_size' => array(
-        'type' => 'number',
-        'label' => __( 'My Icon Size', 'example-text-domain' )
-    ),
-    'my_icon_color' => array(
-        'type' => 'color',
-        'label' => __( 'My Icon Color', 'example-text-domain' )
-    )
+	'my_icon'       => array(
+		'type'  => 'icon',
+		'label' => __( 'My Icon', 'example-text-domain' ),
+	),
+	'my_icon_size'  => array(
+		'type'  => 'number',
+		'label' => __( 'My Icon Size', 'example-text-domain' ),
+	),
+	'my_icon_color' => array(
+		'type'  => 'color',
+		'label' => __( 'My Icon Color', 'example-text-domain' ),
+	),
 );
 ```
 
@@ -87,12 +87,16 @@ The template outputs the icon with its size and color:
 
 ```php
 <?php
-    $icon_styles = array();
-    if ( ! empty( $instance['my_icon_size'] ) ) $icon_styles[] = 'font-size: ' . intval( $instance['my_icon_size'] ) . 'px';
-    if ( ! empty( $instance['my_icon_color'] ) ) $icon_styles[] = 'color: ' . $instance['my_icon_color'];
+	$icon_styles = array();
+if ( ! empty( $instance['my_icon_size'] ) ) {
+	$icon_styles[] = 'font-size: ' . intval( $instance['my_icon_size'] ) . 'px';
+}
+if ( ! empty( $instance['my_icon_color'] ) ) {
+	$icon_styles[] = 'color: ' . $instance['my_icon_color'];
+}
 ?>
 <div>
-   <?php echo siteorigin_widget_get_icon( $instance['my_icon'], $icon_styles ); ?>
+	<?php echo siteorigin_widget_get_icon( $instance['my_icon'], $icon_styles ); ?>
 </div>
 ```
 
@@ -106,8 +110,8 @@ The `siteorigin_widgets_font_families` filter adds font families. Add each font 
 
 ```php
 function my_font_families_filter( $font_families ) {
-    $font_families['A Really Cool Font'] = 'A Really Cool Font';
-    return $font_families;
+	$font_families['A Really Cool Font'] = 'A Really Cool Font';
+	return $font_families;
 }
 add_filter( 'siteorigin_widgets_font_families', 'my_font_families_filter' );
 ```
@@ -136,15 +140,15 @@ Then override `get_less_variables()` in your widget, and return the selected fon
 
 ```php
 function get_less_variables( $instance ) {
-    $selected_font = siteorigin_widget_get_font( $instance['some_font'] );
-    $less_variables = array(
-        'font_family' => $selected_font['family'],
-    );
-    if ( ! empty( $selected_font['weight'] ) ) {
-        $less_variables['font_weight'] = $selected_font['weight_raw'];
-        $less_variables['font_style'] = $selected_font['style'];
-    }
-    return $less_variables;
+	$selected_font  = siteorigin_widget_get_font( $instance['some_font'] );
+	$less_variables = array(
+		'font_family' => $selected_font['family'],
+	);
+	if ( ! empty( $selected_font['weight'] ) ) {
+		$less_variables['font_weight'] = $selected_font['weight_raw'];
+		$less_variables['font_style']  = $selected_font['style'];
+	}
+	return $less_variables;
 }
 ```
 
