@@ -15,7 +15,7 @@ $presets = array(
 );
 ```
 
-Each element in the values array must correspond with a valid setting. Selectors and repeaters are supported through nested arrays.
+Each element in the values array must correspond with a valid setting. Sections use a nested associative array; repeaters use an indexed array of items.
 
 ```php
 'values' => array(
@@ -59,6 +59,21 @@ $presets = array(
 );
 ```
 
+### Adding the Field
+
+Pass your presets array to a `presets` field with the `options` argument. The optional `default_preset` argument takes the slug of the preset that a new widget starts with; without it, the dropdown starts with an empty option.
+
+```php
+'preset' => array(
+	'type' => 'presets',
+	'label' => __( 'Preset', 'siteorigin-docs' ),
+	'options' => $presets,
+	'default_preset' => 'preset-slug',
+),
+```
+
+Selecting a preset copies its values into the form and shows an **Undo** link that restores the previous values. The field shows a warning description by default; set `description` to replace it.
+
 ### Storing Presets as JSON and Loading Presets
 
 To make managing presets easier, we recommend loading your presets from a json file. How you structure json is much stricter compared to standard PHP, so we recommend using a JSON validator if you are having trouble getting your preset JSON to load.
@@ -91,58 +106,74 @@ $presets = json_decode( file_get_contents( plugin_dir_path( __FILE__ ) . 'data/p
 
 ### Dynamic State Handler
 
-The preset field is able to work in combination with the [State Emitters](state-emitters.md). Due to the complicated nature of managing state_handlers when there is a number of presets present, we have created a utility method for `SiteOrigin_Widget` called `dynamic_preset_state_handler`. This method allows you to automatically add `state_handlers` based on the data in your presets. This method has three required parameters:
+The preset field is able to work in combination with the [State Emitters](state-emitters.md). Due to the complicated nature of managing state handlers when there is a number of presets present, we have created a utility method for `SiteOrigin_Widget` called `dynamic_preset_state_handler`. This method adds state handlers based on the data in your presets, and returns the fields array with the state handlers added. This method has three required parameters:
 
 - state_name: `string` The name of the state. This is set when creating the `state_emitter`.
 - preset_data: `array` An array containing your preset data.
 - fields: `array` An array containing the fields you want to add a `state_handler` to.
 
+Only fields inside a `section` receive a state handler. Each of those fields shows while a preset that sets its value is selected and hides for every other preset. Top-level fields, sections themselves and fields that already have a `state_handler` are left unchanged.
+
 #### Example
 
 ```php
-$presets = array(
-	'test' => array( // Preset 1.
-		'label' => 'Test 1',
-		'values' => array(
-			'test' => 'Test 1 example text',
-		),
-	),
-	'test-2' => array( // Preset 2.
-		'label' => 'Test 2',
-		'values' => array(
-			'test' => 'Test 1 example text',
-			'color' => '#0f0',
-		),
-	),
-);
-
-$this->dynamic_preset_state_handler(
-	'selected_theme', // state_name
-	$presets, // preset_data
-	array( // fields
-		'preset' => array(
-			'type' => 'presets',
-			'label' => __( 'Theme', 'siteorigin-docs'),
-			'options' => $presets,
-			'state_emitter' => array(
-				'callback' => 'select',
-				'args' => array( 'selected_theme' ), // state_name
+public function get_widget_form() {
+	$presets = array(
+		'test' => array( // Preset 1.
+			'label' => 'Test 1',
+			'values' => array(
+				'settings' => array(
+					'test' => 'Test 1 example text',
+				),
 			),
 		),
-		'test' => array(
-			'type' => 'text',
-			'label' => __( 'Text', 'siteorigin-docs' ),
+		'test-2' => array( // Preset 2.
+			'label' => 'Test 2',
+			'values' => array(
+				'settings' => array(
+					'test' => 'Test 2 example text',
+					'color' => '#0f0',
+				),
+			),
 		),
-		'color' => array(
-			'type' => 'color',
-			'label' => __( 'color', 'siteorigin-docs' ),
-		),
-	)
-);
+	);
+
+	return $this->dynamic_preset_state_handler(
+		'selected_theme', // state_name
+		$presets, // preset_data
+		array( // fields
+			'preset' => array(
+				'type' => 'presets',
+				'label' => __( 'Theme', 'siteorigin-docs' ),
+				'options' => $presets,
+				'state_emitter' => array(
+					'callback' => 'select',
+					'args' => array( 'selected_theme' ), // state_name
+				),
+			),
+			'settings' => array(
+				'type' => 'section',
+				'label' => __( 'Settings', 'siteorigin-docs' ),
+				'fields' => array(
+					'test' => array(
+						'type' => 'text',
+						'label' => __( 'Text', 'siteorigin-docs' ),
+					),
+					'color' => array(
+						'type' => 'color',
+						'label' => __( 'Color', 'siteorigin-docs' ),
+					),
+				),
+			),
+		)
+	);
+}
 ```
+
+In this example, the **Text** field shows for both presets, and the **Color** field shows only when **Test 2** is selected.
 
 ### Test Plugin
 
-Due to the complicated nature of this field, we've prepared a test plugin for you to try. You can [download it by clicking here](https://siteorigin.com/wp-content/uploads/2021/06/siteorigin-preset-field-demo.zip). Once downloaded, please navigate to **Plugins > Add New** and upload **siteorigin-preset-field-demo.zip**. When prompted, activate the **SiteOrigin - Preset Field** plugin.
+Due to the complicated nature of this field, we've prepared a test plugin for you to try. You can [download it by clicking here](https://siteorigin.com/wp-content/uploads/2021/06/siteorigin-preset-field-demo.zip). Once downloaded, please navigate to **Plugins > Add Plugin**, click **Upload Plugin** and upload **siteorigin-preset-field-demo.zip**. When prompted, activate the **SiteOrigin - Preset Field** plugin.
 
 Once installed, navigate to **Plugins > SiteOrigin Widgets** and activate the **SiteOrigin Preset Field** widget. Open any Page Builder powered page and add the **SiteOrigin Preset Field** widget to your page.
