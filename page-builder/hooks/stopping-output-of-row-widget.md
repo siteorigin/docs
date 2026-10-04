@@ -8,6 +8,7 @@ This filter has the following arguments:
 * `$output` controls whether to output the row. Default is true.
 * `$row` is the current row instance.
 * `$ri` is the Page Builder ID of the current row. Please note that this is a zero-based index. This means that instead of starting at 1, the first item ID is 0.
+* `$panels_data` the data of the currently rendering layout.
 * `$post_id` the post ID of the current post.
 
 The following snippet will prevent the output of a row when the Row Label is set to `test`.
@@ -25,7 +26,7 @@ add_filter( 'siteorigin_panels_output_row', function( $output, $row, $ri, $panel
 ### Filter: siteorigin_panels_output_widget
 This filter has the following arguments:
 
-* `$output` controls whether to output the row. Default is true.
+* `$output` controls whether to output the widget. Default is true.
 * `$widget` is the current widget instance.
 * `$ri` is the Page Builder ID of the current row. 
 * `$ci` is the Page Builder ID of the current cell.
@@ -39,7 +40,7 @@ The following snippet will prevent the output of the Archive widget.
 
 ```php
 add_filter( 'siteorigin_panels_output_widget', function( $output, $widget, $ri, $ci, $wi, $panels_data, $post_id ) {
-	if ( $widget['panels_info']['panels_info'] == 'WP_Widget_Archives' ) {
+	if ( $widget['panels_info']['class'] == 'WP_Widget_Archives' ) {
 		$output = false;
 	}
 
