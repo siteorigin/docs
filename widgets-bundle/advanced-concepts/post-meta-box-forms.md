@@ -1,19 +1,23 @@
 # Post Meta Box Forms
 
-Occasionally a widget needs to be able to store and retrieve post specific data. We have made this possible using the `SiteOrigin_Widget_Meta_Box_Manager` class. It is a singleton which allows a widget to specify form fields in the familiar format used by SiteOrigin widgets to have their forms rendered. Get the instance with `SiteOrigin_Widget_Meta_Box_Manager::single()`. The `$sow_meta_box_manager` global isn't set until the `init` action, after widgets are initialized.
+The `SiteOrigin_Widget_Meta_Box_Manager` class lets a widget save data for each post, with form fields in the same format as a widget form. The class is a singleton, so get its instance with `SiteOrigin_Widget_Meta_Box_Manager::single()`. The `$sow_meta_box_manager` global isn't set until the `init` action, after widgets initialize.
 
-The fields appear in the **Widgets Bundle Post Meta Data** box in the Classic Editor. The Block Editor doesn't show this box.
+The fields appear in the **Widgets Bundle Post Meta Data** box in the Classic Editor. The Block Editor doesn't show the box.
 
-## Adding Fields to the Widgets Bundle Post Meta Box
-Fields are added using the `append_to_form()` function of the `SiteOrigin_Widget_Meta_Box_Manager` class. It takes the following parameters:
-- $widget_id `string` Base id of the widget adding the fields.
-- $fields `array` The fields to add.
-- $post_types `string|array` _Optional_ A post type string, 'all' or an array of post types.
+## Adding Fields
 
-If more than one field is being added for a widget, it is encouraged to wrap the fields being added in a `section` field type to keep the form organized.
+The `append_to_form()` method of `SiteOrigin_Widget_Meta_Box_Manager` adds fields to the box. It takes these arguments:
 
-### Example - Adding Fields
-The post meta box fields would typically be added in a widget's `initialize()` function.
+- `$widget_id` (`string`): the base ID of the widget that adds the fields.
+- `$fields` (`array`): the fields to add.
+- `$post_types` (`string|array`, optional): a post type, `'all'` or an array of post types.
+
+If your widget adds several fields, wrap them in a `section` field to keep the box organized.
+
+### Example: Adding Fields
+
+Add the fields in your widget's `initialize()` method:
+
 ```php
 function initialize() {
     SiteOrigin_Widget_Meta_Box_Manager::single()->append_to_form(
@@ -34,8 +38,10 @@ function initialize() {
 }
 ```
 
-### Example - Adding Fields for a Specific Post Type
-When an array of post types is specified as the third argument to the `append_to_form()` function, the form fields will only be displayed for that post type. 
+### Example: Adding Fields to One Post Type
+
+An array of post types in the third argument shows the fields only on those post types:
+
 ```php
 function initialize() {
     SiteOrigin_Widget_Meta_Box_Manager::single()->append_to_form(
@@ -57,15 +63,18 @@ function initialize() {
 }
 ```
 
-The `append_to_form()` function may be called multiple times by a widget and the additional fields for a widget will be appended and rendered. Caution must be taken not to append multiple fields with the same name and post types combination, or else the last appended form field will override any previously added ones. This can be avoided by ensuring name and post type combinations are unique for a widget.
+A widget can call `append_to_form()` several times, and the box shows every field it adds. If two fields share a name and a post type, the field added last replaces the earlier field, so give each field a unique name for each post type.
 
-## Retrieving Stored Post Meta Data
-Once there is some post specific meta data stored, it may be retrieved by using the `get_widget_post_meta()` function of the `SiteOrigin_Widget_Meta_Box_Manager` class. It returns an empty string when nothing is stored. It takes the following parameters:
-- $post_id `int` The id of the post for which the meta data is stored.
-- $widget_id `string` The base id of the widget for which the meta data is stored.
-- $meta_key `string` The key of the meta data value which is to be retrieved.
+## Getting the Saved Data
 
-### Example - Retrieving Stored Post Meta Data
+The `get_widget_post_meta()` method of `SiteOrigin_Widget_Meta_Box_Manager` returns a post's saved data, or an empty string when nothing is saved. It takes these arguments:
+
+- `$post_id` (`int`): the ID of the post.
+- `$widget_id` (`string`): the base ID of the widget that saved the data.
+- `$meta_key` (`string`): the key of the value to get.
+
+### Example: Getting Saved Data
+
 ```php
 $my_widget_post_meta = SiteOrigin_Widget_Meta_Box_Manager::single()->get_widget_post_meta(
     $post_id,

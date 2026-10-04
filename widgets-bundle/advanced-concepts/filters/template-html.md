@@ -1,6 +1,6 @@
 # Widget Template HTML Filter
 
-This filter gives you some very fine grained control over the HTML displayed for a widget. The filter has the form `'siteorigin_widgets_template_html_' . $this->id_base`. It might be better to just change the template file being used for a given widget, but this filter is ideal if you just need to make small changes.
+The `siteorigin_widgets_template_html_{$id_base}` filter changes the HTML that a widget's template outputs, where `{$id_base}` is the widget's base ID. Use it for small changes to the HTML. For larger changes, change the widget's template file with the [Template File Filter](template-file.md).
 
 ```php
 /**

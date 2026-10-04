@@ -1,27 +1,32 @@
 # LESS Stylesheets
 
-For easier development of styles and runtime stylesheet generation the Widgets Bundle uses LESS. By default, the Widgets Bundle loads `styles/default.less` from your widget folder. A different LESS stylesheet may be specified by overriding the `get_style_name()` function and returning the name of the file, without the `.less` extension, found in the `styles` folder.
+The Widgets Bundle compiles each widget's LESS stylesheet when the widget renders, so the CSS can use the widget's settings. It loads `styles/default.less` from your widget folder. Override `get_style_name()` to use another stylesheet in the `styles` folder, and return the file's name without `.less`.
 
-Once the widget's LESS stylesheets are generated, they'll be cached at `wp-content/uploads/siteorigin-widgets/`. You can prevent this to make testing LESS simpler by adding the following to your `wp-config.php` file:
+The Widgets Bundle saves the compiled CSS in `wp-content/uploads/siteorigin-widgets/`. While you test your LESS, add this line to your `wp-config.php` file to stop the Widgets Bundle saving the CSS:
 
 `define( 'SITEORIGIN_WIDGETS_DEBUG', true );`
 
 ## Mixin Libraries
-For convenience, we have included the mixin libraries, LESS Elements and <a href="https://github.com/madebysource/lesshat" target="_blank">LESSHat</a>, in the `base/less/` folder. They help reduce the amount of CSS required to ensure compatibility with multiple versions of multiple browsers, or where CSS is simply too verbose. See their respective documentation pages for more information on what's available and usage examples. These may be included in a LESS stylesheet by using the `@import` directive, as follows:
+
+The Widgets Bundle includes two mixin libraries in its `base/less/` folder, LESS Elements and [LESSHat](https://github.com/madebysource/lesshat). They shorten CSS that needs vendor prefixes or is long to write, and each library's own documentation lists its mixins. Import them with `@import`:
 
 ```less
 @import "mixins";
 @import "lesshat";
 ```
 
-## Importing Additional Files
-Other LESS and CSS files may be included using the `@import` directive. These additional files should be placed in the widget's `styles` folder, and each `@import` directive must start its own line and use double quotes. They will then be included before LESS compilation takes place.
+## Importing Other Files
 
-## Injecting LESS Variables
-For runtime stylesheet generation, the `SiteOrigin_Widget` base class provides a `get_less_variables()` function. To inject variables into your LESS stylesheets you provide the injection point in the stylesheet simply by declaring the variable name and a default value, and then supply those variables in an array returned by `get_less_variables()`. They keys in the returned array must match the LESS variable names exactly. 
+`@import` also includes other LESS and CSS files, which the Widgets Bundle adds before it compiles the stylesheet. Put the files in the widget's `styles` folder, and give each `@import` its own line with the file name in double quotes.
 
-### Example - Injecting LESS Variables
-Provide injections points in the LESS stylesheet:
+## LESS Variables
+
+`get_less_variables()` passes values from the widget into your stylesheet. Declare each variable in the stylesheet with a default value, then return the values from `get_less_variables()` in an array whose keys match the LESS variable names exactly.
+
+### Example: Passing Variables
+
+Declare the variables in the LESS stylesheet:
+
 ```less
 @background_color: #ffffff;
 @border_radius: 5px;
@@ -32,7 +37,8 @@ Provide injections points in the LESS stylesheet:
 }
 ```
 
-Supply the variables in your widget class:
+Return the values from your widget class:
+
 ```php
 function get_less_variables( $instance ) {
     return array(
@@ -42,26 +48,29 @@ function get_less_variables( $instance ) {
 }
 ```
 
-Empty strings, `false` and `null` values are skipped, so the default value in the stylesheet applies. The Widgets Bundle also skips a value that references another LESS variable, uses `@{}` interpolation or `data-uri()`, adds `!important` or holds more than one declaration. Define `SITEORIGIN_WIDGETS_DEBUG` as `true` to get a PHP notice for each skipped value.
+The Widgets Bundle skips empty strings, `false` and `null`, so the stylesheet's default applies. It also skips a value that references another LESS variable, uses `@{}` interpolation or `data-uri()`, adds `!important` or holds more than one declaration. Define `SITEORIGIN_WIDGETS_DEBUG` as `true` to get a PHP notice for each skipped value.
 
-## LESS `.widget-function()` Callback
-The Widgets Bundle allows callbacks from LESS files which may generate additional runtime styles based on user inputs. This is done in LESS by calling the `.widget-function()` function with the first argument being the name of the function to call, and any subsequent arguments are passed through to the function being called. In your widget class, you supply the function with a name prepended by 'less_'.
+## The `.widget-function()` Callback
 
-### Example - Using the `.widget-function()` Callback
-In the LESS stylesheet, call `.widget-function()`:
+`.widget-function()` calls a PHP method of your widget from the stylesheet, so the method can output styles based on the widget's settings. The first argument is the method's name, and the Widgets Bundle passes the other arguments to the method. Name the method in your widget class with a `less_` prefix.
+
+### Example: Using `.widget-function()`
+
+Call `.widget-function()` in the LESS stylesheet:
+
 ```less
 .some_class {
     .widget-function('my_widget_function', use_blue);
 }
 ```
 
-Don't put a space before the function name, and don't quote the other arguments. The Widgets Bundle passes them as strings with only the surrounding whitespace removed.
+Don't put a space before the method name, and don't quote the other arguments. The Widgets Bundle passes them as strings, with only the surrounding whitespace removed.
 
-Then in your widget class you supply the function prepended by 'less_'. The returned string replaces the whole `.widget-function()` statement, so return complete LESS declarations:
+Then add the method, with the `less_` prefix, to your widget class. The returned string replaces the whole `.widget-function()` statement, so return complete LESS declarations:
+
 ```php
 function less_my_widget_function( $instance, $args ) {
     $color = ( isset( $args[0] ) && $args[0] === 'use_blue' ) ? '#0000ff' : '#ff0000';
     return 'color: ' . $color . ';';
 }
 ```
-

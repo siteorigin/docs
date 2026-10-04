@@ -1,18 +1,21 @@
 # HTML Templates
 
-HTML templates are used to render widgets for display on the front end. A template is included for output when the `widget()` function is called, so it has access to the widget `$instance` variable and the `$args` variable. By default, Widgets Bundle will attempt to use `tpl/default.php` in your widget directory.
+An HTML template outputs a widget on the front end. The Widgets Bundle includes the template when it calls the widget's `widget()` method, so the template can use the widget's `$instance` and `$args` variables. The Widgets Bundle looks for `tpl/default.php` in your widget folder.
 
-The template's name can be optionally overridden by using the `get_template_name()` function. By default, it must be placed in a folder named _tpl_ in the root of the widget folder.
+Override `get_template_name()` to use another template, and keep the template in the `tpl` folder at the root of the widget folder.
 
-### Example - Simple Template
-Overriding the `get_template_name()` function:
+### Example: Naming the Template
+
+Override `get_template_name()`:
+
 ```php
 function get_template_name( $instance ) {
 	return 'my-awesome-template';
 }
 ```
 
-In the file found at tpl/my-awesome-template.php:
+Then add the template, `tpl/my-awesome-template.php`:
+
 ```php
 <div>
 	<?php echo $args['before_title'] . esc_html( $instance['title'] ) . $args['after_title']; ?>
@@ -22,10 +25,12 @@ In the file found at tpl/my-awesome-template.php:
 </div>
 ```
 
-## Template Selection
-A template may be selected at runtime based on an option specified by the user, found in the `$instance` argument passed in to the `get_template_name()` function.
+## Choosing a Template From a Setting
 
-### Example - Template Selection Based on User Input
+`get_template_name()` receives the widget's `$instance`, so it can return a different template for each value of a setting.
+
+### Example: Choosing a Template
+
 ```php
 function get_template_name( $instance ) {
 	$template_name = '';
@@ -39,10 +44,13 @@ function get_template_name( $instance ) {
 ```
 
 ## Template Variables
-For convenience, before including the template file specified by `get_template_name()`, the `SiteOrigin_Widget` base class extracts variables in the array returned by the `get_template_variables()` function. This is useful when it's necessary to perform any transformations on values specified by the user.
 
-### Example - Using Template Variables
-Return the variables for extraction in an array:
+Before the Widgets Bundle includes the template, `SiteOrigin_Widget` extracts the array that `get_template_variables()` returns into variables, so the template uses values you've already prepared, such as defaults for empty fields.
+
+### Example: Using Template Variables
+
+Return the variables in an array:
+
 ```php
 function get_template_variables( $instance, $args ) {
 	return array(
@@ -53,7 +61,8 @@ function get_template_variables( $instance, $args ) {
 }
 ```
 
-Use the extracted variable in a template:
+Then use the variables in the template:
+
 ```php
 <div>
 	<?php echo $args['before_title'] . esc_html( $title ) . $args['after_title']; ?>
@@ -63,10 +72,12 @@ Use the extracted variable in a template:
 </div>
 ```
 
-## Escaping Outputs
-It is considered best practice to escape all potentially unsafe data as late as possible before outputting it to the front end. We strongly encourage this practice as it helps ensure security. Use the WordPress escaping functions, such as `esc_html()`, `esc_url()`, `esc_attr()` and `wp_json_encode()`, as in the following example. The `before_title` and `after_title` values in `$args` hold HTML from the theme's sidebar, so they're output without escaping. More information on escaping data can be found <a href="https://developer.wordpress.org/apis/security/escaping/" target="_blank">here</a>.
+## Escaping Output
 
-### Example - Escaping Data Before Output
+Escape every value as late as possible, just before you output it, with the WordPress escaping functions, such as `esc_html()`, `esc_url()`, `esc_attr()` and `wp_json_encode()`. The `before_title` and `after_title` values in `$args` hold HTML from the theme's widget area, so output them without escaping. [Escaping Data](https://developer.wordpress.org/apis/security/escaping/) on WordPress.org has the details.
+
+### Example: Escaping Values
+
 ```php
 <script type="text/javascript">
 	var value = <?php echo wp_json_encode( $js_value ); ?>;

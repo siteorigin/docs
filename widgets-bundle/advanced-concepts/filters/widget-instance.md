@@ -1,10 +1,8 @@
 # Frontend Widget Instance Filter
 
-This filter allows you to modify the widget instance before the Widgets Bundle renders your widget. This instance is the version that the Widgets Bundle passes to the `get_less_variables` and `get_template_variables` methods. This filter allows you to modify the instance on the frontend without effecting the instance that's handled by the forms or stored in the database.
+The frontend widget instance filters change a widget's instance before the Widgets Bundle renders the widget. This is the instance that the Widgets Bundle passes to `get_less_variables()` and `get_template_variables()`, so the filters change the front end without changing the instance in the form or in the database.
 
-This filter has 2 versions. `'siteorigin_widgets_instance'` and `'siteorigin_widgets_instance_' . $this->id_base`. One targets all widgets and the other only targets a widget with a specific `id_base`. It gets 2 arguments; the first is the instance to be filtered and the second is a copy of the widget object.
-
-The following is an example of filtering the button widget.
+`siteorigin_widgets_instance` runs for every widget, and `siteorigin_widgets_instance_{$id_base}` runs for one widget, where `{$id_base}` is the widget's base ID. Both pass two arguments, the instance and a copy of the widget object. This example changes the Button Widget:
 
 ```php
 function wbe_filter_button_frontend_instance($instance, $widget){
@@ -19,4 +17,4 @@ function wbe_filter_button_frontend_instance($instance, $widget){
 add_filter('siteorigin_widgets_instance_sow-button', 'wbe_filter_button_frontend_instance', 10, 2);
 ```
 
-The function `wbe_modify_button_text` doesn't exist, but you could replace it with something like a translation function, or maybe you want to add some user specific tracking argument to the button URL.
+`wbe_modify_button_text()` stands for your own function, such as a translation function or one that adds a tracking argument to the button's URL.

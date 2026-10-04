@@ -1,10 +1,8 @@
 # Template File Filter
 
-This filter gives you a way to change which file is being used to render/display your widget. By default, Widgets Bundle will look for a file in your template directory called `default.php` in the `tpl` directory, and this filter will allow you to change it to something else.
+The `siteorigin_widgets_template_file_{$id_base}` filter changes the template file that renders a widget, where `{$id_base}` is the widget's base ID. The Widgets Bundle uses `tpl/default.php` in the widget's folder unless the filter returns another path. The path must point to an existing file that ends in `.php`.
 
-This filter is perfect for conditional templates based on settings, and as an example of that, we've written a guide called [extending existing widgets](../../getting-started/extending-existing-widgets.md) that outlines this use case.
-
-This filter has the form `'siteorigin_widgets_template_file_' . $this->id_base`, where id_base is the ID of the widget. The returned path must point to an existing file that ends in `.php`.
+The filter suits a template that depends on a setting, as [Extending Existing Widgets](../../getting-started/extending-existing-widgets.md) shows.
 
 ```php
 function mytheme_button_template_file( $filename, $instance, $widget ){

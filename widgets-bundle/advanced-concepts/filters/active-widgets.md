@@ -1,6 +1,8 @@
 # Active Widgets Filter
 
-This filter changes which widgets are currently active. Most of the time you'll want to use `SiteOrigin_Widgets_Bundle::single()->activate_widget($id)` if all you want to do programmatically activate a widget. This filter is here if you have another use case though. You could, for example, force all the widgets you've created to be active, regardless of what the user sets in Plugins > SiteOriign Widgets.
+The `siteorigin_widgets_active_widgets` filter changes which widgets are active. To activate a widget from code, `SiteOrigin_Widgets_Bundle::single()->activate_widget( $id )` is the more direct route. The filter suits other cases, such as keeping all your own widgets active whatever users set at **Plugins > SiteOrigin Widgets**.
+
+The keys of the `$active` array are widget folder names, such as `button`, and not base IDs such as `sow-button`. Set each key to `true` or `false`.
 
 ```php
 function wbexample_filter_active_widgets($active){
@@ -9,5 +11,3 @@ function wbexample_filter_active_widgets($active){
 }
 add_filter('siteorigin_widgets_active_widgets', 'wbexample_filter_active_widgets');
 ```
-
-The array keys of `$active` are widget folder names, such as `button`, not `id_base` values such as `sow-button`. You can set them to either true or false.

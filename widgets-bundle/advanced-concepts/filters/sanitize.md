@@ -1,8 +1,6 @@
 # Sanitize Instance Filter
 
-The sanitization filter is the last filter run on the widget instance before we store it in the database. The Widgets Bundle does a lot of filtering, but you might want to add some custom sanitization.
-
-The filter has two versions: `'siteorigin_widgets_sanitize_instance'` runs first for all widgets, and `'siteorigin_widgets_sanitize_instance_' . $this->id_base` targets one widget. Before either filter runs, the Widgets Bundle removes instance keys that don't belong to a form field.
+The sanitize instance filters run last on a widget's instance before the Widgets Bundle saves it, so you can add your own sanitization to the Widgets Bundle's. `siteorigin_widgets_sanitize_instance` runs first, for every widget, and `siteorigin_widgets_sanitize_instance_{$id_base}` runs for one widget, where `{$id_base}` is the widget's base ID. Before either filter runs, the Widgets Bundle removes instance keys that don't belong to a form field.
 
 ```php
 /**

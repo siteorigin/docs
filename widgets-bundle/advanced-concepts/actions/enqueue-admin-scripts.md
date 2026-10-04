@@ -1,8 +1,6 @@
 # Enqueue Admin Scripts Action
 
-This action gives you a chance to enqueue any additional admin scripts and styles for a widget. If you need to enqueue scripts for your custom widgets, you can read about that in our getting started section on [initializing a widget](../../getting-started/initializing-a-widget.md). This action is mainly for enqueuing additional scripts and styles for a widget that you're extending.
-
-This action has the form `'siteorigin_widgets_enqueue_admin_scripts_' . $this->id_base`, so it targets a specific widget. It passes one argument, the widget object.
+The `siteorigin_widgets_enqueue_admin_scripts_{$id_base}` action enqueues extra admin scripts and styles for one widget, where `{$id_base}` is the widget's base ID. Use it for a widget you're extending. For your own widgets, enqueue scripts as [Initializing a Widget](../../getting-started/initializing-a-widget.md) describes. The action passes one argument, the widget object.
 
 ```php
 /**

@@ -1,6 +1,6 @@
 # Widget Folders Filter
 
-This filter gives you a way to add extra folders to the Widgets Bundle. It searches these folders for new widgets when the user goes to Plugins > SiteOrigin Widgets and checks these folders when widgets are active.
+The `siteorigin_widgets_widget_folders` filter adds folders where the Widgets Bundle looks for widgets. The Widgets Bundle searches the folders for new widgets when a user opens **Plugins > SiteOrigin Widgets**, and loads active widgets from them.
 
 ```php
 function wbexample_add_widget_folders( $folders ){

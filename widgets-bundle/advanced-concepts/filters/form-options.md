@@ -1,8 +1,6 @@
 # Form Options Filter
 
-The form filter is an incredibly useful filter for changing the fields of an existing widget form. You can use this to enhance the widgets currently in Widgets Bundle, or you can enhance widgets you've added. Maybe you want to add enhanced functionality in a premium version of your plugin.
-
-This filter allows you to edit existing fields or add new ones. The filter has the form `'siteorigin_widgets_form_options_' . $this->id_base`. To change the form of every widget, use `siteorigin_widgets_form_options`, which runs first and takes the same arguments. See the [form modification](../../form-building/modifying-forms.md) doc for more details.
+The `siteorigin_widgets_form_options_{$id_base}` filter changes the fields of a widget's form, where `{$id_base}` is the widget's base ID. Use it to add fields to the Widgets Bundle's widgets or to your own, for example to add settings in a premium version of your plugin. The filter can change existing fields or add new ones. `siteorigin_widgets_form_options` changes the form of every widget, runs first and takes the same arguments. [Modifying Forms](../../form-building/modifying-forms.md) has more examples.
 
 ```php
 function mytheme_filter_widget_form( $form_options, $widget ) {
