@@ -59,7 +59,7 @@ $presets = array(
 
 ## Adding the Field
 
-Pass your presets array to a `presets` field in its `options` argument. The optional `default_preset` argument takes a preset's slug, and the list then has no empty option:
+Pass your presets array to a `presets` field in its `options` argument. The optional `default_preset` argument takes a preset's slug. New widgets then start with that preset's values, and the list has no empty option:
 
 ```php
 'preset' => array(

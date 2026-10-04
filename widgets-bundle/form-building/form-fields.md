@@ -87,7 +87,7 @@ A color input with a color picker.
 
 - `placeholder` (`string`): text shown in the empty field.
 - `alpha` (`bool`): `true` adds an opacity slider to the color picker, and the value can be an `rgba()` color.
-- `palettes` (`array`): hex colors to show as swatches in the color picker. The `siteorigin_widget_color_palette` filter adds swatches to every color field.
+- `palettes` (`array|bool`): hex colors to show as swatches in the color picker, or `false` to hide the swatches. The `siteorigin_widget_color_palette` filter adds swatches to every color field.
 
 #### Example
 
@@ -912,7 +912,7 @@ A list of ready-made settings for your widget, as [Presets](./presets.md) explai
 #### Options
 
 - `options` (`array`): your presets.
-- `default_preset` (`string`): the slug of a preset to select. Without it, the list starts with an empty option.
+- `default_preset` (`string`): the slug of the preset that new widgets start with. Without it, the list starts with an empty option.
 
 #### Example
 
