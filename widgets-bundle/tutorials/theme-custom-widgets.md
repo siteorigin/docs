@@ -20,7 +20,17 @@ The function tells the Widgets Bundle to look for widgets in the `widgets` folde
 
 This example builds a staff widget. Create a `simple-staff-widget` folder with a `simple-staff-widget.php` file in it, and add `tpl`, `styles` and `assets` folders as your widget needs them.
 
-![](./images/theme-widget-folder.png)
+```
+widgets/
+└── simple-staff-widget/
+    ├── assets/
+    │   └── banner.svg
+    ├── styles/
+    │   └── default.less
+    ├── tpl/
+    │   └── base.php
+    └── simple-staff-widget.php
+```
 
 [Creating a Widget](../getting-started/creating-a-widget.md), [HTML Templates](../templating/html-templates.md) and [LESS Stylesheets](../templating/less-stylesheets.md) explain each part of the widget.
 
