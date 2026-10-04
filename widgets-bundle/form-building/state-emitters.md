@@ -6,7 +6,7 @@ State emitters are an advanced concept, and they aren't necessary for all fields
 
 ## Form states
 
-A form state is scoped to a given widget form. Each form can only occupy one state per state group. A state is represented by the string `group[state]`. Group and state names can consist of alphabetical characters and underscores.
+A form state is scoped to a given widget form. Each form can only occupy one state per state group. A state is represented by the string `group[state]`. Group and state names can contain letters, numbers, underscores and hyphens.
 
 ## State Emitters
 
@@ -16,19 +16,19 @@ The first thing you need to understand is state emitters. These are tied to spec
 'map_type'    => array(
     'type'    => 'radio',
     'default' => 'interactive',
-    'label'   => __( 'Map type', 'siteorigin-widgets' ),
+    'label'   => __( 'Map type', 'siteorigin-docs' ),
     'state_emitter' => array(
         'callback' => 'select',
         'args' => array( 'map_type' )
     ),
     'options' => array(
-        'interactive' => __( 'Interactive', 'siteorigin-widgets' ),
-        'static'      => __( 'Static image', 'siteorigin-widgets' ),
+        'interactive' => __( 'Interactive', 'siteorigin-docs' ),
+        'static'      => __( 'Static image', 'siteorigin-docs' ),
     )
 ),
 ```
 
-What the `state_emitter` argument is essentially saying is that every time this field changes, we'll emit a new state based on what's returned by the state emitter callback.
+What the `state_emitter` argument is essentially saying is that every time this field changes, we'll emit a new state based on what's returned by the state emitter callback. To attach several emitters to one field, set `state_emitter` to an array of emitter arrays.
 
 The Widgets Bundle has a few built in state emitter callbacks that should cover most of your needs.
 
@@ -54,7 +54,7 @@ This is useful when you want to group different options into a set of states.
 
 ### The conditional callback
 
-The conditional callback evaluates arbitrary conditions. The variable `var` is available to use in any way you please. Your expression should be valid Javascript and evaluate to a boolean.
+The conditional callback evaluates arbitrary conditions. The variable `val` holds the field value. Your expression should be valid Javascript and evaluate to a boolean.
 
 ```php
 'state_emitter' => array(
@@ -69,7 +69,7 @@ The conditional callback evaluates arbitrary conditions. The variable `var` is a
 
 ### Custom callbacks
 
-If you need a custom state emitter for some specialized functionality, you can add it in Javascript by simply attaching a new function to the global `sowEmitters` object.
+If you need a custom state emitter for some specialized functionality, you can add it in Javascript by attaching a new function to the global `sowEmitters` object. The Widgets Bundle creates `sowEmitters` in its `siteorigin-widget-admin` script, so enqueue your script from your widget's `enqueue_admin_scripts()` method with `siteorigin-widget-admin` as a dependency. Callback names that start with an underscore are ignored.
 
 ```javascript
 sowEmitters.custom = function( val, args, field ){
@@ -82,7 +82,7 @@ sowEmitters.custom = function( val, args, field ){
 };
 ```
 
-The `field` parameter allows you to determine which field triggered the emitter. This can be useful for checking other fields in comparison to the current one.
+The `field` parameter is the jQuery object of the input that triggered the emitter. This can be useful for checking other fields in comparison to the current one.
 
 ## State Handlers
 
@@ -96,7 +96,7 @@ Once a state has been emitted by any field in the form, the rest of the form can
         'map_type[interactive]' => array('show'),
         'map_type[static]' => array('hide'),
     ),
-    'label' => __( 'Draggable markers', 'siteorigin-widgets' )
+    'label' => __( 'Draggable markers', 'siteorigin-docs' )
 ),
 ```
 
@@ -105,10 +105,10 @@ This particular field is from the Google Maps widget. The `markers_draggable` le
 So we're using this state handler to hide this checkbox field if the maps is a static map and show it if it's an interactive map. Each value in the state handler array is essentially saying the following.
 
 ```
-'group[state]' => array('function', 'selector', array( 'args ) ),
+'group[state]' => array( 'function', 'selector', array( 'args' ) ),
 ```
 
-So when the form changes to `state` in `group`, we'll run the given action. The `function` is run on the jQuery object of the form wrapper. If `selector` isn't empty, then we'll use it to target a sub-element using `jQuery.find`. The `args` array is the argument for the action function.
+So when the form changes to `state` in `group`, we'll run the given action. The `function` is run on the jQuery object of the field's wrapper element. If `selector` isn't empty, then we'll use it to target a sub-element using `jQuery.find`. The `args` array is the argument for the action function.
 
 So as an example, if you want to change the color of a field's label to green in a given state, this is the state handler argument you would use.
 
@@ -127,7 +127,7 @@ State handlers also have a very simple syntax for running multiple actions for a
 'state_handler' => array(
     'map_type[interactive][]' => array( 
         array( 'show' ),
-        array( 'css', 'label', array('color', '#00ff00' ),
+        array( 'css', 'label', array( 'color', '#00ff00' ) ),
     ),
 ),
 ```
@@ -151,19 +151,20 @@ The Widgets bundle goes from top to bottom of the state handlers. If it reaches 
 
 State Emitter groups are global within a given form. That means if you have a state emitter for a field inside a repeater, each instance of that field will emit states for the same group. To change this behavoir, use the `{$repeater}` string in your repeater group names.
 
-For example, the Contact Form widget has a repeater that allows a user to create a list of form fields. Each item has a field type dropdown to select what type of field it is and another repeater to add value options for the field. This value options field only applies to dropdown and and checkboxes fields.
+For example, the Contact Form widget has a repeater that allows a user to create a list of form fields. Each item has a field type dropdown to select what type of field it is and another repeater to add value options for the field. This value options field only applies to dropdown, checkboxes and radio fields.
 
-So in the state emitter argument, we have a select state emitter where the group is `field_type_{$repeater}` and a state handler that shows or hides the value options repeater based on this same group.
+So in the state emitter argument, we have a select state emitter where the group is `field_type_{$repeater}` and a state handler that shows or hides the value options repeater based on this same group. Keep `{$repeater}` in a single-quoted PHP string; in double quotes, PHP reads `$repeater` as a variable. A handler state can list several states separated by commas, as in `[select,checkboxes,radio]` below.
 
 ```php
 'type' => array(
 	'type' => 'select',
-	'label' => __( 'Field Type', 'siteorigin-widgets' ),
+	'label' => __( 'Field Type', 'siteorigin-docs' ),
 	'options' => array(
 		// Some options left out
-		'text' => __( 'Text', 'siteorigin-widgets' ),
-		'select' => __( 'Dropdown Select', 'siteorigin-widgets' ),
-		'checkboxes' => __( 'Checkboxes', 'siteorigin-widgets' ),
+		'text' => __( 'Text', 'siteorigin-docs' ),
+		'select' => __( 'Dropdown Select', 'siteorigin-docs' ),
+		'checkboxes' => __( 'Checkboxes', 'siteorigin-docs' ),
+		'radio' => __( 'Radio', 'siteorigin-docs' ),
 	),
 	'state_emitter' => array(
 		'callback' => 'select',
@@ -177,18 +178,18 @@ And then for the value options repeater:
 ```php
 'options' => array(
 	'type' => 'repeater',
-	'label' => __( 'Options', 'siteorigin-widgets' ),
-	'item_name' => __( 'Option', 'siteorigin-widgets' ),
+	'label' => __( 'Options', 'siteorigin-docs' ),
+	'item_name' => __( 'Option', 'siteorigin-docs' ),
 	'fields' => array(
 		'value' => array(
 			'type' => 'text',
-			'label' => __( 'Value', 'siteorigin-widgets' ),
+			'label' => __( 'Value', 'siteorigin-docs' ),
 		),
 	),
 
 	// These are only required for a few states
 	'state_handler' => array(
-		'field_type_{$repeater}[select,checkboxes]' => array('show'),
+		'field_type_{$repeater}[select,checkboxes,radio]' => array('show'),
 		'_else[field_type_{$repeater}]' => array( 'hide' ),
 	),
 ),
