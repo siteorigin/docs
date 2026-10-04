@@ -1,12 +1,10 @@
 # Page Builder Prebuilt Layouts
 
-Page Builder makes it easy to bundle prebuilt layouts into your theme or plugin. We've made a point of not including any of these into the Page Builder core, relying mainly on other themes and plugins to add the layouts that work with their unique designs.
+Your theme or plugin can add prebuilt layouts to Page Builder, so users start a page from a design that fits your theme. Page Builder itself ships with no prebuilt layouts and leaves layouts to themes and plugins.
 
-## Register a Custom Layouts Folder Location
+## Registering a Layouts Folder
 
-Page Builder loads layouts from a `siteorigin-page-builder-layouts` folder in the parent theme and the child theme without any code. To store your layouts in another folder, register its location.
-
-Use the below function to register a location for your prebuilt layout files. Replace `siteorigin` with your theme or plugin namespace. Change folder path as required, in this example we're storing our layouts in the `/inc/layouts` folder
+Page Builder loads layouts from a `siteorigin-page-builder-layouts` folder in the parent theme and the child theme, with no code. To keep your layouts in another folder, register the folder with the `siteorigin_panels_local_layouts_directories` filter. Replace the `siteorigin` prefix with your theme or plugin's prefix, and change the path to your folder. This example registers the `inc/layouts` folder of a theme:
 
 ```
 /**
@@ -19,23 +17,38 @@ function siteorigin_layouts_folder( $layout_folders ) {
 add_filter( 'siteorigin_panels_local_layouts_directories', 'siteorigin_layouts_folder' );
 ```
 
-### Export Your Layout JSON File
+## Adding a Layout to the Folder
 
-Edit the page containing your layout. In Page Builder, click Layouts > Import/Export > Download Layout. To change your layout name as seen in Page Builder, edit the JSON file and locate the name/value pair at the end of the file `"name":"Home"`. Change the `name` value as required. In this example, our layout is named `Home`. To add a thumbnail for each layout, include a JPG, JPEG, GIF or PNG file with the same filename as the JSON file you'd like to use it for. For example, if your JSON file was named `home.json`, your thumbnail image would be named `home.jpg`. Finally, copy both the JSON layout file and thumbnail to your layouts directory location. Navigate to Layouts > Prebuilt layouts in any Page Builder page to view and test your layout.
+1. Build the layout on a page with Page Builder.
+2. In Page Builder, click **Layouts**, open **Import/Export** and click **Download Layout** to save the layout as a JSON file.
+3. Open the JSON file and find the `"name"` value at the end of the file, such as `"name":"Home"`. Change it to the name you'd like users to see in Page Builder.
+4. To add a thumbnail, save a JPG, JPEG, GIF or PNG image with the same file name as the JSON file. For `home.json`, name the image `home.jpg`.
+5. Copy the JSON file and the thumbnail to your layouts folder.
+6. Open any page in Page Builder, click **Layouts** and open **Prebuilt Layouts** to check the layout.
 
-### External Images
+## Using External Images
 
-If you'd like your layout images to populate on other domains, make use of the External URL field wherever possible. For example, when adding a row background you can either use the Select Image button or insert a URL into the External URL field. Using the External URL field will ensure the image loads on domains other than your own.
+Wherever a layout uses an image, such as a row background, enter the image's address in the **External URL** field. Page Builder then loads the image from that address on every site that uses the layout, where an image chosen with **Select Image** would be missing from your users' Media Libraries.
 
----
+## Sorting Layouts
+
+Page Builder lists layouts in the order it finds them. The `siteorigin_panels_prebuilt_layouts` filter passes the `$layouts` array after Page Builder finds them, so you can sort it. This example sorts layouts alphabetically by their ID:
+
+```
+add_filter( 'siteorigin_panels_prebuilt_layouts', function( $layouts ) {
+	// Sort layouts alphabetically.
+	// uksort keeps the layout IDs, which Page Builder uses to find each layout.
+	uksort( $layouts, 'strcmp' );
+
+	return $layouts;
+} );
+```
+
+## Examples
 
 ### Example Theme
 
-You can find an example theme [here](https://siteorigin.com/wp-content/uploads/2019/11/starter-theme.zip). `starter-theme` was created from underscores and isn't intended for production usage. Within the example theme you'll find the following:
-
-#### functions.php
-
-At the end of the theme's `functions.php` file we conditionally require a Page Builder compatibility file.
+The [example theme](https://siteorigin.com/wp-content/uploads/2019/11/starter-theme.zip), `starter-theme`, is based on Underscores and isn't meant for production sites. At the end of its `functions.php` file, the theme loads a Page Builder file when Page Builder is active:
 
 ```
 /**
@@ -46,9 +59,7 @@ if ( defined( 'SITEORIGIN_PANELS_VERSION' ) ) {
 }
 ```
 
-#### /inc/siteorigin-page-builder.php
-
-In our compatibility file we register the location of our prebuilt layouts folder.
+That file, `inc/siteorigin-page-builder.php`, registers the theme's layouts folder:
 
 ```
 /**
@@ -61,19 +72,11 @@ function starter_theme_layouts_folder( $layout_folders ) {
 add_filter( 'siteorigin_panels_local_layouts_directories', 'starter_theme_layouts_folder' );
 ```
 
-#### /inc/layouts/
-
-In our layouts folder we've included a demo layout and matching thumbnail.
-
----
+The `inc/layouts` folder holds a demo layout and its thumbnail.
 
 ### Example Child Theme
 
-You can find an example child theme [here](https://siteorigin.com/wp-content/uploads/2019/11/siteorigin-corp-child-prebuilt-layouts.zip). Our child theme uses [SiteOrigin Corp](https://siteorigin.com/theme/corp/) as its parent theme. Within the example child theme you'll find the following:
-
-#### functions.php
-
-In the child theme `functions.php` file we register the location of our prebuilt layouts folder.
+The [example child theme](https://siteorigin.com/wp-content/uploads/2019/11/siteorigin-corp-child-prebuilt-layouts.zip) uses [SiteOrigin Corp](https://siteorigin.com/theme/corp/) as its parent theme. Its `functions.php` file registers the child theme's `layouts` folder, which holds a demo layout and its thumbnail:
 
 ```
 /**
@@ -85,19 +88,10 @@ function siteorigin_corp_child_layouts_folder( $layout_folders ) {
 }
 add_filter( 'siteorigin_panels_local_layouts_directories', 'siteorigin_corp_child_layouts_folder' );
 ```
-#### layouts
-
-In our layouts folder we've included a demo layout and matching thumbnail.
-
----
 
 ### Example Plugin
 
-You can find an example plugin [here](https://siteorigin.com/wp-content/uploads/2019/11/so-prebuilt-layouts.zip). Within the example plugin you'll find the following:
-
-#### so-custom-post-loop.php
-
-In the main plugin file we register the location of our prebuilt layouts folder.
+The [example plugin](https://siteorigin.com/wp-content/uploads/2019/11/so-prebuilt-layouts.zip) registers its `layouts` folder in its main plugin file, `so-custom-post-loop.php`. The folder holds a demo layout and its thumbnail:
 
 ```
 /**
@@ -108,24 +102,4 @@ function so_prebuilt_layouts_folder( $layout_folders ) {
 	return $layout_folders;
 }
 add_filter( 'siteorigin_panels_local_layouts_directories', 'so_prebuilt_layouts_folder' );
-```
-
-#### layouts
-
-In our layouts folder we've included a demo layout and matching thumbnail.
-
-### Sorting
-
-By default, Page Builder doesn't apply any sorting and layouts are ordered as they're identified. You can sort layouts once Page Builder has identified them by using the `siteorigin_panels_prebuilt_layouts` filter. The `siteorigin_panels_prebuilt_layouts` filter has a single filter containing the `$layouts` array.
-
-For example, the following PHP will alphabetically sort layouts by their layout id.
-
-```
-add_filter( 'siteorigin_panels_prebuilt_layouts', function( $layouts ) {
-	// Sort layouts alphabetically.
-	// uksort keeps the layout IDs, which Page Builder uses to find each layout.
-	uksort( $layouts, 'strcmp' );
-
-	return $layouts;
-} );
 ```

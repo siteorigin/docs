@@ -1,12 +1,10 @@
 # Making Your Widgets Page Builder Compatible
 
-For the most part, Page Builder does a very good job of handling standard widgets. The only real issue comes in when a widget uses javascript that specifically targets the WordPress widget interface.
+Standard widgets work in Page Builder without changes. A widget needs a few changes if its JavaScript targets the WordPress Widgets screen, because Page Builder loads widget forms in its own dialog.
 
-There are usually a few small changes you can make to to ensure your widget works in both the WordPress widgets interface and Page Builder.
+## Loading Your Scripts
 
-### Loading Javascript
-
-The first thing your widget needs to do is enqueue its CSS and Javascript for the Page Builder interface. This is usually as simple as hooking your existing enqueue function to `siteorigin_panel_enqueue_admin_scripts` action.
+Load your widget's admin CSS and JavaScript in Page Builder as well as on the Widgets screen. Hook your existing enqueue function to the `siteorigin_panel_enqueue_admin_scripts` action:
 
 ```php
 /**
@@ -18,14 +16,14 @@ function mywidget_enqueue_scripts() {
 add_action( 'admin_print_scripts-widgets.php', 'mywidget_enqueue_scripts' );
 // Add this to enqueue your scripts on Page Builder too
 add_action( 'siteorigin_panel_enqueue_admin_scripts', 'mywidget_enqueue_scripts' );
-
 ```
 
-### Form Setup Actions
+## Setting Up the Form
 
-The next thing you need to do is ensure your widget form setup function is being called properly. You have 2 options here. Either you can include a `<script> ... </script>` in your widget form that sets up your widget form for both Page Builder and the WordPress widget interface.
+Your widget's form setup code needs to run when Page Builder opens the form. There are two ways to do this:
 
-The other option is to use the `panelsopen` jQuery event. This event is triggered right after the form HTML is loaded, so is a good opportuinity to set up your form.
+- Add a `<script>` to your widget form that sets up the form. It runs on the Widgets screen and in Page Builder.
+- Listen for the `panelsopen` jQuery event, which Page Builder triggers right after it loads the form HTML:
 
 ```javascript
 ( function( $ ) {
@@ -41,11 +39,11 @@ The other option is to use the `panelsopen` jQuery event. This event is triggere
 } )( jQuery );
 ```
 
-### Overriding Automatic Widget Description
+## Choosing the Widget Summary
 
-By default, Page Builder will override a widget's description to allow users to quickly identify widgets without opening them. Page Builder will look for the first valid non-empty input (with a preference for fields called "title" and "text") and use that for its description. This can, however, be problematic for certain fields, so you may wish to tell Page Builder to look for a specific field or completely disable the automatic widget description altogether. This is done by adjusting the `panels_title` option in the widget's `$widget_options` parameter when constructing the widget. The following examples extend `SiteOrigin_Widget`. A `WP_Widget` takes the same option in its third argument, `$widget_options`.
+In the builder, Page Builder shows a summary under each widget's title, so users can tell widgets apart without opening them. The summary comes from the widget's first non-empty field, with fields named "title" and "text" first. To use a different field, or to show the widget's description instead, set the `panels_title` option in the widget's `$widget_options`. The examples below extend `SiteOrigin_Widget`. A `WP_Widget` takes the same option in its third argument, `$widget_options`.
 
-You can disable the widget descriptions by setting `panels_title` to `false`.
+To show the widget's description, set `panels_title` to `false`:
 
 ```php
 function __construct() {
@@ -62,7 +60,7 @@ function __construct() {
 }
 ```
 
-You can tell Page Builder to find a field with a specific name by setting `panels_title` to the field you would like for it to use. For example, if you have a field called "username" you would use:
+To use a specific field, set `panels_title` to the field's name. This example uses a field named "username":
 
 ```php
 function __construct() {
@@ -80,4 +78,4 @@ function __construct() {
 }
 ```
 
-If Page Builder cannot find a valid field with that title, it will fall back to the standard widget description. Page Builder doesn't look for the `panels_title` field inside sections and repeaters unless you also set `panels_title_check_sub_fields` to `true`.
+If the field is empty or missing, Page Builder shows the widget's description. Page Builder looks for the `panels_title` field inside sections and repeaters only when you also set `panels_title_check_sub_fields` to `true`.

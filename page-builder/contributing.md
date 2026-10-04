@@ -1,21 +1,17 @@
 # Contributing to Page Builder
 
-We're working hard on impoving Page Builder - making it the most powerful and flexible page building plugin for WordPress. If you'd like to help us with code contributions, here are a few ways you can help. 
+We welcome code contributions to Page Builder, and the most useful are bug fixes and new hooks.
 
-## Contributing to Core
+## Fixing Bugs and Adding Hooks
 
-There are 2 main categories of we'd love to see from developers out there. These are bug fixes and additional hooks/filters. If you ever find a bug, you can either [create a new issue](https://github.com/siteorigin/siteorigin-panels/issues), or submit a pull request to the [Page Builder GitHub repo](https://github.com/siteorigin/siteorigin-panels).
-
-The same goes for additional hooks and filters. If you're working on a theme and plugin and you need a way to hook into Page Builder to customize its behaviour, either let us know or submit a pull request with the extra hooks.
+If you find a bug, [open an issue](https://github.com/siteorigin/siteorigin-panels/issues) or send a pull request to the [Page Builder GitHub repository](https://github.com/siteorigin/siteorigin-panels). If your theme or plugin needs a hook that Page Builder doesn't have yet, let us know in an issue, or send a pull request that adds the hook.
 
 ## Adding Features
 
-We're trying to keep the core of Page Builder as light as possible. This makes it easier to update and maintain for a large audience. If you'd like to create a new feature for Page Builder, we suggest you create it as a plugin.
+We keep the core of Page Builder small, so it stays light to update and maintain for every site that uses it. If you'd like to add a feature to Page Builder, build it as a plugin. Support for another grid system, such as Bootstrap, or extra row and widget styles both work as plugins that use Page Builder's existing hooks. [styles.php](https://github.com/siteorigin/siteorigin-panels/blob/develop/inc/styles.php) shows how Page Builder adds its own styles.
 
-Some examples are implementing support for other grid systems like Bootstrap, or adding extra row/widget styles. Both are possible with some creative use of the existing hooks in Page Builder. You can see [styles.php](https://github.com/siteorigin/siteorigin-panels/blob/develop/inc/styles.php) for an idea of how we've implemented styles in Page Builder.
+If your plugin becomes popular and you give us permission, we'll add its features to Page Builder itself.
 
-If your plugin proves very popular and you give us premission, we'll integrate the new features into the core of Page Builder.
+## Improving the Developer Docs
 
-## Developer Documentation
-
-Our developer documentation is [hosted on Github](https://github.com/siteorigin/docs), so you can edit it with pull requests. Helping us improve our developer documentation is a great way to help out other developers build for Page Builder.
+These developer docs live in the [siteorigin/docs](https://github.com/siteorigin/docs) repository on GitHub, so you can improve them with a pull request.
