@@ -7,8 +7,7 @@ This filter receives the array of post type names the field searches. By default
 
 ```php
 add_filter( 'siteorigin_widgets_search_posts_post_types', function( $post_types ) {
-	unset( $post_types['product'] );
-	return $post_types;
+	return array_diff( $post_types, array( 'product' ) );
 } );
 ```
 

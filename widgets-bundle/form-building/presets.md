@@ -112,7 +112,7 @@ The preset field is able to work in combination with the [State Emitters](state-
 - preset_data: `array` An array containing your preset data.
 - fields: `array` An array containing the fields you want to add a `state_handler` to.
 
-Only fields inside a `section` receive a state handler. Each of those fields shows while a preset that sets its value is selected and hides for every other preset. Top-level fields, sections themselves and fields that already have a `state_handler` are left unchanged.
+Only fields inside a `section`, including nested sections, receive a state handler. Each of those fields shows while a preset that sets its value is selected and hides for every other preset. Top-level fields, top-level sections and fields that already have a `state_handler` are left unchanged.
 
 #### Example
 
