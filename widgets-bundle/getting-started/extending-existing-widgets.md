@@ -22,7 +22,7 @@ function mytheme_extend_button_form( $form_options, $widget ) {
 add_filter( 'siteorigin_widgets_form_options_sow-button', 'mytheme_extend_button_form', 10, 2 );
 ```
 
-Lets go over what's all happening here. First, we're creating a custom filter function called `mytheme_extend_button_form` and hooking it to `siteorigin_widgets_form_options_sow-button`. This filter is run for every widget in the widget bundle and is of the form `siteorigin_widgets_form_options_{$id_base}`, where `$id_base` is the first argument of the `__construct` argument we looked at earlier. In this case `sow-button`.
+Lets go over what's all happening here. First, we're creating a custom filter function called `mytheme_extend_button_form` and hooking it to `siteorigin_widgets_form_options_sow-button`. Each widget in the Widgets Bundle runs its own filter of the form `siteorigin_widgets_form_options_{$id_base}`, where `$id_base` is the first argument of the `__construct` argument we looked at earlier. In this case `sow-button`.
 
 We're making sure that the option field we're looking for is there, and if it is, we're adding our own option called **Test Style**.
 

@@ -60,7 +60,7 @@ function my_newsletter_signup() {
     check_ajax_referer( 'my_newsletter_signup', 'nonce' );
 
     $hash = isset( $_POST['storage_hash'] ) ? sanitize_key( wp_unslash( $_POST['storage_hash'] ) ) : '';
-    $email = isset( $_POST['email'] ) ? sanitize_email( wp_unslash( $_POST['email'] ) ) : '';
+    $email = isset( $_POST['email'] ) && is_string( $_POST['email'] ) ? sanitize_email( wp_unslash( $_POST['email'] ) ) : '';
 
     $widget = new My_Newsletter_Widget();
     $instance = $widget->get_stored_instance( $hash );
