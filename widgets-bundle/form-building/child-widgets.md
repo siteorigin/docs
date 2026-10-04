@@ -19,7 +19,7 @@ $form_options = array(
 
 ### Loading the Child Widget Class
 
-Make sure the child widget class is available **before** the parent form is built. For Widgets Bundle widgets:
+Make sure the child widget class is available **before** the parent form is built. For Widgets Bundle widgets, do this in your widget's `initialize()` method:
 
 ```php
 if ( ! class_exists( 'SiteOrigin_Widget_Button_Widget' ) ) {
@@ -31,18 +31,25 @@ if ( ! class_exists( 'SiteOrigin_Widget_Button_Widget' ) ) {
 
 The child widget's instance data is stored under the same key you used (`button_field` in this example). To output the widget inside your template:
 
+### Using `sub_widget()`
+
+Inside a widget template, `$this` is your widget, so you can call its `sub_widget( $class, $args, $instance, $return = false )` method. It clears `before_widget` and `after_widget`, and returns the HTML when `$return` is `true`. The Call To Action Widget renders its button this way.
+
+```php
+<?php $this->sub_widget( 'SiteOrigin_Widget_Button_Widget', $args, $instance['button_field'] ); ?>
+```
+
 ### Using `$wp_widget_factory`
 
 ```php
-if ( ! empty( $instance['button_field'] ) ) {
-	global $wp_widget_factory;
+global $wp_widget_factory;
 
-	$button_widget = $wp_widget_factory->widgets['SiteOrigin_Widget_Button_Widget'];
-
-	if ( $button_widget ) {
-		// Render the child widget without extra wrapper markup
-		$button_widget->widget( array(), $instance['button_field'] );
-	}
+if (
+	! empty( $instance['button_field'] ) &&
+	! empty( $wp_widget_factory->widgets['SiteOrigin_Widget_Button_Widget'] )
+) {
+	// Render the child widget without extra wrapper markup
+	$wp_widget_factory->widgets['SiteOrigin_Widget_Button_Widget']->widget( array(), $instance['button_field'] );
 }
 ```
 
@@ -73,16 +80,24 @@ class My_Parent_Widget extends SiteOrigin_Widget {
 
 ### Using a `form_filter` Callback
 
-```php
-'button_field' => array(
-	'type'        => 'widget',
-	'class'       => 'SiteOrigin_Widget_Button_Widget',
-	'form_filter' => array( $this, 'filter_child_form' ),
-),
+The callback receives one argument, the child widget's form array.
 
-function filter_child_form( $form, $child_widget ) {
-	unset( $form['design']['fields']['align'] );
-	return $form;
+```php
+class My_Parent_Widget extends SiteOrigin_Widget {
+	public function get_widget_form() {
+		return array(
+			'button_field' => array(
+				'type'        => 'widget',
+				'class'       => 'SiteOrigin_Widget_Button_Widget',
+				'form_filter' => array( $this, 'filter_child_form' ),
+			),
+		);
+	}
+
+	public function filter_child_form( $form ) {
+		unset( $form['design']['fields']['align'] );
+		return $form;
+	}
 }
 ```
 
