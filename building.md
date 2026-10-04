@@ -6,7 +6,7 @@ There are few steps necessary to prepare a plugin for release on the WordPress.o
 
 1. [Download](https://nodejs.org/download/) and install Node.js and npm. The build uses `node-sass` 4.14, which supports Node.js 14 and earlier.
 2. In a terminal, navigate to the root of the plugin directory and run `git submodule update --init build` to add the `build` folder.
-3. Navigate to the `build` folder and run `npm install`.
+3. Navigate to the `build` folder and run `npm install`. For SiteOrigin CSS, also run `npm install` in the plugin root.
 4. Get some coffee while npm installs the required packages.
 
 Each plugin has a `build-config.js` file in its root directory. The build reads the plugin slug and the files to version, compile and copy from this file.
