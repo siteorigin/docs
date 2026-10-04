@@ -1,36 +1,38 @@
 # Hooks and Filters
 
-The SiteOrigin Widgets Bundle gives you ample opportunity to extend and enhance the functionality of the bundle. We've already covered a lot of these filters in other sections of this documentation. This page just serves as a general reference.
+The Widgets Bundle's actions and filters let your theme or plugin change how widgets load, build their forms and render. Many of them appear in other pages of these docs, and this page lists them all.
 
 ## Actions
 
-* [Version Update](actions/version-update.md) `'siteorigin_widgets_version_update'` - Triggered when the Widgets Bundle core is updated.
-* [Initialize Widget](actions/initialize-widget.md) `'siteorigin_widgets_initialize_widget_' . $this->id_base` - Triggered after each `SiteOrigin_Widget` is initialized.
-* [Enqueue Admin Scripts](actions/enqueue-admin-scripts.md) `'siteorigin_widgets_enqueue_admin_scripts_' . $this->id_base` - Gives widgets a chance to enqueue their scripts.
-* [Enqueue Frontend Scripts](actions/enqueue-frontend-scripts.md) `'siteorigin_widgets_enqueue_frontend_scripts_' . $this->id_base` - Gives widgets a chance to enqueue their frontend scripts and styles.
-* `'siteorigin_widgets_before_widget_' . $this->id_base` and `'siteorigin_widgets_after_widget_' . $this->id_base` - Triggered before and after the widget output. Receives `$instance` and `$widget`.
+- [Version Update Action](actions/version-update.md): `siteorigin_widgets_version_update` runs when the Widgets Bundle updates to a new version.
+- [Initialize Widget Action](actions/initialize-widget.md): `siteorigin_widgets_initialize_widget_{$id_base}` runs after each `SiteOrigin_Widget` initializes.
+- [Enqueue Admin Scripts Action](actions/enqueue-admin-scripts.md): `siteorigin_widgets_enqueue_admin_scripts_{$id_base}` lets a widget enqueue its admin scripts.
+- [Enqueue Frontend Scripts Action](actions/enqueue-frontend-scripts.md): `siteorigin_widgets_enqueue_frontend_scripts_{$id_base}` lets a widget enqueue its front-end scripts and styles.
+- `siteorigin_widgets_before_widget_{$id_base}` and `siteorigin_widgets_after_widget_{$id_base}` run before and after the widget's output, and receive `$instance` and `$widget`.
 
 ## Filters
 
-* [Widget Folders](filters/widget-folders.md) `'siteorigin_widgets_widget_folders'` - Add folders where Widgets Bundle will look for widgets.
-* [Active Widgets](filters/active-widgets.md) `'siteorigin_widgets_active_widgets'` - Filter which widgets are currently active.
-* [Menu Capability](filters/admin-capability.md) `'siteorigin_widgets_admin_menu_capability'` - Change the capability required to enable/disable widgets.
-* `'siteorigin_widgets_default_active'` - Filter the widgets that are active by default. The array keys are widget folder names.
-* `'siteorigin_widgets_onclick_allowlist_functions'` - Filter the JavaScript functions allowed in onclick fields, such as the Button Widget's **Onclick** field.
+- [Widget Folders Filter](filters/widget-folders.md): `siteorigin_widgets_widget_folders` adds folders where the Widgets Bundle looks for widgets.
+- [Active Widgets Filter](filters/active-widgets.md): `siteorigin_widgets_active_widgets` changes which widgets are active.
+- [Menu Capability Filter](filters/admin-capability.md): `siteorigin_widgets_admin_menu_capability` changes the capability that users need to activate and deactivate widgets.
+- `siteorigin_widgets_default_active` changes which widgets are active on a new install. The array keys are widget folder names.
+- `siteorigin_widgets_onclick_allowlist_functions` changes the JavaScript functions allowed in onclick fields, such as the Button Widget's **Onclick** field.
 
-### Widget Modifications
+### Widget Filters
 
-* [Form Options](filters/form-options.md) `'siteorigin_widgets_form_options'` and `'siteorigin_widgets_form_options_' . $this->id_base` - Modify the form array.
-* [Frontend Widget Instance](filters/widget-instance.md) `'siteorigin_widgets_instance'` and `'siteorigin_widgets_instance_' . $this->id_base` - Filter the widget instance before it's rendered.
-* [Form Widget Instance](filters/form-widget-instance.md) `'siteorigin_widgets_form_instance_' . $this->id_base` - Filter the widget instance before it's passed to the form renderer.
-* [Template Variables](filters/template-variables.md) `'siteorigin_widgets_template_variables_' . $this->id_base` - Filter the variables passed to the template.
-* [Template File](filters/template-file.md) `'siteorigin_widgets_template_file_' . $this->id_base` - Filter the template file path.
-* [Template HTML](filters/template-html.md) `'siteorigin_widgets_template_html_' . $this->id_base` - Filter the raw template HTML.
-* [Less File](filters/less-file.md) `'siteorigin_widgets_less_file_' . $this->id_base` - Filter the LESS file path.
-* [Less Content](filters/less-content.md) `'siteorigin_widgets_less_' . $this->id_base` and `'siteorigin_widgets_less_vars_' . $this->id_base` - Filter the actual LESS content of the widget before it's processed.
-* `'siteorigin_widgets_less_variables_' . $this->id_base` - Filter the LESS variables. Receives `$vars`, `$instance` and `$widget`.
-* `'siteorigin_widgets_less_compiler'` - Filter the LESS compiler object, for example to register custom LESS functions. Receives `$compiler`, `$instance` and `$widget`.
-* `'siteorigin_widgets_wrapper_classes_' . $this->id_base` - Filter the array of classes on the widget's wrapper `div`. Receives `$classes`, `$instance` and `$widget`.
-* `'siteorigin_widgets_wrapper_id_' . $this->id_base` - Filter the `id` of the widget's wrapper `div`. Receives `$id`, `$instance` and `$widget`.
-* [Widget CSS](filters/widget-css.md) `'siteorigin_widgets_instance_css'` - Filter the raw CSS generated from the LESS.
-* [Sanitize Instance](filters/sanitize.md) `'siteorigin_widgets_sanitize_instance'` and `'siteorigin_widgets_sanitize_instance_' . $this->id_base` - Filter the instance before its stored in the database. This is designed to be used as a sanitization step.
+- [Form Options Filter](filters/form-options.md): `siteorigin_widgets_form_options` and `siteorigin_widgets_form_options_{$id_base}` change the form array.
+- [Frontend Widget Instance Filter](filters/widget-instance.md): `siteorigin_widgets_instance` and `siteorigin_widgets_instance_{$id_base}` change the widget instance before the widget renders.
+- [Form Widget Instance Filter](filters/form-widget-instance.md): `siteorigin_widgets_form_instance_{$id_base}` changes the widget instance before the form renders.
+- [Template Variables Filter](filters/template-variables.md): `siteorigin_widgets_template_variables_{$id_base}` changes the variables passed to the template.
+- [Template File Filter](filters/template-file.md): `siteorigin_widgets_template_file_{$id_base}` changes the template file's path.
+- [Widget Template HTML Filter](filters/template-html.md): `siteorigin_widgets_template_html_{$id_base}` changes the template's raw HTML.
+- [LESS File Filter](filters/less-file.md): `siteorigin_widgets_less_file_{$id_base}` changes the LESS file's path.
+- [LESS Content Filter](filters/less-content.md): `siteorigin_widgets_less_{$id_base}` and `siteorigin_widgets_less_vars_{$id_base}` change the widget's LESS before the Widgets Bundle compiles it.
+- `siteorigin_widgets_less_variables_{$id_base}` changes the LESS variables, and receives `$vars`, `$instance` and `$widget`.
+- `siteorigin_widgets_less_compiler` changes the LESS compiler object, for example to register custom LESS functions, and receives `$compiler`, `$instance` and `$widget`.
+- `siteorigin_widgets_wrapper_classes_{$id_base}` changes the classes of the widget's wrapper `div`, and receives `$classes`, `$instance` and `$widget`.
+- `siteorigin_widgets_wrapper_id_{$id_base}` changes the `id` of the widget's wrapper `div`, and receives `$id`, `$instance` and `$widget`.
+- [Widget CSS Filter](filters/widget-css.md): `siteorigin_widgets_instance_css` changes the CSS compiled from the LESS.
+- [Sanitize Instance Filter](filters/sanitize.md): `siteorigin_widgets_sanitize_instance` and `siteorigin_widgets_sanitize_instance_{$id_base}` sanitize the instance before the Widgets Bundle saves it.
+
+In each `{$id_base}` filter, `{$id_base}` is the widget's base ID, such as `sow-button`.

@@ -1,14 +1,17 @@
 # Adding Custom Fields
 
-We have made the form fields, used by SiteOrigin widgets, extendible so that you can easily create your own custom fields. There are a few steps involved, but each of them is fairly simple. You can see the example code in the so-dev-examples repository <a href="https://github.com/siteorigin/so-dev-examples/tree/develop/extend-widgets-bundle/custom-fields/" target="_blank">here</a>.
+You can build your own form fields for Widgets Bundle widgets by extending our field classes. The full example code is in the [custom-fields folder](https://github.com/siteorigin/so-dev-examples/tree/develop/extend-widgets-bundle/custom-fields/) of our so-dev-examples repository.
 
 ## Field Class Names
-We "namespace" our classes by prefixing their names with some (hopefully unique) prefix. The full class name is the class prefix followed by the field type, with the field type split on hyphens, each part capitalized and the parts joined with underscores. For example, the basic text field in the Widgets Bundle has the type `text` and it is prefixed by `SiteOrigin_Widget_Field_`, so the resulting class name is `SiteOrigin_Widget_Field_Text`. A field type of `better-text` with the prefix `My_Custom_Field_` gives the class name `My_Custom_Field_Better_Text`.
 
-## Adding Custom Field Class Prefixes
-We encourage you to prefix your custom field class names to avoid conflicts with other class names. If you do this, the Widgets Bundle needs to know what your chosen prefix is, in order to autoload and instantiate your custom field classes. If you need to, you can add more than one prefix, but one is sufficient for the Widgets Bundle.
+A field's class name is a class prefix followed by the field type. The field type is split on hyphens, and each part is capitalized and joined with underscores. The Widgets Bundle's text field, for example, has the type `text` and the prefix `SiteOrigin_Widget_Field_`, so its class is `SiteOrigin_Widget_Field_Text`. A `better-text` field type with the prefix `My_Custom_Field_` has the class `My_Custom_Field_Better_Text`.
 
-### Example - Adding Class Prefixes
+## Adding a Class Prefix
+
+Give your field classes a prefix of your own, so their names don't clash with other classes. The Widgets Bundle needs your prefix to load and create your field classes. You can add more than one prefix, and one is enough.
+
+### Example: Adding a Class Prefix
+
 ```php
 function my_custom_fields_class_prefixes( $class_prefixes ) {
 	$class_prefixes[] = 'My_Custom_Field_';
@@ -17,10 +20,12 @@ function my_custom_fields_class_prefixes( $class_prefixes ) {
 add_filter( 'siteorigin_widgets_field_class_prefixes', 'my_custom_fields_class_prefixes' );
 ```
 
-## Adding Custom Field Class Paths
-It is necessary for the Widgets Bundle to know which directory you custom field class files are kept in for the purpose of autoloading. You can add your class paths to the autoloader by adding the `siteorigin_widgets_field_class_paths` filter.
+## Adding a Class Path
 
-### Example - Adding Class Paths
+The Widgets Bundle also needs the folder that holds your field class files, so it can load them. Add the folder with the `siteorigin_widgets_field_class_paths` filter.
+
+### Example: Adding a Class Path
+
 ```php
 function my_custom_fields_class_paths( $class_paths ) {
 	$class_paths[] = plugin_dir_path( __FILE__ ) . 'custom-fields/';
@@ -28,19 +33,25 @@ function my_custom_fields_class_paths( $class_paths ) {
 }
 add_filter( 'siteorigin_widgets_field_class_paths', 'my_custom_fields_class_paths' );
 ```
+
 ## Implementing a Custom Field
-To implement a custom field, extend one of the existing field classes and override the methods you want to change. If you extend `SiteOrigin_Widget_Field_Base` directly, you must implement at least the `render_field` and `sanitize_field_input` methods. There is much more that can be done, but this is all that is required to successfully render a custom field and save it's input.
 
-### Filenames and Class Naming
-For your field class to be loaded, you need to name your class according to the convention mentioned above. However the file itself must be named according to the convention `$field_type.class.php` and it must be placed in one of the class paths you added in the step above. For example, if you have a field type of `taxonomylist` with a custom class path of `my_custom_fields/` and a class prefix of `My_Custom_Field_`, you'd first create the file `my_custom_fields/taxonomylist.class.php` and then define the class `My_Custom_Field_Taxonomylist` inside it. The `My_Custom_Field_Better_Text` class for the `better-text` field type goes in `better-text.class.php`.
+Extend one of the existing field classes and override the methods you want to change. A class that extends `SiteOrigin_Widget_Field_Base` directly must implement at least `render_field()` and `sanitize_field_input()`, which are enough to render the field and save its input.
 
-### Inheriting from SiteOrigin_Widget_Field_Base
-The `SiteOrigin_Widget_Field_Base` abstract class handles most of the work required for the widget form fields. It contains various properties and methods which are used to render the field in the widget form and preparing input from the field for database persistence. When extending this class there are two abstract methods which must be implemented, namely, `render_field` and `sanitize_field_input`.
+### File and Class Names
 
-#### The `render_field` Method
-`render_field` should output the HTML required for your custom field in the widget form. The method receives two arguments, `$value` and `$instance`. `$value` is the current value of the field for a specific instance of a widget form and should always be escaped just before output. The Widgets Bundle passes an empty array as `$instance` to `render_field`. To read other values from the widget instance, override `render_before_field` or `render_after_field`, which receive the full instance.
+Name your class with your prefix and the field type, as described above, and name its file `{field type}.class.php` in one of your class paths. For a `taxonomylist` field type with the class path `my_custom_fields/` and the prefix `My_Custom_Field_`, create `my_custom_fields/taxonomylist.class.php` and define the `My_Custom_Field_Taxonomylist` class in it. The `My_Custom_Field_Better_Text` class for the `better-text` field type goes in `better-text.class.php`.
 
-##### Example - `render_field` Implementation
+### Extending `SiteOrigin_Widget_Field_Base`
+
+The `SiteOrigin_Widget_Field_Base` abstract class does most of the work of a form field: it renders the field in the widget form and prepares the field's input to be saved. A class that extends it must implement two abstract methods, `render_field()` and `sanitize_field_input()`.
+
+#### The `render_field()` Method
+
+`render_field()` outputs your field's HTML in the widget form. It receives `$value`, the field's current value, which you escape just before output, and `$instance`. The Widgets Bundle passes an empty array as `$instance`, so override `render_before_field()` or `render_after_field()` to read other values from the widget instance, because they receive the full instance.
+
+##### Example: `render_field()`
+
 ```php
 protected function render_field( $value, $instance ) {
 	?>
@@ -50,10 +61,12 @@ protected function render_field( $value, $instance ) {
 }
 ```
 
-#### The `sanitize_field_input` Method
-`sanitize_field_input` should ensure that the input received from the widget form is in the desired format and any unwanted characters are removed. It receives two arguments, `$value`, which is the raw value of the field input, and `$instance`, the widget instance. Typically this value is sanitized using the built-in WordPress sanitization functions.
+#### The `sanitize_field_input()` Method
 
-##### Example - `sanitize_field_input` Implementation
+`sanitize_field_input()` puts the input from the widget form in the format your field needs and removes unwanted characters. It receives `$value`, the raw input, and `$instance`, the widget instance. Use the WordPress sanitization functions to sanitize the value.
+
+##### Example: `sanitize_field_input()`
+
 ```php
 protected function sanitize_field_input( $value, $instance ) {
 	$sanitized_value = sanitize_text_field( $value );
@@ -62,10 +75,13 @@ protected function sanitize_field_input( $value, $instance ) {
 ```
 
 #### Adding Properties
-You may wish to have additional configuration properties for your custom fields. Adding one is as simple as declaring the property in your custom class, then to use it, specify a configuration option with the same name as your property and the base field class will make sure it is set.
 
-##### Example - Adding Properties
-In your custom class simple declare an instance variable.
+Your field can take its own options. Declare a property in your class, and the base field class sets it from the field option with the same name.
+
+##### Example: Adding a Property
+
+Declare the property in your class:
+
 ```php
 class My_Custom_Field_Better_Text extends SiteOrigin_Widget_Field_Text {
 	/**
@@ -78,7 +94,8 @@ class My_Custom_Field_Better_Text extends SiteOrigin_Widget_Field_Text {
 }
 ```
 
-Then when using the field, you may simply add a configuration option with the same name.
+Then set the option with the same name when you use the field:
+
 ```php
 array(
 	'text' => array(
@@ -91,9 +108,11 @@ array(
 ```
 
 #### Rendering the Label
-It is fairly common for fields to have a label, so the `SiteOrigin_Widget_Field_Base` class includes a default label rendering function `render_field_label`. There are two ways to customise the label rendering. You can override `render_field_label` and do your own rendering, or you can override the `get_label_classes` function to return CSS classes to affect the styling of the existing label. The second method makes it easier for subclasses to customize the labels. You will need to ensure that your stylesheet containing the custom label CSS class is enqueued, for example in the field's `enqueue_scripts` method.
 
-##### Example - Overriding `render_field_label`
+`SiteOrigin_Widget_Field_Base` renders the field's label with its `render_field_label()` method. Override `render_field_label()` to render the label yourself, or override `get_label_classes()` to add CSS classes to the default label, which is easier for subclasses to build on. Enqueue the stylesheet with your label classes, for example in the field's `enqueue_scripts()` method.
+
+##### Example: Overriding `render_field_label()`
+
 ```php
 protected function render_field_label( $value, $instance ) {
 	?>
@@ -102,7 +121,8 @@ protected function render_field_label( $value, $instance ) {
 }
 ```
 
-##### Example - Adding Label CSS Classes
+##### Example: Adding Label Classes
+
 ```php
 protected function get_label_classes( $value, $instance ) {
 	$label_classes = parent::get_label_classes( $value, $instance );
@@ -112,13 +132,17 @@ protected function get_label_classes( $value, $instance ) {
 ```
 
 #### Rendering the Description
-Similarly to the field label, the `SiteOrigin_Widget_Field_Base` class includes a default description rendering function `render_field_description`. It's default rendering may be customized in the same way as labels.
 
-#### Render Before and After Field
-The `SiteOrigin_Widget_Field_Base` class has two additional rendering methods, `render_before_field` and `render_after_field` which are called before and after the main rendering method. These serve to avoid duplication of commonly rendered items, such as a label above the field and a description below the field. You should override these if you wish to prevent rendering of the label before a field, or the description after a field, or if you want to render additional items.
+`SiteOrigin_Widget_Field_Base` renders the field's description with its `render_field_description()` method, which you can change the same way as the label.
 
-##### Example - Overriding `render_before_field` and `render_after_field` Methods
-Say you want to render the description after the label, but before the field.
+#### Rendering Before and After the Field
+
+`SiteOrigin_Widget_Field_Base` calls `render_before_field()` before the main rendering method and `render_after_field()` after it, so every field gets its label above and its description below. Override them to drop the label or the description, or to add your own HTML.
+
+##### Example: Overriding `render_before_field()` and `render_after_field()`
+
+This example renders the description after the label, above the field:
+
 ```php
 protected function render_before_field( $value, $instance ) {
 	// This is to keep the default label rendering behaviour.
@@ -132,11 +156,13 @@ protected function render_after_field( $value, $instance ) {
 }
 ```
 
-#### The `sanitize_instance` Method
-There are case where a field may affect values on the widget instance, other than it's own input. It then becomes necessary to perform additional sanitization on the widget instance. In such a case the `sanitize_instance` method may be overridden. It receives the widget instance and must return it.
+#### The `sanitize_instance()` Method
 
-#### The `get_related_instance_keys` Method
-When the widget is saved, the Widgets Bundle removes every instance key that isn't a declared form field. If your field saves a value under its own sibling key, for example `{field name}_unit`, override `get_related_instance_keys` to return an array of those key names so the value is kept. The Widgets Bundle doesn't sanitize these keys, so sanitize them in `sanitize_instance`. The media field does both for its fallback URL key.
+A field that changes values in the widget instance other than its own input needs to sanitize the instance too. Override `sanitize_instance()`, which receives the widget instance and must return it.
+
+#### The `get_related_instance_keys()` Method
+
+When a user saves a widget, the Widgets Bundle removes every instance key that isn't a form field. If your field saves a value under a key of its own, such as `{field name}_unit`, override `get_related_instance_keys()` and return an array of those keys, so the Widgets Bundle keeps them. The Widgets Bundle doesn't sanitize these keys, so sanitize them in `sanitize_instance()`. The media field does both for its fallback URL key.
 
 ```php
 private function get_unit_key() {
@@ -166,10 +192,12 @@ public function sanitize_instance( $instance ) {
 ```
 
 #### Default Options and Initialization
-Override `get_default_options` to return an array of default values for your field's properties. Options passed in the form array override these defaults. Override `initialize` to run code after the options are set.
+
+Override `get_default_options()` to return default values for your field's properties, which options in the form array override. Override `initialize()` to run code after the options are set.
 
 #### Scripts and Styles
-Override the `enqueue_scripts` method to enqueue the field's JavaScript and CSS. The widget calls it for each field while it renders the form. To set up the field in JavaScript, listen for the `sowsetupformfield` event on the field's wrapper, which has the class `siteorigin-widget-field-type-{field type}`.
+
+Override `enqueue_scripts()` to enqueue the field's JavaScript and CSS. The widget calls the method for each field as it renders the form. To set up the field in JavaScript, listen for the `sowsetupformfield` event on the field's wrapper, which has the class `siteorigin-widget-field-type-{field type}`.
 
 ```javascript
 jQuery( document ).on( 'sowsetupformfield', '.siteorigin-widget-field-type-better-text', function() {
@@ -179,11 +207,12 @@ jQuery( document ).on( 'sowsetupformfield', '.siteorigin-widget-field-type-bette
 ```
 
 #### JavaScript Variables
-Occasionally it is necessary for a field to set a variable to be used in the widget form. For such cases, override the `get_javascript_variables` function. This will be called by the containing widget while it is rendering it's form and it will pass all field javascript variables to the browser, where they will be accessible in the global object `sow_field_javascript_variables`, keyed by widget class and then field name: `sow_field_javascript_variables[ widgetClass ][ fieldName ]`.
 
+Override `get_javascript_variables()` to pass values from your field to its JavaScript. The widget calls the method as it renders its form and passes the values to the browser in the global `sow_field_javascript_variables` object, keyed by widget class and then field name: `sow_field_javascript_variables[ widgetClass ][ fieldName ]`.
 
 ### Using a Custom Field
-You can use your custom field in a widget, just like any other field.
+
+Use your custom field in a widget like any other field:
 
 ```php
 $form_options = array(

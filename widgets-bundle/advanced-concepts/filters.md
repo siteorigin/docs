@@ -1,15 +1,15 @@
 # Filters
 
-- [Widget Folders](filters/widget-folders.md).
-- [Active Widgets](filters/active-widgets.md).
-- [Menu Capability](filters/admin-capability.md).
-- [Form Options](filters/form-options.md).
-- [Frontend Widget Instance](filters/widget-instance.md).
-- [Form Widget Instance](filters/form-widget-instance.md).
-- [Template Variables](filters/template-variables.md).
-- [Template File](filters/template-file.md).
-- [Template HTML](filters/template-html.md).
-- [Less File](filters/less-file.md).
-- [Less Content](filters/less-content.md).
-- [Widget CSS](filters/widget-css.md).
-- [Sanitize Instance](filters/sanitize.md).
+- [Widget Folders Filter](filters/widget-folders.md)
+- [Active Widgets Filter](filters/active-widgets.md)
+- [Menu Capability Filter](filters/admin-capability.md)
+- [Form Options Filter](filters/form-options.md)
+- [Frontend Widget Instance Filter](filters/widget-instance.md)
+- [Form Widget Instance Filter](filters/form-widget-instance.md)
+- [Template Variables Filter](filters/template-variables.md)
+- [Template File Filter](filters/template-file.md)
+- [Widget Template HTML Filter](filters/template-html.md)
+- [LESS File Filter](filters/less-file.md)
+- [LESS Content Filter](filters/less-content.md)
+- [Widget CSS Filter](filters/widget-css.md)
+- [Sanitize Instance Filter](filters/sanitize.md)
