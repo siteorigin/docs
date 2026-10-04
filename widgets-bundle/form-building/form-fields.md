@@ -4,13 +4,15 @@ This is where you'll find a lot of the convenience of using the SiteOrigin Widge
 
 ## Form Field Descriptors
 
-The form fields options are passed into the `SiteOrigin_Widget` class constructor as an array and stored in the `$form_options` instance variable. Each value in the array is a form field descriptor, which is an associative array describing the form field to be rendered by the `SiteOrigin_Widget` base class, in order to capture configuration values for a widget instance. Each form field descriptor must at least have a type, however a few of the types won't be useful without additional configuration values. Optional base form field descriptor values are listed below:
+The form fields options are returned as an array from the widget's `get_widget_form()` method, which is what the widgets in the Widgets Bundle use. They can also be passed into the `SiteOrigin_Widget` class constructor as an array; the constructor array is stored in the `$form_options` instance variable, and `get_widget_form()` is only used when that array is empty. Each value in the array is a form field descriptor, which is an associative array describing the form field to be rendered by the `SiteOrigin_Widget` base class, in order to capture configuration values for a widget instance. Each form field descriptor must at least have a type, however a few of the types won't be useful without additional configuration values. Optional base form field descriptor values are listed below:
 
 - label: `string` Render a label for the field with the given value.
 - default: `mixed` The field will be prepopulated with this default value.
 - description: `string` Render small italic text below the field to describe the field's purpose.
 - optional: `bool` Append '(Optional)' to this field's label as a small green superscript.
-- sanitize: `string` Specifies sanitization type to be performed on input from this field. Available sanitizations are'email' and 'url'. If the specified sanitization isn't recognized it is assumed to be a custom sanitization and a filter is applied using the pattern `'siteorigin_widgets_sanitize_field_' . $sanitize`, in case the sanitization is defined elsewhere.
+- required: `bool|string` Append '*' to this field's label and warn the user when they save the widget with this field empty. If this is a string, it is also shown as a message below the field.
+- sanitize: `string|callable` Specifies sanitization type to be performed on non-empty input from this field. Available sanitizations are 'email', 'url', 'text' (removes HTML for users without the `unfiltered_html` capability) and 'number' (typecasts to an integer). A PHP callable is called with the value and the field's previous value. If the specified sanitization isn't recognized it is assumed to be a custom sanitization and a filter is applied using the pattern `'siteorigin_widgets_sanitize_field_' . $sanitize`, in case the sanitization is defined elsewhere. See [Input Sanitization](./input-sanitization.md).
+- state_emitter, state_handler and state_handler_initial: `array` Show, hide or change fields based on the values of other fields. See [State Emitters](./state-emitters.md).
 
 In addition to these, some fields have their own specific configuration values, which are listed in the respective sections below.
 
@@ -25,6 +27,12 @@ Renders a text input field.
 - placeholder: `string` A string to display before any text has been input.
 - readonly: `bool` If true, this field will not be editable.
 - input_type: `string` The input type to use for this field. Supports all standard HTML input types. For a list avaliable types, [click here](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input).
+- allow_html: `bool` Whether to keep HTML in the saved value. Defaults to `true`, which sanitizes the value with `wp_kses_post()`, so escape the value when you output it. If `false`, `sanitize_text_field()` is used.
+- json: `bool` If true, the value is sanitized as JSON.
+- onclick: `bool` If true, the value is sanitized as the JavaScript for an `onclick` attribute.
+- width: `int` The width of the input in pixels.
+
+The `allow_html`, `json` and `onclick` options also apply to the textarea, color, number, measurement and autocomplete fields, and `width` applies to all of these fields except textarea.
 
 #### Example
 Form options input:
@@ -53,6 +61,7 @@ You can filter search results using the `siteorigin_widgets_search_posts_results
 - placeholder: `string` A string to display before any text has been input.
 - readonly: `bool` If true, this field will not be editable.
 - post_types: `array` Array of strings post types by which to search.
+- allow_shortcode: `bool` If true, a value containing `[` is kept as a shortcode instead of being escaped as a URL.
 
 #### Example
 Form options input:
@@ -76,6 +85,8 @@ Renders a color input field and color picker.
 
 #### Additional options
 - placeholder: `string` A string to display before any text has been input.
+- alpha: `bool` If true, the color picker includes an opacity slider and the value can be an `rgba()` color.
+- palettes: `array` An array of hex colors to show as swatches in the color picker. You can add swatches to every color field with the `siteorigin_widget_color_palette` filter.
 
 #### Example
 Form options input:
@@ -103,6 +114,7 @@ Renders a text input field for entering a number. This is the same as the _text_
 - abs: `bool` Whether to optionally apply the PHP function `abs` when saving to ensure only positive numbers are possible.
 - min: `float` An optional minimum value allowed.
 - max: `float` An optional maximum value allowed.
+- step: `float` The step size of the number input.
 - unit: `string` An optional unit of measurement shown to the user. This option will not be saved.
 
 #### Example
@@ -150,11 +162,13 @@ Result:
 
 ![Widget Form Measurement](../images/form-field-type-measurement.png)
 
-### multi measurement
+### multi-measurement
 Renders multiple fields for entering [unit of measurement](https://developer.mozilla.org/en-US/docs/Learn/CSS/Introduction_to_CSS/Values_and_units#Numeric_values). This field type is typically used for things like margins, borders, and paddings.
 
 #### Additional Options
-- measurements: `array` The list of measurement options
+- measurements: `array` The list of measurement options. Each item can be a label string or an array with the following keys:
+-- label: `string` The label for the measurement input.
+-- classes: `array` CSS classes to add to the measurement input.
 -- units: `array` The selector units of measurement. If no units are set, default units are used - `px`, `%`, `in`, `cm`, `mm`, `em`, `rem`, `pt`, `pc`, `ex`, `ch`, `vw`, `vh`, `vmin`, `vmax`.
 - separator: `string` separator for the measurements. Default is an empty space.
 - autofill: `bool` Whether to automatically fill the rest of the inputs when the first value is entered. Default is false.
@@ -196,17 +210,15 @@ Result:
 
 ![Widget Form Multi Measurement](../images/form-field-type-multi-measurement.png)
 
-### multiple media
+### multiple_media
 
-Renders a media selector button that allows for multiple items to be selected. When clicked the button opens the WordPress Media Library dialog for the media types specified by the `library` option.
-
-_This field requires at least WordPress 3.5._
+Renders a media selector button that allows for multiple items to be selected. When clicked the button opens the WordPress Media Library dialog for the media types specified by the `library` option. Use `multiple_media`, with an underscore, as the field type; the field's JavaScript doesn't load for `multiple-media`.
 
 #### Additional Options
 
 - choose: `string` A label for the title of the media selector dialog.
 - update: `string` A label for the confirmation button of the media selector dialog.
-- library: `string` Sets the media library which to browse and from which media can be selected. Allowed MIME type values are `'image'`, `'audio'`, `'video'`, `'file'` and `'application'`. The default is `'image'`.
+- library: `string` Sets the media library which to browse and from which media can be selected. Allowed MIME type values are `'image'`, `'audio'`, `'video'`, `'file'` and `'application'`, or a comma-separated list of them. Use `'all'` for every type. The default is `'image'`.
 - title: `boolean` Whether to display the item title or not. Titles are displayed by default.
 - thumbnail_dimensions: `array` The dimensions of each thumbnail item. Only used when editing widgets. The default dimensions are `array( 64, 64 )`.
 - repeater: `array` An optional array containing information about a repeater field. This will allow for the multiple media field to add items to the repeater. For usage instructions, please refer to [this tutorial](./multiple-media-repeater.md)
@@ -246,7 +258,7 @@ $form_options = array(
 	'some_long_message' => array(
 		'type' => 'textarea',
 		'label' => __( 'Type a message', 'siteorigin-docs' ),
-		'default' => 'An example of a long message.</br>It is even possible to add a few html tags.</br><a href="siteorigin.com" target="_blank"">Links!</a></br><strong>Strong</strong> and <em>emphasized</em> text.',
+		'default' => 'An example of a long message.<br>It is even possible to add a few html tags.<br><a href="https://siteorigin.com" target="_blank">Links!</a><br><strong>Strong</strong> and <em>emphasized</em> text.',
 		'rows' => 10
 	)
 );
@@ -265,7 +277,12 @@ Renders a TinyMCE editor field.
 - default_editor: `string` Whether to display the TinyMCE visual editor or the Quicktags HTML editor initially. Allowed values are `'tinymce'` ( can be abbreviated to `'tmce'`), and `'html'`. The default is `'tinymce'`.
 - media_buttons: `bool` Whether to add the Add Media button. The default is `true`.
 - editor_height: `int` The initial height of the editor. Setting this will cause the rows option to be ignored.
-- button_filters: `array` An array of filter callbacks to filter the buttons available on the TinyMCE visual editor and the Quicktags HTML editor. The TinyMCE editor can display up to four rows of buttons and the Quicktags editor displays a single row of buttons. Each row can be filtered by specifying a corresponding callback, as follows:
+- wpautop: `bool` Whether to add paragraphs with `wpautop()` when the value is saved from the visual editor. The default is `true`.
+- mce_buttons, mce_buttons_2, mce_buttons_3, mce_buttons_4: `array` The buttons for each row of the TinyMCE visual editor.
+- quicktags_buttons: `array` The buttons for the Quicktags HTML editor.
+- mce_plugins: `array` The TinyMCE plugins to load.
+- mce_external_plugins: `array` External TinyMCE plugins to load, as plugin name => script URL.
+- button_filters: `array` An array of filter callbacks to filter the buttons available on the TinyMCE visual editor and the Quicktags HTML editor. Each callback must be a method of your widget, in the form `array( $this, 'method_name' )`. The TinyMCE editor can display up to four rows of buttons and the Quicktags editor displays a single row of buttons. Each row can be filtered by specifying a corresponding callback, as follows:
 	* First row: `'mce_buttons'`
 	* Second row: `'mce_buttons_2'`
 	* Third row: `'mce_buttons_3'`
@@ -279,14 +296,14 @@ $form_options = array(
 	'some_tinymce_editor' => array(
 		'type' => 'tinymce',
 		'label' => __( 'Visually edit, richly.', 'siteorigin-docs' ),
-		'default' => 'An example of a long message.</br>It is even possible to add a few html tags.</br><a href="siteorigin.com" target="_blank"">Links!</a>',
+		'default' => 'An example of a long message.<br>It is even possible to add a few html tags.<br><a href="https://siteorigin.com" target="_blank">Links!</a>',
 		'rows' => 10,
 		'default_editor' => 'html',
 		'button_filters' => array(
 			'mce_buttons' => array( $this, 'filter_mce_buttons' ),
 			'mce_buttons_2' => array( $this, 'filter_mce_buttons_2' ),
 			'mce_buttons_3' => array( $this, 'filter_mce_buttons_3' ),
-			'mce_buttons_4' => array( $this, 'filter_mce_buttons_5' ),
+			'mce_buttons_4' => array( $this, 'filter_mce_buttons_4' ),
 			'quicktags_settings' => array( $this, 'filter_quicktags_settings' ),
 		),
 	)
@@ -302,9 +319,9 @@ Result:
 Renders a number slider field to allow the choice of a number in a range.
 
 #### Additional options
-- min: `int` The minimum value of the allowed range.
-- max: `int` The maximum value of the allowed range.
-- step: `float` The step size when moving in the range.
+- min: `float` The minimum value of the allowed range. The default is `0`.
+- max: `float` The maximum value of the allowed range. The default is `100`.
+- step: `float` The step size when moving in the range. The default is `1`.
 
 #### Example
 Form options input:
@@ -317,7 +334,6 @@ $form_options = array(
 		'min' => 2,
 		'max' => 37,
 		'step' => 0.5,
-		'integer' => true
 	)
 );
 ```
@@ -332,7 +348,7 @@ Renders a list of options that the user can reorder. For usage, please refer to 
 
 #### Additional Options
 - options: `array` The list of options which can be reordered
-- max: `int` The maximum value of the allowed range.
+- default: `array` The keys of `options` in their initial order. This is required: the field only shows the keys in its value, so without a default listing every key it shows nothing.
 
 #### Example
 Form options input:
@@ -362,7 +378,9 @@ Renders a dropdown select field. This field is better for a long list of predefi
 - prompt: `string` If present, it is included as a disabled (not selectable) value at the top of the list of options. If there is no default value, it is selected by default. You might even want to leave the label value blank when you use this.
 - options `array` The list of options which may be selected.
 - multiple `bool` Determines whether this is a single or multiple select field.
-- select2 `bool` If both `select2` and `multiple` are enabled, [Select2](https://select2.org) will be enabled for the field.
+- select2 `bool` If enabled, [Select2](https://select2.org) will be enabled for the field.
+
+The `prompt` option is ignored when `multiple` is enabled.
 
 #### Example 1 - Default Value Without Prompt
 Form options input:
@@ -504,13 +522,12 @@ Result:
 ### media
 Renders a media selector button. When clicked the button opens the WordPress Media Library dialog for the media types specified by the `library` option.
 
-_This field requires at least WordPress 3.5._
-
 #### Additional Options
 - choose: `string` A label for the title of the media selector dialog.
 - update: `string` A label for the confirmation button of the media selector dialog.
-- library: `string` Sets the media library which to browse and from which media can be selected. Allowed MIME type values are `'image'`, `'audio'`, `'video'`, `'file'` and `'application'`. The default is `'image'`.
-- fallback: `bool` Whether or not to display a URL input field which allows for specification of a fallback URL to be used in case the selected media resource isn't available.
+- library: `string` Sets the media library which to browse and from which media can be selected. Allowed MIME type values are `'image'`, `'audio'`, `'video'`, `'file'` and `'application'`, or a comma-separated list of them. Use `'all'` for every type. The default is `'image'`.
+- fallback: `bool` Whether or not to display a URL input field which allows for specification of a fallback URL to be used in case the selected media resource isn't available. The fallback URL is saved in the instance under `{field name}_fallback`, for example `some_media_fallback`.
+- image_search: `string` The label for the Image Search button. The button only shows when `library` is `'image'` and the user can upload files.
 
 #### Example
 Form options input:
@@ -535,11 +552,11 @@ Result:
 ### image size
 Renders a dropdown with all of [the available image sizes](https://developer.wordpress.org/reference/functions/add_image_size/) on the widget users website. This field is commonly used in conjunction with the Media field to allow the user more control over the image output. Please refer to the [Image Sizes tutorial](./image-sizes-field.md) for usage instructions.
 
-_This field requires at least WordPress 2.9._
-
 
 #### Additional Options
 - custom_size: `bool` Whether to allow custom image sizes. By default, Custom Sizes are disabled.
+- custom_size_enforce: `bool` If true, a custom size also shows an **Enforce Dimensions** checkbox, saved as `{field name}_enforce`.
+- sizes: `array` A list of image sizes to show, as size name => label, in place of all registered sizes.
 
 #### Example
 ```php
@@ -559,11 +576,11 @@ Possible Image Size values:
 ![Possible Image Size values](../images/form-field-type-image-sizes-example.png)
 
 #### Custom Image Size
-The custom_size option allows the user to manually input an image size. The custom image size values are prefixed with the option name and then \_width or \_height. For example: `option_name_width` and `option_name_height**`.
+The custom_size option allows the user to manually input an image size. The custom image size values are prefixed with the option name and then \_width or \_height. For example: `option_name_width` and `option_name_height`.
 
 For this image size to be used you'll need to detect the size form field value equals to `custom_size` and then pass an array with the field values. For example:
 
-```
+```php
 <?php
 // Detect custom image size and override size.
 if (
@@ -573,7 +590,7 @@ if (
 ) {
 	$instance['size'] = array(
 		(int) $instance['size_width'],
-		(int) $instance['size_width'],
+		(int) $instance['size_height'],
 	);
 }
 
@@ -583,13 +600,15 @@ $src = siteorigin_widgets_get_attachment_image_src(
 );
 ```
 ### posts
-Renders a post selector field. This can be used to build custom queries with which to select posts from your database. The field displays a small red indicator which shows the number of posts currently being selected. By default, all posts are selected.
+Renders a post selector field. This can be used to build custom queries with which to select posts from your database. The field displays a small red indicator which shows the number of posts currently being selected. By default, all posts of the `post` post type are selected.
 
 You can find more detail about the use of the post selector field [here](./post-selector.md).
 
 
 #### Additional Options
 - show_count: `bool` Whether to add query total results count to the posts section title in the editor. Defaults to true.
+- post_types: `array` Limits the post types in the **Post Type** list.
+- posts_limit: `bool` If true, the field adds a **Maximum Posts to Output** setting.
 
 #### Example
 Form options input:
@@ -615,6 +634,7 @@ The section field type provides a convenient way to group and hide related form 
 #### Additional Options
 - hide: `bool` Whether or not this section should start out collapsed or expanded.
 - fields: `array` The set of fields to be grouped together. This should contain any combination of other field types, even repeaters and sections.
+- tab: `bool` If true, the section is shown as a tab of a tabs field. See [tabs](#tabs).
 
 #### Example
 Form options input:
@@ -715,6 +735,7 @@ The repeater field type provides a convenient way to repeat a specified set of f
 - fields: `array` The set of fields to be repeated together as one item. This should contain any combination of other field types, even repeaters and sections.
 - scroll_count: `int` The maximum number of repeated items to display before adding a scrollbar to the repeater.
 - readonly: `bool` Whether or not items may be added to or removed from this repeater by user interaction.
+- max_items: `int` The maximum number of items. See [Repeaters and Sections](./repeaters-and-sections.md).
 
 #### Example
 Form options input:
@@ -758,6 +779,8 @@ Includes the entire form of an existing widget class. You can [find more informa
 #### Additional Options
 - class: `string` The class name of the widget to be included.
 - hide: `bool` Whether or not this widget's form section should start out collapsed or expanded.
+- form_filter: `callable` A callback that receives the child widget's form options and returns a filtered array. See [Child Widgets](./child-widgets.md).
+- collapsible: `bool` Whether the child widget's form is in a collapsible section. The default is `true`.
 
 #### Example
 Form options input:
@@ -783,7 +806,7 @@ An entire [SiteOrigin Page Builder](https://wordpress.org/plugins/siteorigin-pan
 _This field requires [SiteOrigin Page Builder](https://wordpress.org/plugins/siteorigin-panels/) to be installed and active._
 
 #### Additional Options
--  builder: `string` The type of page builder instance - currently unused. Defaults to `sow-builder-field`
+-  builder_type: `string` The type of Page Builder instance, output as the builder's `data-type` attribute. Defaults to `sow-builder-field`.
 
 #### Example
 Form options input:
@@ -804,9 +827,9 @@ Result:
 ### code
 A textarea field with the [Behave.js library](https://github.com/jakiestfu/Behave.js) set up for it.
 
+The code field doesn't sanitize its value and ignores the `sanitize` option, so your widget must sanitize and escape the value itself.
+
 #### Additional options
-- element_id `string` the id of the code textarea
-- element_name `string` the name of the code textarea
 - rows: `int` The number of visible rows in the textarea.
 - placeholder: `string` A string to display before any text has been input.
 - readonly `bool` If true, this field will not be editable.
@@ -830,9 +853,13 @@ Result:
 ---
 
 ### icon
-Renders an icon selector field. This allows you to select an icon from a default set of icon families, namely <a href="http://fortawesome.github.io/Font-Awesome/" target="_blank">Font Awesome</a>, <a href="https://icomoon.io/" target="_blank">IcoMoon</a>, <a href="http://genericons.com/" target="_blank">Genericons</a>, <a href="http://typicons.com/" target="_blank">Typicons</a>, and <a href="http://www.elegantthemes.com/blog/freebie-of-the-week/free-line-style-icons" target="_blank">Elegant Themes' Line Icons</a>. You can include your own icon families with the `siteorigin_widgets_icon_families` filter.
+Renders an icon selector field. This allows you to select an icon from a default set of icon families, namely <a href="http://fortawesome.github.io/Font-Awesome/" target="_blank">Font Awesome</a>, <a href="https://icomoon.io/" target="_blank">IcoMoon</a>, <a href="http://genericons.com/" target="_blank">Genericons</a>, <a href="http://typicons.com/" target="_blank">Typicons</a>, <a href="http://www.elegantthemes.com/blog/freebie-of-the-week/free-line-style-icons" target="_blank">Elegant Themes' Line Icons</a>, <a href="https://fonts.google.com/icons" target="_blank">Google Material Icons / Symbols</a> and <a href="https://ionic.io/ionicons" target="_blank">Ionicons</a>. You can include your own icon families with the `siteorigin_widgets_icon_families` filter.
 
 You can find more detail about using icons [here](./icons-and-fonts.md).
+
+#### Additional Options
+- icons_callback: `callable` A callback that returns the icon families to offer, in place of all families from the `siteorigin_widgets_icon_families` filter.
+- rows: `int` The number of rows of icons to show. The default is `3`.
 
 #### Example
 Form options input:
@@ -851,7 +878,7 @@ Result:
 ---
 
 ### font
-Renders a font selector field. This allows you to select a font from a default set of font families, namely the web safe fonts (Helvetica Neue, Lucida Grande, Georgia, and Courier New ) and a selection of font families from the Google Fonts library. By default this field will use the font specified by the active theme.
+Renders a font selector field. This allows you to select a font from a default set of font families, namely the web safe fonts (Arial, Courier New, Georgia, Helvetica Neue, Lucida Grande and Times New Roman) and a selection of font families from the Google Fonts library. By default this field will use the font specified by the active theme.
 
 You can include your own font families with the `siteorigin_widgets_font_families` filter. You can find more detail about extending available fonts [here](./icons-and-fonts.md).
 
@@ -958,13 +985,14 @@ Result:
 
 ### Autocomplete
 
-The Autocomplete field provides a list of posts or terms users that the user can select from. When an item is selected, the post/term id will be inserted. If multiple are selected each selection will be separated by a comma.
+The Autocomplete field provides a list of posts or terms users that the user can select from. When an item is selected, the post ID, or the term as `taxonomy:slug`, will be inserted. If multiple are selected each selection will be separated by a comma.
 
 #### Options
 
 - post_types `array` An array of post types to use in the autocomplete query. Only used for posts. Default is posts.
-- source `string` Indicates which database table will be used to retrieve autocomplete suggestions. Options are `posts` and `terms`. Default is posts
-- multiple `string` Whether to allow multiple items to be selected. Default is true.
+- source `string` Indicates which database table will be used to retrieve autocomplete suggestions. Options are `posts` and `terms`. Default is posts. The field sends its search to the `so_widgets_search_{source}` AJAX action.
+- multiple `bool` Whether to allow multiple items to be selected. Default is true.
+- ajax_data `array` Extra parameters to send with the autocomplete AJAX request.
 
 #### Example
 
@@ -983,3 +1011,80 @@ $form_options = array(
 Result:
 
 ![autocomplete Form field](../images/form-field-autocomplete.png)
+
+---
+
+### toggle
+Renders an on/off switch. The fields inside the toggle are shown when the switch is on. The toggle saves its fields like a section and stores the switch state as `so_field_container_state`, which is `'open'` when the switch is on.
+
+#### Additional Options
+- fields: `array` The fields to show when the switch is on.
+- toggle_on: `string` The label for the on position. The default is "On".
+- toggle_off: `string` The label for the off position. The default is "Off".
+- hide: `bool` Whether the switch starts in the off position.
+
+#### Example
+Form options input:
+```php
+$form_options = array(
+	'shadow' => array(
+		'type' => 'toggle',
+		'label' => __( 'Shadow', 'siteorigin-docs' ),
+		'hide' => true,
+		'fields' => array(
+			'color' => array(
+				'type' => 'color',
+				'label' => __( 'Shadow color', 'siteorigin-docs' ),
+			),
+		),
+	),
+);
+```
+
+In your template, check the state before you use the fields:
+
+```php
+if (
+	! empty( $instance['shadow']['so_field_container_state'] ) &&
+	$instance['shadow']['so_field_container_state'] === 'open'
+) {
+	// Use $instance['shadow']['color'] here.
+}
+```
+
+---
+
+### image-radio
+Renders a set of radio buttons with an image for each option.
+
+#### Additional Options
+- options: `array` The options, as value => `array( 'image' => image URL, 'label' => label text )`.
+- layout: `string` Either `vertical` or `horizontal`. The default is `vertical`.
+
+#### Example
+Form options input:
+```php
+$form_options = array(
+	'layout' => array(
+		'type' => 'image-radio',
+		'label' => __( 'Layout', 'siteorigin-docs' ),
+		'default' => 'left',
+		'layout' => 'horizontal',
+		'options' => array(
+			'left' => array(
+				'label' => __( 'Image left', 'siteorigin-docs' ),
+				'image' => plugin_dir_url( __FILE__ ) . 'images/left.svg',
+			),
+			'right' => array(
+				'label' => __( 'Image right', 'siteorigin-docs' ),
+				'image' => plugin_dir_url( __FILE__ ) . 'images/right.svg',
+			),
+		),
+	),
+);
+```
+
+---
+
+### Other field types
+The Widgets Bundle also includes the `date-range` field (set `date_type` to `specific` or `relative`), used by the post selector, and the `image_shape` field, used by the Image Widget's **Image Shape** setting. Use the `image_shape` spelling, with an underscore, because the field's JavaScript doesn't load for `image-shape`.
