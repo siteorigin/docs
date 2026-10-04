@@ -11,11 +11,11 @@ function mytheme_recommended_widgets($widgets){
 	if( empty($widgets['My_Custom_Widget']) ){
 		$widgets['My_Custom_Widget'] = array(
 			'class' => 'My_Custom_Widget',
-			'title' => __('Custom Widget', 'siteorigin-panels'),
+			'title' => __('Custom Widget', 'mytheme'),
 			'description' => __('My custom widget description', 'mytheme'),
 			'installed' => false,
 			'plugin' => array(
-				'name' => __('Custom Widget Plugin', 'siteorigin-panels'),
+				'name' => __('Custom Widget Plugin', 'mytheme'),
 				'slug' => 'plugin-slug'
 			),
 			'groups' => array('recommended'),
@@ -28,6 +28,8 @@ function mytheme_recommended_widgets($widgets){
 add_filter('siteorigin_panels_widgets', 'mytheme_recommended_widgets');
 ```
 
+Page Builder caches the widget list in the `siteorigin_panels_widgets` transient for 10 minutes. Delete the transient while you develop to see your changes right away.
+
 There's an optional `'plugin'` attribute in the widget array. This tells Page Builder where it can download and install the plugin from, if it's hosted on the WordPress.org directory.
 
 ### Rendering Missing Forms and Widgets
@@ -36,7 +38,7 @@ Page Builder gives you a few filters to deal with placeholder widgets. These are
 
 #### Missing Widget Form
 
-If Page Builder needs to render a form that doesn't exist, it'll pass the form HTML through the `` filter. It does this using the following form.
+If Page Builder needs to render a form that doesn't exist, it'll pass the form HTML through the `siteorigin_panels_missing_widget_form` filter. It does this using the following form.
 
 ```php
 apply_filters('siteorigin_panels_missing_widget_form', $form, $widget, $instance);
@@ -53,20 +55,20 @@ function mytheme_filter_missing_widget_form($form, $widget, $instance){
 	
 	return $form;
 }
-add_filter('siteorigin_panels_missing_widget_form', 'mytheme_filter_missing_widget_form');
+add_filter('siteorigin_panels_missing_widget_form', 'mytheme_filter_missing_widget_form', 10, 3);
 ```
 
 You can get creative here as to what you do with the widget form. You could go as far as creating the entire form.
 
 #### Missing Widget Content
 
-Page Builder also lets you create the frontend content for a widget using the `siteorigin_panels_missing_widget` filter. If Page Builder ever tries to render a form but there's no widget to do the rendering, it'll pass an empty string through this filter.
+Page Builder also lets you create the frontend content for a widget using the `siteorigin_panels_missing_widget` filter. If Page Builder ever tries to render a widget but there's no widget to do the rendering, it'll pass the widget's `before_widget` and `after_widget` HTML through this filter.
 
 ```php
-echo apply_filters('siteorigin_panels_missing_widget', '', $widget, $args , $instance);
+echo apply_filters('siteorigin_panels_missing_widget', $args['before_widget'] . $args['after_widget'], $widget, $args, $instance);
 ```
 
-Where the first argument is the empty string for you to populate, `$widget` is the widget class, `$args` are the widget arguments and `$instance` is the widget instance.
+Where the first argument is the HTML for you to replace, `$widget` is the widget class, `$args` are the widget arguments and `$instance` is the widget instance.
 
 Here's an example of using a custom function to render a missing widget.
 
@@ -74,14 +76,15 @@ Here's an example of using a custom function to render a missing widget.
 function mytheme_render_missing_widget($html, $widget, $args, $instance){
 	if( $widget === 'MyWidget_Class') {
 		$html = '';
-		$html .= $args['before_widget'] . $args['before_title'] . $instance['title'] . $args['after_title'];
-		$html .= ' ... ' // This is for more detailed form content.
+		$title = isset( $instance['title'] ) ? $instance['title'] : '';
+		$html .= $args['before_widget'] . $args['before_title'] . esc_html( $title ) . $args['after_title'];
+		$html .= ' ... '; // This is for more detailed widget content.
 		$html .= $args['after_widget'];
 	}
 	
 	return $html;
 }
-add_filter('siteorigin_panels_missing_widget', 'mytheme_render_missing_widget');
+add_filter('siteorigin_panels_missing_widget', 'mytheme_render_missing_widget', 10, 4);
 ```
 
 #### Missing Widget Object
@@ -94,7 +97,7 @@ This is how that filter is called.
 $the_widget = apply_filters( 'siteorigin_panels_widget_object', $the_widget, $widget );
 ```
 
-Where `$the_widget` is the widget object and `$widget` is the class name of the widget.
+Where `$the_widget` is the widget object and `$widget` is the class name of the widget. When Page Builder renders the widget on the front end, it also passes the widget instance as a third argument.
 
 Here's an example of how you'd implement that.
 
@@ -110,5 +113,5 @@ function mytheme_filter_widget_object($the_widget, $widget) {
 	
 	return $the_widget;
 }
-add_filter('siteorigin_panels_widget_object', 'mytheme_filter_widget_object');
+add_filter('siteorigin_panels_widget_object', 'mytheme_filter_widget_object', 10, 2);
 ```
