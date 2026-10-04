@@ -136,10 +136,10 @@ protected function render_after_field( $value, $instance ) {
 There are case where a field may affect values on the widget instance, other than it's own input. It then becomes necessary to perform additional sanitization on the widget instance. In such a case the `sanitize_instance` method may be overridden. It receives the widget instance and must return it.
 
 #### The `get_related_instance_keys` Method
-When the widget is saved, the Widgets Bundle removes every instance key that isn't a declared form field. If your field saves a value under its own sibling key, for example `{field name}_unit`, override `get_related_instance_keys` to return an array of those key names so the value is kept. The media field does this for its fallback URL key.
+When the widget is saved, the Widgets Bundle removes every instance key that isn't a declared form field. If your field saves a value under its own sibling key, for example `{field name}_unit`, override `get_related_instance_keys` to return an array of those key names so the value is kept. The Widgets Bundle doesn't sanitize these keys, so sanitize them in `sanitize_instance`. The media field does both for its fallback URL key.
 
 ```php
-public function get_related_instance_keys() {
+private function get_unit_key() {
 	$name = $this->base_name;
 
 	// Inside a section or repeater, the base name includes the parent names. Keep the last part.
@@ -147,7 +147,21 @@ public function get_related_instance_keys() {
 		$name = substr( $name, strrpos( $name, '][' ) + 2 );
 	}
 
-	return array( $name . '_unit' );
+	return $name . '_unit';
+}
+
+public function get_related_instance_keys() {
+	return array( $this->get_unit_key() );
+}
+
+public function sanitize_instance( $instance ) {
+	$unit_key = $this->get_unit_key();
+
+	if ( isset( $instance[ $unit_key ] ) ) {
+		$instance[ $unit_key ] = in_array( $instance[ $unit_key ], array( 'px', 'em', '%' ), true ) ? $instance[ $unit_key ] : 'px';
+	}
+
+	return $instance;
 }
 ```
 

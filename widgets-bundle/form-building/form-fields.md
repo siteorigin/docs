@@ -11,7 +11,7 @@ The form fields options are returned as an array from the widget's `get_widget_f
 - description: `string` Render small italic text below the field to describe the field's purpose.
 - optional: `bool` Append '(Optional)' to this field's label as a small green superscript.
 - required: `bool|string` Append '*' to this field's label and warn the user when they save the widget with this field empty. If this is a string, it is also shown as a message below the field.
-- sanitize: `string|callable` Specifies sanitization type to be performed on non-empty input from this field. Available sanitizations are 'email', 'url', 'text' (removes HTML for users without the `unfiltered_html` capability) and 'number' (typecasts to an integer). A PHP callable is called with the value and the field's previous value. If the specified sanitization isn't recognized it is assumed to be a custom sanitization and a filter is applied using the pattern `'siteorigin_widgets_sanitize_field_' . $sanitize`, in case the sanitization is defined elsewhere. See [Input Sanitization](./input-sanitization.md).
+- sanitize: `string|callable` Specifies sanitization type to be performed on non-empty input from this field. Available sanitizations are 'email', 'url', 'text' (removes HTML for users without the `unfiltered_html` capability) and 'number' (typecasts to an integer). A PHP callable is called with the value and, if the callable accepts it, the field's previous value. If the specified sanitization isn't recognized it is assumed to be a custom sanitization and a filter is applied using the pattern `'siteorigin_widgets_sanitize_field_' . $sanitize`, in case the sanitization is defined elsewhere. See [Input Sanitization](./input-sanitization.md).
 - state_emitter, state_handler and state_handler_initial: `array` Show, hide or change fields based on the values of other fields. See [State Emitters](./state-emitters.md).
 
 In addition to these, some fields have their own specific configuration values, which are listed in the respective sections below.
@@ -32,7 +32,7 @@ Renders a text input field.
 - onclick: `bool` If true, the value is sanitized as the JavaScript for an `onclick` attribute.
 - width: `int` The width of the input in pixels.
 
-The `allow_html`, `json` and `onclick` options also apply to the textarea, color, number, measurement and autocomplete fields, and `width` applies to all of these fields except textarea.
+The `allow_html`, `json` and `onclick` options also apply to the textarea and autocomplete fields. The `width` option also applies to the color, number, measurement and autocomplete fields.
 
 #### Example
 Form options input:
