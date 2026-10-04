@@ -1,6 +1,6 @@
 # Order Field
 
-The order field lets users drag a list of options into the order they want. Use it to let users choose the order of the parts of a widget.
+The order field lets users drag a list of options into order, for example to set the order of the parts of a widget.
 
 ## Example
 

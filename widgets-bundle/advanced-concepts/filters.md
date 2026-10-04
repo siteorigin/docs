@@ -1,5 +1,7 @@
 # Filters
 
+The Widgets Bundle's filters change values as it loads, builds, renders and saves widgets.
+
 - [Widget Folders Filter](filters/widget-folders.md)
 - [Active Widgets Filter](filters/active-widgets.md)
 - [Menu Capability Filter](filters/admin-capability.md)

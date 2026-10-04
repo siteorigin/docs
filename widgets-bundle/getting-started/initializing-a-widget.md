@@ -2,7 +2,7 @@
 
 ## The `initialize()` Method
 
-A widget that extends `SiteOrigin_Widget` can override the `initialize()` method for its setup code. The code would also work in the widget's constructor, and `initialize()` keeps it separate and easier to read.
+A widget that extends `SiteOrigin_Widget` can override the `initialize()` method for its setup code. The code would also work in the widget's constructor, and `initialize()` keeps setup code apart from the constructor.
 
 ## Registering Front End Scripts and Styles
 

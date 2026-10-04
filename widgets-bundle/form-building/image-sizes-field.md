@@ -1,6 +1,6 @@
 # Image Size Field
 
-The image size field lets users choose one of the site's [image sizes](https://developer.wordpress.org/reference/functions/add_image_size/), so a widget can show a larger or smaller image to suit where it sits. Without the field, the widget uses one fixed size, such as `thumbnail` or `full`.
+The image size field lets users choose one of the site's [image sizes](https://developer.wordpress.org/reference/functions/add_image_size/), so a widget can show a larger or smaller image to suit where it sits.
 
 ## Example
 
@@ -31,14 +31,6 @@ if( ! empty( $instance['image'] ) ) {
 	}
 }
 ```
-
-The template:
-
-1. Checks that an image is set.
-2. Uses the selected size, or `full` if no size is set.
-3. Gets the image.
-4. Checks that the image exists.
-5. Outputs a full-width `div`, 250 pixels high, with the image as its background.
 
 If your media field sets `'fallback' => true`, use `siteorigin_widgets_get_attachment_image_src()` in place of `wp_get_attachment_image_src()`. The function returns the fallback URL when no attachment is selected, so it replaces the `! empty( $instance['image'] )` check. Output a fallback URL in an `src` attribute, because `esc_url()` doesn't make a URL safe inside inline CSS:
 

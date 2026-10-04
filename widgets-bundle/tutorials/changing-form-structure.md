@@ -1,6 +1,6 @@
 # Changing Form Structure
 
-A widget's form changes as the widget grows, and saved widgets still hold data in the old structure. Override the `modify_instance()` method of `SiteOrigin_Widget` to convert an instance from the old structure to the new one.
+When you change the structure of a widget's form, such as moving fields into a section, saved widgets still hold data in the old structure. Override the `modify_instance()` method of `SiteOrigin_Widget` to convert an instance from the old structure to the new one.
 
 ## Updating the Form
 

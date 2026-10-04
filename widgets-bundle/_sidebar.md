@@ -1,5 +1,5 @@
 ### Getting Started
-* [Getting Started Quickly](getting-started-quickly.md)
+* [Starting From the Hello World Widget](getting-started-quickly.md)
 * [Creating a Widget](getting-started/creating-a-widget.md)
 * [Extending Existing Widgets](getting-started/extending-existing-widgets.md)
 * [Initializing a Widget](getting-started/initializing-a-widget.md)

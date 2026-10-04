@@ -21,7 +21,7 @@ $form_options = array(
 - `$enqueue_css` (`bool`): whether to enqueue the layout's CSS. Set it to `true`.
 - `$panels_data` (`array`): the layout data, from `$instance['page_builder']`.
 
-The function is in Page Builder's [`inc/functions.php`](https://github.com/siteorigin/siteorigin-panels/blob/develop/inc/functions.php). This example builds the ID from a hash of the layout, so two builder fields never share an ID:
+The function is in Page Builder's [`inc/functions.php`](https://github.com/siteorigin/siteorigin-panels/blob/develop/inc/functions.php). This example builds the ID from a hash of the layout, so builder fields with different layouts get different IDs:
 
 ```php
 if( function_exists( 'siteorigin_panels_render' ) ) {

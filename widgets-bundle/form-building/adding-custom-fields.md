@@ -8,7 +8,7 @@ A field's class name is a class prefix followed by the field type. The field typ
 
 ## Adding a Class Prefix
 
-Give your field classes a prefix of your own, so their names don't clash with other classes. The Widgets Bundle needs your prefix to load and create your field classes. You can add more than one prefix, and one is enough.
+Give your field classes a prefix of your own, so their names don't clash with other classes. The Widgets Bundle needs your prefix to load and create your field classes. The filter accepts more than one prefix.
 
 ### Example: Adding a Class Prefix
 
@@ -109,7 +109,7 @@ array(
 
 #### Rendering the Label
 
-`SiteOrigin_Widget_Field_Base` renders the field's label with its `render_field_label()` method. Override `render_field_label()` to render the label yourself, or override `get_label_classes()` to add CSS classes to the default label, which is easier for subclasses to build on. Enqueue the stylesheet with your label classes, for example in the field's `enqueue_scripts()` method.
+`SiteOrigin_Widget_Field_Base` renders the field's label with its `render_field_label()` method. Override `render_field_label()` to render the label yourself, or override `get_label_classes()` to add CSS classes to the default label. Enqueue the stylesheet with your label classes, for example in the field's `enqueue_scripts()` method.
 
 ##### Example: Overriding `render_field_label()`
 

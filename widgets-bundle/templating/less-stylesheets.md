@@ -8,7 +8,7 @@ The Widgets Bundle saves the compiled CSS in `wp-content/uploads/siteorigin-widg
 
 ## Mixin Libraries
 
-The Widgets Bundle includes two mixin libraries in its `base/less/` folder, LESS Elements and [LESSHat](https://github.com/madebysource/lesshat). They shorten CSS that needs vendor prefixes or is long to write, and each library's own documentation lists its mixins. Import them with `@import`:
+The Widgets Bundle includes two mixin libraries in its `base/less/` folder, LESS Elements and [LESSHat](https://github.com/madebysource/lesshat). Their mixins write vendor-prefixed and repetitive CSS for you, and each library's documentation lists its mixins. Import them with `@import`:
 
 ```less
 @import "mixins";

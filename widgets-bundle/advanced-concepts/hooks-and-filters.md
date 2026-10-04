@@ -1,6 +1,6 @@
 # Hooks and Filters
 
-The Widgets Bundle's actions and filters let your theme or plugin change how widgets load, build their forms and render. Many of them appear in other pages of these docs, and this page lists them all.
+The Widgets Bundle's actions and filters let your theme or plugin change how widgets load, build their forms and render. Many of them have their own pages, linked below.
 
 ## Actions
 
@@ -35,4 +35,4 @@ The Widgets Bundle's actions and filters let your theme or plugin change how wid
 - [Widget CSS Filter](filters/widget-css.md): `siteorigin_widgets_instance_css` changes the CSS compiled from the LESS.
 - [Sanitize Instance Filter](filters/sanitize.md): `siteorigin_widgets_sanitize_instance` and `siteorigin_widgets_sanitize_instance_{$id_base}` sanitize the instance before the Widgets Bundle saves it.
 
-In each `{$id_base}` filter, `{$id_base}` is the widget's base ID, such as `sow-button`.
+In each hook name, `{$id_base}` is the widget's base ID, such as `sow-button`.

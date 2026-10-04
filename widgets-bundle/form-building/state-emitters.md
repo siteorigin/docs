@@ -1,6 +1,6 @@
 # Modifying Forms With State Emitters
 
-State emitters show, hide or change parts of a widget's form as the user fills it in. A field with a state emitter sends a state to the rest of the form when its value changes, and fields with state handlers act on that state. Build a few forms before you add state emitters, because they add a layer of logic on top of the form array.
+State emitters show, hide or change parts of a widget's form as the user fills it in. A field with a state emitter sends a state to the rest of the form when its value changes, and fields with state handlers act on that state.
 
 ## Form States
 

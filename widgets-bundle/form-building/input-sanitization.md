@@ -125,7 +125,7 @@ $form_options = array(
 
 ## Sanitizing the Whole Instance
 
-Just before `update()` returns the sanitized instance, two more filters let other plugins sanitize it: `siteorigin_widgets_sanitize_instance` and `siteorigin_widgets_sanitize_instance_{$id_base}`, where `{$id_base}` is the widget's base ID. Both filters pass three arguments: the new instance, the form options and the widget object. Use `add_filter( 'siteorigin_widgets_sanitize_instance', 'my_callback', 10, 3 )` to receive all three.
+Before `update()` returns the sanitized instance, two more filters let other plugins sanitize it: `siteorigin_widgets_sanitize_instance` and `siteorigin_widgets_sanitize_instance_{$id_base}`, where `{$id_base}` is the widget's base ID. Both filters pass three arguments: the new instance, the form options and the widget object. Use `add_filter( 'siteorigin_widgets_sanitize_instance', 'my_callback', 10, 3 )` to receive all three.
 
 ## Undeclared Instance Keys
 

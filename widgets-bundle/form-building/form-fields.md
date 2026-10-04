@@ -1,6 +1,6 @@
 # Form Fields
 
-Form fields are where the Widgets Bundle saves you the most work. You declare the fields your widget's users can set, and the Widgets Bundle builds the form, saves the values and passes them to your template.
+Form fields define the settings that your widget's users can change. You declare the fields, and the Widgets Bundle builds the form, saves the values and passes them to your template.
 
 ## Field Descriptors
 

@@ -19,8 +19,10 @@ The Widgets Bundle includes these icon families, which you can use anywhere in y
 The `siteorigin_widgets_icon_families` filter adds icon families. Each family is an item in an associative array, and the item's key is the family's name, which must not contain a hyphen. The item holds these keys:
 
 - `name` (`string`): the family's name in the icon picker.
-- `style_uri` (`string`): the URL of the family's stylesheet, which the Widgets Bundle enqueues wherever the family's icons appear. The Widgets Bundle outputs each icon as `<span class="sow-icon-{family}" data-sow-icon="{unicode value}">`, so the stylesheet needs the `@font-face` declaration, a `font-family` rule for `.sow-icon-{family}` and `content: attr(data-sow-icon);` for `.sow-icon-{family}[data-sow-icon]:before`. The Widgets Bundle's `icons/genericons/style.css` is a working example.
+- `style_uri` (`string`): the URL of the family's stylesheet, which the Widgets Bundle enqueues wherever the family's icons appear.
 - `icons` (`array`): an associative array with each icon's name as the key and its unicode value as the value.
+
+The Widgets Bundle outputs each icon as `<span class="sow-icon-{family}" data-sow-icon="{unicode value}">`. Your stylesheet needs the `@font-face` declaration, a `font-family` rule for `.sow-icon-{family}` and `content: attr(data-sow-icon);` for `.sow-icon-{family}[data-sow-icon]:before`. The Widgets Bundle's `icons/genericons/style.css` is a working example.
 
 ```php
 function my_icon_families_filter( $icon_families ) {

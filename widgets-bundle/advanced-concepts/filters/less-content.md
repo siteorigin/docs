@@ -15,7 +15,7 @@ function wbe_filter_widget_less( $less, $instance, $widget ) {
 add_filter('siteorigin_widgets_less_sow-button', 'wbe_filter_widget_less', 10, 3);
 ```
 
-To change the LESS before the Widgets Bundle adds the variables, use the `siteorigin_widgets_less_vars_{$id_base}` filter instead:
+The `siteorigin_widgets_less_vars_{$id_base}` filter changes the LESS before the Widgets Bundle adds the variables:
 
 ```php
 /**
@@ -33,7 +33,7 @@ add_filter( 'siteorigin_widgets_less_vars_sow-button', 'wbe_filter_widget_less_v
 
 `siteorigin_widgets_less_vars_{$id_base}` runs after the Widgets Bundle has run every `.widget-function()` callback and processed every `@import`.
 
-To change the value of a LESS variable, use the `siteorigin_widgets_less_variables_{$id_base}` filter. It receives the variables array, the instance and the widget object. Unless the widget defines `get_style_hash_variables()`, the filter's result is also part of the hash in the widget's CSS file name. Changes from the other LESS filters don't change that hash, so they don't regenerate an existing CSS file.
+The `siteorigin_widgets_less_variables_{$id_base}` filter changes the value of a LESS variable. It receives the variables array, the instance and the widget object. Unless the widget defines `get_style_hash_variables()`, the filter's result is also part of the hash in the widget's CSS file name. Changes from the other LESS filters don't change that hash, so they don't regenerate an existing CSS file.
 
 ```php
 function wbe_filter_widget_less_variables( $vars, $instance, $widget ) {

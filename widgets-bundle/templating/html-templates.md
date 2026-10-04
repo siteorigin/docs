@@ -74,7 +74,7 @@ Then use the variables in the template:
 
 ## Escaping Output
 
-Escape every value as late as possible, right before you output it, with the WordPress escaping functions, such as `esc_html()`, `esc_url()`, `esc_attr()` and `wp_json_encode()`. The `before_title` and `after_title` values in `$args` hold HTML from the theme's widget area, so output them without escaping. [Escaping Data](https://developer.wordpress.org/apis/security/escaping/) on WordPress.org has the details.
+Escape every value as late as possible, right before you output it, with the WordPress escaping functions, such as `esc_html()`, `esc_url()` and `esc_attr()`. Encode values for JavaScript with `wp_json_encode()`. The `before_title` and `after_title` values in `$args` hold HTML from the theme's widget area, so output them without escaping. [Escaping Data](https://developer.wordpress.org/apis/security/escaping/) on WordPress.org has the details.
 
 ### Example: Escaping Values
 

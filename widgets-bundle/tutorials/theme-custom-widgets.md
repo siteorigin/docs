@@ -1,6 +1,6 @@
 # Adding a Custom Widget to Your Theme
 
-Your theme can ship its own widgets, which users get when they install the Widgets Bundle. This tutorial adds a new widget to a theme. To change one of our existing widgets, follow [Extending Existing Widgets](../getting-started/extending-existing-widgets.md).
+Your theme can ship its own widgets, which users get when they install the Widgets Bundle. To change one of our existing widgets, follow [Extending Existing Widgets](../getting-started/extending-existing-widgets.md).
 
 ## Creating a Widgets Folder
 
@@ -18,7 +18,7 @@ The function tells the Widgets Bundle to look for widgets in the `widgets` folde
 
 ## Adding a Widget to the Folder
 
-This example builds a simple staff widget. Create a `simple-staff-widget` folder with a `simple-staff-widget.php` file in it, and add `tpl`, `styles` and `assets` folders as your widget needs them.
+This example builds a staff widget. Create a `simple-staff-widget` folder with a `simple-staff-widget.php` file in it, and add `tpl`, `styles` and `assets` folders as your widget needs them.
 
 ![](./images/theme-widget-folder.png)
 

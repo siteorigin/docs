@@ -1,6 +1,6 @@
 # Enqueue Frontend Scripts Action
 
-The `siteorigin_widgets_enqueue_frontend_scripts_{$id_base}` action enqueues extra front-end scripts and styles for one widget, where `{$id_base}` is the widget's base ID. Use it for a widget you're extending. For your own widgets, enqueue scripts as [Initializing a Widget](../../getting-started/initializing-a-widget.md) describes. The action runs each time the widget renders, except in a Page Builder preview.
+The `siteorigin_widgets_enqueue_frontend_scripts_{$id_base}` action enqueues extra front-end scripts and styles for one widget, where `{$id_base}` is the widget's base ID. Use it for a widget you're extending, and enqueue scripts for your own widgets as [Initializing a Widget](../../getting-started/initializing-a-widget.md) describes. The action runs each time the widget renders, except in a Page Builder preview.
 
 ```php
 /**

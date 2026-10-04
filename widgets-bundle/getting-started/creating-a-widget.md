@@ -16,7 +16,7 @@ function add_my_awesome_widgets_collection( $folders ) {
 add_filter( 'siteorigin_widgets_widget_folders', 'add_my_awesome_widgets_collection' );
 ```
 
-The Widgets Bundle looks for PHP files in each subfolder of a registered folder. It lists every file whose metadata header has a `Widget Name` field as a widget that users can activate and use wherever widgets work.
+The Widgets Bundle looks for PHP files in each subfolder of a registered folder. It lists every file whose metadata header has a `Widget Name` field as a widget that users can activate and use in widget areas, Page Builder and the Block Editor.
 
 The `extend-widgets-bundle` plugin in our [so-dev-examples](https://github.com/siteorigin/so-dev-examples) repository is a standard WordPress plugin that uses this filter to add its `extra-widgets` folder.
 

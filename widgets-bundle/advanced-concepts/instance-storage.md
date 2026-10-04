@@ -1,8 +1,8 @@
 # Instance Storage
 
-Instance storage saves a widget's instance on the server and gives your template a hash that retrieves it. Use it when the front end needs to act on a widget setting without showing the setting in the page's HTML.
+Instance storage saves a widget's instance in your site's database and gives your template a hash that retrieves it. Use it when the front end needs to act on a widget setting without showing the setting in the page's HTML.
 
-## When to Use It
+## An Example Use
 
 A newsletter widget, for example, has a field for the user's Mailchimp API key. The widget needs the key only after a visitor submits the signup form, and the key must never appear in the page's HTML. The signup form sends the instance storage hash, and your code uses the hash to retrieve the full instance, including the API key, when the form arrives.
 
@@ -51,7 +51,7 @@ With `instance_storage` enabled, your widget's templates have a `$storage_hash` 
 
 ## Retrieving the Instance
 
-Call `$this->get_stored_instance( $storage_hash )` to retrieve the instance. An [AJAX handler](https://developer.wordpress.org/plugins/javascript/ajax/) is the most direct way to receive the form. Send the form to `admin-ajax.php` with `action` set to `my_newsletter_signup`, and hook the handler to `wp_ajax_nopriv_` as well for visitors who aren't logged in:
+Call `$this->get_stored_instance( $storage_hash )` to retrieve the instance. An [AJAX handler](https://developer.wordpress.org/plugins/javascript/ajax/) is the most direct way to receive the form. Send the form to `admin-ajax.php` with `action` set to `my_newsletter_signup`. Hook the handler to `wp_ajax_nopriv_` as well, for visitors who aren't logged in:
 
 ```php
 function my_newsletter_signup() {
@@ -79,4 +79,4 @@ add_action( 'wp_ajax_nopriv_my_newsletter_signup', 'my_newsletter_signup' );
 
 The Widgets Bundle stores the instance in a transient that expires seven days after the widget last rendered, and it doesn't store the instance in a widget preview. Handle `get_stored_instance()` returning `false` when the hash has expired.
 
-To store part of the instance, override `modify_stored_instance()` in your widget class. The method receives the instance and returns the array to store, and the Widgets Bundle builds the storage hash from that array.
+`modify_stored_instance()` stores part of the instance. Override it in your widget class: it receives the instance and returns the array to store. The Widgets Bundle builds the storage hash from that array.

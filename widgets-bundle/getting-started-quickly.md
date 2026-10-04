@@ -1,6 +1,14 @@
-# Getting Started Quickly
+# Starting From the Hello World Widget
 
-The fastest way to build a widget is to copy our Hello World Widget. Install and activate the [SiteOrigin Widgets Bundle](https://wordpress.org/plugins/so-widgets-bundle/), clone our [so-dev-examples](https://github.com/siteorigin/so-dev-examples) Git repository, and activate its `extend-widgets-bundle` plugin at **Plugins**. The plugin's `hello-world-widget` folder holds the Hello World Widget, and these steps turn a copy into your own widget:
+Our Hello World Widget is a working widget that you can copy and turn into your own. It's in the `extend-widgets-bundle` plugin of our [so-dev-examples](https://github.com/siteorigin/so-dev-examples) Git repository.
+
+To set up the example plugin:
+
+1. Install and activate the [SiteOrigin Widgets Bundle](https://wordpress.org/plugins/so-widgets-bundle/).
+2. Clone the so-dev-examples repository, and copy its `extend-widgets-bundle` folder to your site's `wp-content/plugins` folder.
+3. Activate the `extend-widgets-bundle` plugin at **Plugins**.
+
+The plugin's `hello-world-widget` folder holds the Hello World Widget. To turn a copy into your own widget:
 
 1. Choose an ID for your widget, such as `my-awesome-widget`.
 2. Copy the `hello-world-widget` folder, and rename the copy and the `hello-world-widget.php` file inside it with your ID, such as `my-awesome-widget` and `my-awesome-widget.php`. The folder and the file must have the same name.
@@ -9,8 +17,6 @@ The fastest way to build a widget is to copy our Hello World Widget. Install and
 5. At the bottom of the file, the widget is registered. Replace `hello-world-widget` with your ID and `Hello_World_Widget` with your class name.
 6. In the metadata header above the class, change the `Widget Name` field to your widget's name, such as `Widget Name: My Awesome Widget`. The name can be anything, but the Widgets Bundle lists the widget only if the header has a `Widget Name` field.
 7. Go to **Plugins > SiteOrigin Widgets** and activate your widget. New widgets start inactive.
-
-You now have a working widget to build on.
 
 ## Adding a Separate Widgets Folder
 
@@ -26,6 +32,6 @@ function add_my_awesome_widgets_collection($folders){
 add_filter('siteorigin_widgets_widget_folders', 'add_my_awesome_widgets_collection');
 ```
 
-The Widgets Bundle looks for PHP files in each subfolder of a registered folder. It lists every file whose metadata header has a `Widget Name` field as a widget that users can activate and use wherever widgets work.
+The Widgets Bundle looks for PHP files in each subfolder of a registered folder. It lists every file whose metadata header has a `Widget Name` field as a widget that users can activate and use in widget areas, Page Builder and the Block Editor.
 
 The `extend-widgets-bundle` example plugin is a standard WordPress plugin that uses this filter to add its `extra-widgets` folder.

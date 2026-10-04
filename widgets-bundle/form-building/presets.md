@@ -74,7 +74,7 @@ When a user chooses a preset, the field copies the preset's values into the form
 
 ## Storing Presets in a JSON File
 
-Presets are easier to manage in a JSON file. JSON is stricter than PHP arrays, so check the file with a JSON validator if your presets don't load. This example is a `presets.json` file in a `data` folder in your widget folder:
+You can keep presets in a JSON file, apart from your PHP code. JSON is stricter than PHP arrays, so check the file with a JSON validator if your presets don't load. This example is a `presets.json` file in a `data` folder in your widget folder:
 
 ```json
 {
@@ -94,7 +94,7 @@ Presets are easier to manage in a JSON file. JSON is stricter than PHP arrays, s
 }
 ```
 
-This PHP loads the file:
+Load the file with `json_decode()`:
 
 ```php
 $presets = json_decode( file_get_contents( plugin_dir_path( __FILE__ ) . 'data/presets.json' ), true );
