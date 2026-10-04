@@ -1,9 +1,10 @@
 # Global Widget Settings
 
-You can add global settings for your widget by adding the `get_settings_form` method to your widget and returning a standard [forms](./form-fields.md) array. These settings are accessed by the user navigating to **Plugins > SiteOrigin Widgets** and then clicking your widgets respective Settings button.
+Global settings apply to every copy of a widget on the site. Add a `get_settings_form()` method to your widget that returns a standard [form fields](./form-fields.md) array, and users find the settings at **Plugins > SiteOrigin Widgets** under the widget's **Settings** button.
 
-### Example
-The following example adds an example checkbox global setting to this widget's global settings.
+## Example
+
+This example adds a checkbox to the widget's global settings:
 
 ```php
 class MyCustomWidget extends SiteOrigin_Widget {
@@ -20,8 +21,9 @@ class MyCustomWidget extends SiteOrigin_Widget {
 }
 ```
 
-### Retrieving a Widget’s Global Settings
-The `SiteOrigin_Widget` class includes a utility method called `get_global_settings` you can use to retrieve your global settings. It features an optional string parameter that allows you to retrieve a specific setting. If this parameter isn't set, all settings are returned. The following example snippet fetches the widget's global settings and then checks for our example checkbox.
+## Getting the Settings
+
+The `get_global_settings()` method of `SiteOrigin_Widget` returns the widget's global settings. This example gets every setting and checks the example checkbox:
 
 ```php
 class MyCustomWidget extends SiteOrigin_Widget {
@@ -41,8 +43,7 @@ class MyCustomWidget extends SiteOrigin_Widget {
 }
 ```
 
-### Retrieving a Specific Widget Global Setting
-The `get_global_settings` method features an optional string parameter that allows you to retrieve a specific setting. If this parameter isn't set, all settings are returned. Below is the above snippet modified to use this parameter.
+Pass a setting's name to `get_global_settings()` to get that setting only:
 
 ```php
 class MyCustomWidget extends SiteOrigin_Widget {
@@ -59,10 +60,9 @@ class MyCustomWidget extends SiteOrigin_Widget {
 }
 ```
 
-### Add Global Defaults to Other Widgets
-The `siteorigin_widgets_settings_form` filter can be used to alter the global settings of a widget. You can target a specific widget by appending its `id_base` to the filter name. For example, you can target the SiteOrigin Button Widget using: `siteorigin_widgets_settings_form_sow-button`
+## Adding Settings to Other Widgets
 
-Both filters also pass the widget object as a second argument. The following snippet will add an example checkbox to the SiteOrigin Button Widget.
+The `siteorigin_widgets_settings_form` filter changes the global settings of every widget. To change one widget's settings, add its `id_base` to the filter name, such as `siteorigin_widgets_settings_form_sow-button` for the Button Widget. Both filters also pass the widget object as a second argument. This example adds a checkbox to the Button Widget's global settings:
 
 ```php
 add_filter( 'siteorigin_widgets_settings_form_sow-button', function( $form_options ) {
@@ -74,7 +74,5 @@ add_filter( 'siteorigin_widgets_settings_form_sow-button', function( $form_optio
 	return $form_options;
 } );
 ```
-
-Result
 
 ![Widget Form Text Input](../images/form-building-global-widget-settings-button.png)

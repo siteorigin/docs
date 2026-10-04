@@ -1,10 +1,10 @@
 # Modifying Forms
 
-For the most part, you'll be creating your forms using the standard [forms array](./form-fields.md). There are times, however, that you'll want to modify the form at a later stage. There are a few use cases for this. You might want to extend the functionality of an existing widget in the Widgets Bundle, or extend the functionality of a widget you've created.
+You build most forms with the standard [form fields](./form-fields.md) array. A form can also change after you declare it, for example to extend a Widgets Bundle widget or to add data to your own widget's form only when the form is needed.
 
-## Modifying a Form Within a Widget
+## Modifying a Form Inside a Widget
 
-The `SiteOrigin_Widget` class has a placeholder function called `modify_form`. By default, this function just returns the $form array unchanged, but you can override this in your class to do whatever you like.
+The `modify_form()` method of `SiteOrigin_Widget` returns the form array unchanged. Override it in your class to change the form:
 
 ```php
 class MyCustomWidget extends SiteOrigin_Widget {
@@ -21,9 +21,7 @@ class MyCustomWidget extends SiteOrigin_Widget {
 }
 ```
 
-So when would you want to use this? One example is to late-add data to your form array. Maybe you have a `select` field with several hundred options that you want to add to the `options`. Adding this in the main form array means you're loading all the options into memory with every page load.
-
-The `modify_form` function is only ever called when the Widgets Bundle needs the form. So you can load the large options array from a file and not  use memory unnecessarily on every request. `modify_form` is also only called when editing the widget form if the form options [were added using get_widget_form](https://siteorigin.com/docs/widgets-bundle/getting-started/creating-a-widget/#heading-widget-class).
+`modify_form()` suits data that's expensive to load, such as a `select` field with several hundred options. Options in the main form array load into memory on every page load. The Widgets Bundle calls `modify_form()` only when it needs the form, so this example loads the options from a file only then. `modify_form()` runs when a user edits the widget only if the widget declares its form with `get_widget_form()`, as [Creating a Widget](../getting-started/creating-a-widget.md) shows.
 
 ```php
 class MyCustomWidget extends SiteOrigin_Widget {
@@ -38,14 +36,14 @@ class MyCustomWidget extends SiteOrigin_Widget {
 
 ## Using a WordPress Filter
 
-The Widgets Bundle also passes your form array through a few filters before ever using it. This allows you to modify the array outside the widget itself.
+The Widgets Bundle passes every form array through two filters before it uses the form, so you can change a form from outside the widget:
 
 ```php
 $form_options = apply_filters( 'siteorigin_widgets_form_options', $form_options, $this );
 $form_options = apply_filters( 'siteorigin_widgets_form_options_' . $this->id_base, $form_options, $this );
 ```
 
-Both of these are quite easy to hook into. If you're using the `siteorigin_widgets_form_options` filter, then your function should check that the 2nd argument is the class you want to filter. The other filter will only run for one specific widget type.
+`siteorigin_widgets_form_options` runs for every widget, so check that its second argument is the widget you want to change. `siteorigin_widgets_form_options_{$id_base}` runs for one widget only:
 
 ```php
 function mytheme_filter_widget_form( $form_options, $widget ) {
@@ -63,11 +61,9 @@ function mytheme_filter_widget_form( $form_options, $widget ) {
 add_filter( 'siteorigin_widgets_form_options_sow-button', 'mytheme_filter_widget_form', 10, 2 );
 ```
 
-## Modifying a Child Widget Form
+## Modifying a Child Widget's Form
 
-The Widgets Bundle has a concept of a child widget. This is a widget that's included in the form of another widget. The Call-to-action widget, for example, includes a button widget. Rather than completely recreate the button functionality in the Call-to-action widget, it just includes the button widget as a child widget field.
-
-In this case though, there might be some fields in the child widget that aren't necessary. In the case of the Call-to-action widget, the alignment field of the Button widget isn't necessary because the CTA widget itself is handling this. In this case, we use `modify_child_widget_form` to remove that field.
+A [child widget](./child-widgets.md) is a widget inside the form of another widget. The Call To Action Widget, for example, includes the Button Widget for its button. The Call To Action Widget aligns the button itself, so it removes the Button Widget's alignment fields with `modify_child_widget_form()`:
 
 ```php
 class SiteOrigin_Widget_Cta_Widget extends SiteOrigin_Widget {
@@ -83,4 +79,4 @@ class SiteOrigin_Widget_Cta_Widget extends SiteOrigin_Widget {
 }
 ```
 
-The most important thing to note here is that the CTA widget is the one that's filtering the button widget's form. This filtering function allows the parent CTA widget to decide exactly how it wants to handle the button widget without having an effect on the main button widget itself.
+The parent widget changes the child widget's form only inside the parent, and the Button Widget's own form stays the same everywhere else.

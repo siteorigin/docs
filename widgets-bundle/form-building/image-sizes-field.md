@@ -1,8 +1,9 @@
-# Image Size
+# Image Size Field
 
-The image size field allows the user to specifically select a desired [image size](https://developer.wordpress.org/reference/functions/add_image_size/). This gives the user option of using a larger, or smaller image based on the context the widget is being used in rather than enforcing a specific size of the image (for example, `thumbnail` or `full`).
+The image size field lets users choose one of the site's [image sizes](https://developer.wordpress.org/reference/functions/add_image_size/), so a widget can show a larger or smaller image to suit where it sits. Without the field, the widget uses one fixed size, such as `thumbnail` or `full`.
 
 ## Example
+
 ```php
 $form_options = array(
 	'image' => array(
@@ -17,10 +18,9 @@ $form_options = array(
 );
 ```
 
-### Outputting with selected image size
+## Outputting the Selected Size
 
-The `image_size` selection returns the selected image size name, for example `full`, `thumbnail` or another registered size, so to render an image with this selection, while also accounting for no selection, we can use [wp_get_attachment_image_src](https://developer.wordpress.org/reference/functions/wp_get_attachment_image_src/).
-Here's some example code that can be used in your template:
+The field saves the name of the selected size, such as `full`, `thumbnail` or another registered size. Pass it to [`wp_get_attachment_image_src()`](https://developer.wordpress.org/reference/functions/wp_get_attachment_image_src/), and use `full` when the user hasn't chosen a size:
 
 ```php
 if( ! empty( $instance['image'] ) ) {
@@ -32,16 +32,15 @@ if( ! empty( $instance['image'] ) ) {
 }
 ```
 
-The above PHP will:
-1. Check to ensure an image is set.
-2. Check if an image size is set.
-  - If no size is set, default to full.
-  - If size is set, use `image_size`.
-3. Fetch the image.
-4. Ensure image exists.
-5. Render Image as a full width div with 250px height with the image set as the background.
+The template:
 
-If your media field sets `'fallback' => true`, use `siteorigin_widgets_get_attachment_image_src()` in place of `wp_get_attachment_image_src()`. It returns the fallback URL when no attachment is selected, so it replaces the `! empty( $instance['image'] )` check. Print a fallback URL in an `src` attribute, because `esc_url()` doesn't make a URL safe inside inline CSS:
+1. Checks that an image is set.
+2. Uses the selected size, or `full` if no size is set.
+3. Gets the image.
+4. Checks that the image exists.
+5. Outputs a full-width `div`, 250 pixels high, with the image as its background.
+
+If your media field sets `'fallback' => true`, use `siteorigin_widgets_get_attachment_image_src()` in place of `wp_get_attachment_image_src()`. The function returns the fallback URL when no attachment is selected, so it replaces the `! empty( $instance['image'] )` check. Output a fallback URL in an `src` attribute, because `esc_url()` doesn't make a URL safe inside inline CSS:
 
 ```php
 $size = empty( $instance['image_size'] ) ? 'full' : $instance['image_size'];

@@ -1,6 +1,6 @@
-# Connecting Multiple Media Form Field to a Repeater
+# Connecting a Multiple Media Field to a Repeater
 
-A multiple media form field can be connected to a repeater to allow users to bulk add images. Any images added using this field won't be stored in the field directly; instead, they'll be stored in the repeater directly. This functionality currently only supports adding images to media fields inside repeaters.
+A multiple media field connected to a repeater lets users add many images at once. Each image the user selects becomes a new repeater item, and the multiple media field itself stores nothing. The repeater's target field must be a media field.
 
 ## Example
 
@@ -30,8 +30,12 @@ $form_options = array(
 );
 ```
 
-#### Test Plugin
+## Test Plugin
 
-We've prepared a test plugin for you to try. You can [download it by clicking here](https://siteorigin.com/wp-content/uploads/2021/08/siteorigin-multiple-media-repeater.zip). Once downloaded, navigate to **Plugins > Add Plugin**, click **Upload Plugin** and upload **siteorigin-multiple-media-repeater.zip**. When prompted, activate the **SiteOrigin - Multiple Media Repeater Test Widget** plugin.
+The [test plugin](https://siteorigin.com/wp-content/uploads/2021/08/siteorigin-multiple-media-repeater.zip) shows the connection in a working widget:
 
-Once installed, navigate to **Plugins > SiteOrigin Widgets** and activate the **SiteOrigin Multiple Media Repeater** widget. Open any Page Builder powered page and add the **SiteOrigin Multiple Media Repeater** widget to your page.
+1. Download the plugin.
+2. Go to **Plugins > Add Plugin**, click **Upload Plugin** and upload `siteorigin-multiple-media-repeater.zip`.
+3. Activate the **SiteOrigin - Multiple Media Repeater Test Widget** plugin.
+4. Go to **Plugins > SiteOrigin Widgets** and activate the **SiteOrigin Multiple Media Repeater** widget.
+5. Add the **SiteOrigin Multiple Media Repeater** widget to a page in Page Builder.
