@@ -109,7 +109,16 @@ function get_template_dir( $instance ) {
 
 The Hello World Widget's files are laid out like this:
 
-![Hello World Directory Structure](../images/hello-world-widget-directory-structure.png)
+```
+hello-world-widget/
+├── assets/
+│   └── banner.svg
+├── styles/
+│   └── hello-world-widget-style.less
+├── tpl/
+│   └── hello-world-widget-template.php
+└── hello-world-widget.php
+```
 
 The Hello World Widget's template outputs the widget's text:
 
