@@ -1,6 +1,6 @@
 # Sanitization
 
-When a widget is saved, `SiteOrigin_Widget::update()` passes each field value to that field's `sanitize()` method. The sanitization method varies for different field types and additional sanitization may be done using filters. An empty string or `null` is always saved as an empty string, so the field sanitization below only runs for other values.
+When a widget is saved, `SiteOrigin_Widget::update()` passes each field value to that field's `sanitize()` method. The sanitization method varies for different field types and additional sanitization may be done using filters. For most fields, an empty string or `null` is saved as an empty string, so the field sanitization below only runs for other values. Container fields, such as sections, repeaters and child widgets, save an empty value as an empty array.
 
 >Note: We have included a wrapper for the built-in WordPress `esc_url_raw()` function, named `sow_esc_url_raw()`. It performs the same function, but additionally allows the "skype:" and "steam:" URL protocols (filterable with `siteorigin_esc_url_protocols`) and our own "post:" protocol which we convert into a real URL using the specified post ID.
 
@@ -28,7 +28,7 @@ The value should be an integer so is passed through the `intval()` function. Add
 The value is stripped of leading and trailing whitespace and then checked against a regular expression which ensures the value starts with 'post:' followed by at least one digit. If it does not match the required pattern it is assumed to be a URL and escaped using `sow_esc_url_raw()`. If the field's `allow_shortcode` option is set, a value containing `[` is escaped with `esc_attr()` so that it can hold a shortcode.
 
 ### Checkbox fields
-If the value is any non-empty value other than the string `'false'`, it is set to true, otherwise it is set to false.
+If the value is any non-empty value other than the string `'false'`, it is set to true, otherwise it is set to false. An unchecked checkbox sends no value, so it is saved as an empty string.
 
 ### Widget fields
 Each field of the child widget's form is sanitized by its own field type, the same way section fields are.

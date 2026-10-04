@@ -348,7 +348,7 @@ Renders a list of options that the user can reorder. For usage, please refer to 
 
 #### Additional Options
 - options: `array` The list of options which can be reordered
-- default: `array` The keys of `options` in their initial order. This is required: the field only shows the keys in its value, so without a default listing every key it shows nothing.
+- default: `array` The keys of `options` in their initial order. Without a default, the order of `options` is used.
 
 #### Example
 Form options input:

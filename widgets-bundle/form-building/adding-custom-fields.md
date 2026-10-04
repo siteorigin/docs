@@ -29,7 +29,7 @@ function my_custom_fields_class_paths( $class_paths ) {
 add_filter( 'siteorigin_widgets_field_class_paths', 'my_custom_fields_class_paths' );
 ```
 ## Implementing a Custom Field
-Implementing a custom field is as simple as extending one of the existing field classes and implementing or overriding at least the `render_field` and `sanitize_field_input` methods. There is much more that can be done, but this is all that is required to successfully render a custom field and save it's input.
+To implement a custom field, extend one of the existing field classes and override the methods you want to change. If you extend `SiteOrigin_Widget_Field_Base` directly, you must implement at least the `render_field` and `sanitize_field_input` methods. There is much more that can be done, but this is all that is required to successfully render a custom field and save it's input.
 
 ### Filenames and Class Naming
 For your field class to be loaded, you need to name your class according to the convention mentioned above. However the file itself must be named according to the convention `$field_type.class.php` and it must be placed in one of the class paths you added in the step above. For example, if you have a field type of `taxonomylist` with a custom class path of `my_custom_fields/` and a class prefix of `My_Custom_Field_`, you'd first create the file `my_custom_fields/taxonomylist.class.php` and then define the class `My_Custom_Field_Taxonomylist` inside it. The `My_Custom_Field_Better_Text` class for the `better-text` field type goes in `better-text.class.php`.
