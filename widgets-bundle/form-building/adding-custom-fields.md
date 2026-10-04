@@ -48,7 +48,7 @@ The `SiteOrigin_Widget_Field_Base` abstract class does most of the work of a for
 
 #### The `render_field()` Method
 
-`render_field()` outputs your field's HTML in the widget form. It receives `$value`, the field's current value, which you escape just before output, and `$instance`. The Widgets Bundle passes an empty array as `$instance`, so override `render_before_field()` or `render_after_field()` to read other values from the widget instance, because they receive the full instance.
+`render_field()` outputs your field's HTML in the widget form. It receives `$value`, the field's current value, which you escape right before output, and `$instance`. The Widgets Bundle passes an empty array as `$instance`, so override `render_before_field()` or `render_after_field()` to read other values from the widget instance, because they receive the full instance.
 
 ##### Example: `render_field()`
 

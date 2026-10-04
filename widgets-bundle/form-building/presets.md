@@ -102,7 +102,7 @@ $presets = json_decode( file_get_contents( plugin_dir_path( __FILE__ ) . 'data/p
 
 ## Showing Fields for Each Preset
 
-The presets field works with [state emitters](state-emitters.md), so the form shows only the fields that the selected preset sets. Setting up a state handler for every field by hand is error-prone with many presets, so `SiteOrigin_Widget` has a `dynamic_preset_state_handler()` method that adds the handlers from your preset data. The method returns your fields array with the handlers added, and it takes three arguments:
+The presets field works with state emitters, described in [Modifying Forms With State Emitters](state-emitters.md), so the form shows only the fields that the selected preset sets. Setting up a state handler for every field by hand is error-prone with many presets, so `SiteOrigin_Widget` has a `dynamic_preset_state_handler()` method that adds the handlers from your preset data. The method returns your fields array with the handlers added, and it takes three arguments:
 
 - `$state_name` (`string`): the name of the state, which you set in the presets field's `state_emitter`.
 - `$preset_data` (`array`): your presets.

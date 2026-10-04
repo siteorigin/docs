@@ -1,6 +1,6 @@
 # Modifying Forms
 
-You build most forms with the standard [form fields](./form-fields.md) array. A form can also change after you declare it, for example to extend a Widgets Bundle widget or to add data to your own widget's form only when the form is needed.
+You build most forms with the standard form array that [Form Fields](./form-fields.md) describes. A form can also change after you declare it, for example to extend a Widgets Bundle widget or to add data to your own widget's form only when the form is needed.
 
 ## Modifying a Form Inside a Widget
 
@@ -63,7 +63,7 @@ add_filter( 'siteorigin_widgets_form_options_sow-button', 'mytheme_filter_widget
 
 ## Modifying a Child Widget's Form
 
-A [child widget](./child-widgets.md) is a widget inside the form of another widget. The Call To Action Widget, for example, includes the Button Widget for its button. The Call To Action Widget aligns the button itself, so it removes the Button Widget's alignment fields with `modify_child_widget_form()`:
+A child widget is a widget inside the form of another widget, as [Child Widgets](./child-widgets.md) explains. The Call To Action Widget, for example, includes the Button Widget for its button. The Call To Action Widget aligns the button itself, so it removes the Button Widget's alignment fields with `modify_child_widget_form()`:
 
 ```php
 class SiteOrigin_Widget_Cta_Widget extends SiteOrigin_Widget {

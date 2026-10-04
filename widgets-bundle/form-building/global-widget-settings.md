@@ -1,6 +1,6 @@
 # Global Widget Settings
 
-Global settings apply to every copy of a widget on the site. Add a `get_settings_form()` method to your widget that returns a standard [form fields](./form-fields.md) array, and users find the settings at **Plugins > SiteOrigin Widgets** under the widget's **Settings** button.
+Global settings apply to every copy of a widget on the site. Add a `get_settings_form()` method to your widget that returns a standard form array, as described in [Form Fields](./form-fields.md), and users find the settings at **Plugins > SiteOrigin Widgets** under the widget's **Settings** button.
 
 ## Example
 

@@ -124,7 +124,7 @@ $form_options = array(
 
 ## Sections
 
-A section groups related fields under one heading, and users can collapse the section to hide its fields. Sections keep large forms short and easy to scan.
+A section groups related fields under one heading, and users can collapse the section to hide its fields. Sections keep large forms short and readable.
 
 ### Example
 
