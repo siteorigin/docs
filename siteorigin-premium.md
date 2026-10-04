@@ -6,7 +6,7 @@ SiteOrigin Premium is our way of adding features to all of our WordPress themes 
 
 We promote SiteOrigin Premium through small teasers in our plugins. If you're a theme developer building on top of Page Builder, Widgets Bundle or SiteOrigin CSS, we give you the option to hide the SiteOrigin Premium teasers.
 
-This allows you to build on top of our ecosystem while monetizing users in the way you want to. Your users won't see the upgrade teasers.
+This allows you to build on top of our ecosystem while monetizing users in the way you want to.
 
 ```php
 // Remove the SiteOrigin Premium teasers.
@@ -17,7 +17,7 @@ Page Builder also has its own **Upgrade Teaser** setting at **Settings > Page Bu
 
 ## Adding Your Affiliate ID
 
-The `siteorigin_premium_affiliate_id` filter adds your affiliate ID to the SiteOrigin Premium links in our plugins as a `ref` query argument.
+The `siteorigin_premium_affiliate_id` filter adds your affiliate ID as a `ref` query argument to the SiteOrigin Premium links in Page Builder and in Widgets Bundle widget forms.
 
 ```php
 function mytheme_premium_affiliate_id( $affiliate_id ) {
