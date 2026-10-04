@@ -1,8 +1,9 @@
-# Builder
+# Builder Field
 
-The builder field is an entire [SiteOrigin Page Builder](https://wordpress.org/plugins/siteorigin-panels/) instance. As such, SiteOrigin Page Builder is required for this field to work in all instances (settings and output). 
+The builder field puts a full [Page Builder](https://wordpress.org/plugins/siteorigin-panels/) layout inside a widget's form. The field needs Page Builder, both to edit the layout and to output it.
 
 ## Example
+
 ```php
 $form_options = array(
 	'page_builder' => array(
@@ -12,15 +13,15 @@ $form_options = array(
 );
 ```
 
-### Rendering the field
+## Rendering the Field
 
-`siteorigin_panels_render` will handle rendering the field value itself, but it does require some information to be able to proceed. `siteorigin_panels_render` has three relevant parameters for outputting this field:
+`siteorigin_panels_render()` outputs the field's layout. It takes three arguments:
 
-- post_id: `int|string|bool` The post ID or `'home'`.
-- enqueue_css: `bool` Should we also enqueue the layout CSS. This, for all intents and purposes, should rarely not be set to true.
-- panels_data: `array` $panels_data This is where we pass the contents of $instance['page_builder']
+- `$post_id` (`int|string|bool`): the post ID, or `'home'`. For a builder field, pass an ID that is unique to the layout.
+- `$enqueue_css` (`bool`): whether to enqueue the layout's CSS. Set it to `true`.
+- `$panels_data` (`array`): the layout data, from `$instance['page_builder']`.
 
-For information on `siteorigin_panels_render`, please refer to the full source code [here](https://github.com/siteorigin/siteorigin-panels/blob/develop/inc/functions.php).
+The function is in Page Builder's [`inc/functions.php`](https://github.com/siteorigin/siteorigin-panels/blob/develop/inc/functions.php). This example builds the ID from a hash of the layout, so builder fields with different layouts get different IDs:
 
 ```php
 if( function_exists( 'siteorigin_panels_render' ) ) {
@@ -31,4 +32,3 @@ else {
 	esc_html_e( 'This widget requires Page Builder.', 'widget-form-fields-text-domain' );
 }
 ```
-`$content_builder_id` doesn't need to be complex, but we recommend using a complex id to prevent any potential mismatches.

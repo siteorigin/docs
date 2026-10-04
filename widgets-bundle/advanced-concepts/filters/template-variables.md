@@ -1,6 +1,6 @@
 # Template Variables Filter
 
-For you to understand this filter, it's best to look at the context in which it runs. The widgets bundle passes the widget instance to the `get_template_variables` function. This function is the one your plugin should override to return an array of variables that the Widgets Bundle will pass through `extract` to make them available for your widget template.
+The Widgets Bundle passes the widget's instance to `get_template_variables()`, which your widget overrides to return the variables for its template. The Widgets Bundle runs the result through the `siteorigin_widgets_template_variables_{$id_base}` filter, where `{$id_base}` is the widget's base ID, and then through `extract()`:
 
 ```php
 $template_vars = $this->get_template_variables($instance, $args);
@@ -8,9 +8,7 @@ $template_vars = apply_filters( 'siteorigin_widgets_template_variables_' . $this
 extract( $template_vars );
 ```
 
-This filter mainly comes in useful if you want to modify the template variables of another widget. You could technically just modify the frontend instance, but this filter gives you a way to modify the variables in a way that doesn't change the instance for the LESS templates.
-
-The filter takes the form `'siteorigin_widgets_template_variables_' . $this->id_base`. The Widgets Bundle passes it 4 arguments.
+Use the filter to change the template variables of another widget. Changing the front-end instance would also work, and this filter leaves the instance that the LESS stylesheet uses unchanged. The filter passes four arguments:
 
 ```php
 /**

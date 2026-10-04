@@ -1,8 +1,6 @@
 # Initialize Widget Action
 
-This action is triggered right after the core Widgets Bundle has run all its initialization actions for the specified widget. The intention is that this will allow you to additional adjustments that couldn't necessarily be done until after the widget been inititalization.
-
-This action is widget specific, so it's not possible to automatically target all widgets by default. The syntax for the action name is: `'siteorigin_widgets_initialize_widget_' . $this->id_base`. The action fires inside the widget constructor and passes the widget object, so it runs each time a widget object is created.
+The `siteorigin_widgets_initialize_widget_{$id_base}` action runs right after the Widgets Bundle initializes a widget, so your code can change a widget after the Widgets Bundle sets it up. `{$id_base}` is the widget's base ID, so the action runs for one widget at a time, and no version of it runs for every widget. The action runs inside the widget's constructor and passes the widget object, so it runs each time a widget object is created.
 
 ```php
 /**

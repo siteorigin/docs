@@ -20,7 +20,7 @@ You can also extend our existing widgets with your own templates, styles and for
 * [Icons and Fonts](widgets-bundle/form-building/icons-and-fonts.md)
 * [Adding Custom Fields](widgets-bundle/form-building/adding-custom-fields.md)
 * [Modifying Forms](widgets-bundle/form-building/modifying-forms.md)
-* [State Emitters](widgets-bundle/form-building/state-emitters.md)
+* [Modifying Forms With State Emitters](widgets-bundle/form-building/state-emitters.md)
 * [Overriding Form Fields](widgets-bundle/form-building/overriding-form-fields.md)
 * [Link Form Field Filters](widgets-bundle/form-building/link-form-field-filters.md)
 * [Global Widget Settings](widgets-bundle/form-building/global-widget-settings.md)
@@ -32,7 +32,7 @@ You can also extend our existing widgets with your own templates, styles and for
 ### Advanced Concepts
 * [Instance Storage](widgets-bundle/advanced-concepts/instance-storage.md)
 * [Hooks and Filters](widgets-bundle/advanced-concepts/hooks-and-filters.md)
-* [Post Meta Boxes for Widget Data](widgets-bundle/advanced-concepts/post-meta-box-forms.md)
+* [Post Meta Box Forms](widgets-bundle/advanced-concepts/post-meta-box-forms.md)
 
 ### Tutorials
 * [Hello World!](widgets-bundle/tutorials/hello-world.md)

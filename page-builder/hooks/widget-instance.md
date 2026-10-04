@@ -1,6 +1,6 @@
 # Filtering the Widget Instance
 
-The `siteorigin_panels_widget_instance` filter changes a widget's instance just before Page Builder renders the widget on the front end, so you can change one setting based on the values of others. The filter passes three arguments:
+The `siteorigin_panels_widget_instance` filter changes a widget's instance right before Page Builder renders the widget on the front end, so you can change one setting based on the values of others. The filter passes three arguments:
 
 - `$instance`: the widget's instance array.
 - `$the_widget`: the widget's `WP_Widget` object.

@@ -1,10 +1,10 @@
 # Child Widgets
 
-Including a **child widget** (embedding one widget's form and output inside another widget) lets you reuse existing widget functionality without duplicating form fields or front end code. A common example is the Call-to-Action widget, which embeds the Button widget instead of recreating every button field.
+A child widget is a widget whose form and output sit inside another widget, so you reuse its fields and front-end code without copying them. The Call To Action Widget, for example, embeds the Button Widget for its button.
 
-## Defining a `widget` Form Field
+## Adding a Widget Field
 
-Add a field of **`type` => `widget`** to your widget's `$form_options` array and specify the fully-qualified PHP class name of the widget you want to embed.
+Add a field with the `widget` type to your widget's `$form_options`, and set `class` to the full PHP class name of the widget to embed:
 
 ```php
 $form_options = array(
@@ -19,7 +19,7 @@ $form_options = array(
 
 ### Loading the Child Widget Class
 
-Make sure the child widget class is available **before** the parent form is built. For Widgets Bundle widgets, do this in your widget's `initialize()` method:
+The child widget's class must exist before the Widgets Bundle builds the parent's form. For a Widgets Bundle widget, load the class in your widget's `initialize()` method:
 
 ```php
 if ( ! class_exists( 'SiteOrigin_Widget_Button_Widget' ) ) {
@@ -27,19 +27,19 @@ if ( ! class_exists( 'SiteOrigin_Widget_Button_Widget' ) ) {
 }
 ```
 
-## Rendering the Child Widget on the Front-End
+## Rendering the Child Widget
 
-The child widget's instance data is stored under the same key you used (`button_field` in this example). To output the widget inside your template:
+The child widget's instance is saved under the field's key, `button_field` in this example. Output the child widget in your template in one of three ways.
 
-### Using `sub_widget()`
+### With `sub_widget()`
 
-Inside a widget template, `$this` is your widget, so you can call its `sub_widget( $class, $args, $instance, $return = false )` method. It clears `before_widget` and `after_widget`, and returns the HTML when `$return` is `true`. The Call To Action Widget renders its button this way.
+In a widget template, `$this` is your widget, so call its `sub_widget( $class, $args, $instance, $return = false )` method. The method clears `before_widget` and `after_widget`, and returns the HTML when `$return` is `true`. The Call To Action Widget renders its button this way:
 
 ```php
 <?php $this->sub_widget( 'SiteOrigin_Widget_Button_Widget', $args, $instance['button_field'] ); ?>
 ```
 
-### Using `$wp_widget_factory`
+### With `$wp_widget_factory`
 
 ```php
 global $wp_widget_factory;
@@ -53,19 +53,21 @@ if (
 }
 ```
 
-### Using `the_widget()`
+### With `the_widget()`
 
 ```php
 the_widget( 'SiteOrigin_Widget_Button_Widget', $instance['button_field'] );
 ```
 
-> **Note:** `the_widget()` adds a default `<div class="widget">` wrapper. Use `$wp_widget_factory` if you need full control over the markup.
+`the_widget()` wraps the widget in a `<div class="widget">`. Use `$wp_widget_factory` for full control over the markup.
 
-## Customizing the Child Widget Form
+## Changing the Child Widget's Form
 
-Sometimes the child widget has fields that are irrelevant in your parent widget. You can remove or tweak these fields in two ways.
+The child widget's form can include fields that your parent widget doesn't need. Remove or change them in one of two ways.
 
-### Overriding `modify_child_widget_form()`
+### With `modify_child_widget_form()`
+
+Override `modify_child_widget_form()` in your widget:
 
 ```php
 class My_Parent_Widget extends SiteOrigin_Widget {
@@ -78,9 +80,9 @@ class My_Parent_Widget extends SiteOrigin_Widget {
 }
 ```
 
-### Using a `form_filter` Callback
+### With a `form_filter` Callback
 
-The callback receives one argument, the child widget's form array.
+Set a `form_filter` callback on the field. The callback receives the child widget's form array:
 
 ```php
 class My_Parent_Widget extends SiteOrigin_Widget {
@@ -101,11 +103,9 @@ class My_Parent_Widget extends SiteOrigin_Widget {
 }
 ```
 
-## Examples in Core Widgets
+## Examples in the Widgets Bundle
 
-| Parent Widget  | Child Widget(s)     | File                                  |
-| -------------- | ------------------- | ------------------------------------- |
-| Call-to-Action | Button              | `widgets/cta/cta.php`                 |
-| Button Grid    | Repeater of Buttons | `widgets/button-grid/button-grid.php` |
-
-Browse these files in the Widgets Bundle source to see working implementations.
+| Parent widget | Child widget | File |
+| --- | --- | --- |
+| Call To Action Widget | Button Widget | `widgets/cta/cta.php` |
+| Button Grid Widget | Button Widget, in a repeater | `widgets/button-grid/button-grid.php` |

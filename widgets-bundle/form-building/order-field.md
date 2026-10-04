@@ -1,8 +1,9 @@
-# Order
+# Order Field
 
-The order form field allows users to reorder the listed options. The most common usage of this field is using the order field to control the output of widget contents.
+The order field lets users drag a list of options into order, for example to set the order of the parts of a widget.
 
 ## Example
+
 ```php
 $form_options = array(
 	'ordering' => array(
@@ -18,8 +19,9 @@ $form_options = array(
 );
 ```
 
-### Rendering the field
-You can use `foreach` and `switch` to run through the through the `$instance['ordering']` `array`. An example of this is:
+## Rendering the Field
+
+The field saves the option keys in their new order, so loop through `$instance['ordering']` and output each part in turn:
 
 ```php
 foreach( $instance['ordering'] as $item ) {
@@ -38,4 +40,4 @@ foreach( $instance['ordering'] as $item ) {
 			break;
 	}
 }
-````
+```

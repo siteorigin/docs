@@ -1,16 +1,14 @@
 # Modifying Forms With State Emitters
 
-State emitters give you a way to easily hide, show or manipulate certain parts of a widget's form. Using entries in the form array, you can define state emitters fields, that will emit a specific state to the rest of the form, and then state handlers that will perform a specific action based on any changes in the state.
+State emitters show, hide or change parts of a widget's form as the user fills it in. A field with a state emitter sends a state to the rest of the form when its value changes, and fields with state handlers act on that state.
 
-State emitters are an advanced concept, and they aren't necessary for all fields. Make sure you're comfortable with creating forms before you try adding state emitters.
+## Form States
 
-## Form states
-
-A form state is scoped to a given widget form. Each form can only occupy one state per state group. A state is represented by the string `group[state]`. Group and state names can contain letters, numbers, underscores and hyphens.
+A state belongs to one widget form, and the form holds one state per group. The string `group[state]` names a state, and group and state names can contain letters, numbers, underscores and hyphens.
 
 ## State Emitters
 
-The first thing you need to understand is state emitters. These are tied to specific fields. They broadcast form states based on a given set of arguments. Here's how you define them in the form array.
+A state emitter belongs to a field, and it sends states based on the field's value and the emitter's arguments. Add it to the field in the form array:
 
 ```php
 'map_type'    => array(
@@ -28,17 +26,15 @@ The first thing you need to understand is state emitters. These are tied to spec
 ),
 ```
 
-What the `state_emitter` argument is essentially saying is that every time this field changes, we'll emit a new state based on what's returned by the state emitter callback. To attach several emitters to one field, set `state_emitter` to an array of emitter arrays.
+Each time this field changes, the form takes on the states that the emitter's callback returns. To give one field several emitters, set `state_emitter` to an array of emitter arrays. The Widgets Bundle has three built-in callbacks.
 
-The Widgets Bundle has a few built in state emitter callbacks that should cover most of your needs.
+### The `select` Callback
 
-### The select callback
+The `select` callback sets each group in `args` to the field's value. Use it with a select or radio field.
 
-The `select` state emitter simply sets the state for all the given groups in the args array to the value of the field. This is especially useful when you want to set the state of the field based on a dropdown or radio field.
+### The `in` Callback
 
-### The in callback
-
-The `in` state emitter checks if the current field value is in the set of arguments.
+The `in` callback checks whether the field's value is in a list, so you can group several options into one state:
 
 ```php
 'state_emitter' => array(
@@ -50,11 +46,9 @@ The `in` state emitter checks if the current field value is in the set of argume
 ),
 ```
 
-This is useful when you want to group different options into a set of states.
+### The `conditional` Callback
 
-### The conditional callback
-
-The conditional callback evaluates arbitrary conditions. The variable `val` holds the field value. Your expression should be valid Javascript and evaluate to a boolean.
+The `conditional` callback evaluates a JavaScript expression that returns a boolean, where `val` holds the field's value:
 
 ```php
 'state_emitter' => array(
@@ -67,9 +61,9 @@ The conditional callback evaluates arbitrary conditions. The variable `val` hold
 ),
 ```
 
-### Custom callbacks
+### Custom Callbacks
 
-If you need a custom state emitter for some specialized functionality, you can add it in Javascript by attaching a new function to the global `sowEmitters` object. The Widgets Bundle creates `sowEmitters` in its `siteorigin-widget-admin` script, so enqueue your script from your widget's `enqueue_admin_scripts()` method with `siteorigin-widget-admin` as a dependency. Callback names that start with an underscore are ignored.
+Add your own callback in JavaScript as a function on the global `sowEmitters` object. The Widgets Bundle creates `sowEmitters` in its `siteorigin-widget-admin` script, so enqueue your script from your widget's `enqueue_admin_scripts()` method with `siteorigin-widget-admin` as a dependency. The Widgets Bundle ignores callback names that start with an underscore.
 
 ```javascript
 sowEmitters.custom = function( val, args, field ){
@@ -82,11 +76,11 @@ sowEmitters.custom = function( val, args, field ){
 };
 ```
 
-The `field` parameter is the jQuery object of the input that triggered the emitter. This can be useful for checking other fields in comparison to the current one.
+The `field` argument is the jQuery object of the input that triggered the emitter, so you can compare the input with other fields.
 
 ## State Handlers
 
-Once a state has been emitted by any field in the form, the rest of the form can handle state changes by defining a state handler. The most common use case of this will be to show or hide fields, depending on the state of the form.
+A state handler on a field acts when the form's state changes, and it usually shows or hides the field:
 
 ```php
 'markers_draggable' => array(
@@ -100,17 +94,13 @@ Once a state has been emitted by any field in the form, the rest of the form can
 ),
 ```
 
-This particular field is from the Google Maps widget. The `markers_draggable` lets you decide if you want the user to be allowed to move the markers. This feature, however, is only available in interactive map mode, not static map mode.
-
-So we're using this state handler to hide this checkbox field if the maps is a static map and show it if it's an interactive map. Each value in the state handler array is essentially saying the following.
+This field is from the Google Maps Widget. The `markers_draggable` checkbox lets users drag the map's markers, which works only on an interactive map, so the handler hides the checkbox for a static map and shows it for an interactive map. Each entry in a state handler has this form:
 
 ```
 'group[state]' => array( 'function', 'selector', array( 'args' ) ),
 ```
 
-So when the form changes to `state` in `group`, we'll run the given action. The `function` is run on the jQuery object of the field's wrapper element. If `selector` isn't empty, then we'll use it to target a sub-element using `jQuery.find`. The `args` array is the argument for the action function.
-
-So as an example, if you want to change the color of a field's label to green in a given state, this is the state handler argument you would use.
+When `group` changes to `state`, the handler runs `function` on the jQuery object of the field's wrapper element. If `selector` isn't empty, the handler uses `jQuery.find()` to run the function on an element inside the wrapper, and `args` holds the function's arguments. This example colors the field's label green for an interactive map:
 
 ```php
 'state_handler' => array(
@@ -119,9 +109,9 @@ So as an example, if you want to change the color of a field's label to green in
 ),
 ```
 
-### Multiple actions
+### Running Several Actions
 
-State handlers also have a very simple syntax for running multiple actions for a given state.
+Add `[]` after the state name to run several actions for one state, and give the actions as an array of arrays:
 
 ```php
 'state_handler' => array(
@@ -132,11 +122,9 @@ State handlers also have a very simple syntax for running multiple actions for a
 ),
 ```
 
-Just adding the `[]` after the state name is enough to tell the Widgets Bundle that there are multiple actions to run. It just expects an array of arrays.
+### Else Handlers
 
-### Else arguments
-
-Else arguments give you a catch all of actions to run for a given group. Let's say, for example, you've created a state emitters that emits several states for a given goup. You only want to hide a field for one of those states and show it for the rest. Rather than defining actions for each state, you can combine them all into a single `_else`.
+An `_else` handler runs for every state in a group that has no handler of its own. If an emitter sends several states and you want to hide a field for one of them, hide it for that state and show it in `_else`:
 
 ```php
 'state_handler' => array(
@@ -145,15 +133,13 @@ Else arguments give you a catch all of actions to run for a given group. Let's s
 ),
 ```
 
-The Widgets bundle goes from top to bottom of the state handlers. If it reaches an else handler, it'll run it only if no actions have run for the same group for the given state handler.
+The Widgets Bundle runs the handlers from top to bottom, and runs an `_else` handler only if no other handler for the same group has run.
 
 ## States in Repeaters
 
-State Emitter groups are global within a given form. That means if you have a state emitter for a field inside a repeater, each instance of that field will emit states for the same group. To change this behavoir, use the `{$repeater}` string in your repeater group names.
+State groups apply to the whole form, so a state emitter on a field inside a repeater sends states to the same group from every item. Add `{$repeater}` to the group name to give each repeater item its own group.
 
-For example, the Contact Form widget has a repeater that allows a user to create a list of form fields. Each item has a field type dropdown to select what type of field it is and another repeater to add value options for the field. This value options field only applies to dropdown, checkboxes and radio fields.
-
-So in the state emitter argument, we have a select state emitter where the group is `field_type_{$repeater}` and a state handler that shows or hides the value options repeater based on this same group. Keep `{$repeater}` in a single-quoted PHP string; in double quotes, PHP reads `$repeater` as a variable. A handler state can list several states separated by commas, as in `[select,checkboxes,radio]` below.
+The Contact Form Widget, for example, has a repeater of form fields. Each item has a **Field Type** select field and an **Options** repeater, which applies only to dropdown, checkbox and radio fields. The **Field Type** field's `select` emitter uses the group `field_type_{$repeater}`, and a state handler on the **Options** repeater shows or hides the repeater for the same group. Keep `{$repeater}` in a single-quoted PHP string, because in double quotes PHP reads `$repeater` as a variable. A state handler can list several states separated by commas, as in `[select,checkboxes,radio]` below.
 
 ```php
 'type' => array(
@@ -173,7 +159,7 @@ So in the state emitter argument, we have a select state emitter where the group
 ),
 ```
 
-And then for the value options repeater:
+The **Options** repeater:
 
 ```php
 'options' => array(

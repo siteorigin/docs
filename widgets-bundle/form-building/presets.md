@@ -1,10 +1,10 @@
 # Presets
 
-The Preset form field allows you to create presets for your widget. To do this, you'll need to create a multidimensional array containing your setting selections.
+The presets field gives users a list of ready-made settings for your widget. When a user chooses a preset, the field copies the preset's values into the widget's form.
 
-The first level of the array is where the slug of the preset is stored. This slug is used to uniquely identify the preset as a select option value.
+## Building the Presets Array
 
-The second level contains the label, the visible text used in the presets drop-down, and the preset values.
+Each preset is an item in an array. The item's key is the preset's slug, which identifies the preset in the presets list. The item holds a `label`, the name users see in the list, and the preset's `values`:
 
 ```php
 $presets = array(
@@ -15,7 +15,7 @@ $presets = array(
 );
 ```
 
-Each element in the values array must correspond with a valid setting. Sections use a nested associative array; repeaters use an indexed array of items.
+Each key in `values` must match a field in your form. A section takes a nested associative array, and a repeater takes an indexed array of items:
 
 ```php
 'values' => array(
@@ -28,9 +28,7 @@ Each element in the values array must correspond with a valid setting. Sections 
 ),
 ```
 
-Your preset does not have to adjust all of your fields. Any fields not adjusted will retain their original values.
-
-Now that you've structured your first preset, you can add additional presets to the first level array by creating another element in the first level of the presets array.
+A preset only needs values for the fields it changes, and every other field keeps its value. Add more presets as more items in the array:
 
 ```php
 $presets = array(
@@ -59,9 +57,9 @@ $presets = array(
 );
 ```
 
-### Adding the Field
+## Adding the Field
 
-Pass your presets array to a `presets` field with the `options` argument. The optional `default_preset` argument takes a preset slug; when it's set, the dropdown has no empty option.
+Pass your presets array to a `presets` field in its `options` argument. The optional `default_preset` argument takes a preset's slug, and the list then has no empty option:
 
 ```php
 'preset' => array(
@@ -72,13 +70,11 @@ Pass your presets array to a `presets` field with the `options` argument. The op
 ),
 ```
 
-Selecting a preset copies its values into the form and shows an **Undo** link that restores the previous values. The field shows a warning description by default; set `description` to replace it.
+When a user chooses a preset, the field copies the preset's values into the form and shows an **Undo** link that restores the previous values. The field shows a warning as its description, and a `description` argument replaces the warning.
 
-### Storing Presets as JSON and Loading Presets
+## Storing Presets in a JSON File
 
-To make managing presets easier, we recommend loading your presets from a json file. How you structure json is much stricter compared to standard PHP, so we recommend using a JSON validator if you are having trouble getting your preset JSON to load.
-
-The following snippet is the contents of presets.json, which can be added to a data directory in your widgets directory.
+You can keep presets in a JSON file, apart from your PHP code. JSON is stricter than PHP arrays, so check the file with a JSON validator if your presets don't load. This example is a `presets.json` file in a `data` folder in your widget folder:
 
 ```json
 {
@@ -98,23 +94,23 @@ The following snippet is the contents of presets.json, which can be added to a d
 }
 ```
 
-The following PHP will allow you to load the presets.json file in your widgets data directory:
+Load the file with `json_decode()`:
 
 ```php
 $presets = json_decode( file_get_contents( plugin_dir_path( __FILE__ ) . 'data/presets.json' ), true );
 ```
 
-### Dynamic State Handler
+## Showing Fields for Each Preset
 
-The preset field is able to work in combination with the [State Emitters](state-emitters.md). Due to the complicated nature of managing state handlers when there is a number of presets present, we have created a utility method for `SiteOrigin_Widget` called `dynamic_preset_state_handler`. This method adds state handlers based on the data in your presets, and returns the fields array with the state handlers added. This method has three required parameters:
+The presets field works with state emitters, described in [Modifying Forms With State Emitters](state-emitters.md), so the form shows only the fields that the selected preset sets. Setting up a state handler for every field by hand is error-prone with many presets, so `SiteOrigin_Widget` has a `dynamic_preset_state_handler()` method that adds the handlers from your preset data. The method returns your fields array with the handlers added, and it takes three arguments:
 
-- state_name: `string` The name of the state. This is set when creating the `state_emitter`.
-- preset_data: `array` An array containing your preset data.
-- fields: `array` An array containing the fields you want to add a `state_handler` to.
+- `$state_name` (`string`): the name of the state, which you set in the presets field's `state_emitter`.
+- `$preset_data` (`array`): your presets.
+- `$fields` (`array`): the fields to add state handlers to.
 
-Only fields inside a `section`, including nested sections, receive a state handler. Each of those fields shows while a preset that sets its value is selected and hides for every other preset. Top-level fields, top-level sections and fields that already have a `state_handler` are left unchanged.
+The method adds a handler only to fields inside a `section`, including nested sections. Each of those fields shows while a preset that sets the field's value is selected, and hides for every other preset. Top-level fields, top-level sections and fields that already have a `state_handler` keep their settings.
 
-#### Example
+### Example
 
 ```php
 public function get_widget_form() {
@@ -172,8 +168,12 @@ public function get_widget_form() {
 
 In this example, the **Text** field shows for both presets, and the **Color** field shows only when **Test 2** is selected.
 
-### Test Plugin
+## Test Plugin
 
-Due to the complicated nature of this field, we've prepared a test plugin for you to try. You can [download it by clicking here](https://siteorigin.com/wp-content/uploads/2021/06/siteorigin-preset-field-demo.zip). Once downloaded, please navigate to **Plugins > Add Plugin**, click **Upload Plugin** and upload **siteorigin-preset-field-demo.zip**. When prompted, activate the **SiteOrigin - Preset Field** plugin.
+The [test plugin](https://siteorigin.com/wp-content/uploads/2021/06/siteorigin-preset-field-demo.zip) shows the presets field in a working widget:
 
-Once installed, navigate to **Plugins > SiteOrigin Widgets** and activate the **SiteOrigin Preset Field** widget. Open any Page Builder powered page and add the **SiteOrigin Preset Field** widget to your page.
+1. Download the plugin.
+2. Go to **Plugins > Add Plugin**, click **Upload Plugin** and upload `siteorigin-preset-field-demo.zip`.
+3. Activate the **SiteOrigin - Preset Field** plugin.
+4. Go to **Plugins > SiteOrigin Widgets** and activate the **SiteOrigin Preset Field** widget.
+5. Add the **SiteOrigin Preset Field** widget to a page in Page Builder.

@@ -1,9 +1,9 @@
 # Post Selector
 
-The post selector field allows the user to build a query to find posts in the database. The resulting posts are then typically used in some form of list display, e.g., a post carousel.
+The post selector field lets users build a query that finds posts, for a widget that lists posts, such as a post carousel.
 
 ## Example
-Form options input:
+
 ```php
 $form_options = array(
 	'some_posts' => array(
@@ -14,12 +14,9 @@ $form_options = array(
 );
 ```
 
-Use of the post selector will result in a pseudo query looking something like this:
-`post_type=post&orderby=date&order=DESC&posts_per_page=3`.
+The field saves the query as a string, such as `post_type=post&orderby=date&order=DESC&posts_per_page=3`. `siteorigin_widget_post_selector_process_query()` turns the string into an array that you pass to `WP_Query`. Its optional second argument, `$exclude_current`, is `true` unless you pass `false`, and adds the current post to `post__not_in`.
 
-This pseudo query may be transformed into a format understood by WordPress by using the `siteorigin_widget_post_selector_process_query()` function, which takes the pseudo query and an optional `$exclude_current` argument, and returns a query array which may be passed directly to the `WP_Query` constructor to find posts. `$exclude_current` defaults to `true`, which adds the current post to `post__not_in`.
-
-### An Example Template Using the Post Selector Query
+## Using the Query in a Template
 
 ```php
 <?php
@@ -51,11 +48,9 @@ if ( $query_result->have_posts() ) : ?>
 <?php endif; ?>
 ```
 
-### Filtering Siteorigin_widget_post_selector_process_query
+## Filtering the Query
 
-The `siteorigin_widgets_posts_selector_query` filter can be used to filter the array returned by `siteorigin_widget_post_selector_process_query`. This allows you to alter the query of SiteOrigin widgets (i.e., Post Loop) and widgets that function and make changes that otherwise wouldn't be possible with just the Additional field.
-
-The following example will require results to have `age` meta with a value of `3` or `4`.
+The `siteorigin_widgets_posts_selector_query` filter changes the array that `siteorigin_widget_post_selector_process_query()` returns. It changes the queries of SiteOrigin widgets that use the post selector, such as the Post Loop Widget, in ways the field's **Additional** setting can't. This example finds only posts whose `age` meta value is 3 or 4:
 
 ```php
 <?php

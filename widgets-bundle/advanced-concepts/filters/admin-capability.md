@@ -1,6 +1,6 @@
 # Menu Capability Filter
 
-This filter just gives you the chance to change the [capability](https://developer.wordpress.org/plugins/users/roles-and-capabilities/) required to view Plugins > SiteOrigin Widgets. Users with this capability can also activate and deactivate widgets, and open and save the widget settings forms. By default, the capability is `manage_options`.
+The `siteorigin_widgets_admin_menu_capability` filter changes the [capability](https://developer.wordpress.org/plugins/users/roles-and-capabilities/) that users need to open **Plugins > SiteOrigin Widgets**. Users with the capability can also activate and deactivate widgets, and open and save widget settings. The capability is `manage_options` unless you change it.
 
 ```php
 function wbe_widgets_capability_filter($cap){
