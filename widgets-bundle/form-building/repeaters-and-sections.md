@@ -1,11 +1,13 @@
 # Repeaters and Sections
 
 ## Repeaters
-### Basic Usage
-Repeaters provide a way to repeat a group of form fields any number of times. The group of fields to be repeated are specified similarly to a section. Initially the repeater is empty and only displays the header label and the 'Add' button. When the user clicks the 'Add' button, an item containing the specified group of fields is added to the repeater in it's collapsed state, where only the item label, remove button and expand/collapse toggle are visible. Clicking anywhere on this item header, except on the remove button, will toggle the expanded/collapsed state. Clicking on the remove button will trigger a warning asking the user to confirm the action and then, on confirmation, remove the item from the repeater.
- 
-### Example 1 - Basic Usage
-Form options input:
+
+A repeater lets users add a group of fields as many times as they need, such as one group per slide or per feature. You declare the repeated fields the same way as a section's fields.
+
+A new repeater is empty and shows its label and an **Add** button. Each click on **Add** adds an item, collapsed, with its label, a remove button and an expand toggle in its header. Clicking the header, anywhere except the remove button, expands or collapses the item. Clicking the remove button asks the user to confirm, then removes the item.
+
+### Example
+
 ```php
 $form_options = array(
 	'a_repeater' => array(
@@ -25,18 +27,21 @@ $form_options = array(
 	)
 );
 ```
-Result:
 
-Empty repeater:
+An empty repeater:
+
 ![Widget Form Repeater 1](../images/form-field-type-repeater-1.png)
 
-Repeater with newly added collapsed item.
+A repeater with a new, collapsed item:
+
 ![Widget Form Repeater 2](../images/form-field-type-repeater-2.png)
 
-Repeater with expanded item.
+A repeater with an expanded item:
+
 ![Widget Form Repeater 3](../images/form-field-type-repeater-3.png)
 
-The resulting input is then grouped in an indexed array on the widget instance and can be accessed using the key given for the repeater when first initializing form options. For the above example, the repeater item fields can be accessed in the `get_template_variables` function, as follows:
+The widget instance stores the items as an indexed array under the repeater's key. This example reads the items in `get_template_variables()`:
+
 ```php
 public function get_template_variables( $instance, $args ) {
 	$joined_text = '';
@@ -55,16 +60,18 @@ public function get_template_variables( $instance, $args ) {
 }
 ```
 
-### Using Item Labels
-By default, repeaters use the 'item_name' value as the item label in item headers. Repeaters can be configured to use a specific input field's value as the item label, which is displayed in the item header. This is done using the 'item_label' configuration value, which is an associative array that describes how the repeater may retrieve the item labels from an HTML elements as it is updated. It takes the following properties; only `selector` (or `selector_array`) is required:
-- selector: `string` A JQuery selector which is used to find an element from which to retrieve the item label. Any JQuery selector is valid here.
-- update_event: `string` Optional. The javascript event on which to bind and update the item label. Defaults to 'change' event.
-- value_method: `string` Optional. The javascript function which should be used to retrieve the item label from an element. Defaults to `val()` method.
-- selector_array: `array` Optional. Use in place of `selector` to try several elements in order. Each entry is an array with a `selector` and an optional `value_method`, and the first entry that returns a value sets the label.
-- increment: `string` Optional. Set to `before` or `after` to add the item number before or after the `item_name` label when no value is found.
+### Item Labels
 
-### Example 2 - Using Item Labels
-Form options input:
+Each item's header shows the repeater's `item_name`. The `item_label` option shows the value of one of the item's fields instead, and updates the header as the user types. `item_label` is an associative array, and only `selector`, or `selector_array`, is required:
+
+- `selector` (`string`): a jQuery selector for the element that holds the label.
+- `update_event` (`string`, optional): the JavaScript event that updates the label. The default is `change`.
+- `value_method` (`string`, optional): the jQuery method that reads the label from the element. The default is `val()`.
+- `selector_array` (`array`, optional): several elements to try in order, in place of `selector`. Each entry is an array with a `selector` and an optional `value_method`, and the first entry that returns a value sets the label.
+- `increment` (`string`, optional): `before` or `after` adds the item's number before or after the `item_name` when no field has a value.
+
+This example labels each item with its `repeat_text` field:
+
 ```php
 $form_options = array(
 	'a_repeater' => array(
@@ -90,17 +97,14 @@ $form_options = array(
 );
 ```
 
-In the above example the repeater has been configured to use the 'repeat_text' field value as the item label. The result can be seen in the below image.
+A repeater with two items labeled by `item_label`:
 
-Repeater containing two items using the `item_label` property:
 ![Widget Form Repeater 4](../images/form-field-type-repeater-4.png)
 
-### Limiting Repeater Items (`max_items`)
+### Limiting the Number of Items
 
-Use the `max_items` option to cap how many items a repeater can contain. When the limit is reached, the **Add** button stops adding items.
+The `max_items` option sets the most items a repeater can hold. When the repeater reaches the limit, the **Add** button stops adding items:
 
-#### Example 3 – Limiting Items
-Form options input:
 ```php
 $form_options = array(
     'feature_list' => array(
@@ -118,13 +122,12 @@ $form_options = array(
 );
 ```
 
----
-
 ## Sections
-Sections simply allow the user to better organize fields and to hide a group of fields when not in use. This improves user experience by simplifying the appearance of large forms.
+
+A section groups related fields under one heading, and users can collapse the section to hide its fields. Sections keep large forms short and easy to scan.
 
 ### Example
-Form options input:
+
 ```php
 $form_options = array(
 	'a_section' => array(
@@ -144,11 +147,11 @@ $form_options = array(
 	)
 );
 ```
-Result:
 
 ![Widget Form Section](../images/form-field-type-section.png)
 
-The resulting input is then grouped in an associative array on the widget instance and can be accessed using the key given for the section when first initializing form options. For the above example, the `grouped_text` fields can be retrieved in the `get_template_variables` function, as follows:
+The widget instance stores a section's fields as an associative array under the section's key. This example reads the `grouped_text` field in `get_template_variables()`:
+
 ```php
 public function get_template_variables( $instance, $args ) {
     // Ensure that the group and field in the group are actually available.

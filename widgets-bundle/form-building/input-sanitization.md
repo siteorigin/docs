@@ -1,57 +1,72 @@
-# Sanitization
+# Input Sanitization
 
-When a widget is saved, `SiteOrigin_Widget::update()` passes each field value to that field's `sanitize()` method. The sanitization method varies for different field types and additional sanitization may be done using filters. For most fields, an empty string or `null` is saved as an empty string, so the field sanitization below only runs for other values. Container fields, such as sections, repeaters and child widgets, save an empty value as an empty array.
+When a user saves a widget, `SiteOrigin_Widget::update()` passes each field's value to that field's `sanitize()` method. Each field type sanitizes its value in its own way, and filters add more sanitization. Most fields save an empty string or `null` as an empty string, and sanitize every other value as described below. Container fields, such as sections, repeaters and child widgets, save an empty value as an empty array.
 
->Note: We have included a wrapper for the built-in WordPress `esc_url_raw()` function, named `sow_esc_url_raw()`. It performs the same function, but additionally allows the "skype:" and "steam:" URL protocols (filterable with `siteorigin_esc_url_protocols`) and our own "post:" protocol which we convert into a real URL using the specified post ID.
+The Widgets Bundle has its own version of the WordPress `esc_url_raw()` function, `sow_esc_url_raw()`. It also accepts the `skype:` and `steam:` URL protocols, which the `siteorigin_esc_url_protocols` filter changes, and our own `post:` protocol, which it turns into the URL of the post with that ID.
 
-## Built-in sanitization for field types
+## Sanitization by Field Type
 
-### Select and radio fields
-If the selected value is not present in the list of values originally presented to the front end, then the value reverts to the field's specified default. If there is no default specified, the value reverts to `false`.
+### Select and Radio Fields
 
-### Number fields
-If the value isn't numeric, it is set to `false`. Otherwise it is limited by the field's `min` and `max` options, made positive if the `abs` option is set, and typecast to float. A `min` or `max` of `0` is ignored.
+If the value isn't one of the field's options, the field saves its default, or `false` if it has no default.
 
-### Slider fields
-The value is typecast to float.
+### Number Fields
 
-### Textarea and text fields
-The value is sanitized using two WordPress sanitization functions, namely `wp_kses_post()` followed by a forced `balanceTags()` call. This allows users to input some HTML tags, but not JavaScript and attempts to fix any mistakes made by users when inputting HTML tags. If the field's `allow_html` option is `false`, `sanitize_text_field()` is used in place of `wp_kses_post()`. If the `json` option is set, the value is sanitized as JSON.
+A value that isn't numeric becomes `false`. A numeric value is limited by the field's `min` and `max` options, made positive if the `abs` option is set, and cast to a float. A `min` or `max` of `0` has no effect.
 
-### Color fields
-A missing '#' is added to the start of the value. The value is then checked against a regular expression pattern which ensures the value starts with the '#' character followed by either 3 or 6 characters in the ranges 'A-F', 'a-f' and '0-9'. If it does not match the required pattern it is set to `false`. If the field's `alpha` option is set, an `rgba(r,g,b,a)` value is also accepted.
+### Slider Fields
 
-### Media fields
-The value should be an integer so is passed through the `intval()` function. Additionally, if the optional 'fallback' URL is specified, it is escaped using `sow_esc_url_raw()`.
+The value is cast to a float.
 
-### Link fields
-The value is stripped of leading and trailing whitespace and then checked against a regular expression which ensures the value starts with 'post:' followed by at least one digit. If it does not match the required pattern it is assumed to be a URL and escaped using `sow_esc_url_raw()`. If the field's `allow_shortcode` option is set, a value containing `[` is escaped with `esc_attr()` so that it can hold a shortcode.
+### Text and Textarea Fields
 
-### Checkbox fields
-If the value is any non-empty value other than the string `'false'`, it is set to true, otherwise it is set to false. An unchecked checkbox sends no value, so it is saved as an empty string.
+The value passes through `wp_kses_post()` and then `balanceTags()`, so users can enter some HTML tags but no JavaScript, and unclosed tags are fixed. If the field's `allow_html` option is `false`, the field uses `sanitize_text_field()` in place of `wp_kses_post()`. If the `json` option is set, the field sanitizes the value as JSON.
 
-### Widget fields
-Each field of the child widget's form is sanitized by its own field type, the same way section fields are.
+### Color Fields
 
-### Repeater fields
-The repeater items are iterated over and each item is passed into the `sanitize` function to be sanitized.
+The field adds a missing `#` to the start of the value, then checks that the value is a `#` followed by 3 or 6 hexadecimal characters. A value that doesn't match becomes `false`. If the field's `alpha` option is set, the field also accepts an `rgba(r,g,b,a)` value.
 
-### Section fields
-A section is passed into the `sanitize` function to be sanitized.
+### Media Fields
 
-### Unknown field types
-If the type of field is not recognized, the field displays an error message in the widget form and its value is not sanitized. Check that every field in your form uses a valid field type.
+The value is an attachment ID, so it passes through `intval()`. If the field has a fallback URL, the URL passes through `sow_esc_url_raw()`.
 
-## Additional sanitization
-Additionally, a 'sanitize' option may be set on form options to specify extra sanitization which should occur. Extra sanitization only runs when the value is not empty. There are four existing additional 'sanitize' options:
-- url: Lets the field be sanitized as a URL using the `sow_esc_url_raw()` function.
-- email: Lets the field be sanitized as an email address using the built-in WordPress `sanitize_email()` function.
-- text: Removes HTML using `sanitize_text_field()` when the user saving the widget doesn't have the `unfiltered_html` capability.
-- number: Typecasts the value to an integer.
+### Link Fields
 
-The 'sanitize' option can also be any PHP callable. The callable receives the value and returns the sanitized value. If the callable accepts a second argument, it also receives the field's previous value. PHP's own functions, such as `intval`, receive only the value unless they require two arguments.
+The field trims the value, then checks whether it is `post:` followed by a post ID. Any other value is treated as a URL and passes through `sow_esc_url_raw()`. If the field's `allow_shortcode` option is set, a value that contains `[` passes through `esc_attr()` so that it can hold a shortcode.
 
-### Example - additional sanitization options
+### Checkbox Fields
+
+Any non-empty value other than the string `'false'` becomes `true`, and every other value becomes `false`. An unchecked checkbox sends no value, so it saves an empty string.
+
+### Widget Fields
+
+Each field in the child widget's form is sanitized by its own field type, the same way as fields in a section.
+
+### Repeater Fields
+
+Each repeater item passes through `sanitize()`.
+
+### Section Fields
+
+The section passes through `sanitize()`.
+
+### Unknown Field Types
+
+A field with an unknown type shows an error message in the widget form, and its value isn't sanitized. Check that every field in your form uses a valid field type.
+
+## Extra Sanitization
+
+A field's `sanitize` option adds more sanitization, which runs only when the value isn't empty. The option accepts four built-in values:
+
+- `url`: sanitizes the value as a URL with `sow_esc_url_raw()`.
+- `email`: sanitizes the value as an email address with `sanitize_email()`.
+- `text`: removes HTML with `sanitize_text_field()` when the user who saves the widget doesn't have the `unfiltered_html` capability.
+- `number`: casts the value to an integer.
+
+The `sanitize` option also accepts any PHP callable, which receives the value and returns the sanitized value. If the callable accepts a second argument, it also receives the field's previous value. PHP's own functions, such as `intval`, receive only the value unless they require two arguments.
+
+### Example: Built-In Options
+
 ```php
 $form_options = array(
 	'some_url' => array(
@@ -67,9 +82,10 @@ $form_options = array(
 );
 ```
 
-If any other string is specified for the 'sanitize' option, it is assumed to be a custom sanitization and a filter is applied using a concatenation of 'siteorigin_widgets_sanitize_field_' and the specified string. The filter receives one argument, the value.
+### Example: A Custom Option
 
-### Example - custom sanitization options
+Any other string in the `sanitize` option runs the `siteorigin_widgets_sanitize_field_{$sanitize}` filter, where `{$sanitize}` is the string. The filter receives the value. This example adds a `date` option:
+
 ```php
 function my_widgets_sanitize_date( $date_to_sanitize ) {
 	// Perform custom date sanitization here.
@@ -79,7 +95,7 @@ function my_widgets_sanitize_date( $date_to_sanitize ) {
 add_filter( 'siteorigin_widgets_sanitize_field_date', 'my_widgets_sanitize_date' );
 ```
 
-Then set the 'sanitize' option to `date` in your widget's form.
+Then set the field's `sanitize` option to `date`:
 
 ```php
 'some_date' => array(
@@ -89,8 +105,9 @@ Then set the 'sanitize' option to `date` in your widget's form.
 ),
 ```
 
-### Example - callable sanitization
-The 'sanitize' option can also name a function directly. No filter is needed.
+### Example: A Callable
+
+The `sanitize` option can also name a function, with no filter:
 
 ```php
 function my_widgets_sanitize_date_field( $date_to_sanitize, $old_value = null ) {
@@ -106,8 +123,10 @@ $form_options = array(
 );
 ```
 
+## Sanitizing the Whole Instance
 
-Finally, just before the sanitized instance is returned, two more filters are applied to allow other plugins to perform their own sanitization. The filters are `'siteorigin_widgets_sanitize_instance'` and `'siteorigin_widgets_sanitize_instance_' . $this->id_base`, where `$this->id_base` is the base ID of the widget class which is performing the sanitization. Both filters pass three arguments: the new instance, the form options and the widget object. Use `add_filter( 'siteorigin_widgets_sanitize_instance', 'my_callback', 10, 3 )` to receive all three.
+Just before `update()` returns the sanitized instance, two more filters let other plugins sanitize it: `siteorigin_widgets_sanitize_instance` and `siteorigin_widgets_sanitize_instance_{$id_base}`, where `{$id_base}` is the widget's base ID. Both filters pass three arguments: the new instance, the form options and the widget object. Use `add_filter( 'siteorigin_widgets_sanitize_instance', 'my_callback', 10, 3 )` to receive all three.
 
-## Undeclared instance keys
-When a widget is saved, the Widgets Bundle removes every instance key that isn't a declared form field. Keys that a field declares with its `get_related_instance_keys()` method, such as a media field's fallback URL, are kept, along with `_sow_form_id`, `_sow_form_timestamp` and `panels_info`. If your widget stores extra values, add a field for them to the form. Fields inside sections and repeaters follow the same rule.
+## Undeclared Instance Keys
+
+When a user saves a widget, the Widgets Bundle removes every instance key that isn't a form field. It keeps the keys that a field declares with its `get_related_instance_keys()` method, such as a media field's fallback URL, along with `_sow_form_id`, `_sow_form_timestamp` and `panels_info`. If your widget stores extra values, add a field for them to the form. Fields inside sections and repeaters follow the same rule.
