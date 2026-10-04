@@ -30,7 +30,7 @@ class MyCustomWidget extends SiteOrigin_Widget {
 	// We're leaving out all the setup code here
 
 	function modify_form( $form ) {
-		$form['my_field']['options'] = include( 'data-file.php' );
+		$form['my_field']['options'] = include __DIR__ . '/data-file.php';
 		return $form;
 	}
 }
@@ -70,12 +70,13 @@ The Widgets Bundle has a concept of a child widget. This is a widget that's incl
 In this case though, there might be some fields in the child widget that aren't necessary. In the case of the Call-to-action widget, the alignment field of the Button widget isn't necessary because the CTA widget itself is handling this. In this case, we use `modify_child_widget_form` to remove that field.
 
 ```php
-class SiteOrigin_Widget_Cta_widget extends SiteOrigin_Widget {
+class SiteOrigin_Widget_Cta_Widget extends SiteOrigin_Widget {
 	// Everything else goes here.
 
 	function modify_child_widget_form( $child_widget_form, $child_widget ) {
 		// We could also check $child_widget if we're including different types of child widgets.
 		unset( $child_widget_form['design']['fields']['align'] );
+		unset( $child_widget_form['design']['fields']['mobile_align'] );
 
 		return $child_widget_form;
 	}
