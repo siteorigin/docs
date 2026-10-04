@@ -1,6 +1,8 @@
-### Filter: siteorigin_panels_builder_supports
+# Filtering Page Builder Features and Actions
 
-The `siteorigin_panels_builder_supports` filter allows you to enable and disable Page Builder features. The filter also passes `$post` and `$panels_data`. For example, the following snippet will prevent users from being able to add new widgets:
+The `siteorigin_panels_builder_supports` filter enables and disables Page Builder's features and the actions users can take on rows and widgets. Every feature and action is enabled by default. The filter also passes `$post` and `$panels_data`.
+
+This example stops users from adding new widgets:
 
 ```php
 function so_disallow_new_widgets( $supports ) {
@@ -11,71 +13,29 @@ function so_disallow_new_widgets( $supports ) {
 add_filter( 'siteorigin_panels_builder_supports', 'so_disallow_new_widgets' );
 ```
 
-#### Adjustable Actions
+## Actions
 
-All adjustable actions are enabled by default.
+- `addRow`: users can add new rows and duplicate rows.
+- `editRow`: users can edit rows.
+- `deleteRow`: users can delete rows.
+- `moveRow`: users can move rows.
+- `addWidget`: users can add new widgets.
+- `editWidget`: users can edit widgets.
+- `deleteWidget`: users can delete widgets.
+- `moveWidget`: users can move widgets.
 
-**addRow**
+## Features
 
-Controls whether new rows can be added and existing rows duplicated.
+- `prebuilt`: the **Layouts** button in the Page Builder toolbar opens the prebuilt layouts.
+- `history`: the **History** button in the toolbar lets users undo earlier edits.
+- `liveEditor`: the **Live Editor** button in the toolbar opens the Live Editor.
+- `revertToEditor`: users can switch from Page Builder back to the WordPress editor.
 
-**editRow**
+Page Builder applies `history`, `liveEditor` and `revertToEditor` only in a builder that shows the matching button.
 
-Controls whether rows are editable.
+## Layout Builder Widget
 
-**deleteRow**
-
-Controls whether rows are able to be deleted.
-
-**moveRow**
-
-Controls whether rows are able movable.
-
-**addWidget**
-
-Controls whether new widgets can be added.
-
-**editWidget**
-
-Controls whether widgets are able to be edited.
-
-**deleteWidget**
-
-Controls whether widgets are able to be deleted.
-
-**moveWidget**
-
-Controls whether widgets are able to be moved.
-
-#### Adjustable Features
-
-All adjustable features are enabled by default.
-
-**prebuilt**
-
-If `prebuilt` is enabled, the user will be able to access the Layouts Directory. The Layout Directory can accessed by clicking the Layouts button in the Page Builder toolbar.
-
-**history**
-
-If `history` is enabled, the History buttton will appear in the Page Builder toolbar and the user will be able to undo previous edits.
-
-This action isn't supported by every Page Builder instance may not always have a noticeable effect.
-
-**liveEditor**
-
-If `liveEditor` is enabled, the Live Editor button will appear in the Page Builder toolbar, and the user will be able to make changes using the Live Editor.
-
-This action isn't supported by every Page Builder instance may not always have a noticeable effect.
-
-**revertToEditor**
-
-If `revertToEditor` is enabled, the user will be able to switch from Page Builder back to the standard editor.
-
-This action isn't supported by every Page Builder instance may not always have a noticeable effect.
-
-#### siteorigin_panels_layout_builder_supports
-
-`siteorigin_panels_layout_builder_supports` is specific to the Layout Builder widget and is equivelent to `siteorigin_panels_builder_supports`. Its second argument is the Layout Builder's `$panels_data` as a JSON string. The following snippet will prevent new widgets from being added to layout builders - the base Page Builder instance will be unaffected.
+The `siteorigin_panels_layout_builder_supports` filter does the same job for the Layout Builder Widget and leaves the main Page Builder untouched. Its second argument is the Layout Builder's `$panels_data` as a JSON string. This example stops users from adding new widgets inside Layout Builder Widgets:
 
 ```php
 function so_disallow_new_widgets_layout_builder( $supports ) {

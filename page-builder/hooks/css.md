@@ -1,30 +1,26 @@
 # Page Builder CSS Hooks
 
-Page Builder has several hooks for filtering CSS output. This can be useful if you want to make adjustments to how Page Builder renders its content or if you're making changes to the general HTML structure using [Page Builder's HTML hooks](./html.md).
+Page Builder's CSS hooks change the CSS it generates for each layout. Use them to adjust how Page Builder styles its rows and columns, or to style HTML you've changed with the hooks in [Filtering Page Builder HTML Structure](./html.md).
 
 ## Filtering CSS Values
 
-Page Builder has several filters along the way to change various aspects of the Page Builder layout. You can find most of these in the [`SiteOrigin_Panels_Renderer::generate_css()`](https://github.com/siteorigin/siteorigin-panels/blob/develop/inc/renderer.php) method, which `siteorigin_panels_generate_css()` calls.
+Page Builder applies these filters as it generates a layout's CSS, in the [`SiteOrigin_Panels_Renderer::generate_css()`](https://github.com/siteorigin/siteorigin-panels/blob/develop/inc/renderer.php) method that `siteorigin_panels_generate_css()` calls:
 
-* `siteorigin_panels_css_cell_weight` - This filter lets you change the share of the row that an individual cell takes. The value is a number from 0 to 1, like `0.3333`. Page Builder turns it into the cell's percentage width and subtracts its share of the row gutter. This filter gives you the following arguments.
-	* `$weight` - The cell weight.
-	* `$row` - The row array. You can var_dump or use a debugger to see what's available to you here.
-	* `$ri` The row index.
-	* `$cell` The cell array.
-	* `$ci` The cell index, minus one. The first cell in a row gets `-1`.
-	* `$panels_data` The full $panels_data array. This will also have all the style values.
-	* `$post_id`
-* `siteorigin_panels_css_row_margin_bottom` - This filter lets you change the bottom margin of a row. This is given as a CSS string (with px units), so you can change both the value and the units. The filter is called using the following code - `apply_filters('siteorigin_panels_css_row_margin_bottom', $settings['margin-bottom'] . 'px', $row, $ri, $panels_data, $post_id)`
-* `siteorigin_panels_css_row_gutter` - This is a string that represents the space between the cells of a given row. This is often referred to as the row gutter. It's called as follows - `apply_filters('siteorigin_panels_css_row_gutter', $settings['margin-sides'] . 'px', $row, $ri, $panels_data);`
-* `siteorigin_panels_css_row_mobile_margin_bottom` - This filter lets you change the bottom margin of a row on mobile. It takes the same arguments as `siteorigin_panels_css_row_margin_bottom`.
+* `siteorigin_panels_css_cell_weight` changes the share of the row that a column takes, as a number from 0 to 1, such as `0.3333`. Page Builder turns the weight into the column's percentage width and subtracts the column's share of the row gutter. The filter passes these arguments:
+	* `$weight`: the column's weight.
+	* `$row`: the row's data. Use `var_dump()` or a debugger to see what it holds.
+	* `$ri`: the row's index.
+	* `$cell`: the column's data.
+	* `$ci`: the column's index minus one, so the first column in a row is `-1`.
+	* `$panels_data`: the layout data, including every style value.
+	* `$post_id`: the ID of the post.
+* `siteorigin_panels_css_row_margin_bottom` changes a row's bottom margin. The value is a CSS string with its unit, such as `30px`, so you can change the unit as well as the number. Page Builder calls it with `apply_filters( 'siteorigin_panels_css_row_margin_bottom', $settings['margin-bottom'] . 'px', $row, $ri, $panels_data, $post_id )`.
+* `siteorigin_panels_css_row_gutter` changes a row's gutter, the space between its columns, as a CSS string. Page Builder calls it with `apply_filters( 'siteorigin_panels_css_row_gutter', $settings['margin-sides'] . 'px', $row, $ri, $panels_data )`.
+* `siteorigin_panels_css_row_mobile_margin_bottom` changes a row's bottom margin on mobile, and takes the same arguments as `siteorigin_panels_css_row_margin_bottom`.
 
-## CSS Builder Class
+## The CSS Builder Class
 
-Before delving too deep into filtering CSS, you should have a basic understanding of the [CSS builder class](https://github.com/siteorigin/siteorigin-panels/blob/develop/inc/css-builder.php).
-
-Page Builder uses the [CSS builder class](https://github.com/siteorigin/siteorigin-panels/blob/develop/inc/css-builder.php) to create responsive CSS. You can quite easily develop for Page Builder without knowing exactly how this class works, but understanding it might help you create some fairly advanced functionality.
-
-Before outputting CSS for a given layout, Page Builder gives themes and plugins an opportuinity to filter the CSS builder class `SiteOrigin_Panels_Css_Builder`.
+Page Builder generates its responsive CSS with the [`SiteOrigin_Panels_Css_Builder`](https://github.com/siteorigin/siteorigin-panels/blob/develop/inc/css-builder.php) class. Before it outputs a layout's CSS, Page Builder passes the class through the `siteorigin_panels_css_object` filter, so your theme or plugin can add its own rules:
 
 ```php
 // Let other plugins and components filter the CSS object.
@@ -32,18 +28,18 @@ $css = apply_filters('siteorigin_panels_css_object', $css, $panels_data, $post_i
 return $css->get_css();
 ```
 
-#### Adding Row CSS
+### Adding Row CSS
 
-The CSS builder has a function called [add\_row\_css](https://github.com/siteorigin/siteorigin-panels/blob/develop/inc/css-builder.php#L65). This function takes the following arguments.
+The [`add_row_css()`](https://github.com/siteorigin/siteorigin-panels/blob/develop/inc/css-builder.php#L65) method adds CSS to a row. It takes these arguments:
 
-* `$li` - This is the ID of the layout. It's part of the row selector, `#pg-{$li}-{$ri}`, and is also used on its own when `$specify_layout` is set to true or when `$ri` is false.
-* `$ri` - The row index that this CSS is for. If you set this to false, the CSS will apply to all rows in the given layout. A string is used as the row's HTML ID.
-* `$sub_selector` - This adds a sub selection CSS to the CSS. This is useful if you want to target HTML elements, like style wrappers, within the row.
-* `$attributes` - This is an associative array of CSS attributes. More examples will follow.
-* `$resolution` - The resolution that this CSS will take effect. The default value of 1920 is treated as all. Any value lower than this will take effect at that resolution. A `"max:min"` string, like `"1024:781"`, targets a range.
-* `$specify_layout` - If set to true, this CSS will apply specifically to the given layout.
+* `$li`: the layout's ID. It forms part of the row selector, `#pg-{$li}-{$ri}`, and Page Builder uses it on its own when `$specify_layout` is `true` or `$ri` is `false`.
+* `$ri`: the index of the row the CSS applies to. Set it to `false` to apply the CSS to every row in the layout, or pass a string to use as the row's HTML ID.
+* `$sub_selector`: a selector inside the row, for elements such as the row's style wrapper.
+* `$attributes`: an associative array of CSS properties and values.
+* `$resolution`: the screen width the CSS applies to. The default, 1920, applies the CSS at every width. A lower number applies the CSS at that width and below, and a `"max:min"` string, such as `"1024:781"`, applies it to a range.
+* `$specify_layout`: set to `true` to apply the CSS only to this layout.
 
-To better understand this, lets take a look at how Page Builder itself uses this class.
+Page Builder uses `add_row_css()` to give a row, `$ri`, its bottom margin:
 
 ```php
 $css->add_row_css( $post_id, $ri, '', array(
@@ -51,15 +47,13 @@ $css->add_row_css( $post_id, $ri, '', array(
 ) );
 ```
 
-So in this case, Page Builder is giving a bottom margin to the row, represented by `$ri`.
+### Adding Column CSS
 
-#### Adding Cell CSS
+The [`add_cell_css()`](https://github.com/siteorigin/siteorigin-panels/blob/develop/inc/css-builder.php#L104) method adds CSS to a column. It takes the same arguments as `add_row_css()`, plus `$ci`, the column's index in the row, starting at 0.
 
-We wont go as in depth with the cell CSS function because it's very similar to the row CSS class. Adding CSS is done through the [add\_cell\_css](https://github.com/siteorigin/siteorigin-panels/blob/develop/inc/css-builder.php#L104) function. It's arguments are mostly the same as [add\_row\_css](https://github.com/siteorigin/siteorigin-panels/blob/develop/inc/css-builder.php#L65), we just have an extra `$ci` argument that specifies the 0 base cell index.
+### Filtering the CSS Builder
 
-#### Filtering the CSS Builder
-
-Page Builder gives you an opportunity to filter the builder class right before it generates the CSS, using the `siteorigin_panels_css_object` filter shown above. The following example gives the first row of every layout a background color on screens 780px wide and below.
+This example uses the `siteorigin_panels_css_object` filter to give the first row of every layout a background color on screens 780 pixels wide and narrower:
 
 ```php
 function mytheme_filter_css_object( $css, $panels_data, $post_id, $layout_data ) {

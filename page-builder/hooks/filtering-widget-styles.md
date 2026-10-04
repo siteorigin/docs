@@ -1,12 +1,10 @@
-### Filtering Widget Styles Based on Widget Being Edited
+# Filtering Widget Options
 
-As of SiteOrigin Page Builder `2.12.3`, it's possible to filter the Widget Styles available on a widget by widget basis. This is done using the `siteorigin_panels_widget_style_fields` filter, which has an optional parameter called `$args`, which contains the builder arguments. `$args` is `false` when Page Builder builds its field cache. When editing a widget, `$args['widget']` will be set to the currently active Widget Class.
+From Page Builder 2.12.3, the `siteorigin_panels_widget_style_fields` filter changes the widget style fields for one widget at a time. Its third argument, `$args`, holds the builder arguments. When a user edits a widget, `$args['widget']` holds the widget's class. When Page Builder builds its field cache, `$args` is `false`, so check that `$args['widget']` is set before you use it, or PHP shows a notice.
 
-Due to `$args['widget']` not always being present, it's recommended you check that the array key exists before using it to avoid a PHP notice.
+## Example
 
-#### Example
-
-The following snippet will remove the Widget ID field in the Attributes settings group when editing the Archives Widget.
+This example removes the **Widget ID** field from the **Attributes** group when a user edits the Archives widget:
 
 ```php
 add_filter( 'siteorigin_panels_widget_style_fields', function( $fields, $post_id, $args ) {

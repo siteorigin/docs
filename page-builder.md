@@ -26,13 +26,13 @@ A prebuilt layout is a complete page layout that your users insert with the **La
 
 Page Builder's hooks and filters change its HTML and CSS output, its row and widget settings, its widget forms and the features of the builder itself.
 
-- [Filtering HTML Structure](./page-builder/hooks/html.md)
-- [Filtering CSS](./page-builder/hooks/css.md)
+- [Filtering Page Builder HTML Structure](./page-builder/hooks/html.md)
+- [Page Builder CSS Hooks](./page-builder/hooks/css.md)
 - [Filtering Custom Row Options](./page-builder/hooks/filtering-row-styles.md)
 - [Filtering Widget Options](./page-builder/hooks/filtering-widget-styles.md)
-- [Filtering Widget Form](./page-builder/hooks/widget-form.md)
-- [Filtering Widget Instance](./page-builder/hooks/widget-instance.md)
+- [Filtering the Widget Form](./page-builder/hooks/widget-form.md)
+- [Filtering the Widget Instance](./page-builder/hooks/widget-instance.md)
 - [Filtering Page Builder Features and Actions](./page-builder/hooks/builder-features-actions.md)
-- [Overriding Row Collapse Point](./page-builder/hooks/override-row-collapse-point.md)
-- [Filtering Row Form](./page-builder/hooks/row-form.md)
-- [Row & Widget Output Filters](./page-builder/hooks/stopping-output-of-row-widget.md)
+- [Overriding the Row Collapse Point](./page-builder/hooks/override-row-collapse-point.md)
+- [Filtering the Row Form](./page-builder/hooks/row-form.md)
+- [Stopping Row and Widget Output](./page-builder/hooks/stopping-output-of-row-widget.md)

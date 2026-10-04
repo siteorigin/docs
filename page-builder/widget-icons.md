@@ -1,12 +1,10 @@
 # Widget Icons
 
-Widget icons are class names that Page Builder adds to a `span` beside each widget in the **Add Widget** dialog. Widgets without an icon get `dashicons dashicons-admin-generic`. These are a great way to give your users a quick visual representation of your widget.
+Page Builder shows an icon beside each widget in the **Add Widget** dialog, so users can spot a widget at a glance. A widget icon is a set of class names that Page Builder adds to a `span`, and a widget without an icon gets `dashicons dashicons-admin-generic`. Use [Dashicons](https://developer.wordpress.org/resource/dashicons/), the WordPress icon set, or your own icon classes with CSS that you load in the admin with `admin_enqueue_scripts`.
 
-The easiest thing to use for your icons is the official WordPress icon set, [Dashicons](https://developer.wordpress.org/resource/dashicons/), but you can also use your own icon classes with CSS you load in the admin using `admin_enqueue_scripts`.
+## Setting the Icon in Your Widget
 
-### Widgets Argument
-
-This is the easiest way to add icons to your widgets. You just need to include a `panels_icon` argument to the `$widget_options` argument of the `WP_Widget` constructor.
+Add a `panels_icon` argument to the `$widget_options` argument of the `WP_Widget` constructor:
 
 ```php
 class Foo_Widget extends WP_Widget {
@@ -27,9 +25,9 @@ class Foo_Widget extends WP_Widget {
 }
 ```
 
-### Filtering Page Builder Widgets
+## Setting the Icon With a Filter
 
-This works in a similar way to how you'd assign [widget groups](./widget-groups.md). Use the `siteorigin_panels_widgets` filter to change widget icons. The array key is the widget's PHP class name.
+The `siteorigin_panels_widgets` filter changes the icon of any widget, including widgets you didn't write. It works like [Page Builder Widget Groups](./widget-groups.md): the array key is the widget's PHP class name.
 
 ```php
 function mytheme_add_widget_icons($widgets){

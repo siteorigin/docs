@@ -1,8 +1,10 @@
-### Filter: siteorigin_panels_default_row_columns
+# Filtering the Row Form
 
-It's possible to override the default number of row columns, and their weight (width), by using the `siteorigin_panels_default_row_columns` filter. This filter accepts a multidimensional array with each item being treated as a column. Each item must contain a weight item which is used to size the column. Weight is decimal based so 0.30 is equivalent to 30% of the row. By default, new rows have two columns with a weight of 0.5 each.
+## Default Row Columns
 
-The following snippet will allow you to set the default:
+New rows have two columns with a weight of 0.5 each. The `siteorigin_panels_default_row_columns` filter changes the number of columns in a new row and the width of each column. The filter returns an array with one item per column, and each item sets the column's `weight`, its share of the row's width as a decimal: 0.30 is 30% of the row.
+
+This example gives new rows three equal columns:
 
 ```php
 add_filter( 'siteorigin_panels_default_row_columns', function( $default_columns ) {
@@ -20,11 +22,11 @@ add_filter( 'siteorigin_panels_default_row_columns', function( $default_columns 
 } );
 ```
 
-### Filter: siteorigin_panels_row_column_count_input
+## Column Count Field
 
-It's possible to adjust the Row Column input markup by using the `siteorigin_panels_row_column_count_input` filter. This will allow alter the column number present in the input field. It doesn't however allow you to alter the default row columns, that's done using `siteorigin_panels_default_row_columns` filter.
+The `siteorigin_panels_row_column_count_input` filter changes the HTML of the column count field in the row form, including the number the field shows. To change the columns of a new row, use `siteorigin_panels_default_row_columns` instead.
 
-The following snippet will column the column field to 4.
+This example sets the column count field to 4:
 
 ```php
 add_filter( 'siteorigin_panels_row_column_count_input', function( $input ) {

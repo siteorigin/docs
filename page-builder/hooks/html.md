@@ -1,14 +1,10 @@
 # Filtering Page Builder HTML Structure
 
-By default, Page Builder gives you all the HTML you'll likely need to customize the look and feel of your layout. There are times, however, that you'll need to add your own HTML, classes or styles. You'll find most of these filters in the [`SiteOrigin_Panels_Renderer`](https://github.com/siteorigin/siteorigin-panels/blob/develop/inc/renderer.php) class, which `siteorigin_panels_render()` calls.
+Page Builder outputs classes and wrapper elements for every layout, row, column and widget. To add your own HTML, classes or attributes, use the filters in the [`SiteOrigin_Panels_Renderer`](https://github.com/siteorigin/siteorigin-panels/blob/develop/inc/renderer.php) class, which `siteorigin_panels_render()` calls.
 
-### Before and After Content
+## Before and After the Layout
 
-Page builder gives you a pair of filters, `siteorigin_panels_before_content` and `siteorigin_panels_after_content` that let you add extra content before and after a layout. By default, these filters both output empty strings, but you can add what ever you need.
-
-These filters both take 3 arguments. An empty string, which will eventually be echoed by Page Builder, `$panels_data` and `$post_id`.
-
-They're called as follows.
+The `siteorigin_panels_before_content` and `siteorigin_panels_after_content` filters add HTML before and after a layout. Both start with an empty string, which Page Builder echoes, and also pass `$panels_data` and `$post_id`:
 
 ```php
 echo apply_filters( 'siteorigin_panels_before_content', '', $panels_data, $post_id );
@@ -16,9 +12,9 @@ echo apply_filters( 'siteorigin_panels_before_content', '', $panels_data, $post_
 echo apply_filters( 'siteorigin_panels_after_content', '', $panels_data, $post_id );
 ```
 
-### Layout Wrapper
+## Layout Wrapper
 
-Page Builder wraps the whole layout in a `div`. The `siteorigin_panels_layout_classes` and `siteorigin_panels_layout_attributes` filters let you change its classes and attributes.
+Page Builder wraps each layout in a `div`. The `siteorigin_panels_layout_classes` and `siteorigin_panels_layout_attributes` filters change the wrapper's classes and attributes:
 
 ```php
 $layout_classes = apply_filters( 'siteorigin_panels_layout_classes', array( 'panel-layout' ), $post_id, $panels_data );
@@ -28,9 +24,9 @@ $layout_attributes = apply_filters( 'siteorigin_panels_layout_attributes', array
 ), $post_id, $panels_data );
 ```
 
-### Before and After Rows
+## Before and After Rows
 
-Just like before and after content, these filters give you a chance to add raw HTML before and after indivdual rows.
+The `siteorigin_panels_before_row` and `siteorigin_panels_after_row` filters add HTML before and after each row. `$row` is the row's layout data, including its `style` and `cells`:
 
 ```php
 echo apply_filters( 'siteorigin_panels_before_row', '', $row, $row_attributes );
@@ -38,11 +34,9 @@ echo apply_filters( 'siteorigin_panels_before_row', '', $row, $row_attributes );
 echo apply_filters( 'siteorigin_panels_after_row', '', $row, $row_attributes );
 ```
 
-`$row` is the row's layout data, including its `style` and `cells`.
+## Inside Rows
 
-### Inside Rows Before and After
-
-You can output additional content inside the rows and before/after the cells have been added.
+The `siteorigin_panels_inside_row_before` and `siteorigin_panels_inside_row_after` filters add HTML inside each row, before and after its columns:
 
 ```php
 // Row Container.
@@ -52,9 +46,9 @@ echo apply_filters( 'siteorigin_panels_inside_row_after', '', $row );
 // Row Container End.
 ```
 
-### Before and After Cells
+## Before and After Columns
 
-These filters add HTML before and after each cell.
+The `siteorigin_panels_before_cell` and `siteorigin_panels_after_cell` filters add HTML before and after each column:
 
 ```php
 echo apply_filters( 'siteorigin_panels_before_cell', '', $cell, $cell_attributes );
@@ -62,9 +56,9 @@ echo apply_filters( 'siteorigin_panels_before_cell', '', $cell, $cell_attributes
 echo apply_filters( 'siteorigin_panels_after_cell', '', $cell, $cell_attributes );
 ```
 
-### Inside Cells Before and After
+## Inside Columns
 
-Like with the Inside Before After Rows, you can output additional markup inside the cells. This will allow you to wrap the widgets added to the cell with additional markup before/after the widget has rendered.
+The `siteorigin_panels_inside_cell_before` and `siteorigin_panels_inside_cell_after` filters add HTML inside each column, before and after its widgets, so you can wrap a column's widgets in your own markup:
 
 ```php
 // Row Container
@@ -76,20 +70,18 @@ echo apply_filters( 'siteorigin_panels_inside_cell_after', '', $cell );
 // Row Container End
 ```
 
-### Inside Widgets Before and After
+## Inside Widgets
 
-These filters add HTML inside each widget's wrapper, before and after the widget content. `$widget_info` is the widget's `panels_info` array.
+The `siteorigin_panels_inside_widget_before` and `siteorigin_panels_inside_widget_after` filters add HTML inside each widget's wrapper, before and after the widget's content. `$widget_info` is the widget's `panels_info` array:
 
 ```php
 $args['before_widget'] .= apply_filters( 'siteorigin_panels_inside_widget_before', '', $widget_info );
 $args['after_widget'] = apply_filters( 'siteorigin_panels_inside_widget_after', '', $widget_info ) . $args['after_widget'];
 ```
 
-### Row and Cell Styles
+## Row and Column Classes and Attributes
 
-Page Builder has a few ways for you to add classes and CSS attributes to style wrappers. These wrappers are designed to give you a way to add visual styling to your Page Builder elements.
-
-This is how the filters are called for rows.
+Rows and columns have filters for the classes and attributes of their wrappers. Page Builder calls the row filters like this:
 
 ```php
 $row_classes = apply_filters( 'siteorigin_panels_row_classes', $row_classes, $row );
@@ -99,7 +91,7 @@ $row_attributes = apply_filters( 'siteorigin_panels_row_attributes', array(
 ), $row );
 ```
 
-The first filter `siteorigin_panels_row_classes` lets you add classes. The second is `siteorigin_panels_row_attributes` lets you add HTML and CSS attributes as an associative array. So you might have a function as follows.
+`siteorigin_panels_row_classes` adds classes to the row, and `siteorigin_panels_row_attributes` adds HTML attributes as an associative array. This example adds a background color to the row's `style` attribute:
 
 ```php
 function myplugin_filter_row_attributes( $attributes, $row ) {
@@ -112,7 +104,7 @@ function myplugin_filter_row_attributes( $attributes, $row ) {
 add_filter('siteorigin_panels_row_attributes','myplugin_filter_row_attributes', 10, 2);
 ```
 
-Dealing with cell styles is similar.
+The column filters work the same way:
 
 ```php
 // Themes can add their own styles to cells.
@@ -123,11 +115,11 @@ $cell_attributes = apply_filters( 'siteorigin_panels_cell_attributes', array(
 ), $cell );
 ```
 
-The older `siteorigin_panels_row_cell_classes` and `siteorigin_panels_row_cell_attributes` filters still run after these, with `$panels_data` as the second argument and `$cell` as the third. Use the filters above in new code.
+After these filters, Page Builder also runs the older `siteorigin_panels_row_cell_classes` and `siteorigin_panels_row_cell_attributes` filters, with `$panels_data` as the second argument and `$cell` as the third. Use `siteorigin_panels_cell_classes` and `siteorigin_panels_cell_attributes` in new code.
 
-### Prevent Output of Row or Widget
+## Stopping Row and Widget Output
 
-You can completely prevent a row or widget from outputting by using the `siteorigin_panels_output_row` and `siteorigin_panels_output_widget` filters. Row indexes start at 0.
+The `siteorigin_panels_output_row` and `siteorigin_panels_output_widget` filters stop Page Builder from outputting a row or a widget. Row indexes start at 0. [Stopping Row and Widget Output](stopping-output-of-row-widget.md) lists each filter's arguments.
 
 ```php
 // Prevent the first row from outputting.
@@ -146,5 +138,4 @@ add_filter( 'siteorigin_panels_output_widget', function( $output, $widget, $ri, 
 
 	return $output;
 }, 10, 7 );
-
 ```
