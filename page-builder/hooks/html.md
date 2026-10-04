@@ -17,11 +17,16 @@ echo apply_filters( 'siteorigin_panels_after_content', '', $panels_data, $post_i
 Page Builder wraps each layout in a `div`. The `siteorigin_panels_layout_classes` and `siteorigin_panels_layout_attributes` filters change the wrapper's classes and attributes:
 
 ```php
-$layout_classes = apply_filters( 'siteorigin_panels_layout_classes', array( 'panel-layout' ), $post_id, $panels_data );
-$layout_attributes = apply_filters( 'siteorigin_panels_layout_attributes', array(
-	'id'    => 'pl-' . $post_id,
-	'class' => implode( ' ', $layout_classes ),
-), $post_id, $panels_data );
+$layout_classes    = apply_filters( 'siteorigin_panels_layout_classes', array( 'panel-layout' ), $post_id, $panels_data );
+$layout_attributes = apply_filters(
+	'siteorigin_panels_layout_attributes',
+	array(
+		'id'    => 'pl-' . $post_id,
+		'class' => implode( ' ', $layout_classes ),
+	),
+	$post_id,
+	$panels_data
+);
 ```
 
 ## Before and After Rows
@@ -76,7 +81,7 @@ The `siteorigin_panels_inside_widget_before` and `siteorigin_panels_inside_widge
 
 ```php
 $args['before_widget'] .= apply_filters( 'siteorigin_panels_inside_widget_before', '', $widget_info );
-$args['after_widget'] = apply_filters( 'siteorigin_panels_inside_widget_after', '', $widget_info ) . $args['after_widget'];
+$args['after_widget']   = apply_filters( 'siteorigin_panels_inside_widget_after', '', $widget_info ) . $args['after_widget'];
 ```
 
 ## Row and Column Classes and Attributes
@@ -84,11 +89,15 @@ $args['after_widget'] = apply_filters( 'siteorigin_panels_inside_widget_after', 
 Rows and columns have filters for the classes and attributes of their wrappers. Page Builder calls the row filters like this:
 
 ```php
-$row_classes = apply_filters( 'siteorigin_panels_row_classes', $row_classes, $row );
-$row_attributes = apply_filters( 'siteorigin_panels_row_attributes', array(
-	'id'    => 'pg-' . $post_id . '-' . $ri,
-	'class' => implode( ' ', $row_classes ),
-), $row );
+$row_classes    = apply_filters( 'siteorigin_panels_row_classes', $row_classes, $row );
+$row_attributes = apply_filters(
+	'siteorigin_panels_row_attributes',
+	array(
+		'id'    => 'pg-' . $post_id . '-' . $ri,
+		'class' => implode( ' ', $row_classes ),
+	),
+	$row
+);
 ```
 
 `siteorigin_panels_row_classes` adds classes to the row, and `siteorigin_panels_row_attributes` adds HTML attributes as an associative array. This example adds a background color to the row's `style` attribute:
@@ -101,18 +110,22 @@ function myplugin_filter_row_attributes( $attributes, $row ) {
 
 	return $attributes;
 }
-add_filter('siteorigin_panels_row_attributes','myplugin_filter_row_attributes', 10, 2);
+add_filter( 'siteorigin_panels_row_attributes', 'myplugin_filter_row_attributes', 10, 2 );
 ```
 
 The column filters work the same way:
 
 ```php
 // Themes can add their own styles to cells.
-$cell_classes = apply_filters( 'siteorigin_panels_cell_classes', $cell_classes, $cell );
-$cell_attributes = apply_filters( 'siteorigin_panels_cell_attributes', array(
-	'id'    => 'pgc-' . $post_id . '-' . $ri . '-' . $ci,
-	'class' => implode( ' ', $cell_classes ),
-), $cell );
+$cell_classes    = apply_filters( 'siteorigin_panels_cell_classes', $cell_classes, $cell );
+$cell_attributes = apply_filters(
+	'siteorigin_panels_cell_attributes',
+	array(
+		'id'    => 'pgc-' . $post_id . '-' . $ri . '-' . $ci,
+		'class' => implode( ' ', $cell_classes ),
+	),
+	$cell
+);
 ```
 
 After these filters, Page Builder also runs the older `siteorigin_panels_row_cell_classes` and `siteorigin_panels_row_cell_attributes` filters, with `$panels_data` as the second argument and `$cell` as the third. Use `siteorigin_panels_cell_classes` and `siteorigin_panels_cell_attributes` in new code.
@@ -123,19 +136,29 @@ The `siteorigin_panels_output_row` and `siteorigin_panels_output_widget` filters
 
 ```php
 // Prevent the first row from outputting.
-add_filter( 'siteorigin_panels_output_row', function( $output, $row, $ri, $panels_data, $post_id ) {
-	if ( $ri === 0 ) {
-		$output = false;
-	}
-	return $output;
-}, 10, 5 );
+add_filter(
+	'siteorigin_panels_output_row',
+	function ( $output, $row, $ri, $panels_data, $post_id ) {
+		if ( $ri === 0 ) {
+			$output = false;
+		}
+		return $output;
+	},
+	10,
+	5
+);
 
 // Prevent the Archive Widget from outputting.
-add_filter( 'siteorigin_panels_output_widget', function( $output, $widget, $ri, $ci, $wi, $panels_data, $post_id ) {
-	if ( $widget['panels_info']['class'] == 'WP_Widget_Archives' ) {
-		$output = false;
-	}
+add_filter(
+	'siteorigin_panels_output_widget',
+	function ( $output, $widget, $ri, $ci, $wi, $panels_data, $post_id ) {
+		if ( $widget['panels_info']['class'] == 'WP_Widget_Archives' ) {
+			$output = false;
+		}
 
-	return $output;
-}, 10, 7 );
+		return $output;
+	},
+	10,
+	7
+);
 ```

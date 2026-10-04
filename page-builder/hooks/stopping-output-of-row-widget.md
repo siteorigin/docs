@@ -15,13 +15,18 @@ The `siteorigin_panels_output_row` filter passes five arguments:
 This example stops the output of any row labeled "test":
 
 ```php
-add_filter( 'siteorigin_panels_output_row', function( $output, $row, $ri, $panels_data, $post_id ) {
-	if ( ! empty( $row['label'] ) && $row['label'] == 'test' ) {
-		$output = false;
-	}
+add_filter(
+	'siteorigin_panels_output_row',
+	function ( $output, $row, $ri, $panels_data, $post_id ) {
+		if ( ! empty( $row['label'] ) && $row['label'] == 'test' ) {
+			$output = false;
+		}
 
-	return $output;
-}, 10, 5 );
+		return $output;
+	},
+	10,
+	5
+);
 ```
 
 ## Stopping a Widget
@@ -39,11 +44,16 @@ The `siteorigin_panels_output_widget` filter passes seven arguments:
 Each index starts at 0. This example stops the output of every Archives widget:
 
 ```php
-add_filter( 'siteorigin_panels_output_widget', function( $output, $widget, $ri, $ci, $wi, $panels_data, $post_id ) {
-	if ( $widget['panels_info']['class'] == 'WP_Widget_Archives' ) {
-		$output = false;
-	}
+add_filter(
+	'siteorigin_panels_output_widget',
+	function ( $output, $widget, $ri, $ci, $wi, $panels_data, $post_id ) {
+		if ( $widget['panels_info']['class'] == 'WP_Widget_Archives' ) {
+			$output = false;
+		}
 
-	return $output;
-}, 10, 7 );
+		return $output;
+	},
+	10,
+	7
+);
 ```

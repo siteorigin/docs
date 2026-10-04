@@ -56,23 +56,18 @@ class Hello_World_Widget extends SiteOrigin_Widget {
 		parent::__construct(
 			// The unique id for your widget.
 			'hello-world-widget',
-
 			// The name of the widget for display purposes.
 			__( 'Hello World Widget', 'hello-world-widget-text-domain' ),
-
 			// The $widget_options array, which is passed through to WP_Widget.
 			// It has a couple of extras like the optional help URL, which should link to your sites help or support page.
 			array(
 				'description' => __( 'A hello world widget.', 'hello-world-widget-text-domain' ),
 				'help'        => 'http://example.com/hello-world-widget-docs',
 			),
-
 			// The $control_options array, which is passed through to WP_Widget
 			array(),
-
 			// We set $form_options using the get_widget_form method below.
 			false,
-
 			// The $base_folder path string.
 			plugin_dir_path( __FILE__ )
 		);
@@ -81,8 +76,8 @@ class Hello_World_Widget extends SiteOrigin_Widget {
 	public function get_widget_form() {
 		return array(
 			'text' => array(
-				'type' => 'text',
-				'label' => __( 'Hello world! goes here.', 'hello-world-widget-text-domain' ),
+				'type'    => 'text',
+				'label'   => __( 'Hello world! goes here.', 'hello-world-widget-text-domain' ),
 				'default' => 'Hello world!',
 			),
 		);
@@ -124,7 +119,7 @@ The Hello World Widget's template outputs the widget's text:
 
 ```php
 <div>
-	<?php echo wp_kses_post( $instance['text'] ) ?>
+	<?php echo wp_kses_post( $instance['text'] ); ?>
 </div>
 ```
 

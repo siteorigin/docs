@@ -4,9 +4,9 @@ The `siteorigin_widgets_form_instance_{$id_base}` filter changes a widget's inst
 
 ```php
 function wbe_modify_form_instance( $instance, $widget ) {
-    // We can modify the instance here.
-    $instance['text'] = 'Never Change!';
-    return $instance;
+	// We can modify the instance here.
+	$instance['text'] = 'Never Change!';
+	return $instance;
 }
-add_filter( 'siteorigin_widgets_form_instance_sow-button', 'wbe_modify_form_instance', 10, 2);
+add_filter( 'siteorigin_widgets_form_instance_sow-button', 'wbe_modify_form_instance', 10, 2 );
 ```

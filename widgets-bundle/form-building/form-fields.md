@@ -41,10 +41,10 @@ The `allow_html`, `json` and `onclick` options also apply to the textarea and au
 ```php
 $form_options = array(
 	'some_text' => array(
-		'type' => 'text',
-		'label' => __( 'Some text goes here', 'siteorigin-docs' ),
-		'default' => 'Some default text.'
-	)
+		'type'    => 'text',
+		'label'   => __( 'Some text goes here', 'siteorigin-docs' ),
+		'default' => 'Some default text.',
+	),
 );
 ```
 
@@ -68,10 +68,10 @@ An input for a URL, with a button that searches public posts, except attachments
 ```php
 $form_options = array(
 	'some_url' => array(
-		'type' => 'link',
-		'label' => __( 'Some URL goes here', 'siteorigin-docs' ),
-		'default' => 'http://www.example.com'
-	)
+		'type'    => 'link',
+		'label'   => __( 'Some URL goes here', 'siteorigin-docs' ),
+		'default' => 'http://www.example.com',
+	),
 );
 ```
 
@@ -94,10 +94,10 @@ A color input with a color picker.
 ```php
 $form_options = array(
 	'some_color' => array(
-		'type' => 'color',
-		'label' => __( 'Choose a color', 'siteorigin-docs' ),
-		'default' => '#bada55'
-	)
+		'type'    => 'color',
+		'label'   => __( 'Choose a color', 'siteorigin-docs' ),
+		'default' => '#bada55',
+	),
 );
 ```
 
@@ -124,11 +124,11 @@ A number input. The field works like the text field and saves the value as a `fl
 ```php
 $form_options = array(
 	'some_number' => array(
-		'type' => 'number',
-		'label' => __( 'Enter a number', 'siteorigin-docs' ),
+		'type'    => 'number',
+		'label'   => __( 'Enter a number', 'siteorigin-docs' ),
 		'default' => '12654',
-		'unit' => 'px',
-	)
+		'unit'    => 'px',
+	),
 );
 ```
 
@@ -152,10 +152,10 @@ An input for a CSS [length](https://developer.mozilla.org/en-US/docs/Learn/CSS/I
 ```php
 $form_options = array(
 	'example_size' => array(
-		'type' => 'measurement',
-		'label' => __( 'Size', 'siteorigin-docs' ),
+		'type'    => 'measurement',
+		'label'   => __( 'Size', 'siteorigin-docs' ),
 		'default' => '10px',
-	)
+	),
 );
 ```
 
@@ -180,17 +180,17 @@ Several [length](https://developer.mozilla.org/en-US/docs/Learn/CSS/Introduction
 
 ```php
 $useable_units = array( 'px', '%' );
-$form_options = array(
+$form_options  = array(
 	'padding' => array(
-		'type' => 'multi-measurement',
-		'autofill' => true,
-		'default' => '5% 0px 25px 0px',
+		'type'         => 'multi-measurement',
+		'autofill'     => true,
+		'default'      => '5% 0px 25px 0px',
 		'measurements' => array(
-			'top' => array(
+			'top'    => array(
 				'label' => __( 'Padding Top', 'siteorigin-docs' ),
 				'units' => $useable_units,
 			),
-			'right' => array(
+			'right'  => array(
 				'label' => __( 'Padding Right', 'siteorigin-docs' ),
 				'units' => $useable_units,
 			),
@@ -198,7 +198,7 @@ $form_options = array(
 				'label' => __( 'Padding Bottom', 'siteorigin-docs' ),
 				'units' => $useable_units,
 			),
-			'left' => array(
+			'left'   => array(
 				'label' => __( 'Padding Left', 'siteorigin-docs' ),
 				'units' => $useable_units,
 			),
@@ -229,11 +229,11 @@ A button that opens the WordPress Media Library, where users select several file
 ```php
 $form_options = array(
 	'images' => array(
-		'type' => 'multiple_media',
-		'label' => __( 'Multiple Media', 'siteorigin-docs' ),
-		'library' => 'image',
+		'type'                 => 'multiple_media',
+		'label'                => __( 'Multiple Media', 'siteorigin-docs' ),
+		'library'              => 'image',
 		'thumbnail_dimensions' => array( 64, 64 ),
-		'title' => true,
+		'title'                => true,
 	),
 );
 ```
@@ -257,11 +257,11 @@ A textarea.
 ```php
 $form_options = array(
 	'some_long_message' => array(
-		'type' => 'textarea',
-		'label' => __( 'Type a message', 'siteorigin-docs' ),
+		'type'    => 'textarea',
+		'label'   => __( 'Type a message', 'siteorigin-docs' ),
 		'default' => 'An example of a long message.<br>It is even possible to add a few html tags.<br><a href="https://siteorigin.com" target="_blank">Links!</a><br><strong>Strong</strong> and <em>emphasized</em> text.',
-		'rows' => 10
-	)
+		'rows'    => 10,
+	),
 );
 ```
 
@@ -296,19 +296,19 @@ A TinyMCE editor.
 ```php
 $form_options = array(
 	'some_tinymce_editor' => array(
-		'type' => 'tinymce',
-		'label' => __( 'Visually edit, richly.', 'siteorigin-docs' ),
-		'default' => 'An example of a long message.<br>It is even possible to add a few html tags.<br><a href="https://siteorigin.com" target="_blank">Links!</a>',
-		'rows' => 10,
+		'type'           => 'tinymce',
+		'label'          => __( 'Visually edit, richly.', 'siteorigin-docs' ),
+		'default'        => 'An example of a long message.<br>It is even possible to add a few html tags.<br><a href="https://siteorigin.com" target="_blank">Links!</a>',
+		'rows'           => 10,
 		'default_editor' => 'html',
 		'button_filters' => array(
-			'mce_buttons' => array( $this, 'filter_mce_buttons' ),
-			'mce_buttons_2' => array( $this, 'filter_mce_buttons_2' ),
-			'mce_buttons_3' => array( $this, 'filter_mce_buttons_3' ),
-			'mce_buttons_4' => array( $this, 'filter_mce_buttons_4' ),
+			'mce_buttons'        => array( $this, 'filter_mce_buttons' ),
+			'mce_buttons_2'      => array( $this, 'filter_mce_buttons_2' ),
+			'mce_buttons_3'      => array( $this, 'filter_mce_buttons_3' ),
+			'mce_buttons_4'      => array( $this, 'filter_mce_buttons_4' ),
 			'quicktags_settings' => array( $this, 'filter_quicktags_settings' ),
 		),
-	)
+	),
 );
 ```
 
@@ -331,13 +331,13 @@ A slider for choosing a number in a range.
 ```php
 $form_options = array(
 	'some_number_in_a_range' => array(
-		'type' => 'slider',
-		'label' => __( 'Choose a number', 'siteorigin-docs' ),
+		'type'    => 'slider',
+		'label'   => __( 'Choose a number', 'siteorigin-docs' ),
 		'default' => 24,
-		'min' => 2,
-		'max' => 37,
-		'step' => 0.5,
-	)
+		'min'     => 2,
+		'max'     => 37,
+		'step'    => 0.5,
+	),
 );
 ```
 
@@ -359,11 +359,11 @@ A list of options that users drag into order. [Order Field](./order-field.md) sh
 ```php
 $form_options = array(
 	'ordering' => array(
-		'type' => 'order',
-		'label' => __( 'Element Order', 'siteorigin-docs' ),
+		'type'    => 'order',
+		'label'   => __( 'Element Order', 'siteorigin-docs' ),
 		'options' => array(
-			'section' => __( 'Section', 'siteorigin-docs' ),
-			'divider' => __( 'Content', 'siteorigin-docs' ),
+			'section'       => __( 'Section', 'siteorigin-docs' ),
+			'divider'       => __( 'Content', 'siteorigin-docs' ),
 			'other section' => __( 'Other Section', 'siteorigin-docs' ),
 		),
 		'default' => array( 'section', 'divider', 'other section' ),
@@ -393,15 +393,15 @@ The field ignores `prompt` when `multiple` is `true`.
 ```php
 $form_options = array(
 	'some_selection' => array(
-		'type' => 'select',
-		'label' => __( 'Choose a thing from a long list of things', 'siteorigin-docs' ),
+		'type'    => 'select',
+		'label'   => __( 'Choose a thing from a long list of things', 'siteorigin-docs' ),
 		'default' => 'the_other_thing',
 		'options' => array(
-			'this_thing' => __( 'This thing', 'siteorigin-docs' ),
-			'that_thing' => __( 'That thing', 'siteorigin-docs' ),
+			'this_thing'      => __( 'This thing', 'siteorigin-docs' ),
+			'that_thing'      => __( 'That thing', 'siteorigin-docs' ),
 			'the_other_thing' => __( 'The other thing', 'siteorigin-docs' ),
-		)
-	)
+		),
+	),
 );
 ```
 
@@ -412,14 +412,14 @@ $form_options = array(
 ```php
 $form_options = array(
 	'another_selection' => array(
-		'type' => 'select',
-		'prompt' => __( 'Choose a thing from a long list of things', 'siteorigin-docs' ),
+		'type'    => 'select',
+		'prompt'  => __( 'Choose a thing from a long list of things', 'siteorigin-docs' ),
 		'options' => array(
-			'this_thing' => __( 'This thing', 'siteorigin-docs' ),
-			'that_thing' => __( 'That thing', 'siteorigin-docs' ),
+			'this_thing'      => __( 'This thing', 'siteorigin-docs' ),
+			'that_thing'      => __( 'That thing', 'siteorigin-docs' ),
 			'the_other_thing' => __( 'The other thing', 'siteorigin-docs' ),
-		)
-	)
+		),
+	),
 );
 ```
 
@@ -430,16 +430,16 @@ $form_options = array(
 ```php
 $form_options = array(
 	'another_selection' => array(
-		'type' => 'select',
-		'label' => __( 'Choose a thing from a long list of things', 'siteorigin-docs' ),
+		'type'     => 'select',
+		'label'    => __( 'Choose a thing from a long list of things', 'siteorigin-docs' ),
 		'multiple' => true,
-		'default' => 'the_other_thing',
-		'options' => array(
-			'this_thing' => __( 'This thing', 'siteorigin-docs' ),
-			'that_thing' => __( 'That thing', 'siteorigin-docs' ),
+		'default'  => 'the_other_thing',
+		'options'  => array(
+			'this_thing'      => __( 'This thing', 'siteorigin-docs' ),
+			'that_thing'      => __( 'That thing', 'siteorigin-docs' ),
 			'the_other_thing' => __( 'The other thing', 'siteorigin-docs' ),
-		)
-	)
+		),
+	),
 );
 ```
 
@@ -456,10 +456,10 @@ A checkbox.
 ```php
 $form_options = array(
 	'some_boolean' => array(
-		'type' => 'checkbox',
-		'label' => __( 'Allow this thing?', 'siteorigin-docs' ),
-		'default' => true
-	)
+		'type'    => 'checkbox',
+		'label'   => __( 'Allow this thing?', 'siteorigin-docs' ),
+		'default' => true,
+	),
 );
 ```
 
@@ -480,14 +480,14 @@ A set of checkboxes.
 ```php
 $form_options = array(
 	'potential_options' => array(
-		'type' => 'checkboxes',
-		'label' => __( 'Allow this thing?', 'siteorigin-docs' ),
+		'type'    => 'checkboxes',
+		'label'   => __( 'Allow this thing?', 'siteorigin-docs' ),
 		'options' => array(
-			'option' =>  __( 'value', 'siteorigin-docs' ),
-			'other option' =>  __( 'other value', 'siteorigin-docs' ),
-			'another additional option' => __( 'Another possible value', 'siteorigin-docs' )
+			'option'                    => __( 'value', 'siteorigin-docs' ),
+			'other option'              => __( 'other value', 'siteorigin-docs' ),
+			'another additional option' => __( 'Another possible value', 'siteorigin-docs' ),
 		),
-	)
+	),
 );
 ```
 
@@ -508,15 +508,15 @@ A set of radio buttons. Use it for a short list of values, and the select field 
 ```php
 $form_options = array(
 	'radio_selection' => array(
-		'type' => 'radio',
-		'label' => __( 'Choose a thing from a short list of things', 'siteorigin-docs' ),
+		'type'    => 'radio',
+		'label'   => __( 'Choose a thing from a short list of things', 'siteorigin-docs' ),
 		'default' => 'that_thing',
 		'options' => array(
-			'this_thing' => __( 'This thing', 'siteorigin-docs' ),
-			'that_thing' => __( 'That thing', 'siteorigin-docs' ),
-			'the_other_thing' => __( 'The other thing', 'siteorigin-docs' )
-		)
-	)
+			'this_thing'      => __( 'This thing', 'siteorigin-docs' ),
+			'that_thing'      => __( 'That thing', 'siteorigin-docs' ),
+			'the_other_thing' => __( 'The other thing', 'siteorigin-docs' ),
+		),
+	),
 );
 ```
 
@@ -541,13 +541,13 @@ A button that opens the WordPress Media Library, where users select a file of th
 ```php
 $form_options = array(
 	'some_media' => array(
-		'type' => 'media',
-		'label' => __( 'Choose a media thing', 'siteorigin-docs' ),
-		'choose' => __( 'Choose image', 'siteorigin-docs' ),
-		'update' => __( 'Set image', 'siteorigin-docs' ),
-		'library' => 'image',
-		'fallback' => true
-	)
+		'type'     => 'media',
+		'label'    => __( 'Choose a media thing', 'siteorigin-docs' ),
+		'choose'   => __( 'Choose image', 'siteorigin-docs' ),
+		'update'   => __( 'Set image', 'siteorigin-docs' ),
+		'library'  => 'image',
+		'fallback' => true,
+	),
 );
 ```
 
@@ -570,9 +570,9 @@ A dropdown of the site's [image sizes](https://developer.wordpress.org/reference
 ```php
 $form_options = array(
 	'size' => array(
-		'type' => 'image-size',
+		'type'  => 'image-size',
 		'label' => __( 'Image size', 'siteorigin-docs' ),
-	)
+	),
 );
 ```
 
@@ -623,10 +623,10 @@ A post selector, where users build a query that selects posts. A small red badge
 ```php
 $form_options = array(
 	'some_posts' => array(
-		'type' => 'posts',
+		'type'       => 'posts',
 		'show_count' => true,
-		'label' => __( 'Some posts query', 'siteorigin-docs' ),
-	)
+		'label'      => __( 'Some posts query', 'siteorigin-docs' ),
+	),
 );
 ```
 
@@ -649,20 +649,20 @@ A group of related fields that users can collapse, which keeps a large form mana
 ```php
 $form_options = array(
 	'a_section' => array(
-		'type' => 'section',
-		'label' => __( 'A section containing related fields.' , 'siteorigin-docs' ),
-		'hide' => true,
+		'type'   => 'section',
+		'label'  => __( 'A section containing related fields.', 'siteorigin-docs' ),
+		'hide'   => true,
 		'fields' => array(
-			'grouped_text' => array(
-				'type' => 'text',
-				'label' => __( 'A grouped text field', 'siteorigin-docs' )
+			'grouped_text'     => array(
+				'type'  => 'text',
+				'label' => __( 'A grouped text field', 'siteorigin-docs' ),
 			),
 			'grouped_checkbox' => array(
-				'type' => 'checkbox',
-				'label' => __( 'A grouped checkbox', 'siteorigin-docs' )
-			)
-		)
-	)
+				'type'  => 'checkbox',
+				'label' => __( 'A grouped checkbox', 'siteorigin-docs' ),
+			),
+		),
+	),
 );
 ```
 
@@ -679,49 +679,50 @@ A row of tabs, where each tab shows one section. The field works only with secti
 - `tabs` (`array`): the sections to show as tabs, as section ID => tab label. The tab label can differ from the section's label.
 
 ```php
-add_filter( 'siteorigin_widgets_form_options_sow-editor', function( $form_options ) {
-	if ( empty( $form_options ) ) {
+add_filter(
+	'siteorigin_widgets_form_options_sow-editor',
+	function ( $form_options ) {
+		if ( empty( $form_options ) ) {
+			return $form_options;
+		}
+
+		$form_options['tabs'] = array(
+			'type' => 'tabs',
+			'tabs' => array(
+				'example_section' => __( 'Example Section', 'siteorigin-docs' ),
+				'another_example' => __( 'Second Example', 'siteorigin-docs' ),
+			),
+		);
+
+		$form_options['example_section'] = array(
+			'type'   => 'section',
+			'label'  => __( 'Example Section', 'siteorigin-docs' ),
+			'tab'    => true,
+			'hide'   => true,
+			'fields' => array(
+				'test' => array(
+					'type'   => 'html',
+					'markup' => __( 'First tab', 'siteorigin-docs' ),
+				),
+			),
+		);
+
+		$form_options['another_example'] = array(
+			'type'   => 'section',
+			'label'  => __( 'The Tab label defined above will be output instead of this', 'siteorigin-docs' ),
+			'tab'    => true,
+			'hide'   => true,
+			'fields' => array(
+				'test' => array(
+					'type'   => 'html',
+					'markup' => __( 'Second tab', 'siteorigin-docs' ),
+				),
+			),
+		);
+
 		return $form_options;
 	}
-
-	$form_options['tabs'] = array(
-		'type' => 'tabs',
-		'tabs' => array(
-			'example_section' => __( 'Example Section', 'siteorigin-docs' ),
-			'another_example' => __( 'Second Example', 'siteorigin-docs' ),
-		),
-	);
-
-	$form_options['example_section'] = array(
-		'type' => 'section',
-		'label' => __( 'Example Section' , 'siteorigin-docs' ),
-		'tab' => true,
-		'hide' => true,
-		'fields' => array(
-			'test' => array(
-				'type' => 'html',
-				'markup' => __( 'First tab', 'siteorigin-docs' ),
-			),
-		),
-	);
-
-
-	$form_options['another_example'] = array(
-		'type' => 'section',
-		'label' => __( 'The Tab label defined above will be output instead of this' , 'siteorigin-docs' ),
-		'tab' => true,
-		'hide' => true,
-		'fields' => array(
-			'test' => array(
-				'type' => 'html',
-				'markup' => __( 'Second tab', 'siteorigin-docs' ),
-			),
-		),
-	);
-
-
-	return $form_options;
-} );
+);
 ```
 
 ![Tabs Form Field](../images/form-field-tabs.png)
@@ -749,25 +750,25 @@ A set of fields that users can add as many times as they need. [Repeaters and Se
 ```php
 $form_options = array(
 	'a_repeater' => array(
-		'type' => 'repeater',
-		'label' => __( 'A repeating repeater.' , 'siteorigin-docs' ),
+		'type'       => 'repeater',
+		'label'      => __( 'A repeating repeater.', 'siteorigin-docs' ),
 		'item_name'  => __( 'Repeater item', 'siteorigin-docs' ),
 		'item_label' => array(
 			'selector'     => "[id*='repeat_text']",
 			'update_event' => 'change',
-			'value_method' => 'val'
+			'value_method' => 'val',
 		),
-		'fields' => array(
-			'repeat_text' => array(
-				'type' => 'text',
-				'label' => __( 'A text field in a repeater item.', 'siteorigin-docs' )
+		'fields'     => array(
+			'repeat_text'     => array(
+				'type'  => 'text',
+				'label' => __( 'A text field in a repeater item.', 'siteorigin-docs' ),
 			),
 			'repeat_checkbox' => array(
-				'type' => 'checkbox',
-				'label' => __( 'A checkbox in a repeater item.', 'siteorigin-docs' )
-			)
-		)
-	)
+				'type'  => 'checkbox',
+				'label' => __( 'A checkbox in a repeater item.', 'siteorigin-docs' ),
+			),
+		),
+	),
 );
 ```
 
@@ -795,11 +796,11 @@ The full form of another widget, as [Child Widgets](./child-widgets.md) explains
 ```php
 $form_options = array(
 	'some_widget' => array(
-		'type' => 'widget',
+		'type'  => 'widget',
 		'label' => __( 'Button Widget', 'siteorigin-docs' ),
 		'class' => 'SiteOrigin_Widget_Button_Widget',
-		'hide' => true
-	)
+		'hide'  => true,
+	),
 );
 ```
 
@@ -820,9 +821,9 @@ A full [Page Builder](https://wordpress.org/plugins/siteorigin-panels/) layout. 
 ```php
 $form_options = array(
 	'page_builder' => array(
-		'type' => 'builder',
-		'label' => __( 'Page Builder', 'siteorigin-docs'),
-	)
+		'type'  => 'builder',
+		'label' => __( 'Page Builder', 'siteorigin-docs' ),
+	),
 );
 ```
 
@@ -845,9 +846,9 @@ A textarea with the [Behave.js](https://github.com/jakiestfu/Behave.js) code edi
 ```php
 $form_options = array(
 	'code_editor' => array(
-		'type' => 'code',
+		'type'  => 'code',
 		'label' => __( 'Code Editor', 'siteorigin-docs' ),
-	)
+	),
 );
 ```
 
@@ -869,9 +870,9 @@ An icon picker with the icon families from [Icons and Fonts](./icons-and-fonts.m
 ```php
 $form_options = array(
 	'some_icon' => array(
-		'type' => 'icon',
+		'type'  => 'icon',
 		'label' => __( 'Select an icon', 'siteorigin-docs' ),
-	)
+	),
 );
 ```
 
@@ -888,9 +889,9 @@ A font picker with the web-safe fonts (Arial, Courier New, Georgia, Helvetica Ne
 ```php
 $form_options = array(
 	'some_font' => array(
-		'type' => 'font',
+		'type'  => 'font',
 		'label' => __( 'Select a font', 'siteorigin-docs' ),
-	)
+	),
 );
 ```
 
@@ -918,20 +919,20 @@ A list of ready-made settings for your widget, as [Presets](./presets.md) explai
 ```php
 $form_options = array(
 	'presets' => array(
-		'type' => 'presets',
-		'label' => __( 'Theme', 'siteorigin-docs' ),
+		'type'           => 'presets',
+		'label'          => __( 'Theme', 'siteorigin-docs' ),
 		'default_preset' => 'test-2',
-		'options' => array(
-			'test' => array( // Preset 1
-				'label' => 'Test 1',
+		'options'        => array(
+			'test'   => array( // Preset 1
+				'label'  => 'Test 1',
 				'values' => array(
 					'test' => 'Test 1 example text',
 				),
 			),
 			'test-2' => array(  // Preset 2
-				'label' => 'Test 2',
+				'label'  => 'Test 2',
 				'values' => array(
-					'test' => 'Test 1 example text',
+					'test'  => 'Test 1 example text',
 					'color' => '#0f0',
 				),
 			),
@@ -957,26 +958,28 @@ HTML output in the form, for information that's clearer on its own than in a fie
 This example adds two HTML fields to the end of the SiteOrigin Editor Widget's form: a box with inline styles, and the SiteOrigin logo.
 
 ```php
-add_filter( 'siteorigin_widgets_form_options_sow-editor', function( $form_options ) {
-	if ( empty( $form_options ) ) {
+add_filter(
+	'siteorigin_widgets_form_options_sow-editor',
+	function ( $form_options ) {
+		if ( empty( $form_options ) ) {
+			return $form_options;
+		}
+
+		// This go anywhere in the `$form_options` array.
+		$form_options['html_button_example'] = array(
+			'type'   => 'html',
+			'markup' => '<span style="border: 1px solid #000; padding: 5px; margin: 21px; display: inline-block;">' . __( 'Box with inline styling', 'siteorigin-docs' ) . '</span>',
+		);
+
+		$form_options['siteorigin_logo'] = array(
+			'type'   => 'html',
+			'label'  => __( 'SiteOrigin Logo HTML Example', 'siteorigin-docs' ),
+			'markup' => '<img src="https://siteorigin.com/wp-content/themes/siteorigin-theme/images/logo/logo.svg" width="175" height="33">',
+		);
+
 		return $form_options;
 	}
-
-	// This go anywhere in the `$form_options` array.
-	$form_options['html_button_example'] = array(
-		'type' => 'html',
-		'markup' => '<span style="border: 1px solid #000; padding: 5px; margin: 21px; display: inline-block;">' . __( 'Box with inline styling', 'siteorigin-docs' ) . '</span>',
-	);
-
-	$form_options['siteorigin_logo'] = array(
-		'type' => 'html',
-		'label' => __( 'SiteOrigin Logo HTML Example' , 'siteorigin-docs' ),
-		'markup' => '<img src="https://siteorigin.com/wp-content/themes/siteorigin-theme/images/logo/logo.svg" width="175" height="33">',
-	);
-
-	return $form_options;
-} );
-
+);
 ```
 
 ![HTML Form field](../images/form-field-html.png)
@@ -999,10 +1002,10 @@ A field that suggests posts or terms as the user types. The field saves a select
 ```php
 $form_options = array(
 	'example' => array(
-		'type' => 'autocomplete',
-		'label' => __( 'Pages', 'siteorigin-docs'),
+		'type'       => 'autocomplete',
+		'label'      => __( 'Pages', 'siteorigin-docs' ),
 		'post_types' => array(
-			'page'
+			'page',
 		),
 	),
 );
@@ -1028,12 +1031,12 @@ An on and off switch that shows its fields when it's on. The toggle saves its fi
 ```php
 $form_options = array(
 	'shadow' => array(
-		'type' => 'toggle',
-		'label' => __( 'Shadow', 'siteorigin-docs' ),
-		'hide' => true,
+		'type'   => 'toggle',
+		'label'  => __( 'Shadow', 'siteorigin-docs' ),
+		'hide'   => true,
 		'fields' => array(
 			'color' => array(
-				'type' => 'color',
+				'type'  => 'color',
 				'label' => __( 'Shadow color', 'siteorigin-docs' ),
 			),
 		),
@@ -1068,12 +1071,12 @@ A set of radio buttons with an image for each option.
 ```php
 $form_options = array(
 	'layout' => array(
-		'type' => 'image-radio',
-		'label' => __( 'Layout', 'siteorigin-docs' ),
+		'type'    => 'image-radio',
+		'label'   => __( 'Layout', 'siteorigin-docs' ),
 		'default' => 'left',
-		'layout' => 'horizontal',
+		'layout'  => 'horizontal',
 		'options' => array(
-			'left' => array(
+			'left'  => array(
 				'label' => __( 'Image left', 'siteorigin-docs' ),
 				'image' => plugin_dir_url( __FILE__ ) . 'images/left.svg',
 			),

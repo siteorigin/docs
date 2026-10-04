@@ -12,7 +12,7 @@ function wbe_filter_widget_less( $less, $instance, $widget ) {
 	// Filter the LESS content here.
 	return $less;
 }
-add_filter('siteorigin_widgets_less_sow-button', 'wbe_filter_widget_less', 10, 3);
+add_filter( 'siteorigin_widgets_less_sow-button', 'wbe_filter_widget_less', 10, 3 );
 ```
 
 The `siteorigin_widgets_less_vars_{$id_base}` filter changes the LESS before the Widgets Bundle adds the variables:

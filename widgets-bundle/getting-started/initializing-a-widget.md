@@ -12,13 +12,13 @@ The `register_frontend_scripts()` and `register_frontend_styles()` methods of `S
 function initialize() {
 	$this->register_frontend_scripts(
 		array(
-			array( 'hello-world-script', plugin_dir_url( __FILE__ ) . 'js/script.js', array( 'jquery' ), '1.0' )
+			array( 'hello-world-script', plugin_dir_url( __FILE__ ) . 'js/script.js', array( 'jquery' ), '1.0' ),
 		)
 	);
-	
+
 	$this->register_frontend_styles(
 		array(
-			array( 'hello-world-style', plugin_dir_url( __FILE__ ) . 'css/style.css', array(), '1.0' )
+			array( 'hello-world-style', plugin_dir_url( __FILE__ ) . 'css/style.css', array(), '1.0' ),
 		)
 	);
 }

@@ -5,7 +5,7 @@ The `siteorigin_widgets_template_file_{$id_base}` filter changes the template fi
 The filter can choose a template from a widget setting, as [Extending Existing Widgets](../../getting-started/extending-existing-widgets.md) shows.
 
 ```php
-function mytheme_button_template_file( $filename, $instance, $widget ){
+function mytheme_button_template_file( $filename, $instance, $widget ) {
 	if ( ! empty( $instance['design']['theme'] ) && $instance['design']['theme'] == 'test' ) {
 		// This option works for plugins.
 		$filename = plugin_dir_path( __FILE__ ) . 'tpl/button.php';

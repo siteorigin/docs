@@ -34,7 +34,7 @@ Then add the template, `tpl/my-awesome-template.php`:
 ```php
 function get_template_name( $instance ) {
 	$template_name = '';
-	if( ! empty( $instance['use_blue_template'] ) ) {
+	if ( ! empty( $instance['use_blue_template'] ) ) {
 		$template_name = 'blue_template';
 	} else {
 		$template_name = 'red_template';
@@ -54,8 +54,8 @@ Return the variables in an array:
 ```php
 function get_template_variables( $instance, $args ) {
 	return array(
-		'title' => ! empty( $instance['title'] ) ? $instance['title'] : 'Default title',
-		'link_url' => ! empty( $instance['link_url'] ) ? $instance['link_url'] : '',
+		'title'     => ! empty( $instance['title'] ) ? $instance['title'] : 'Default title',
+		'link_url'  => ! empty( $instance['link_url'] ) ? $instance['link_url'] : '',
 		'link_text' => ! empty( $instance['link_text'] ) ? $instance['link_text'] : 'Default link text.',
 	);
 }

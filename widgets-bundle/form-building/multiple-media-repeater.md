@@ -7,22 +7,22 @@ A multiple media field connected to a repeater lets users add many images at onc
 ```php
 $form_options = array(
 	'example_multiple_media' => array(
-		'type' => 'multiple_media',
-		'label' => __( 'Example repeater multiple media', 'siteorigin-docs' ),
+		'type'     => 'multiple_media',
+		'label'    => __( 'Example repeater multiple media', 'siteorigin-docs' ),
 		'repeater' => array(
-			'field' => 'images', // The ID of a repeater at the same level of the form.
+			'field'   => 'images', // The ID of a repeater at the same level of the form.
 			'setting' => 'image', // The media form field inside of the repeater that'll be set when the user adds new images.
 		),
 	),
-	'images' => array(
-		'type' => 'repeater',
-		'label' => __( 'Images', 'siteorigin-docs' ),
-		'item_name'  => __( 'Image', 'siteorigin-docs' ),
-		'fields' => array(
+	'images'                 => array(
+		'type'      => 'repeater',
+		'label'     => __( 'Images', 'siteorigin-docs' ),
+		'item_name' => __( 'Image', 'siteorigin-docs' ),
+		'fields'    => array(
 			'image' => array(
-				'type' => 'media',
-				'label' => __( 'Image', 'siteorigin-docs' ),
-				'library' => 'image',
+				'type'     => 'media',
+				'label'    => __( 'Image', 'siteorigin-docs' ),
+				'library'  => 'image',
 				'fallback' => true,
 			),
 		),

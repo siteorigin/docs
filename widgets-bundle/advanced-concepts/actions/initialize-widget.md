@@ -7,7 +7,7 @@ The `siteorigin_widgets_initialize_widget_{$id_base}` action runs right after th
  * @param SiteOrigin_Widget $widget The widget object.
  */
 function wbe_after_button_init( $widget ) {
-    // Add your custom code here
+	// Add your custom code here
 }
 add_action( 'siteorigin_widgets_initialize_widget_sow-button', 'wbe_after_button_init' );
 ```

@@ -8,8 +8,8 @@ The `siteorigin_widgets_enqueue_frontend_scripts_{$id_base}` action enqueues ext
  * @param SiteOrigin_Widget $widget The widget object.
  */
 function wbe_enqueue_button_frontend_scripts( $instance, $widget ) {
-    wp_enqueue_script( ... );
-    wp_enqueue_style( ... );
+	wp_enqueue_script( ... );
+	wp_enqueue_style( ... );
 }
 add_action( 'siteorigin_widgets_enqueue_frontend_scripts_sow-button', 'wbe_enqueue_button_frontend_scripts', 10, 2 );
 ```

@@ -8,9 +8,9 @@ The sanitize instance filters run last on a widget's instance before the Widgets
  * @param array $fields The form fields.
  * @param SiteOrigin_Widget $widget The widget object.
  */
-function wbe_sanitize_widget_instance($instance, $fields, $widget){
-    // Use $fields to check and sanitize $instance
-    return $instance;
+function wbe_sanitize_widget_instance( $instance, $fields, $widget ) {
+	// Use $fields to check and sanitize $instance
+	return $instance;
 }
-add_filter('siteorigin_widgets_sanitize_instance_sow-button', 'wbe_sanitize_widget_instance', 10, 3);
+add_filter( 'siteorigin_widgets_sanitize_instance_sow-button', 'wbe_sanitize_widget_instance', 10, 3 );
 ```

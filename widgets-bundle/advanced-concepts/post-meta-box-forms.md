@@ -20,21 +20,21 @@ Add the fields in your widget's `initialize()` method:
 
 ```php
 function initialize() {
-    SiteOrigin_Widget_Meta_Box_Manager::single()->append_to_form(
-        $this->id_base,
-        array(
-            'my_widget_fields_section' => array(
-                'type' => 'section',
-                'label' => __( 'My Widget Meta Fields', 'your-text-domain' ),
-                'fields' => array(
-                    'some_post_meta_text' => array(
-                        'type' => 'text',
-                        'label' => __( 'Meta Text', 'your-text-domain' )
-                    ),
-                )
-            )
-        )
-    );
+	SiteOrigin_Widget_Meta_Box_Manager::single()->append_to_form(
+		$this->id_base,
+		array(
+			'my_widget_fields_section' => array(
+				'type'   => 'section',
+				'label'  => __( 'My Widget Meta Fields', 'your-text-domain' ),
+				'fields' => array(
+					'some_post_meta_text' => array(
+						'type'  => 'text',
+						'label' => __( 'Meta Text', 'your-text-domain' ),
+					),
+				),
+			),
+		)
+	);
 }
 ```
 
@@ -44,22 +44,22 @@ An array of post types in the third argument shows the fields only on those post
 
 ```php
 function initialize() {
-    SiteOrigin_Widget_Meta_Box_Manager::single()->append_to_form(
-        $this->id_base,
-        array(
-            'my_widget_fields_section' => array(
-                'type' => 'section',
-                'label' => __( 'My Widget Meta Fields', 'your-text-domain' ),
-                'fields' => array(
-                    'some_post_meta_text' => array(
-                        'type' => 'text',
-                        'label' => __( 'Meta Text', 'your-text-domain' )
-                    ),
-                )
-            )
-        ),
-        array( 'post' )
-    );
+	SiteOrigin_Widget_Meta_Box_Manager::single()->append_to_form(
+		$this->id_base,
+		array(
+			'my_widget_fields_section' => array(
+				'type'   => 'section',
+				'label'  => __( 'My Widget Meta Fields', 'your-text-domain' ),
+				'fields' => array(
+					'some_post_meta_text' => array(
+						'type'  => 'text',
+						'label' => __( 'Meta Text', 'your-text-domain' ),
+					),
+				),
+			),
+		),
+		array( 'post' )
+	);
 }
 ```
 
@@ -77,8 +77,8 @@ The `get_widget_post_meta()` method of `SiteOrigin_Widget_Meta_Box_Manager` retu
 
 ```php
 $my_widget_post_meta = SiteOrigin_Widget_Meta_Box_Manager::single()->get_widget_post_meta(
-    $post_id,
-    $this->id_base,
-    'my_widget_fields_section'
+	$post_id,
+	$this->id_base,
+	'my_widget_fields_section'
 );
 ```

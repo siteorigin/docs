@@ -7,11 +7,11 @@ Your theme can ship its own widgets, which users get when they install the Widge
 Create a folder in your theme for your widgets, such as `widgets`, and register it as a Widgets Bundle folder. Add this function to your theme's `functions.php` file:
 
 ```php
-function wbexample_add_widget_folders( $folders ){
-    $folders[] = get_template_directory() . '/widgets/';
-    return $folders;
+function wbexample_add_widget_folders( $folders ) {
+	$folders[] = get_template_directory() . '/widgets/';
+	return $folders;
 }
-add_filter('siteorigin_widgets_widget_folders', 'wbexample_add_widget_folders');
+add_filter( 'siteorigin_widgets_widget_folders', 'wbexample_add_widget_folders' );
 ```
 
 The function tells the Widgets Bundle to look for widgets in the `widgets` folder of the theme.
@@ -39,19 +39,19 @@ widgets/
 New widgets start inactive. Users can activate your widget at **Plugins > SiteOrigin Widgets**, or your theme can activate it with the `activate_widget()` method of `SiteOrigin_Widgets_Bundle`:
 
 ```php
-function wbexample_activate_bundled_widgets(){
-    // Stop if the Widgets Bundle isn't active.
-    if ( ! class_exists( 'SiteOrigin_Widgets_Bundle' ) ) {
-        return;
-    }
+function wbexample_activate_bundled_widgets() {
+	// Stop if the Widgets Bundle isn't active.
+	if ( ! class_exists( 'SiteOrigin_Widgets_Bundle' ) ) {
+		return;
+	}
 
-    if( !get_theme_mod('bundled_widgets_activated') ) {
-        if ( SiteOrigin_Widgets_Bundle::single()->activate_widget( 'simple-staff-widget' ) ) {
-            set_theme_mod( 'bundled_widgets_activated', true );
-        }
-    }
+	if ( ! get_theme_mod( 'bundled_widgets_activated' ) ) {
+		if ( SiteOrigin_Widgets_Bundle::single()->activate_widget( 'simple-staff-widget' ) ) {
+			set_theme_mod( 'bundled_widgets_activated', true );
+		}
+	}
 }
-add_action('admin_init', 'wbexample_activate_bundled_widgets');
+add_action( 'admin_init', 'wbexample_activate_bundled_widgets' );
 ```
 
 This function activates the widget in the `simple-staff-widget` folder on `admin_init`. `activate_widget()` takes the widget's folder name as its ID. A theme mod records the activation, so the function stops running once the widget is active.

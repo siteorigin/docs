@@ -7,8 +7,8 @@ The `siteorigin_widgets_enqueue_admin_scripts_{$id_base}` action enqueues extra 
  * @param SiteOrigin_Widget $widget The widget object.
  */
 function wbe_enqueue_button_admin_scripts( $widget ) {
-    wp_enqueue_script( ... );
-    wp_enqueue_style( ... );
+	wp_enqueue_script( ... );
+	wp_enqueue_style( ... );
 }
 add_action( 'siteorigin_widgets_enqueue_admin_scripts_sow-button', 'wbe_enqueue_button_admin_scripts' );
 ```

@@ -8,10 +8,10 @@ The `siteorigin_widgets_template_html_{$id_base}` filter changes the HTML that a
  * @param array $instance The widget instance.
  * @param SiteOrigin_Widget $widget The widget object.
  */
-function wbe_change_button_html( $template_html, $instance, $widget ){
+function wbe_change_button_html( $template_html, $instance, $widget ) {
 	// Modify the $template_html here
-	
+
 	return $template_html;
 }
-add_filter('siteorigin_widgets_template_html_sow-button', 'wbe_change_button_html', 10, 3);
+add_filter( 'siteorigin_widgets_template_html_sow-button', 'wbe_change_button_html', 10, 3 );
 ```

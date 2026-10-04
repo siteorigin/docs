@@ -104,8 +104,8 @@ When `group` changes to `state`, the handler runs `function` on the jQuery objec
 
 ```php
 'state_handler' => array(
-    'map_type[interactive]' => array('css', 'label', array('color', '#00ff00') ),
-    'map_type[static]' => array('css', 'label', array('color', '#474747') ),
+	'map_type[interactive]' => array( 'css', 'label', array( 'color', '#00ff00' ) ),
+	'map_type[static]'      => array( 'css', 'label', array( 'color', '#474747' ) ),
 ),
 ```
 
@@ -115,10 +115,10 @@ Add `[]` after the state name to run several actions for one state, and give the
 
 ```php
 'state_handler' => array(
-    'map_type[interactive][]' => array( 
-        array( 'show' ),
-        array( 'css', 'label', array( 'color', '#00ff00' ) ),
-    ),
+	'map_type[interactive][]' => array(
+		array( 'show' ),
+		array( 'css', 'label', array( 'color', '#00ff00' ) ),
+	),
 ),
 ```
 
@@ -128,8 +128,8 @@ An `_else` handler runs for every state in a group that has no handler of its ow
 
 ```php
 'state_handler' => array(
-    'map_type[interactive]' => array( 'hide' ),
-    '_else[map_type]' => array( 'show' ),
+	'map_type[interactive]' => array( 'hide' ),
+	'_else[map_type]'       => array( 'show' ),
 ),
 ```
 
@@ -163,20 +163,20 @@ The **Options** repeater:
 
 ```php
 'options' => array(
-	'type' => 'repeater',
-	'label' => __( 'Options', 'siteorigin-docs' ),
-	'item_name' => __( 'Option', 'siteorigin-docs' ),
-	'fields' => array(
+	'type'          => 'repeater',
+	'label'         => __( 'Options', 'siteorigin-docs' ),
+	'item_name'     => __( 'Option', 'siteorigin-docs' ),
+	'fields'        => array(
 		'value' => array(
-			'type' => 'text',
+			'type'  => 'text',
 			'label' => __( 'Value', 'siteorigin-docs' ),
 		),
 	),
 
 	// These are only required for a few states
 	'state_handler' => array(
-		'field_type_{$repeater}[select,checkboxes,radio]' => array('show'),
-		'_else[field_type_{$repeater}]' => array( 'hide' ),
+		'field_type_{$repeater}[select,checkboxes,radio]' => array( 'show' ),
+		'_else[field_type_{$repeater}]'                   => array( 'hide' ),
 	),
 ),
 ```

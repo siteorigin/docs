@@ -9,11 +9,11 @@ This example adds a **Parallax** checkbox to the **Design** group of the row set
 ```php
 function custom_row_style_fields( $fields ) {
 	$fields['parallax'] = array(
-		'name' => __( 'Parallax', 'so-widgets-test' ),
-		'type' => 'checkbox',
-		'group' => 'design',
+		'name'        => __( 'Parallax', 'so-widgets-test' ),
+		'type'        => 'checkbox',
+		'group'       => 'design',
 		'description' => __( 'If enabled, the background image will have a parallax effect.', 'so-widgets-test' ),
-		'priority' => 8,
+		'priority'    => 8,
 	);
 
 	return $fields;

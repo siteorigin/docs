@@ -36,7 +36,7 @@ The child widget's instance is saved under the field's key, `button_field` in th
 In a widget template, `$this` is your widget, so call its `sub_widget( $class, $args, $instance, $return = false )` method. The method clears `before_widget` and `after_widget`, and returns the HTML when `$return` is `true`. The Call To Action Widget renders its button this way:
 
 ```php
-<?php $this->sub_widget( 'SiteOrigin_Widget_Button_Widget', $args, $instance['button_field'] ); ?>
+<?php $this->sub_widget( 'SiteOrigin_Widget_Button_Widget', $args, $instance['button_field'] );
 ```
 
 ### With `$wp_widget_factory`
