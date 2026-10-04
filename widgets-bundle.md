@@ -38,5 +38,5 @@ These developer docs will teach you everything you need to know to build on top 
 
 ### Tutorials
 * [Hello World!](widgets-bundle/tutorials/hello-world.md)
-* [Adding Custom Styles to a Button Widget](widgets-bundle/tutorials/adding-custom-styles-to-a-button-widget.md)
+* [Adding a Custom Widget to Your Theme](widgets-bundle/tutorials/theme-custom-widgets.md)
 * [Changing Form Structure](widgets-bundle/tutorials/changing-form-structure.md)

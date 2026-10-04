@@ -17,7 +17,7 @@ function wbexample_add_widget_folders( $folders ){
     $folders[] = get_template_directory() . '/widgets/';
     return $folders;
 }
-add_action('siteorigin_widgets_widget_folders', 'wbexample_add_widget_folders');
+add_filter('siteorigin_widgets_widget_folders', 'wbexample_add_widget_folders');
 ```
 
 This function tells the Widgets Bundle to look in a folder called widgets in the main template directory.
@@ -38,12 +38,18 @@ After a user installs your theme, you could add the following function.
 
 ```php
 function wbexample_activate_bundled_widgets(){
+    // Stop if the Widgets Bundle isn't active.
+    if ( ! class_exists( 'SiteOrigin_Widgets_Bundle' ) ) {
+        return;
+    }
+
     if( !get_theme_mod('bundled_widgets_activated') ) {
-        SiteOrigin_Widgets_Bundle::single()->activate_widget( 'wbe-staff' );
-        set_theme_mod( 'bundled_widgets_activated', true );
+        if ( SiteOrigin_Widgets_Bundle::single()->activate_widget( 'simple-staff-widget' ) ) {
+            set_theme_mod( 'bundled_widgets_activated', true );
+        }
     }
 }
-add_filter('admin_init', 'wbexample_activate_bundled_widgets');
+add_action('admin_init', 'wbexample_activate_bundled_widgets');
 ```
 
-This function activates the widget with id `wbe-staff` on `admin_init`. We're using a theme mod to make sure this only ever runs once.
+This function activates the widget in the `simple-staff-widget` folder on `admin_init`. The ID passed to `activate_widget()` is the widget's folder name. We're using a theme mod to make sure this only runs until the widget is activated.

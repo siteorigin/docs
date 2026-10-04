@@ -1,4 +1,5 @@
 ### Getting Started
+* [Getting Started Quickly](getting-started-quickly.md)
 * [Creating a Widget](getting-started/creating-a-widget.md)
 * [Extending Existing Widgets](getting-started/extending-existing-widgets.md)
 * [Initializing a Widget](getting-started/initializing-a-widget.md)
@@ -19,7 +20,8 @@
 * [State Emitters](form-building/state-emitters.md)
 * [Overriding Form Fields](form-building/overriding-form-fields.md)
 * [Link Form Field Filters](form-building/link-form-field-filters.md)
-* [Global Widget Settings](widgets-bundle/form-building/global-widget-settings.md)
+* [Global Widget Settings](form-building/global-widget-settings.md)
+* [Child Widgets](form-building/child-widgets.md)
 
 ### Templating
 * [HTML Templates](templating/html-templates.md)
@@ -28,9 +30,11 @@
 ### Advanced Concepts
 * [Instance Storage](advanced-concepts/instance-storage.md)
 * [Hooks and Filters](advanced-concepts/hooks-and-filters.md)
+* [Actions](advanced-concepts/actions.md)
+* [Filters](advanced-concepts/filters.md)
 * [Post Meta Boxes](advanced-concepts/post-meta-box-forms.md)
 
 ### Tutorials
 * [Hello World!](tutorials/hello-world.md)
-* [Adding Custom Styles to a Button Widget](tutorials/adding-custom-styles-to-a-button-widget.md)
+* [Adding a Custom Widget to Your Theme](tutorials/theme-custom-widgets.md)
 * [Changing Form Structure](tutorials/changing-form-structure.md)
