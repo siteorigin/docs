@@ -1,38 +1,38 @@
 # Page Builder Developer Docs
 
-We built Page Builder to work with just about any WordPress theme, but there are lots of things you can do to customize the experience for your users. Please read our [Contributing to Page Builder](./page-builder/contributing.md) guide if you'd like to help improve Page Builder.
+Page Builder has hooks, filters and theme support options for theme and plugin developers. Use them to add widgets and prebuilt layouts, change Page Builder's HTML and CSS output, and add your own row and widget settings. If you'd like to help improve Page Builder, read [Contributing to Page Builder](./page-builder/contributing.md).
 
 ## Widgets
 
-Page Builder supports most standard widgets. There are a few things that you should be aware of though. Especially related to how your widget should handle Javascript. Read our [compatibility guide](./page-builder/widget-compatibility.md) on making your widgets work with Page Builder.
+Standard widgets work in Page Builder without changes, unless their JavaScript targets the WordPress Widgets screen. [Making Your Widgets Page Builder Compatible](./page-builder/widget-compatibility.md) explains the changes those widgets need.
 
-Page Builder has a few unique widget related concepts.
+You can also change how your widgets appear in the **Add Widget** dialog:
 
-- [Placeholder widgets](./page-builder/placeholder-widgets.md) let you add widgets that don't yet exist to the Add Widget dialog. This feature is useful for recommending widgets that you might want your user to install. You can also remove the widgets that Page Builder itself recommends.
-- [Widget groups](./page-builder/widget-groups.md) let you organize your widgets within the Add Widget dialog.
-- [Widget icons](./page-builder/widget-icons.md) let you make your widgets stand out in the Add Widget dialog.
+- [Placeholder Widgets](./page-builder/placeholder-widgets.md) add widgets your users haven't installed yet, so you can recommend widgets for them to install. You can also remove the widgets Page Builder recommends.
+- [Page Builder Widget Groups](./page-builder/widget-groups.md) organize your widgets into groups.
+- [Widget Icons](./page-builder/widget-icons.md) give your widgets their own icons.
 
-For widget developers, you could consider using the [SiteOrigin Widgets Bundle](./widgets-bundle.md) as a boilerplate for your widgets. It gives you a base to create some fairly advanced widgets and widget interfaces with minimal coding.
+If you build widgets, the Widgets Bundle gives you form fields, templates and LESS stylesheets to build on, as [Widgets Bundle Developer Docs](./widgets-bundle.md) explains.
 
 ## Prebuilt Layouts
 
-Prebuilt Layouts are a great way to give your users some designs that they can use with your theme. A prebuilt layout is essentially a complete layout that your users can insert. Read our guide on [bundling prebuilt layouts](./page-builder/bundling-prebuilt.md) for your pages.
+A prebuilt layout is a complete page layout that your users insert with the **Layouts** button in Page Builder. [Page Builder Prebuilt Layouts](./page-builder/bundling-prebuilt.md) shows how to add layouts to your theme or plugin.
 
 ## Theme Integration
 
-Read our [Theme Integration](./page-builder/theme-integration.md) guide to make your theme work well with Page Builder.
+[Theme Integration](./page-builder/theme-integration.md) covers theme support, page templates, full-width rows and the style settings for rows, columns and widgets.
 
 ## Hooks and Filters
 
-Page Builder has lots of hooks and filters for you to use. You can use them to inject custom content, filter output, etc.
+Page Builder's hooks and filters change its HTML and CSS output, its row and widget settings, its widget forms and the features of the builder itself.
 
-- [Filtering HTML Structure](./page-builder/hooks/html.md).
-- [Filtering CSS](./page-builder/hooks/css.md).
-- [Filtering Custom Row Options](./page-builder/hooks/filtering-row-styles.md).
+- [Filtering HTML Structure](./page-builder/hooks/html.md)
+- [Filtering CSS](./page-builder/hooks/css.md)
+- [Filtering Custom Row Options](./page-builder/hooks/filtering-row-styles.md)
 - [Filtering Widget Options](./page-builder/hooks/filtering-widget-styles.md)
-- [Filtering Widget Form](./page-builder/hooks/widget-form.md).
-- [Filtering Widget Instance](./page-builder/hooks/widget-instance.md).
-- [Filtering Page Builder Features and Actions](./page-builder/hooks/builder-features-actions.md).
+- [Filtering Widget Form](./page-builder/hooks/widget-form.md)
+- [Filtering Widget Instance](./page-builder/hooks/widget-instance.md)
+- [Filtering Page Builder Features and Actions](./page-builder/hooks/builder-features-actions.md)
 - [Overriding Row Collapse Point](./page-builder/hooks/override-row-collapse-point.md)
-- [Filtering Row Form](./page-builder/hooks/row-form.md).
+- [Filtering Row Form](./page-builder/hooks/row-form.md)
 - [Row & Widget Output Filters](./page-builder/hooks/stopping-output-of-row-widget.md)

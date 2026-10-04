@@ -1,6 +1,6 @@
 # SiteOrigin Developer Documentation
 
-This is the home of SiteOrigin developer documentation for our themes and plugins.
+Extend Page Builder, the Widgets Bundle and SiteOrigin Premium from your own theme or plugin, and build our plugins for release.
 
 * [Page Builder](page-builder.md)
 * [Widgets Bundle](widgets-bundle.md)
