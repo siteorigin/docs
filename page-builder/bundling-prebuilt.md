@@ -4,6 +4,8 @@ Page Builder makes it easy to bundle prebuilt layouts into your theme or plugin.
 
 ## Register a Custom Layouts Folder Location
 
+Page Builder loads layouts from a `siteorigin-page-builder-layouts` folder in the parent theme and the child theme without any code. To store your layouts in another folder, register its location.
+
 Use the below function to register a location for your prebuilt layout files. Replace `siteorigin` with your theme or plugin namespace. Change folder path as required, in this example we're storing our layouts in the `/inc/layouts` folder
 
 ```
@@ -19,7 +21,7 @@ add_filter( 'siteorigin_panels_local_layouts_directories', 'siteorigin_layouts_f
 
 ### Export Your Layout JSON File
 
-Edit the page containing your layout. In Page Builder, click Layouts > Import/Export > Download Layout. To change your layout name as seen in Page Builder, edit the JSON file and locate the name/value pair at the end of the file `"name":"Home"`. Change the `name` value as required. In this example, our layout is named `Home`. To add a thumbnail for each layout, include a JPG or PNG file with the same filename as the JSON file you'd like to use it for. For example, if your JSON file was named `home.json`, your thumbnail image would be named `home.jpg`. Finally, copy both the JSON layout file and thumbnail to your layouts directory location. Navigate to Layouts > Prebuilt layouts in any Page Builder page to view and test your layout.
+Edit the page containing your layout. In Page Builder, click Layouts > Import/Export > Download Layout. To change your layout name as seen in Page Builder, edit the JSON file and locate the name/value pair at the end of the file `"name":"Home"`. Change the `name` value as required. In this example, our layout is named `Home`. To add a thumbnail for each layout, include a JPG, JPEG, GIF or PNG file with the same filename as the JSON file you'd like to use it for. For example, if your JSON file was named `home.json`, your thumbnail image would be named `home.jpg`. Finally, copy both the JSON layout file and thumbnail to your layouts directory location. Navigate to Layouts > Prebuilt layouts in any Page Builder page to view and test your layout.
 
 ### External Images
 
@@ -102,7 +104,7 @@ In the main plugin file we register the location of our prebuilt layouts folder.
  * Register a custom layouts folder location.
  */
 function so_prebuilt_layouts_folder( $layout_folders ) {
-	$layout_folders[] = plugin_dir_path( __FILE__ ) . '/layouts';
+	$layout_folders[] = plugin_dir_path( __FILE__ ) . 'layouts';
 	return $layout_folders;
 }
 add_filter( 'siteorigin_panels_local_layouts_directories', 'so_prebuilt_layouts_folder' );
@@ -121,9 +123,8 @@ For example, the following PHP will alphabetically sort layouts by their layout 
 ```
 add_filter( 'siteorigin_panels_prebuilt_layouts', function( $layouts ) {
 	// Sort layouts alphabetically.
-	usort( $layouts, function( $a, $b ) {
-		return strcmp( $a['id'], $b['id'] );
-	} );
+	// uksort keeps the layout IDs, which Page Builder uses to find each layout.
+	uksort( $layouts, 'strcmp' );
 
 	return $layouts;
 } );
