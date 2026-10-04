@@ -6,7 +6,7 @@ In this tutorial, we'll deal with adding a new style to the button widget.
 
 ## Modifying the Form
 
-The first thing you'll want to do is modify the default form to add in your own style. To get an idea of what the default form looks like, navigate to the `so-widgets-bundle` directory and open up `widgets/button/button.php`. The `SiteOrigin_Widget_Button_Widget` class has inherited the `$form_options` array, an argument from its parent class's `__construct` function that specifies the form. Further down in `button.php` is `get_widget_form()`, where you'll find a section called `design` and in that, a field called `theme`.
+The first thing you'll want to do is modify the default form to add in your own style. To get an idea of what the default form looks like, navigate to the `so-widgets-bundle` directory and open up `widgets/button/button.php`. The `SiteOrigin_Widget_Button_Widget` class builds its form in `get_widget_form()`. In `get_widget_form()`, where you'll find a section called `design` and in that, a field called `theme`.
 
 The `theme` field is a method of allowing the user to select different button themes. We need to modify this field and add our own custom theme option, which will allow users to select our theme. Here's the PHP we would use to do that:
 
@@ -14,7 +14,7 @@ The `theme` field is a method of allowing the user to select different button th
 function mytheme_extend_button_form( $form_options, $widget ) {
 	// Lets add a new theme option.
 	if ( ! empty($form_options['design']['fields']['theme']['options']) ) {
-		$form_options['design']['fields']['theme']['options']['test'] = __( 'Test Style', 'siteorigin-docs' );
+		$form_options['design']['fields']['theme']['options']['test'] = __( 'Test Style', 'your-text-domain' );
 	}
 
 	return $form_options;
@@ -22,7 +22,7 @@ function mytheme_extend_button_form( $form_options, $widget ) {
 add_filter( 'siteorigin_widgets_form_options_sow-button', 'mytheme_extend_button_form', 10, 2 );
 ```
 
-Lets go over what's all happening here. First, we're creating a custom filter function called `mytheme_extend_button_form` and hooking it to `siteorigin_widget_form_options_sow-button`. This filter is run for every widget in the widget bundle and is of the form `siteorigin_widget_form_options_{$id_base}`, where `$id_base` is the first argument of the `__construct` argument we looked at earlier. In this case `sow-button`.
+Lets go over what's all happening here. First, we're creating a custom filter function called `mytheme_extend_button_form` and hooking it to `siteorigin_widgets_form_options_sow-button`. This filter is run for every widget in the widget bundle and is of the form `siteorigin_widgets_form_options_{$id_base}`, where `$id_base` is the first argument of the `__construct` argument we looked at earlier. In this case `sow-button`.
 
 We're making sure that the option field we're looking for is there, and if it is, we're adding our own option called **Test Style**.
 
@@ -39,8 +39,8 @@ function mytheme_button_template_file( $filename, $instance, $widget ) {
 		// This option works for plugins.
 		$filename = plugin_dir_path( __FILE__ ) . 'tpl/button.php';
 
-		// And this one for themes.
-		$filename = get_stylesheet_directory() . '/tpl/button.php';
+		// For a theme, use this line instead.
+		// $filename = get_stylesheet_directory() . '/tpl/button.php';
 	}
 
 	return $filename;
@@ -55,16 +55,17 @@ Also, keep in mind that you can just skip specifying a custom template file, in 
 
 ## Changing the LESS File
 
-We'll use a similar method to change the LESS file we use to generate the style for our custom button. Most of the time, this is going to be the only file you actually change.
+We'll use a similar method to change the LESS file we use to generate the style for our custom button. You need this filter whenever you add a theme option: the Button Widget looks for a LESS file named after the selected theme, so without the filter your button has no styles.
 
 ```php
 function mytheme_button_less_file( $filename, $instance, $widget ) {
 	// Check if the user has selected your custom theme.
 	if ( !empty($instance['design']['theme']) && $instance['design']['theme'] == 'test' ) {
+		// This option works for plugins.
 		$filename = plugin_dir_path( __FILE__ ) . 'less/test.less';
 
-		// And this one for themes.
-		$filename = get_stylesheet_directory() . '/less/test.less';
+		// For a theme, use this line instead.
+		// $filename = get_stylesheet_directory() . '/less/test.less';
 	}
 
 	return $filename;

@@ -8,6 +8,7 @@ The quickest and simplest way to get started is by making sure you have the [Sit
 4. In the class' constructor, the first argument to the parent constructor is the widget id. Replace the current value `hello-world-widget` with your chosen id. E.g. `my-awesome-widget`.
 5. At the bottom of the file, you'll see the widget being registered. Again replace `hello-world-widget` with your chosen id and replace the class name `Hello_World_Widget`, with your class name. E.g. `my-awesome-widget` and `My_Awesome_Widget`.
 6. In the metadata header above the class, change the `Widget Name` field to your widget name. E.g. `Widget Name: My Awesome Widget`. This field does not follow any convention, but it must be present for your widget to be included in the list of SiteOrigin widgets.
+7. Activate your widget at **Plugins > SiteOrigin Widgets**. New widgets are inactive.
 
 You should now have a simple, functional widget that you can start changing to create your awesome widget!
 
@@ -19,7 +20,7 @@ If you'd like to keep your widgets separate from the SiteOrigin widgets, we have
 <?php
 
 function add_my_awesome_widgets_collection($folders){
-    $folders[] = 'path/to/my/widgets/';
+    $folders[] = plugin_dir_path( __FILE__ ) . 'extra-widgets/';
     return $folders;
 }
 add_filter('siteorigin_widgets_widget_folders', 'add_my_awesome_widgets_collection');
