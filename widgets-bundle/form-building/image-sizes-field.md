@@ -8,7 +8,7 @@ $form_options = array(
 	'image' => array(
 		'type' => 'media',
 		'library' => 'image',
-		'label' => __(' Background Image', 'siteorigin-docs' ),
+		'label' => __( 'Background Image', 'siteorigin-docs' ),
 	),
 	'image_size' => array(
 		'type' => 'image-size',
@@ -19,7 +19,7 @@ $form_options = array(
 
 ### Outputting with selected image size
 
-The `image_size` selection will return the selected unit of measurement so to render an image with this selection, while also accounting for no selection, we can use [wp_get_attachment_image_src](https://developer.wordpress.org/reference/functions/wp_get_attachment_image_src/).
+The `image_size` selection returns the selected image size name, for example `full`, `thumbnail` or another registered size, so to render an image with this selection, while also accounting for no selection, we can use [wp_get_attachment_image_src](https://developer.wordpress.org/reference/functions/wp_get_attachment_image_src/).
 Here's some example code that can be used in your template:
 
 ```php
@@ -40,3 +40,17 @@ The above PHP will:
 3. Fetch the image.
 4. Ensure image exists.
 5. Render Image as a full width div with 250px height with the image set as the background.
+
+If your media field sets `'fallback' => true`, use `siteorigin_widgets_get_attachment_image_src()` in place of `wp_get_attachment_image_src()`. It returns the fallback URL when no attachment is selected, so it replaces the `! empty( $instance['image'] )` check. Print a fallback URL in an `src` attribute, because `esc_url()` doesn't make a URL safe inside inline CSS:
+
+```php
+$size = empty( $instance['image_size'] ) ? 'full' : $instance['image_size'];
+$attachment = siteorigin_widgets_get_attachment_image_src(
+	$instance['image'],
+	$size,
+	! empty( $instance['image_fallback'] ) ? $instance['image_fallback'] : false
+);
+if ( ! empty( $attachment ) ) {
+	echo '<img src="' . sow_esc_url( $attachment[0] ) . '" alt="">';
+}
+```

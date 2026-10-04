@@ -8,19 +8,21 @@ Icons are useful when trying to convey meaning in a small amount of space. The W
 - <a href="https://icomoon.io/" target="_blank">IcoMoon</a>
 - <a href="http://genericons.com/" target="_blank">Genericons</a>
 - <a href="http://typicons.com/" target="_blank">Typicons</a>
-- <a href="http://www.elegantthemes.com/blog/freebie-of-the-week/free-line-style-icons" target="_blank">Elegant Themes' Line Icons</a>.
+- <a href="http://www.elegantthemes.com/blog/freebie-of-the-week/free-line-style-icons" target="_blank">Elegant Themes' Line Icons</a>
+- <a href="https://fonts.google.com/icons" target="_blank">Google Material Icons / Symbols</a>
+- <a href="https://ionic.io/ionicons" target="_blank">Ionicons</a>
 
 ### Filtering Icons
-To filter the icon families, you use the `'siteorigin_widgets_icon_families'` filter. An icon family is then added by including an associative array with the following properties:
+To filter the icon families, you use the `'siteorigin_widgets_icon_families'` filter. An icon family is then added by including an associative array with the following properties. The array key is the family name, and it must not contain a hyphen.
 - name: `string` The name of the icon family to be displayed when selecting an icon family.
-- style_uri `string` The path of a CSS stylesheet to be enqueued when the icon family is to be displayed. This typically contains the `@font-face` declaration.
+- style_uri `string` The path of a CSS stylesheet to be enqueued when the icon family is to be displayed. Icons are output as `<span class="sow-icon-{family}" data-sow-icon="{unicode value}">`, so the stylesheet needs the `@font-face` declaration, a `font-family` rule for `.sow-icon-{family}` and `content: attr(data-sow-icon);` for `.sow-icon-{family}[data-sow-icon]:before`. The Widgets Bundle's `icons/genericons/style.css` is a working example.
 - icons: `array` An associative array containing `string` values, where the key is the name of the icon to be used and the value is it's unicode value.
 
 ```php
 function my_icon_families_filter( $icon_families ) {
     $icon_families['radicons'] = array(
 		'name' => __( 'My Rad Icons', 'example-text-domain' ),
-		'style_uri' => plugin_dir_url( __FILE__ ) . '/icons/style.css',
+		'style_uri' => plugin_dir_url( __FILE__ ) . 'icons/style.css',
 		'icons' => array(
 		    'my-rad-search-icon' => '&#xf101;',
 		    'my-rad-close-icon' => '&#xf101;'
@@ -38,18 +40,20 @@ We have also included filters for each of the default included icon families, so
 - `'siteorigin_widgets_icons_genericons'` 
 - `'siteorigin_widgets_icons_typicons'` 
 - `'siteorigin_widgets_icons_elegantline'` 
+- `'siteorigin_widgets_icons_materialicons'`
+- `'siteorigin_widgets_icons_ionicons'`
 
-Let's say you don't want to display the FontAwesome 'glass' icon, then add the filter and remove it from the `$icons` array:
+Let's say you don't want to display the FontAwesome 'address-book' icon, then add the filter and remove it from the `$icons` array:
 ```php
 function my_fontawesome_icons_filter( $icons ) {
-    if ( isset( $icons['glass'] ) unset( $icons['glass'] );
+    unset( $icons['address-book'] );
     return $icons;
 }
 add_filter( 'siteorigin_widgets_icons_fontawesome', 'my_fontawesome_icons_filter' );
 ```
 
 ### Using Icons
-Once an icon has been selected for use in your widget form, it needs a bit of processing before it can be used in a template. The Widgets Bundle includes a function which does this for you, namely `siteorigin_widget_get_icon()`. To use it you simply pass in the selected value from the widget instance and, optionally, an indexed array of icon styles to be included inline.
+Once an icon has been selected for use in your widget form, it needs a bit of processing before it can be used in a template. The Widgets Bundle includes a function which does this for you, namely `siteorigin_widget_get_icon()`. To use it you simply pass in the selected value from the widget instance and, optionally, an indexed array of icon styles to be included inline and a title for the icon's `title` attribute.
 
 Let's say your widget form includes the following:
 ```php
@@ -82,7 +86,7 @@ Then, to render the icon in your template, you simply include a call to the icon
 ```
  
 ## Fonts
-Fonts provide a nice simple way to distinguish your site. The Widgets Bundle provides a way to style any text using the web safe fonts (Helvetica Neue, Lucida Grande, Georgia, and Courier New ) and a large selection of font families from the Google Fonts library.
+Fonts provide a nice simple way to distinguish your site. The Widgets Bundle provides a way to style any text using the web safe fonts (Arial, Courier New, Georgia, Helvetica Neue, Lucida Grande and Times New Roman) and a large selection of font families from the Google Fonts library.
 
 For the moment, using the font field is a fairly involved process which requires a few steps. We are working on simplifying this.
  
@@ -96,6 +100,8 @@ function my_font_families_filter( $font_families ) {
 }
 add_filter( 'siteorigin_widgets_font_families', 'my_font_families_filter' );
 ```
+
+The Widgets Bundle only loads web safe fonts and Google Fonts. For any other font you add, you need to enqueue the font's stylesheet yourself. `siteorigin_widget_get_font()` passes the font array for these fonts through the `siteorigin_widget_get_custom_font_family` filter.
  
 ### Using Fonts
 To use the selected font family in your template, requires a few steps:
@@ -145,15 +151,15 @@ Example value:
 
 The selected font weight and styling. `weight` will only be set up the user selects a font with a weight, or the font is set to italic.
 
-This item is maintained for backwards compatibility. We recommend using `widgets_raw` and `style` instead.
+This item is maintained for backwards compatibility. We recommend using `weight_raw` and `style` instead.
 
 Example value:
 
 `600italic`
 
-**widgets_raw**
+**weight_raw**
 
-The selected font. `weight` will only be set up the user selects a font with a weight.
+The numeric font weight. `weight_raw` will only be set if the user selects a font with a weight.
 
 Example value:
 
@@ -166,3 +172,11 @@ The selected style. `style` will be empty if the user doesn't select an italic f
 Example value:
 
 `italic`
+
+**url**
+
+The Google Fonts stylesheet URL for the selected font. `url` is only set for Google Fonts.
+
+Example value:
+
+`https://fonts.googleapis.com/css?family=Alegreya:600italic`

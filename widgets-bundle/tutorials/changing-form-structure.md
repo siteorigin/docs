@@ -3,7 +3,7 @@
 Creating a widget is an iterative process. A form structure that might have made sense at one stage might need to be improved as your widget evolves. To handle these cases the `SiteOrigin_Widget` class provides the `modify_instance()` method, which you can override to transform a widget instance from the old structure to the new one.
 
 ## Updating form_options
-Let's say we want to clean up a widget's form options by grouping a few together in a section. The first thing to do is update the form_options argument to the `SiteOrigin_Widget` parent constructor. For example:
+Let's say we want to clean up a widget's form options by grouping a few together in a section. The first thing to do is update the array returned by `get_widget_form()`. For example:
 
 Old form options:
 ```php
@@ -40,9 +40,10 @@ $form_options = array(
 ```
 
 ## Overriding `modify_instance()`
-Now to transform a widget instance's structure we override the `modify_instance()` method and apply the desired changes as follows:
- ```php
- function modify_instance( $instance )  {
+Now to transform a widget instance's structure we override the `modify_instance()` method and apply the desired changes as follows. The Widgets Bundle calls `modify_instance()` when it displays the widget, renders the form and saves the form, so the method must leave an instance that already has the new structure unchanged.
+
+```php
+function modify_instance( $instance )  {
     // Only apply the transformation if the instance does not already have the new structure.
     if( empty( $instance['employee'] ) ) {
         $instance['employee'] = array();
@@ -53,5 +54,5 @@ Now to transform a widget instance's structure we override the `modify_instance(
         unset( $instance['employee_surname'] );
     }
     return $instance;
- }
- ```
+}
+```

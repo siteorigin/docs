@@ -15,11 +15,9 @@ function get_template_name( $instance ) {
 In the file found at tpl/my-awesome-template.php:
 ```php
 <div>
-	<?php echo $args['before_title'] ?>
-	<h1><?php echo $instance['title'] ?></h1>
-	<?php echo $args['after_title'] ?>
+	<?php echo $args['before_title'] . esc_html( $instance['title'] ) . $args['after_title']; ?>
 	<div>
-		<a href="<?php $instance['link_url'] ?>"><?php $instance['link_text'] ?></a>
+		<a href="<?php echo esc_url( $instance['link_url'] ); ?>"><?php echo esc_html( $instance['link_text'] ); ?></a>
 	</div>
 </div>
 ```
@@ -58,29 +56,25 @@ function get_template_variables( $instance, $args ) {
 Use the extracted variable in a template:
 ```php
 <div>
-	<?php echo $args['before_title'] ?>
-	<h1><?php echo $title ?></h1>
-	<?php echo $args['after_title'] ?>
+	<?php echo $args['before_title'] . esc_html( $title ) . $args['after_title']; ?>
 	<div>
-		<a href="<?php $link_url ?>"><?php $link_text ?></a>
+		<a href="<?php echo esc_url( $link_url ); ?>"><?php echo esc_html( $link_text ); ?></a>
 	</div>
 </div>
 ```
 
 ## Escaping Outputs
-It is considered best practice to escape all potentially unsafe data as late as possible before outputting it to the front end. We strongly encourage this practice as it helps ensure security. The four built-in WordPress escaping functions (`esc_html`, `esc_url`, `esc_attr`, and `esc_js`) should be used as in the following example. More information on escaping data can be found <a href="http://codex.wordpress.org/Validating_Sanitizing_and_Escaping_User_Data#Escaping:_Securing_Output" target="_blank">here</a>.
+It is considered best practice to escape all potentially unsafe data as late as possible before outputting it to the front end. We strongly encourage this practice as it helps ensure security. Use the WordPress escaping functions, such as `esc_html()`, `esc_url()`, `esc_attr()` and `wp_json_encode()`, as in the following example. The `before_title` and `after_title` values in `$args` hold HTML from the theme's sidebar, so they're output without escaping. More information on escaping data can be found <a href="https://developer.wordpress.org/apis/security/escaping/" target="_blank">here</a>.
 
 ### Example - Escaping Data Before Output
 ```php
 <script type="text/javascript">
-	var value = <?php esc_js( $js_value ) ?>;
+	var value = <?php echo wp_json_encode( $js_value ); ?>;
 </script>
 <div>
-	<?php echo esc_html( $args['before_title'] ) ?>
-	<h1><?php echo esc_html( $title ) ?></h1>
-	<?php echo esc_html( $args['after_title'] ) ?>
-	<div class="<?php echo esc_attr( $style_attribute ) ?>">
-		<a href="<?php echo esc_url( $link_url ) ?>"><?php echo esc_html( $link_text ) ?></a> 
+	<?php echo $args['before_title'] . esc_html( $title ) . $args['after_title']; ?>
+	<div class="<?php echo esc_attr( $style_attribute ); ?>">
+		<a href="<?php echo esc_url( $link_url ); ?>"><?php echo esc_html( $link_text ); ?></a>
 	</div>
 </div>
 ```

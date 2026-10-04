@@ -15,9 +15,9 @@ $form_options = array(
 ```
 
 Use of the post selector will result in a pseudo query looking something like this:
-`post_type=_all&orderby=post__in&order=DESC&posts_per_page=3&sticky=&additional=`.
+`post_type=post&orderby=date&order=DESC&posts_per_page=3`.
 
-This pseudo query may be transformed into a format understood by WordPress by using the `siteorigin_widget_post_selector_process_query()` function, which takes only the pseudo query as an argument and returns a query object which may be passed directly to the `WP_Query` constructor to find posts.
+This pseudo query may be transformed into a format understood by WordPress by using the `siteorigin_widget_post_selector_process_query()` function, which takes the pseudo query and an optional `$exclude_current` argument, and returns a query array which may be passed directly to the `WP_Query` constructor to find posts. `$exclude_current` defaults to `true`, which adds the current post to `post__not_in`.
 
 ### An Example Template Using the Post Selector Query
 
@@ -38,8 +38,9 @@ if ( $query_result->have_posts() ) : ?>
 			<li>
 				<h3><a href="<?php the_permalink() ?>"><?php the_title() ?></a></h3>
 				<div>
-					<?php if ( has_post_thumbnail() ) : $img = wp_get_attachment_image_src( get_post_thumbnail_id() ); ?>
-						<a href="<?php the_permalink() ?>" style="background-image: url(<?php echo sow_esc_url( $img[0] ); ?>)"/>
+					<?php $img = has_post_thumbnail() ? wp_get_attachment_image_src( get_post_thumbnail_id() ) : false; ?>
+					<?php if ( ! empty( $img ) ) : ?>
+						<a href="<?php the_permalink() ?>" style="background-image: url(<?php echo sow_esc_url( $img[0] ); ?>)" aria-label="<?php the_title_attribute(); ?>"></a>
 					<?php endif; ?>
 				</div>
 			</li>
@@ -59,7 +60,7 @@ The following example will require results to have `age` meta with a value of `3
 ```php
 <?php
 add_filter( 'siteorigin_widgets_posts_selector_query', function( $query ) {
-    $query['meta_query'] => array(
+    $query['meta_query'] = array(
         array(
             'key'     => 'age',
             'value'   => array( 3, 4 ),

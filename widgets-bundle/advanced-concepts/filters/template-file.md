@@ -4,16 +4,16 @@ This filter gives you a way to change which file is being used to render/display
 
 This filter is perfect for conditional templates based on settings, and as an example of that, we've written a guide called [extending existing widgets](../../getting-started/extending-existing-widgets.md) that outlines this use case.
 
-This filter has the form `'siteorigin_widgets_template_file_' . $this->id_base`, where id_base is the ID of the widget.
+This filter has the form `'siteorigin_widgets_template_file_' . $this->id_base`, where id_base is the ID of the widget. The returned path must point to an existing file that ends in `.php`.
 
 ```php
 function mytheme_button_template_file( $filename, $instance, $widget ){
 	if ( ! empty( $instance['design']['theme'] ) && $instance['design']['theme'] == 'test' ) {
 		// This option works for plugins.
 		$filename = plugin_dir_path( __FILE__ ) . 'tpl/button.php';
-		
-		// And this one for themes.
-		$filename = get_stylesheet_dir() . '/tpl/button.php'; 
+
+		// For a theme, use this line instead.
+		// $filename = get_stylesheet_directory() . '/tpl/button.php';
 	}
 	return $filename;
 }

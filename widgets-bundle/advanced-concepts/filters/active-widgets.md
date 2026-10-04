@@ -10,4 +10,4 @@ function wbexample_filter_active_widgets($active){
 add_filter('siteorigin_widgets_active_widgets', 'wbexample_filter_active_widgets');
 ```
 
-The array keys of `$active` correspond to the widget IDs. You can set them to either true or false.
+The array keys of `$active` are widget folder names, such as `button`, not `id_base` values such as `sow-button`. You can set them to either true or false.

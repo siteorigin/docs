@@ -16,3 +16,4 @@
 - [Overriding Form Fields](form-building/overriding-form-fields.md).
 - [Link Form Field Filters](form-building/link-form-field-filters.md)
 - [Global Widget Settings](form-building/global-widget-settings.md).
+- [Child Widgets](form-building/child-widgets.md).

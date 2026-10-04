@@ -1,3 +1,3 @@
 # Missing Field Filter
 
-The main use case of this filter is adding your own custom field. 
+The Widgets Bundle has no missing field filter. To add your own custom field, use the `siteorigin_widgets_field_class_prefixes` and `siteorigin_widgets_field_class_paths` filters described in [Adding Custom Fields](../../form-building/adding-custom-fields.md).

@@ -38,7 +38,7 @@ Repeater with expanded item.
 
 The resulting input is then grouped in an indexed array on the widget instance and can be accessed using the key given for the repeater when first initializing form options. For the above example, the repeater item fields can be accessed in the `get_template_variables` function, as follows:
 ```php
-get_template_variables( $instance, $args ) {
+public function get_template_variables( $instance, $args ) {
 	$joined_text = '';
     // Ensure that the repeater is available and not empty.
     if ( ! empty( $instance['a_repeater'] ) ) {
@@ -56,10 +56,12 @@ get_template_variables( $instance, $args ) {
 ```
 
 ### Using Item Labels
-By default, repeaters use the 'item_name' value as the item label in item headers. Repeaters can be configured to use a specific input field's value as the item label, which is displayed in the item header. This is done using the 'item_label' configuration value, which is an associative array that describes how the repeater may retrieve the item labels from an HTML elements as it is updated. It requires three properties, namely:
+By default, repeaters use the 'item_name' value as the item label in item headers. Repeaters can be configured to use a specific input field's value as the item label, which is displayed in the item header. This is done using the 'item_label' configuration value, which is an associative array that describes how the repeater may retrieve the item labels from an HTML elements as it is updated. It takes the following properties; only `selector` (or `selector_array`) is required:
 - selector: `string` A JQuery selector which is used to find an element from which to retrieve the item label. Any JQuery selector is valid here.
-- update_event: `string` The javascript event on which to bind and update the item label. Defaults to 'change' event.
-- value_method: `string` The javascript function which should be used to retrieve the item label from an element. Defaults to `val()` method.
+- update_event: `string` Optional. The javascript event on which to bind and update the item label. Defaults to 'change' event.
+- value_method: `string` Optional. The javascript function which should be used to retrieve the item label from an element. Defaults to `val()` method.
+- selector_array: `array` Optional. Use in place of `selector` to try several elements in order. Each entry is an array with a `selector` and an optional `value_method`, and the first entry that returns a value sets the label.
+- increment: `string` Optional. Set to `before` or `after` to add the item number before or after the `item_name` label when no value is found.
 
 ### Example 2 - Using Item Labels
 Form options input:
@@ -95,7 +97,7 @@ Repeater containing two items using the `item_label` property:
 
 ### Limiting Repeater Items (`max_items`)
 
-Use the `max_items` option to cap how many items a repeater can contain. When the limit is reached, the **Add** button is disabled and no further items can be added.
+Use the `max_items` option to cap how many items a repeater can contain. When the limit is reached, the **Add** button stops adding items.
 
 #### Example 3 – Limiting Items
 Form options input:
@@ -114,6 +116,7 @@ $form_options = array(
         ),
     ),
 );
+```
 
 ---
 
@@ -147,7 +150,7 @@ Result:
 
 The resulting input is then grouped in an associative array on the widget instance and can be accessed using the key given for the section when first initializing form options. For the above example, the `grouped_text` fields can be retrieved in the `get_template_variables` function, as follows:
 ```php
-get_template_variables( $instance, $args ) {
+public function get_template_variables( $instance, $args ) {
     // Ensure that the group and field in the group are actually available.
     if ( ! empty( $instance['a_section'] ) && ! empty ( $instance['a_section']['grouped_text'] ) ) {
         $text_from_grouped_text = $instance['a_section']['grouped_text'];

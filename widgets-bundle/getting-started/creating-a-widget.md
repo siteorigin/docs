@@ -10,7 +10,7 @@ To allow you to organize your widgets and keep them separate from the SiteOrigin
 <?php
 
 function add_my_awesome_widgets_collection( $folders ) {
-	$folders[] = 'path/to/my/widgets/'; // important: Slash on end string is required.
+	$folders[] = plugin_dir_path( __FILE__ ) . 'widgets/'; // An absolute path. The slash at the end is required.
 	return $folders;
 }
 add_filter( 'siteorigin_widgets_widget_folders', 'add_my_awesome_widgets_collection' );
@@ -22,7 +22,7 @@ In our example `extend-widgets-bundle` plugin we use the standard WordPress meth
 
 ## Widget Name
 
-Start by creating your widget folder using a name of your choice, and then a PHP file with the same name. We encourage the use of the WordPress guidelines for naming files and folders, which you can find <a href="http://codex.wordpress.org/Writing_a_Plugin#Names.2C_Files.2C_and_Locations" target="_blank">here</a>.
+Start by creating your widget folder using a name of your choice, and then a PHP file with the same name. We encourage the use of the WordPress guidelines for naming files and folders, which you can find <a href="https://developer.wordpress.org/plugins/plugin-basics/best-practices/" target="_blank">here</a>.
 
 ## Widget Metadata
 
@@ -36,8 +36,7 @@ Widget Name: Hello world widget
 Description: An example widget which displays 'Hello world!'.
 Author: Me
 Author URI: http://example.com
-Widget URI: http://example.com/hello-world-widget-docs,
-Video URI: http://example.com/hello-world-widget-video
+Documentation: http://example.com/hello-world-widget-docs
 */
 
 ```
@@ -95,7 +94,7 @@ siteorigin_widget_register( 'hello-world-widget', __FILE__, 'Hello_World_Widget'
 
 ```
 
-Once you have implemented your widget like the above example, your widget will be listed in the SiteOrigin Widgets list. This list can be accessed by navigating to **Plugins > SiteOrigin Widgets**. In the above example, the Hello World widget will be listed. This widget will contain a text field in the Edit Widget form containing the text 'Hello world!', which can be edited and saved. It won't, however, output the text on the frontend without a Widget Template.
+Once you have implemented your widget like the above example, your widget will be listed in the SiteOrigin Widgets list. This list can be accessed by navigating to **Plugins > SiteOrigin Widgets**. New widgets are inactive, so activate your widget in this list before you use it. In the above example, the Hello World widget will be listed. This widget will contain a text field in the Edit Widget form containing the text 'Hello world!', which can be edited and saved. It won't, however, output the text on the frontend without a Widget Template.
 
 ## Widget Template
 
@@ -131,7 +130,7 @@ And now you can see your widget being displayed!
 
 ## Widget Styles
 
-You can supply a LESS stylesheet for your widget by overriding the `get_style_name` function and returning the name of the LESS stylesheet, without a `.less` file extension. The base `SiteOrigin_Widget` class looks for a LESS file in a `styles` directory, in the widget directory.
+By default, the Widgets Bundle loads `styles/default.less` from your widget directory. You can supply a different LESS stylesheet for your widget by overriding the `get_style_name` function and returning the name of the LESS stylesheet, without a `.less` file extension. The base `SiteOrigin_Widget` class looks for a LESS file in a `styles` directory, in the widget directory.
 
 You can find more detail about the use of LESS in the Widgets Bundle [here](../templating/less-stylesheets.md).
 

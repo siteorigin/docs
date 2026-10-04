@@ -9,13 +9,13 @@ The following example adds an example checkbox global setting to this widget's g
 class MyCustomWidget extends SiteOrigin_Widget {
 	// We're leaving out all the setup code here.
 
-	function get_settings_form( $form ) {
-		// We can modify this $form array however we want.
-		$form['example'] = array(
-			'type' => 'checkbox',
-			'label' => __( 'Example', 'siteorigin-docs' ),
+	public function get_settings_form() {
+		return array(
+			'example' => array(
+				'type' => 'checkbox',
+				'label' => __( 'Example', 'siteorigin-docs' ),
+			),
 		);
-		return $form;
 	}
 }
 ```
@@ -27,7 +27,7 @@ The `SiteOrigin_Widget` class includes a utility method called `get_global_setti
 class MyCustomWidget extends SiteOrigin_Widget {
 	// We're leaving out all the setup code here.
 
-	function modify_instance( $form ) {
+	public function modify_instance( $instance ) {
 
 		// Retrieve all settings.
 		$global_settings = $this->get_global_settings();
@@ -36,7 +36,7 @@ class MyCustomWidget extends SiteOrigin_Widget {
 			// Global example setting is enabled. Do something here.
 		}
 
-		return $form;
+		return $instance;
 	}
 }
 ```
@@ -48,21 +48,21 @@ The `get_global_settings` method features an optional string parameter that allo
 class MyCustomWidget extends SiteOrigin_Widget {
 	// We're leaving out all the setup code here.
 
-	function modify_instance( $form ) {
+	public function modify_instance( $instance ) {
 
 		if ( ! empty( $this->get_global_settings( 'example' ) ) ) {
 			// Global example setting is enabled. Do something here.
 		}
 
-		return $form;
+		return $instance;
 	}
 }
 ```
 
 ### Add Global Defaults to Other Widgets
-The `siteorigin_widgets_settings_form` filter can be used to alter the global settings of a widget. You can target specific widgets by prefixing the widget id to the end of the snippet. For example, you can target the SiteOrigin Button Widget using: `siteorigin_widgets_settings_form_sow-button`
+The `siteorigin_widgets_settings_form` filter can be used to alter the global settings of a widget. You can target a specific widget by appending its `id_base` to the filter name. For example, you can target the SiteOrigin Button Widget using: `siteorigin_widgets_settings_form_sow-button`
 
-The following snippet will add an example checkbox to the SiteOrigin Button Widget.
+Both filters also pass the widget object as a second argument. The following snippet will add an example checkbox to the SiteOrigin Button Widget.
 
 ```php
 add_filter( 'siteorigin_widgets_settings_form_sow-button', function( $form_options ) {
