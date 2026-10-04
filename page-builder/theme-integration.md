@@ -96,7 +96,7 @@ Page Builder gives you these functions for use in templates.
 
 These functions, and the body classes below, work with layouts built in the classic editor. They don't detect a SiteOrigin Layout Block in the block editor. The block renders as part of the post content.
 
-To stop Page Builder from replacing the content for one call to `the_content`, use the `siteorigin_panels_filter_content_enabled` filter. Unwind does this on video posts. It removes the first video from the post content, then runs the rest through `the_content` without the Page Builder layout.
+To stop Page Builder from replacing the content for one call to `the_content`, use the `siteorigin_panels_filter_content_enabled` filter. Unwind does this on video posts: it renders the layout without the first Video Player Widget, then runs that HTML through `the_content` with the filter off so Page Builder doesn't replace it with the full layout.
 
 ```php
 $content = get_the_content();
@@ -223,7 +223,7 @@ Corp adds these settings to pages and posts.
 - **Page Title**: shows or hides the title.
 - **Footer Widgets**: shows or hides the footer widgets.
 
-North has similar settings. Its **Page Layout** options are Default, No Sidebar, Full Width, Full Width With Sidebar, and Stripped. It also has **Page Title**, **Masthead Bottom Margin**, **Footer Top Margin**, **Hide Masthead** and **Hide Footer Widgets**.
+North has similar settings. Its **Page Layout** options are Default, No Sidebar, Full Width, Full Width, With Sidebar, and Stripped. It also has **Page Title**, **Masthead Bottom Margin**, **Footer Top Margin**, **Hide Masthead** and **Hide Footer Widgets**.
 
 The themes use these values in two ways. First, templates check a value before they output an element. This is from Corp's `template-parts/content-page.php`.
 
