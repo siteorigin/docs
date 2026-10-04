@@ -19,7 +19,7 @@ The following example will add a notice to the WordPress Archives widget suggest
 ```
 function so_add_text_prior_to_archives_widget_form( $the_widget, $instance ) {
 	if ( get_class( $the_widget ) == 'WP_Widget_Archives' ) {
-		echo __( 'We recommend ticking "Show posts count"', 'example-text-domain' );
+		esc_html_e( 'We recommend ticking "Show posts count"', 'example-text-domain' );
 	}
 }
 add_action( 'siteorigin_panels_before_widget_form', 'so_add_text_prior_to_archives_widget_form', 10, 2 );
@@ -50,7 +50,7 @@ The following example code will replace the Calendar widgets form with a message
 ```
 function so_override_calendar_form( $form, $widget_class, $instance ) {
 	if ( $widget_class == 'WP_Widget_Calendar' ) {
-		return __( 'This is an example of the Calendar form being completely overridden.', 'example-text-domain' );
+		return esc_html__( 'This is an example of the Calendar form being completely overridden.', 'example-text-domain' );
 	}
 	return $form;
 }

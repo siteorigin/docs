@@ -16,6 +16,8 @@ function custom_row_style_fields( $fields ) {
 add_filter( 'siteorigin_panels_row_style_fields', 'custom_row_style_fields' );
 ```
 
+The filter also passes `$post_id` and `$args` (the builder arguments). Use `siteorigin_panels_cell_style_fields` and `siteorigin_panels_widget_style_fields` for cells and widgets, or `siteorigin_panels_general_style_fields` for all three.
+
 #### Parameters:
 
 **name**
@@ -24,11 +26,11 @@ The name of the custom option.
 
 **type**
 
-Can be set to `checkbox`, `text`, `code`, `measurement`, `color`, `image` and `select`.
+Can be set to `checkbox`, `code`, `color`, `image`, `image_size`, `measurement`, `multi-select`, `number`, `radio`, `select`, `slider`, `text`, `textarea`, `toggle` and `url`.
 
 **group**
 
-Can be set to `design`, `layout` and `attributes`.
+Can be set to `attributes`, `layout`, `tablet_layout`, `mobile_layout` and `design`. The `tablet_layout` group only shows when **Use Tablet Layout** is enabled in the Page Builder settings. Fields without a group, or with the `theme` group, appear in a **Theme** group.
 
 **description**
 
@@ -81,9 +83,7 @@ To add a custom class, append the class name to `$attributes['class']`.
 
 To add a custom style (like text-align: center;), append the style to `$attributes['style']`.
 
-To add a new attribute, add both a new key and value to `$attributes`. Example: `$attributes['data-video-id'] = $args['video-id'];` will add `data-video-id="9"` to the row element.
-
-Note that the filter for `siteorigin_panels_row_style_attributes` needs to be called after Page Builder loads. In my project I added the filter inside a function which is triggered on `plugins_loaded`.
+To add a new attribute, add both a new key and value to `$attributes`. Example: `$attributes['data-video-id'] = $args['video-id'];` will add `data-video-id="9"` to the row's style wrapper element.
 
 ### Processing Styles
 
@@ -116,11 +116,12 @@ For example, the following JavaScript will conditionally show a field with the i
 ```javascript
 ( function( $ ) {
 	$( document ).on( 'setup_style_fields', function( e, view ) {
-		var example = view.$el.find( '.so-field-example' );
+		var exampleField = view.$el.find( '.so-field-example' );
 
 		view.$el.find( '.so-field-toggle_example input[type="checkbox"]' ).on( 'change', function() {
 			// If the toggle example field is checked, show the field.
 			$( this ).is( ':checked' ) ? exampleField.show() : exampleField.hide();
 		} ).trigger( 'change' );
+	} );
 } )( jQuery );
 ```

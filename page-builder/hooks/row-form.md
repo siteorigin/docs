@@ -1,6 +1,6 @@
 ### Filter: siteorigin_panels_default_row_columns
 
-It's possible to override the default number of row columns, and their weight (width), by using the `siteorigin_panels_default_row_columns` filter. This filter accepts a multidimensional array with each item being treated as a column. Each item must contain a weight item which is used to size the column. Weight is decimal based so 0.30 is equivalent to 30% of the row.
+It's possible to override the default number of row columns, and their weight (width), by using the `siteorigin_panels_default_row_columns` filter. This filter accepts a multidimensional array with each item being treated as a column. Each item must contain a weight item which is used to size the column. Weight is decimal based so 0.30 is equivalent to 30% of the row. By default, new rows have two columns with a weight of 0.5 each.
 
 The following snippet will allow you to set the default:
 
@@ -28,6 +28,6 @@ The following snippet will column the column field to 4.
 
 ```php
 add_filter( 'siteorigin_panels_row_column_count_input', function( $input ) {
-	return '<input type="number" min="1" max="12" name="cells" class="so-row-field" value="4" />';
+	return '<input type="number" min="1" max="12" name="cells" id="so-row-count-input" class="so-row-field" value="4" />';
 } );
 ```

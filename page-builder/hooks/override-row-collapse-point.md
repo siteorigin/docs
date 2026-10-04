@@ -6,7 +6,7 @@ The `siteorigin_panels_css_row_collapse_point` filter will allow you to override
 
 **collapse_point**
 
-collapse_point is the collapse_point of the current row. This parameter is empty by default, and the global Page Builder Mobile Width is used instead.
+collapse_point is the collapse_point of the current row. This parameter is empty by default, and the global Page Builder Mobile Width is used instead. The filter only takes effect when **Responsive Layout** is enabled in the Page Builder settings and the row has no **Collapse Behaviour** set.
 
 **row**
 
@@ -14,11 +14,11 @@ The instance of the current row instance.
 
 **ri**
 
-The row index of the current row. Please note that the row index is not zero-based, so the first-row index is 1.
+The row index of the current row. Please note that the row index is zero-based, so the first-row index is 0.
 
-**$panels_data**
+**panels_data**
 
-The current Page Builder instance.
+The layout data array.
 
 ### Example
 
@@ -26,7 +26,7 @@ The following example will override the collapse point of the first row in the c
 
 ```php
 add_filter( 'siteorigin_panels_css_row_collapse_point', function( $collapse_point, $row, $ri, $panels_data ) {
-	if ( $ri == 1 ) {
+	if ( $ri == 0 ) {
 		$collapse_point = 550;
 	}
 
@@ -42,7 +42,7 @@ The following snippet will allow you to set a Collapse Point on a row by row bas
 // Add in collapse point input field.
 add_filter( 'siteorigin_panels_row_style_fields', function( $fields ) {
 	$fields['collapse_point'] = array(
-		'name'        => __( 'Row Collapse Point', 'siteorigin-panels' ),
+		'name'        => __( 'Row Collapse Point', 'custom-text-domain' ),
 		'type'        => 'number',
 		'group'       => 'layout',
 		'description' => sprintf( __( 'Row Collapse point. Default is %spx.', 'custom-text-domain' ), siteorigin_panels_setting( 'mobile-width' ) ),

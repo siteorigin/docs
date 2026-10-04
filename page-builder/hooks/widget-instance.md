@@ -11,7 +11,7 @@ The `siteorigin_panels_widget_instance` hook will allow you to override the widg
 
 ### Examples
 
-The example code will enable the SiteOrigin Editor widget setting `Automatically Add Paragraph` if the `Title` setting is set to `Test`.
+The example code will enable the SiteOrigin Editor widget setting `Automatically add paragraphs` if the `Title` setting is set to `Test`.
 
 ```
 function so_editor_override_setting_if_test( $instance, $the_widget, $widget_class ) {

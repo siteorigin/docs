@@ -28,18 +28,22 @@ The next thing you need to do is ensure your widget form setup function is being
 The other option is to use the `panelsopen` jQuery event. This event is triggered right after the form HTML is loaded, so is a good opportuinity to set up your form.
 
 ```javascript
-$( document ).on( 'panelsopen', function( e ) {
-	var dialog = $( e.target );
-	// Check that this is for our widget class
-	if( !dialog.has( '.some-unique-widget-form-class' ) ) return;
+( function( $ ) {
+	$( document ).on( 'panelsopen', function( e ) {
+		var dialog = $( e.target );
+		// Check that this is for our widget class
+		if ( ! dialog.find( '.some-unique-widget-form-class' ).length ) {
+			return;
+		}
 
-	// Here we can setup our widget form.
-} );
+		// Here we can setup our widget form.
+	} );
+} )( jQuery );
 ```
 
 ### Overriding Automatic Widget Description
 
-By default, Page Builder will override a widget's description to allow users to quickly identify widgets without opening them. Page Builder will look for the first valid non-empty input (with a preference for fields called "title" and "text") and use that for its description. This can, however, be problematic for certain fields, so you may wish to tell Page Builder to look for a specific field or completely disable the automatic widget description altogether. This is done by adjusting the `panels_title` option in the widget's `$widget_options` parameter when constructing the widget.
+By default, Page Builder will override a widget's description to allow users to quickly identify widgets without opening them. Page Builder will look for the first valid non-empty input (with a preference for fields called "title" and "text") and use that for its description. This can, however, be problematic for certain fields, so you may wish to tell Page Builder to look for a specific field or completely disable the automatic widget description altogether. This is done by adjusting the `panels_title` option in the widget's `$widget_options` parameter when constructing the widget. The following examples extend `SiteOrigin_Widget`. A `WP_Widget` takes the same option in its third argument, `$widget_options`.
 
 You can disable the widget descriptions by setting `panels_title` to `false`.
 
@@ -49,7 +53,7 @@ function __construct() {
 		'sow-demo-widget',
 		__( 'SiteOrigin Demo Widget', 'siteorigin-docs' ),
 		array(
-			'panels_title' => 'false', // Disable Widget description override.
+			'panels_title' => false, // Disable Widget description override.
 		),
 		array(),
 		false,
@@ -76,4 +80,4 @@ function __construct() {
 }
 ```
 
-If Page Builder cannot find a valid field with that title, it will fall back to the standard widget description.
+If Page Builder cannot find a valid field with that title, it will fall back to the standard widget description. Page Builder doesn't look for the `panels_title` field inside sections and repeaters unless you also set `panels_title_check_sub_fields` to `true`.
