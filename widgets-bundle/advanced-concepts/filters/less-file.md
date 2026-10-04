@@ -7,10 +7,11 @@ This filter has the form `'siteorigin_widgets_less_file_' . $this->id_base`, whe
 ```php
 function mytheme_button_less_file( $filename, $instance, $widget ){
     if( !empty($instance['design']['theme']) && $instance['design']['theme'] == 'test' ) {
+        // This option works for plugins.
         $filename = plugin_dir_path( __FILE__ ) . 'less/test.less';
-        
-        // And this one for themes
-        $filename = get_stylesheet_directory() . '/less/test.less'; 
+
+        // For a theme, use this line instead.
+        // $filename = get_stylesheet_directory() . '/less/test.less';
     }
     return $filename;
 }

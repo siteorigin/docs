@@ -16,7 +16,7 @@ The filter takes the form `'siteorigin_widgets_template_variables_' . $this->id_
 /**
  * @param array $template_vars The Template variables array
  * @param array $instance The widget instance
- * @param array $args The widget instance
+ * @param array $args The widget display arguments, such as before_title and after_title
  * @param SiteOrigin_Widget $widget The main widget instance.
  */
 function wbe_filter_template_variables( $template_vars, $instance, $args, $widget ){

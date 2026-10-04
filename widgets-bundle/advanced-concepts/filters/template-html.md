@@ -11,7 +11,7 @@ This filter gives you some very fine grained control over the HTML displayed for
 function wbe_change_button_html( $template_html, $instance, $widget ){
 	// Modify the $template_html here
 	
-	return $template_html
+	return $template_html;
 }
 add_filter('siteorigin_widgets_template_html_sow-button', 'wbe_change_button_html', 10, 3);
 ```

@@ -7,7 +7,7 @@ If you're doing that with a widget that you've created, then you would be better
 This filter takes the form `'siteorigin_widgets_form_instance_' . $this->id_base`, where id_base is the ID of the widget.
 
 ```php
-function wbe_modify_form_instance( $instance, $this ) {
+function wbe_modify_form_instance( $instance, $widget ) {
     // We can modify the instance here.
     $instance['text'] = 'Never Change!';
     return $instance;
