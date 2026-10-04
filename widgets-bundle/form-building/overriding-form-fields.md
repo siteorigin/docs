@@ -10,7 +10,7 @@ function siteorigin_load_custom_form_fields( $class_paths ) {
 add_filter( 'siteorigin_widgets_field_registered_class_paths', 'siteorigin_load_custom_form_fields' );
 ```
 
-The above snippet will only work in a plugin without modification.
+The above snippet will only work in a plugin without modification. The filter runs on `init`, so add it before `init`, for example when your plugin loads.
 
 Then create a directory in the same directory as the above PHP snippet called `fields`. In that directory please add a file called `tinymce.class.php` (the same filename as the base TinyMCE Form Field). Add the following PHP to that file:
 

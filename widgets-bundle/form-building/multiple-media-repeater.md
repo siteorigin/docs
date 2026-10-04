@@ -8,20 +8,20 @@ A multiple media form field can be connected to a repeater to allow users to bul
 $form_options = array(
 	'example_multiple_media' => array(
 		'type' => 'multiple_media',
-		'label' => __( 'Example repeater multiple media', 'so-widgets-test' ),
+		'label' => __( 'Example repeater multiple media', 'siteorigin-docs' ),
 		'repeater' => array(
-			'field' => 'images', // The ID of the repeater form field.
+			'field' => 'images', // The ID of a repeater at the same level of the form.
 			'setting' => 'image', // The media form field inside of the repeater that'll be set when the user adds new images.
 		),
 	),
 	'images' => array(
 		'type' => 'repeater',
-		'label' => __( 'Images', 'so-widgets-test' ),
-		'item_name'  => __( 'Image', 'so-widgets-test' ),
+		'label' => __( 'Images', 'siteorigin-docs' ),
+		'item_name'  => __( 'Image', 'siteorigin-docs' ),
 		'fields' => array(
 			'image' => array(
 				'type' => 'media',
-				'label' => __( 'Image', 'so-widgets-test' ),
+				'label' => __( 'Image', 'siteorigin-docs' ),
 				'library' => 'image',
 				'fallback' => true,
 			),
@@ -32,6 +32,6 @@ $form_options = array(
 
 #### Test Plugin
 
-We've prepared a test plugin for you to try. You can [download it by clicking here](https://siteorigin.com/wp-content/uploads/2021/08/siteorigin-multiple-media-repeater.zip). Once downloaded, navigate to **Plugins > Add New** and upload **siteorigin-multiple-media-repeater.zip**. When prompted, activate the **SiteOrigin - Multiple Media Repeater Test Widget** plugin.
+We've prepared a test plugin for you to try. You can [download it by clicking here](https://siteorigin.com/wp-content/uploads/2021/08/siteorigin-multiple-media-repeater.zip). Once downloaded, navigate to **Plugins > Add Plugin**, click **Upload Plugin** and upload **siteorigin-multiple-media-repeater.zip**. When prompted, activate the **SiteOrigin - Multiple Media Repeater Test Widget** plugin.
 
 Once installed, navigate to **Plugins > SiteOrigin Widgets** and activate the **SiteOrigin Multiple Media Repeater** widget. Open any Page Builder powered page and add the **SiteOrigin Multiple Media Repeater** widget to your page.
