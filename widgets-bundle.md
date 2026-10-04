@@ -1,10 +1,8 @@
 # Widgets Bundle Developer Docs
 
-The SiteOrigin Widgets Bundle is far more than just a collection of widgets. It's a foundation you can use to create widgets in a fraction of the time. It features powerful form building, data handling and templating. The core of the Widgets Bundle handles everything for you, so you can focus your efforts on building beautiful widgets.
+The SiteOrigin Widgets Bundle includes a framework for building your own widgets. You describe a widget's form as an array of fields, and the Widgets Bundle builds the form, sanitizes and stores the values, and renders the widget with your PHP template and LESS stylesheet.
 
-Even if you don't want to create custom widgets from scratch, the Widgets Bundle is easy to extend in other ways. You can create custom templates, styles and form fields for all our existing widgets. One example use case is creating a custom style for the button widget that fits in with the look and feel of your theme.
-
-These developer docs will teach you everything you need to know to build on top of the SiteOrigin Widgets Bundle.
+You can also extend our existing widgets with your own templates, styles and form fields, for example a Button Widget style that matches your theme.
 
 ## Topics
 

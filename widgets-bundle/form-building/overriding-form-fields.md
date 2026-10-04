@@ -1,4 +1,4 @@
-# Overriding Form Fields.
+# Overriding Form Fields
 
 It's possible to completely override a form field by passing a directory to the `siteorigin_widgets_field_registered_class_paths` filter that contains a file named exactly the same as the base form field with the same class set. For example, if I wanted to override the TinyMCE field I would load a directory containing fields using the following PHP:
 

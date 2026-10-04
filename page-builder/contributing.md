@@ -1,4 +1,4 @@
-# Contributing To Page Buider
+# Contributing to Page Builder
 
 We're working hard on impoving Page Builder - making it the most powerful and flexible page building plugin for WordPress. If you'd like to help us with code contributions, here are a few ways you can help. 
 
