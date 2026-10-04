@@ -1,10 +1,10 @@
 # Creating a Widget
 
-What follows are the basic requirements for creating your own widget using the SiteOrigin Widgets Bundle as a framework.
+A Widgets Bundle widget is a folder with a PHP file that declares the widget, a template that outputs it and an optional LESS stylesheet. The Widgets Bundle builds the widget's form from the fields you declare, then saves and renders the widget for you.
 
-## Registering a Custom Widgets Folder
+## Registering a Widgets Folder
 
-To allow you to organize your widgets and keep them separate from the SiteOrigin widgets, we have included a filter hook which you can use to register a folder containing several of your widgets, as follows:
+The `siteorigin_widgets_widget_folders` filter registers a folder of your own widgets, so you can keep them apart from the SiteOrigin widgets:
 
 ```php
 <?php
@@ -16,17 +16,17 @@ function add_my_awesome_widgets_collection( $folders ) {
 add_filter( 'siteorigin_widgets_widget_folders', 'add_my_awesome_widgets_collection' );
 ```
 
-The Widgets Bundle plugin code will check subfolders of this folder for PHP files. If it finds any PHP files with a metadata header containing a Widget Name field, it will list them as a widget which can be activated and used anywhere widgets may normally be used.
+The Widgets Bundle looks for PHP files in each subfolder of a registered folder. It lists every file whose metadata header has a `Widget Name` field as a widget that users can activate and use wherever widgets work.
 
-In our example `extend-widgets-bundle` plugin we use the standard WordPress method of creating a plugin, which then uses the above filter hook to add its `extra-widgets` folder to the search path for widgets.
+The `extend-widgets-bundle` plugin in our [so-dev-examples](https://github.com/siteorigin/so-dev-examples) repository is a standard WordPress plugin that uses this filter to add its `extra-widgets` folder.
 
-## Widget Name
+## Naming the Widget Folder
 
-Start by creating your widget folder using a name of your choice, and then a PHP file with the same name. We encourage the use of the WordPress guidelines for naming files and folders, which you can find <a href="https://developer.wordpress.org/plugins/plugin-basics/best-practices/" target="_blank">here</a>.
+Create a folder for your widget, and a PHP file inside it with the same name. Follow the WordPress [naming best practices](https://developer.wordpress.org/plugins/plugin-basics/best-practices/) for the file and folder names.
 
-## Widget Metadata
+## Adding the Metadata Header
 
-The first thing you'll need in your PHP file is the metadata header which is used by the SiteOrigin Widgets Bundle plugin to identify PHP files which contain a widget class. The minimum requirement for this header is the Widget Name field, as without this field the file will be skipped. The rest of the fields are optional but we encourage their use, as they provide the option to display more detailed information about the widget and/or widget author in future.
+Start the PHP file with a metadata header. The Widgets Bundle uses the header to find files that contain a widget, and it skips any file without a `Widget Name` field. The other fields are optional, and they give users more information about the widget and its author:
 
 ```php
 <?php
@@ -38,14 +38,13 @@ Author: Me
 Author URI: http://example.com
 Documentation: http://example.com/hello-world-widget-docs
 */
-
 ```
 
-## Widget Class
+## Writing the Widget Class
 
-Now you'll need to create a class that extends the `SiteOrigin_Widget` abstract base class. The `SiteOrigin_Widget` class is based on the WordPress Widgets API, so a constructor containing information about the widget is required. We recommend setting `$form_options` using the Widgets Bundle specific `get_widget_form` method over the Widgets API constructor, but both are useable.
+Your widget class extends the `SiteOrigin_Widget` base class. `SiteOrigin_Widget` builds on the WordPress Widgets API, so the class needs a constructor that describes the widget. Declare the form fields in a `get_widget_form()` method, as the example does. Passing `$form_options` to the constructor also works.
 
-You'll also need to register your widget class with the SiteOrigin Widgets Bundle using the `siteorigin_widget_register` function, passing in the widget id, widget file path, and widget class name as arguments.
+Register the class with `siteorigin_widget_register()`, passing the widget ID, the path of the widget file and the class name:
 
 ```php
 class Hello_World_Widget extends SiteOrigin_Widget {
@@ -90,19 +89,13 @@ class Hello_World_Widget extends SiteOrigin_Widget {
 	}
 }
 siteorigin_widget_register( 'hello-world-widget', __FILE__, 'Hello_World_Widget' );
-
-
 ```
 
-Once you have implemented your widget like the above example, your widget will be listed in the SiteOrigin Widgets list. This list can be accessed by navigating to **Plugins > SiteOrigin Widgets**. New widgets are inactive, so activate your widget in this list before you use it. In the above example, the Hello World widget will be listed. This widget will contain a text field in the Edit Widget form containing the text 'Hello world!', which can be edited and saved. It won't, however, output the text on the frontend without a Widget Template.
+The widget now appears in the list at **Plugins > SiteOrigin Widgets**. New widgets start inactive, so activate the Hello World Widget there before you use it. Its form has a text field with the default text "Hello world!", which users can edit and save. The widget shows nothing on the front end until it has a template.
 
-## Widget Template
+## Adding a Template
 
-You need to provide a template to tell the widget how it should be displayed. By default, Widgets Bundle will attempt to use `tpl/default.php` in your widget directory.
-
-You optionally supply a custom template name by overriding the `get_template_name` function and returning the name of the template file without a `.php` file extension. By default, the base `SiteOrigin_Widget` class looks for a PHP file, with the name returned by `get_template_name`, in a `tpl` directory, in the widget directory.
-
-You can change what the directory Widgets Bundle looks in by overriding the `get_template_dir` function and returning the path of a directory (without leading or trailing slashes) relative to the widget class file.
+The template outputs the widget. The Widgets Bundle looks for `tpl/default.php` in your widget folder. Override `get_template_name()` to use another template, and return the template's file name without `.php`. Override `get_template_dir()` to use another folder, and return the folder's path relative to the widget class file, without leading or trailing slashes:
 
 ```php
 function get_template_name( $instance ) {
@@ -114,11 +107,11 @@ function get_template_dir( $instance ) {
 }
 ```
 
-Below is the directory structure of the Hello World Widget.
+The Hello World Widget's files are laid out like this:
 
 ![Hello World Directory Structure](../images/hello-world-widget-directory-structure.png)
 
-Now that the widget knows where to find it's template you can add in some HTML. The Hello World widget template simply contains the following:
+The Hello World Widget's template outputs the widget's text:
 
 ```php
 <div>
@@ -126,13 +119,11 @@ Now that the widget knows where to find it's template you can add in some HTML. 
 </div>
 ```
 
-And now you can see your widget being displayed!
+The widget now shows its text on the front end.
 
-## Widget Styles
+## Adding Styles
 
-By default, the Widgets Bundle loads `styles/default.less` from your widget directory. You can supply a different LESS stylesheet for your widget by overriding the `get_style_name` function and returning the name of the LESS stylesheet, without a `.less` file extension. The base `SiteOrigin_Widget` class looks for a LESS file in a `styles` directory, in the widget directory.
-
-You can find more detail about the use of LESS in the Widgets Bundle [here](../templating/less-stylesheets.md).
+The Widgets Bundle loads `styles/default.less` from your widget folder. Override `get_style_name()` to use another LESS stylesheet in the `styles` folder, and return the stylesheet's file name without `.less`. [LESS Stylesheets](../templating/less-stylesheets.md) explains how the Widgets Bundle uses LESS.
 
 ```php
 function get_style_name( $instance ) {
@@ -140,8 +131,9 @@ function get_style_name( $instance ) {
 }
 ```
 
-## Widget Banner Image
-To use a custom image for the banner in the Plugins > SiteOrigin Widgets list, you can either place it in a folder named `assets` and name the file `banner.svg`, or you can use the `siteorigin_widgets_widget_banner` filter hook. The following code can be found in the example main widget file `my-awesome-widget.php` outside of the class declaration. If you put the code somewhere else, make sure to adjust the file path accordingly.
+## Adding a Banner Image
+
+Each widget has a banner in the list at **Plugins > SiteOrigin Widgets**. Save your banner as `assets/banner.svg` in your widget folder, or set its URL with the `siteorigin_widgets_widget_banner` filter. This example sits in `my-awesome-widget.php`, outside the class. If you put the code in another file, change the image path to match:
 
 ```php
 function my_awesome_widget_banner_img_src( $banner_url, $widget_meta ) {

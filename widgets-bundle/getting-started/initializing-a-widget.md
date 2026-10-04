@@ -1,10 +1,12 @@
 # Initializing a Widget
 
 ## The `initialize()` Method
-A widget extending `SiteOrigin_Widget` can optionally override the `initialize` method to handle any required initialization steps. This code could technically be put in the widget constructor, but we use this method for better code organization and readability.
+
+A widget that extends `SiteOrigin_Widget` can override the `initialize()` method for its setup code. The code would also work in the widget's constructor, and `initialize()` keeps it separate and easier to read.
 
 ## Registering Front End Scripts and Styles
-The `SiteOrigin_Widget` base class provides two convenience methods, `register_frontend_scripts` and `register_frontend_styles`, for enqueueing scripts and styles necessary for rendering the template on the front end. The arguments to these methods are simply an array of arrays. Each array contains the arguments exactly as they would appear when calling [`wp_enqueue_script`](https://developer.wordpress.org/reference/functions/wp_enqueue_script/) or [`wp_enqueue_style`](https://developer.wordpress.org/reference/functions/wp_enqueue_style/). The second item is the file's URL, not a file path. The Widgets Bundle enqueues these files only when the widget is displayed.
+
+The `register_frontend_scripts()` and `register_frontend_styles()` methods of `SiteOrigin_Widget` load the scripts and styles that your template needs on the front end. The Widgets Bundle enqueues these files only on pages that show the widget. Each method takes an array of arrays, and each inner array holds the arguments you'd pass to [`wp_enqueue_script()`](https://developer.wordpress.org/reference/functions/wp_enqueue_script/) or [`wp_enqueue_style()`](https://developer.wordpress.org/reference/functions/wp_enqueue_style/). The second item is the file's URL, and a file path doesn't work there:
 
 ```php
 function initialize() {
