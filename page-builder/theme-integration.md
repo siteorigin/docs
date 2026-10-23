@@ -210,6 +210,24 @@ When both filters return a value, Page Builder:
 
 Standard rows then stay at your content width, and stretched rows fill the container. Page Builder adds this CSS only with its default flexbox layout engine. If **Use Legacy Layout Engine** switches a page to the legacy engine, the filters still turn off JavaScript stretching, and Page Builder adds none of this CSS. Other content in the container, such as the page title, also loses its `max-width` on those pages. Style that content so it stays at your content width.
 
+### Caching Plugins That Delay JavaScript
+
+Some caching and optimization plugins hold back JavaScript until the page has finished loading, or until the visitor first scrolls or moves the mouse. LiteSpeed Cache does this when **Load JS Deferred** is set to **Delayed**, and WP Rocket does it with **Delay JavaScript execution**. The stretch script then runs late, and stretched rows keep the `siteorigin-panels-before-js` layout until it does. On most themes the row background is already at the full width, and the content of **Full Width Stretched** rows moves out to the full width when the script runs. On a theme that clips its content area with `overflow: hidden`, the row stays at the content width until then.
+
+To let the stretch script run on page load, exclude it and its inline settings from the delay. The script needs jQuery, so jQuery must be excluded too.
+
+- LiteSpeed Cache: **LiteSpeed Cache > Page Optimization > JS Settings > JS Deferred / Delayed Excludes**. jQuery is in the default excludes.
+- WP Rocket: **WP Rocket > File Optimization > Delay JavaScript execution > Excluded JavaScript Files**. WP Rocket delays jQuery by default, so add `jquery.min.js` as a third line. jQuery then loads on page load again, which reduces what the delay saves.
+
+Add these lines.
+
+```
+siteorigin-panels/js/styling
+panelsStyles
+```
+
+Purge the cache after saving. If your theme uses the CSS container breaker above, rows stretch without the script, and no exclusion is needed.
+
 ### Full Width Page Layouts
 
 Full width rows can only stretch as wide as the full width container. If your theme has a sidebar or a narrow content area, give users a way to remove it on Page Builder pages. See **Page Settings** below.
