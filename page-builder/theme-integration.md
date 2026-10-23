@@ -216,7 +216,7 @@ Some caching and optimization plugins hold back JavaScript until the page has fi
 
 To let the stretch script run on page load, exclude it and its inline settings from the delay. The script needs jQuery, so jQuery must be excluded too.
 
-- LiteSpeed Cache: **LiteSpeed Cache > Page Optimization > JS Settings > JS Deferred / Delayed Excludes**. jQuery is in the default excludes.
+- LiteSpeed Cache: **LiteSpeed Cache > Page Optimization > Tuning > JS Deferred / Delayed Excludes**. jQuery is in the default excludes.
 - WP Rocket: **WP Rocket > File Optimization > Delay JavaScript execution > Excluded JavaScript Files**. WP Rocket delays jQuery by default, so add `jquery.min.js` as a third line. jQuery then loads on page load again, which reduces what the delay saves.
 
 Add these lines.
