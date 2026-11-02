@@ -1,0 +1,14 @@
+# Deploys through the shared SiteOrigin workflow; siteorigin/.github's README
+# names the secrets. master deploys siteorigin.com.
+name: Deploy
+
+on:
+  push:
+    branches: [master]
+
+jobs:
+  deploy:
+    uses: siteorigin/.github/.github/workflows/deploy.yml@v1
+    with:
+      live: deploy-siteorigin-docs
+    secrets: inherit
